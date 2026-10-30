@@ -1,0 +1,621 @@
+<!doctype html>
+<html lang="id" dir="ltr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Apakah rekayasa balik memerlukan model yang lebih besar? | REA</title>
+    <meta
+      name="description"
+      content="Apa yang saya pelajari dari rekonstruksi Touhou tentang model umum, model khusus, dan cara belajar mengajukan hipotesis yang lebih baik melalui umpan balik kompiler."
+    />
+    <!-- website:sharing:start -->
+    <!-- prettier-ignore -->
+    <link rel="canonical" href="https://rea.tools/id/blog/reverse-engineering-models/" />
+    <!-- website:languages:start -->
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="en" href="https://rea.tools/blog/reverse-engineering-models/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="zh-CN" href="https://rea.tools/zh-CN/blog/reverse-engineering-models/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="zh-TW" href="https://rea.tools/zh-TW/blog/reverse-engineering-models/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="ja" href="https://rea.tools/ja/blog/reverse-engineering-models/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="ko" href="https://rea.tools/ko/blog/reverse-engineering-models/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="tr" href="https://rea.tools/tr/blog/reverse-engineering-models/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="ru" href="https://rea.tools/ru/blog/reverse-engineering-models/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="vi" href="https://rea.tools/vi/blog/reverse-engineering-models/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="th" href="https://rea.tools/th/blog/reverse-engineering-models/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="de" href="https://rea.tools/de/blog/reverse-engineering-models/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="es" href="https://rea.tools/es/blog/reverse-engineering-models/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="fr" href="https://rea.tools/fr/blog/reverse-engineering-models/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="uk" href="https://rea.tools/uk/blog/reverse-engineering-models/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="pl" href="https://rea.tools/pl/blog/reverse-engineering-models/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="pt-BR" href="https://rea.tools/pt-BR/blog/reverse-engineering-models/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="ar" href="https://rea.tools/ar/blog/reverse-engineering-models/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="fa" href="https://rea.tools/fa/blog/reverse-engineering-models/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="id" href="https://rea.tools/id/blog/reverse-engineering-models/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="it" href="https://rea.tools/it/blog/reverse-engineering-models/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="el" href="https://rea.tools/el/blog/reverse-engineering-models/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="x-default" href="https://rea.tools/blog/reverse-engineering-models/" />
+<!-- website:languages:end -->
+    <!-- prettier-ignore -->
+    <meta property="og:type" content="website" />
+    <!-- prettier-ignore -->
+    <meta property="og:site_name" content="REA" />
+    <!-- prettier-ignore -->
+    <meta property="og:title" content="Apakah rekayasa balik memerlukan model yang lebih besar? | REA" />
+    <!-- prettier-ignore -->
+    <meta property="og:description" content="Apa yang saya pelajari dari rekonstruksi Touhou tentang model umum, model khusus, dan cara belajar mengajukan hipotesis yang lebih baik melalui umpan balik kompiler." />
+    <!-- prettier-ignore -->
+    <meta property="og:url" content="https://rea.tools/id/blog/reverse-engineering-models/" />
+    <!-- prettier-ignore -->
+    <meta property="og:image" content="https://rea.tools/assets/social-card.png" />
+    <!-- prettier-ignore -->
+    <meta property="og:image:type" content="image/png" />
+    <!-- prettier-ignore -->
+    <meta property="og:image:width" content="1200" />
+    <!-- prettier-ignore -->
+    <meta property="og:image:height" content="630" />
+    <!-- prettier-ignore -->
+    <meta
+      property="og:image:alt"
+      content="REA-Cari tahu cara kerja perangkat lunak. Rekayasa balik dengan agen pengkodean Anda."
+    />
+    <!-- prettier-ignore -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <!-- prettier-ignore -->
+    <meta name="twitter:title" content="Apakah rekayasa balik memerlukan model yang lebih besar? | REA" />
+    <!-- prettier-ignore -->
+    <meta name="twitter:description" content="Apa yang saya pelajari dari rekonstruksi Touhou tentang model umum, model khusus, dan cara belajar mengajukan hipotesis yang lebih baik melalui umpan balik kompiler." />
+    <!-- prettier-ignore -->
+    <meta name="twitter:image" content="https://rea.tools/assets/social-card.png" />
+    <!-- prettier-ignore -->
+    <meta
+      name="twitter:image:alt"
+      content="REA-Cari tahu cara kerja perangkat lunak. Rekayasa balik dengan agen pengkodean Anda."
+    />
+    <!-- website:sharing:end -->
+    <!-- website:theme:start -->
+    <meta name="theme-color" content="#ffffff" />
+    <!-- Apply the saved theme before styles load, to avoid a flash on navigation. -->
+    <script src="../../../assets/theme.js"></script>
+    <!-- website:theme:end -->
+    <link rel="icon" href="../../../assets/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="../../../assets/styles.css" />
+    <script src="../../../assets/main.js" defer></script>
+  <script id="website-messages" type="application/json">{"Copied": "Disalin", "Code copied to clipboard.": "Kode disalin ke papan klip.", "Selected": "Dipilih", "Code selected. Use your keyboard to copy it.": "Kode dipilih. Gunakan keyboard Anda untuk menyalinnya.", "REA on GitHub ({count})": "REA di GitHub ({count})", "Switch to light mode": "Beralih ke mode terang", "Switch to dark mode": "Beralih ke mode gelap"}</script>
+  </head>
+  <body id="top">
+    <a class="skip-link" href="#main">Lewati ke konten</a>
+    <!-- website:header:start -->
+    <!-- prettier-ignore -->
+    <header class="site-header">
+      <div class="container header-inner">
+        <a class="brand" href="../../" aria-label="Beranda REA"
+          ><span class="brand-name">REA</span
+          ><span class="brand-caption" data-i18n-skip>Reverse Engineer Anything</span></a
+        >
+        <nav class="navigation" aria-label="Navigasi utama">
+          <a href="../../../get-started/" class="nav-start">Mulai</a>
+          <a href="../../showcase/">Studi kasus</a>
+          <a href="../" aria-current="page">Blog</a>
+          <a href="../../guides/">Panduan</a>
+        </nav>
+        <div class="header-social">
+          <details class="language-picker" data-i18n-skip><summary><span aria-hidden="true">文 / A</span> <span>Bahasa Indonesia</span></summary><nav aria-label="Bahasa Indonesia"><a href="../../../blog/reverse-engineering-models/" lang="en" dir="ltr" data-language="en">English</a><a href="../../../zh-CN/blog/reverse-engineering-models/" lang="zh-CN" dir="ltr" data-language="zh-CN">简体中文</a><a href="../../../zh-TW/blog/reverse-engineering-models/" lang="zh-TW" dir="ltr" data-language="zh-TW">繁體中文</a><a href="../../../ja/blog/reverse-engineering-models/" lang="ja" dir="ltr" data-language="ja">日本語</a><a href="../../../ko/blog/reverse-engineering-models/" lang="ko" dir="ltr" data-language="ko">한국어</a><a href="../../../tr/blog/reverse-engineering-models/" lang="tr" dir="ltr" data-language="tr">Türkçe</a><a href="../../../ru/blog/reverse-engineering-models/" lang="ru" dir="ltr" data-language="ru">Русский</a><a href="../../../vi/blog/reverse-engineering-models/" lang="vi" dir="ltr" data-language="vi">Tiếng Việt</a><a href="../../../th/blog/reverse-engineering-models/" lang="th" dir="ltr" data-language="th">ไทย</a><a href="../../../de/blog/reverse-engineering-models/" lang="de" dir="ltr" data-language="de">Deutsch</a><a href="../../../es/blog/reverse-engineering-models/" lang="es" dir="ltr" data-language="es">Español</a><a href="../../../fr/blog/reverse-engineering-models/" lang="fr" dir="ltr" data-language="fr">Français</a><a href="../../../uk/blog/reverse-engineering-models/" lang="uk" dir="ltr" data-language="uk">Українська</a><a href="../../../pl/blog/reverse-engineering-models/" lang="pl" dir="ltr" data-language="pl">Polski</a><a href="../../../pt-BR/blog/reverse-engineering-models/" lang="pt-BR" dir="ltr" data-language="pt-BR">Português (Brasil)</a><a href="../../../ar/blog/reverse-engineering-models/" lang="ar" dir="rtl" data-language="ar">العربية</a><a href="../../../fa/blog/reverse-engineering-models/" lang="fa" dir="rtl" data-language="fa">فارسی</a><a href="../../../id/blog/reverse-engineering-models/" lang="id" dir="ltr" data-language="id" aria-current="true">Bahasa Indonesia</a><a href="../../../it/blog/reverse-engineering-models/" lang="it" dir="ltr" data-language="it">Italiano</a><a href="../../../el/blog/reverse-engineering-models/" lang="el" dir="ltr" data-language="el">Ελληνικά</a><a href="../../../ml/blog/reverse-engineering-models/" lang="ml" dir="ltr" data-language="ml">മലയാളം · English</a><a href="../../../ur-Latn/blog/reverse-engineering-models/" lang="ur-Latn" dir="ltr" data-language="ur-Latn">Roman Urdu · English</a><a href="../../../ro/blog/reverse-engineering-models/" lang="ro" dir="ltr" data-language="ro">Română · English</a></nav></details>
+          <button class="theme-toggle" type="button" data-theme-toggle hidden>
+            <svg class="theme-moon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+              <path d="M20.9 13a9 9 0 0 1-9.9-9.9A9 9 0 1 0 20.9 13Z" />
+            </svg>
+            <svg class="theme-sun" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true" focusable="false">
+              <circle cx="12" cy="12" r="4" />
+              <path d="M12 2v2m0 16v2M2 12h2m16 0h2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42" />
+            </svg>
+          </button>
+          <a
+            class="nav-github"
+            href="https://github.com/morluto/rea"
+            aria-label="REA di GitHub"
+            title="REA di GitHub"
+          >
+            <svg
+              width="22"
+              height="22"
+              viewBox="0 0 16 16"
+              aria-hidden="true"
+              focusable="false"
+            >
+              <path
+                fill="currentColor"
+                d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82a7.65 7.65 0 0 1 2-.27c.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z"
+              />
+            </svg>
+            <span class="nav-github-count" hidden aria-hidden="true"></span>
+          </a>
+          <a
+            class="nav-discord"
+            href="https://discord.gg/GkcryMnJDM"
+            aria-label="Gabung REA di Discord"
+            title="Gabung REA di Discord"
+          >
+            <svg
+              width="22"
+              height="22"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+              focusable="false"
+            >
+              <path
+                fill="currentColor"
+                d="M20.317 4.3698a19.7913 19.7913 0 0 0-4.8851-1.5152.0741.0741 0 0 0-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 0 0-.0785-.037 19.7363 19.7363 0 0 0-4.8852 1.515.0699.0699 0 0 0-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 0 0 .0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 0 0 .0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 0 0-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 0 1-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 0 1 .0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 0 1 .0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 0 1-.0066.1276 12.2986 12.2986 0 0 1-1.873.8914.0766.0766 0 0 0-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 0 0 .0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 0 0 .0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 0 0-.0312-.0286ZM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189Zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189Z"
+              />
+            </svg>
+          </a>
+          <a
+            class="nav-x"
+            href="https://x.com/reatools"
+            aria-label="Ikuti REA di X"
+            title="Ikuti REA di X"
+          >
+            <svg
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+              focusable="false"
+            >
+              <path
+                fill="currentColor"
+                d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z"
+              />
+            </svg>
+          </a>
+        </div>
+      </div>
+    </header>
+    <!-- website:header:end -->
+    <main id="main" class="container">
+      <div class="page-heading">
+        <p class="breadcrumb">
+          <a href="../../">Beranda</a> / <a href="../">Blog</a> / Model dan rekayasa balik
+        </p>
+        <p class="eyebrow">Esai</p>
+        <h1>Apakah rekayasa balik memerlukan model yang lebih besar?</h1>
+        <p class="page-meta">Oleh N0zoM1z0 · 13 Oktober 2026</p>
+        <div class="blog-takeaway">
+          <p class="eyebrow">Poin utama</p>
+          <ul>
+            <li>
+              <strong
+                >Kemampuan model memengaruhi hipotesis mana yang dapat diajukan oleh agen AI.</strong
+              > Sesi berikutnya memecahkan masalah yang belum terselesaikan oleh pekerjaan sebelumnya.
+            </li>
+            <li>
+              <strong
+                >Kompiler yang familiar menawarkan pola konkret untuk dipelajari model khusus.</strong
+              > Beberapa kecocokan kode mesin yang tepat bergantung pada pola kode sumber spesifik yang dapat digunakan kembali.
+            </li>
+            <li>
+              <strong>Sertakan pengetahuan repositori dalam perbandingan yang adil.</strong> Model yang lebih kecil dengan pengambilan pengetahuan yang baik mungkin sudah memiliki informasi yang cukup untuk membuat kemajuan.
+            </li>
+            <li>
+              <strong
+                >Latih model untuk memilih eksperimen berguna berikutnya, dan uji pemeriksanya.</strong
+              > Masukan hanya berguna jika pemeriksa memverifikasi hal yang benar.
+            </li>
+            <li>
+              <strong
+                >Evaluasi hasil rekonstruksi terverifikasi beserta waktu dan biaya.</strong
+              > Itulah yang ingin saya ukur untuk alur kerja agen AI yang lengkap.
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="article-layout">
+        <nav class="contents" aria-label="Di halaman ini">
+          <p>Dalam artikel ini</p>
+          <ul>
+            <li><a href="#model-capability">Apa yang berubah dengan model yang lebih kuat?</a></li>
+            <li><a href="#specialization">Mengapa mengambil spesialisasi?</a></li>
+            <li><a href="#repository-knowledge">Di mana pengalaman ini harus disimpan?</a></li>
+            <li><a href="#learning-search">Pelajari eksperimen bermanfaat berikutnya</a></li>
+            <li><a href="#re-and-rl">Pembelajaran rekayasa balik dan penguatan</a></li>
+            <li><a href="#oracle">Ketika pemeriksa salah</a></li>
+            <li><a href="#comparison">Sebuah perbandingan yang layak untuk dijalankan</a></li>
+            <li><a href="#future-agent">Agen AI macam apa yang disarankan di sini?</a></li>
+          </ul>
+        </nav>
+        <article
+          class="article"
+          aria-label="Model dan esai rekayasa balik"
+        >
+          <section class="article-section" id="model-capability">
+            <h2>Apa yang berubah dengan model yang lebih kuat?</h2>
+            <p>
+              Sejak Agustus 2026, saya telah mengeksplorasi seberapa banyak rekayasa balik yang dapat dilakukan agen dengan akses ke suatu program dan cara untuk memeriksa kerjanya. Sebagian besar pengalaman saya berasal dari merekonstruksi game, terutama Touhou. Karena saya telah mengubah model, repositori menyimpan catatan tentang apa yang berhasil dipulihkan oleh setiap sesi.
+            </p>
+            <p>
+              Sebagian besar pekerjaan tersebut bertujuan untuk rekonstruksi yang tepat: kami mengkompilasi sumber yang dikelola di bawah rantai alat historis dengan versi tetap dan memeriksa apakah sumber tersebut mereproduksi fungsi target. Ketika model selanjutnya berhasil ketika pekerjaan sebelumnya terhenti, perubahan sumber menunjukkan apa yang memungkinkan kemajuan tersebut.
+            </p>
+            <h3>Variabel sementara membutuhkan masa hidup yang tumpang tindih</h3>
+            <p>
+              Sebagian besar logika fungsi serangan TH09 telah direkonstruksi, namun kompiler masih menyimpan hasil sementara yang berbeda dari aslinya. Masalah yang tersisa adalah berapa lama hasil tersebut perlu bertahan dan kapan penyimpanannya dapat digunakan kembali.
+            </p>
+            <p>
+              Catatan sesi <a
+                href="https://github.com/N0zoM1z0/th09/commit/de63c0f9121963f3a6b1ab5471c4878625fd3425"
+                >GPT-6-Sol</a
+              > melaporkan ketidakcocokan ini setelah menguji beberapa pengaturan kode sumber biasa. Ketika <a
+                href="https://github.com/N0zoM1z0/th09/commit/52929ed7c299f1a5f29cc13964e22510145fd616"
+                >GPT-6.1-Sol memeriksa masalahnya lagi</a
+              >, ia mengajukan hipotesis yang berguna tentang masa hidup variabel-variabel sementara ini.
+            </p>
+            <p>
+              Fungsi tersebut memberikan hasil sementara dan menyalinnya ke posisi animasi. Di C++, hasil sementara tetap aktif hingga ekspresi yang menggunakannya selesai. Mengelompokkan operasi nyata ke dalam satu ekspresi membuat hasil tersebut tetap hidup, sehingga kompiler tidak dapat lagi menggunakan penyimpanan yang sama untuk semuanya.
+            </p>
+            <p>
+              Salah satu hasil masih berbagi penyimpanan dengan nilai yang nantinya digunakan untuk pemeriksaan tabrakan. Memberikan nilai tersebut seumur hidupnya akan menyelesaikan sisa tumpang tindih. Setelah beberapa eksperimen yang ditargetkan, <strong
+                >kompilasi ulang yang bersih dari sumber mengonfirmasi bahwa seluruh fungsi cocok</strong
+              >.
+            </p>
+            <p>
+              Saya tertarik pada bagaimana penemuan dan pengujian saling mendukung. Hipotesis tentang masa hidup objek yang bersifat sementara memberikan arah baru bagi agen AI. Umpan balik dari kompiler membantunya menyempurnakan hipotesis tersebut menjadi susunan kode sumber yang cocok.
+            </p>
+            <h3>Grafik aliran kontrol yang berbeda</h3>
+            <p>
+              Fungsi TH09 kedua menunjukkan mengapa arah baru itu penting. Di sini kendalanya adalah bagaimana beberapa cabang membagikan karya akhirnya. <a
+                href="https://github.com/N0zoM1z0/th09/commit/f8d12d72aaf02212ee1b585a8f3f86d7ed000269"
+                >Pekerjaan sebelumnya GPT-6.1-Sol</a
+              > memiliki bagian-bagian fungsi yang cocok, namun cabang-cabangnya masih digabungkan secara berbeda dari aslinya.
+            </p>
+            <p>
+              <a
+                href="https://github.com/N0zoM1z0/th09/commit/da33a646221198ceb7f3df2b96e2ca0e9b2f705f"
+                >GPT-6-Astra mengubah grafik aliran kontrol di sekitarnya</a
+              >. Jalur utama sekarang mengarah ke pembaruan akhir bersama dan kembalinya. Dalam struktur sumber tersebut, kompiler menggabungkan cabang-cabang dengan cara yang sama seperti aslinya. Fungsi keseluruhannya cocok, dan <a
+                href="https://github.com/N0zoM1z0/th09/commit/5f825b28a862f8e1a6d4aea2f78a42f04c09a1c0"
+                >pemeriksaan pembangunan kembali secara terpisah mengonfirmasi hal tersebut</a
+              >.
+            </p>
+            <p>
+              <strong
+                >Mengubah representasi membuka ruang pencarian yang lebih produktif.</strong
+              > Kedua kasus tersebut memberi saya alasan untuk menganggap serius kemampuan model umum: agen dapat terus mencoba variasi lokal untuk waktu yang lama sebelum menemukan cara yang lebih baik untuk mengekspresikan pekerjaan di sekitarnya.
+            </p>
+            <p>
+              Pada saat yang sama, sesi selanjutnya dimulai dengan sumber sebelumnya dan mencatat kegagalan. Akumulasi pekerjaan itu adalah bagian dari keuntungan mereka. Sejarah memungkinkan kita memeriksa penemuan-penemuan dan pemeriksaannya; perbandingan terkontrol akan membantu memisahkan pengaruh model dari pengalaman yang diwarisinya.
+            </p>
+            <p>
+              Inilah yang membuat pertanyaan ini menarik bagi saya. Beberapa kemajuan datang dari penemuan representasi baru. Sebagian besar pekerjaan yang tersisa melibatkan pengujian pengaturan kode sumber yang berbeda terhadap kompiler yang sudah dikenal. Seberapa banyak hal ini memerlukan kemampuan penalaran yang luas? Berapa banyak yang dapat dipelajari suatu model dengan bekerja berulang kali menggunakan compiler dan kode tersebut?
+            </p>
+          </section>
+          <section class="article-section" id="specialization">
+            <h2>Mengapa model AI khusus dapat berfungsi dengan baik?</h2>
+            <p>
+              Touhou memberi kita alasan konkret untuk mengharapkan pengalaman itu membantu. Sebagian besar kode permainan berasal dari penulis yang sama, ZUN, jadi kebiasaan berulang adalah asumsi awal yang masuk akal. Repositori mendukung hal tersebut dengan contoh-contoh yang berguna: loop terkait dan pengaturan pembantu telah memberikan hipotesis di seluruh game.
+            </p>
+            <p>
+              Pola sumber tersebut menjadi lebih spesifik ketika kita menyertakan kompiler. Dalam versi dan rangkaian opsi tertentu, perubahan kecil pada sumber dapat menghasilkan perbedaan berulang dalam kode mesin. Beberapa dari perbedaan tersebut ternyata tidak jelas.
+            </p>
+            <p>
+              Di TH095, misalnya, <strong
+                >bahkan nama variabel lokal dapat memengaruhi tempat VC7.1 menyimpannya</strong
+              >. Memindahkan deklarasinya tidak menyelesaikan tata letak penyimpanan. Namun, fungsi latar belakang sebelumnya telah mengungkapkan pola penamaan yang mempengaruhi pilihan kompiler. Hal ini menunjukkan hipotesis yang lebih menjanjikan untuk <a
+                href="https://github.com/N0zoM1z0/th095/commit/26bb64bdb093a13f73abd0ee8ae7ce199ee4658f"
+                >merekonstruksi <code>Supervisor::LoadDat</code></a
+              >.
+            </p>
+            <p>
+              Menggunakan kembali pola tersebut untuk variabel ukuran file menghasilkan tata letak yang diperlukan tanpa menambahkan penyimpanan. Fungsi penuh kemudian dicocokkan.
+            </p>
+            <p>
+              Ini adalah detail yang sangat spesifik yang mungkin tidak diketahui oleh model AI tujuan umum saat pertama kali mengalami masalah. Model yang dikhususkan untuk kompiler ini dapat melihat banyak kasus seperti itu dan mempelajari variasi kode sumber mana yang layak untuk diuji terlebih dahulu.
+            </p>
+            <p>
+              Peluangnya sangat jelas dalam masalah pencocokan akhir dimana kita sudah memahami perilakunya. Kami kemudian menanyakan pengaturan kode sumber biasa mana yang diubah oleh kompiler ini menjadi instruksi yang diamati. Spesialisasi dapat membantu model mengusulkan bentuk-bentuk tersebut dengan lebih efisien, sementara target tetap menentukan hipotesis mana yang bertahan.
+            </p>
+            <p>
+              Pola yang berguna harus mempertahankan konteksnya. TH08 menggunakan versi Visual C++ yang lebih lama dari TH095 dan TH09. TH04 menggunakan compiler yang berbeda dari era DOS. <a
+                href="https://github.com/N0zoM1z0/th04/commit/6dce0a79d5b931f0e2a08475b90e0c33d2321b98"
+                >rekonstruksi kode pemain</a
+              > memerlukan hipotesis berbeda tentang pola kode sumber dan bagaimana kode yang dikompilasi dihubungkan ke dalam file yang dapat dieksekusi. Memiliki penulis yang sama memberi kita ekspektasi awal, namun setiap target memberi tahu kita apakah target tersebut berlaku. Model khusus perlu membedakan konteks-konteks ini.
+            </p>
+          </section>
+          <section class="article-section" id="repository-knowledge">
+            <h2>Di mana pengalaman ini harus disimpan?</h2>
+            <p>
+              Sebelum memutuskan untuk mengajarkan pola-pola tersebut melalui pelatihan model, saya akan melihat pengetahuan yang sudah kita simpan di gudang. Dalam <a href="../touhou-reconstruction/">esai sebelumnya</a>, saya menulis tentang hal ini yang menjadi memori kerja proyek. Memori tersebut mencakup pelajaran kompiler, beserta sumbernya dan eksperimen gagal yang menjadikannya berguna.
+            </p>
+            <p>
+              Dengan mengambil catatan tersebut, agen dapat memulai dengan hasil yang diketahui dan memeriksa bagaimana kami mencapainya. Hal ini juga dapat menghindari alternatif-alternatif yang telah gagal dalam konteks yang sama. Titik awal ditingkatkan tanpa mengubah parameter model yang dilatih.
+            </p>
+            <p>
+              Saat merekonstruksi fungsi TH09 untuk menciptakan musuh, <a
+                href="https://github.com/N0zoM1z0/th09/commit/1eb843383941d00065622a9e353146c4bb96979e"
+                >sesi GPT-6-Luna-max</a
+              > mengambil hipotesis dari kode sumber TH08 terkait. Kode sebelumnya menyarankan cara mengatur loop dan menangani kegagalan di dalamnya. Bukti TH09 sendiri memberikan detail khusus game tersebut. Pembangunan kembali dari sumber mengonfirmasi bahwa fungsi lengkapnya cocok.
+            </p>
+            <p>
+              <strong
+                >"Model tidak mengetahui kekhasan kompiler" dan "model tidak dapat menggunakannya" adalah masalah yang berbeda.</strong
+              > Pengambilan mungkin memecahkan masalah pertama, namun mengubah fakta tersebut menjadi kandidat yang berguna masih membutuhkan usaha. Dan jika kandidat kode sumber gagal, model harus memutuskan apa arti hasil tersebut untuk percobaan berikutnya. Mengetahui pola yang relevan hanyalah awal dari proses itu.
+            </p>
+            <p>
+              Oleh karena itu, saya akan menyertakan model AI serba guna yang lebih kecil dengan pengambilan yang baik dalam perbandingan apa pun. Memberikan perpustakaan pengalaman yang sama akan membantu kami mengidentifikasi apa saja yang ditambahkan oleh pelatihan: perolehan kandidat yang lebih baik, keputusan yang lebih baik setelah adanya masukan, atau keduanya.
+            </p>
+          </section>
+          <section class="article-section" id="learning-search">
+            <h2>Pelajari eksperimen bermanfaat berikutnya</h2>
+            <p>
+              Keputusan-keputusan setelah mendapat masukan adalah hal yang paling ingin saya pelajari. Dalam rekonstruksi agenik, model mengajukan penjelasan dan mengujinya terhadap program. Bahkan ketika kode sumber kandidat gagal, hasilnya dapat mempersempit kemungkinan yang tersisa dan menyarankan percobaan berikutnya yang lebih berguna.
+            </p>
+            <p>
+              Perhatikan kembali contoh hasil sementara. Sumber akhirnya menunjukkan pengaturan yang berhasil, namun rute ke sumber tersebut berisi lebih banyak informasi. Setiap eksperimen berikut membantu mengidentifikasi apa yang masih perlu diubah.
+            </p>
+            <div class="evidence-table-wrap">
+              <table
+                class="evidence-table"
+                aria-label="Eksperimen rekonstruksi yang dipilih"
+              >
+                <thead>
+                  <tr>
+                    <th scope="col">Eksperimen</th>
+                    <th scope="col">Apa yang diajarkan hasilnya kepada kita</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Coba cara lain untuk menyalin hasilnya</td>
+                    <td>
+                      Kode copynya berubah, tapi fungsinya tetap berbeda.
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Gunakan nilai yang dikembalikan secara langsung</td>
+                    <td>
+                      Penyalinan mengikuti pola aslinya, namun penyimpanan sementara tetap berbeda.
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Jaga agar semua variabel sementara tetap valid pada waktu yang sama</td>
+                    <td>
+                      Mereka mendapatkan penyimpanan terpisah, namun masih tumpang tindih dengan nilai yang digunakan nanti untuk pemeriksaan tabrakan.
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Pisahkan nilai pemeriksaan tabrakan</td>
+                    <td>Kompilasi ulang yang bersih dari sumber mengonfirmasi kecocokan yang lengkap.</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <p class="caption">
+              Eksperimen yang dipilih dari rekonstruksi fungsi serangan di atas, dikelompokkan berdasarkan apa yang diajarkannya kepada kita.
+            </p>
+            <p>
+              Catatan pelatihan yang menjaga urutan ini dapat mengajarkan lebih dari sekedar sumber akhir saja. Ini menghubungkan setiap perubahan yang diusulkan dengan hasil yang diamati dan keputusan berikutnya. Mempertahankan variasi yang tidak efektif juga penting: variasi tersebut akan memberi tahu agen selanjutnya hipotesis mana yang telah diuji dalam konteks tersebut.
+            </p>
+            <p>
+              <strong
+                >Saya ingin model mempelajari cara menggunakan masukan.</strong
+              > Hasil yang netral adalah alasan untuk mempertimbangkan kembali variasi; ketidakcocokan yang berubah mungkin menunjukkan penyebab lain. Ketika suntingan lokal tidak lagi bersifat informatif, agen harus dapat mengunjungi kembali representasi sumber atau memeriksa bukti lagi.
+            </p>
+            <p>
+              Belajar membuat pilihan tersebut membutuhkan otonomi. Terkadang langkah berikutnya yang berguna adalah memeriksa pemanggil lain daripada mengkompilasi hasil edit lainnya. Urutan penulisan ulang yang diperlukan akan menghilangkan pilihan tersebut, bersama dengan bagian dari perilaku yang kita ingin model pelajari.
+            </p>
+          </section>
+          <section class="article-section" id="re-and-rl">
+            <h2>Mengapa rekayasa balik menarik untuk pembelajaran penguatan</h2>
+            <p>
+              Rekonstruksi dengan lingkup yang jelas memberi lingkungan praktis untuk mempelajari pilihan ini. Setelah versi target dan kompiler ditetapkan, banyak eksperimen kode sumber memberi umpan balik yang cepat dan dapat diulang. Agen bisa mengompilasi kandidat, memeriksa perbedaan, lalu memilih langkah berikutnya.
+            </p>
+            <p>
+              Pembelajaran penguatan dapat melatih proses pengambilan keputusan melalui umpan balik yang diterimanya. Kandidat yang diterima melalui pemeriksaan tertentu memberi kita hasil yang konkrit, sementara rangkaian upaya memungkinkan kita mengamati berapa banyak usaha yang diperlukan untuk mencapainya.
+            </p>
+            <p>
+              Sudah ada penelitian yang mendukung arah ini. <a href="https://aclanthology.org/2024.emnlp-main.203/"
+                >LLM4Decompile</a
+              > mempelajari model yang dikhususkan untuk dekompilasi. <a href="https://arxiv.org/html/2606.16162v1">AutoDecompiler</a> melatih penyempurnaan multi-putaran menggunakan compiler dan masukan eksekusi. Studi mereka fokus pada pemulihan fungsional. Untuk pekerjaan ini, saya akan menggunakannya sebagai titik awal untuk tugas terkait menemukan sumber yang cocok dengan keluaran kompiler historis.
+            </p>
+            <p>
+              Namun, untuk mencapai tugas yang terdefinisi dengan baik, pertama-tama kita perlu menetapkan sumber daya yang dimiliki suatu fungsi atau merancang cara baru untuk mengamati perilaku program saat berjalan. Di TH08, misalnya, <a
+                href="https://github.com/N0zoM1z0/th08/commit/af9cb1d3e839b15a78b47ac1701506083cc82847"
+                >perbedaan tabrakan mengarah kembali ke cara program asli menangani penghitungan floating-point</a
+              >. Sebelum agen dapat menguji koreksi yang berguna, agen harus menentukan apa yang diukur.
+            </p>
+            <p>
+              Hal ini menunjukkan adanya peran lain dari model yang berkemampuan luas: membantu membuat masalah dapat diperiksa. Setelah pemeriksaan tersebut dilakukan, kami dapat menyelidiki sejauh mana kebijakan penelusuran yang dipelajari dapat diterapkan.
+            </p>
+          </section>
+          <section class="article-section" id="oracle">
+            <h2>Ketika pemeriksa salah</h2>
+            <p>
+              Saat suatu pemeriksaan dipakai untuk pelatihan, cakupannya menjadi bagian dari lingkungan belajar. Saya menyebut acuan atau alat pemeriksa itu oracle. Bahkan jawaban yang dapat diulang harus dipahami berdasarkan apa yang benar-benar diperiksanya.
+            </p>
+            <p>
+              TH08 menunjukkan seberapa banyak yang bisa disembunyikan di luar cakupan itu. Beberapa fungsi yang direkonstruksi memberikan perbandingan yang tepat dengan konstanta floating-point yang salah. Pembanding menyesuaikan alamat yang direlokasi sebelum memeriksa instruksi, namun pembanding memeriksa nilai di balik alamat tersebut hanya jika nilai tersebut telah dicatat secara eksplisit untuk verifikasi. Referensi literal lainnya bisa lolos tanpa diperiksa nilainya.
+            </p>
+            <p>
+              Untuk mengatasi kesenjangan ini, <a
+                href="https://github.com/N0zoM1z0/th08/commit/a393f400786e4cc6cbb1000af0dad3276da12c78"
+                >audit yang lebih luas</a
+              > menemukan konstanta yang salah pada fungsi yang telah lolos verifikasi. Dalam satu perhitungan, kode sumber yang direkonstruksi menambahkan <code>1.0f</code>, sedangkan kode sumber asli menambahkan <code>32.0f</code>.
+            </p>
+            <p>
+              <strong
+                >Model yang diberi imbalan melalui pemeriksaan verifikasi lama dapat belajar menghasilkan rekonstruksi yang salah.</strong
+              > Kami tidak melatih model RL menggunakan pemeriksa tersebut. Kegagalan yang kami amati ada pada pemeriksaan itu sendiri. Namun jika kita menggunakannya sebagai hadiah, titik buta yang sama akan menjadi bagian dari lingkungan belajar.
+            </p>
+            <p>
+              Tes fungsional dapat memiliki titik buta serupa. <a href="https://arxiv.org/html/2609.05370v1"
+                >Penelitian yang menggunakan fuzzing diferensial pada dekompiler LLM</a
+              > menemukan perbedaan perilaku di luar pengujian yang disediakan. Oleh karena itu, kita perlu memahami tes kelulusan dalam kaitannya dengan kasus-kasus yang dilakukannya. Demikian pula, kecocokan instruksi harus dipahami dalam kaitannya dengan byte dan data yang diverifikasi.
+            </p>
+            <p>
+              Sebelum menggunakan salah satu jenis cek verifikasi sebagai hadiah, saya akan mengujinya dengan hasil yang sengaja salah. Saya juga akan memisahkan penerimaan akhir dari kode sumber yang dapat diedit oleh agen AI. Model harus lolos verifikasi dengan merekonstruksi program dengan benar. Jika tidak, hanya dengan menyalin array byte dari target dapat menipu sistem penilaian yang naif tanpa memulihkan kode sumber yang berguna.
+            </p>
+            <p>
+              <strong
+                >Memperbaiki model yang belajar dan memperbaiki pemeriksanya merupakan bagian dari masalah penelitian yang sama.</strong
+              > Semakin baik model mengoptimalkan umpan balik yang kita berikan, semakin penting memahami umpan balik itu sendiri.
+            </p>
+          </section>
+          <section class="article-section" id="comparison">
+            <h2>Sebuah perbandingan yang layak untuk dijalankan</h2>
+            <p>
+              Dengan pemeriksaan tersebut, saya akan memulai perbandingan pada rangkaian tugas VC7.1 yang tetap. Pertama, saya akan menetapkan dasar untuk model AI tujuan umum yang kuat dan model yang lebih kecil. Menambahkan pengetahuan repositori ke model yang lebih kecil akan menunjukkan perubahan pengambilan apa. Dari sana, spesialisasi yang diawasi dan versi terlatih RL akan memungkinkan kita memeriksa apa saja yang ditambahkan dalam pelatihan.
+            </p>
+            <p>
+              Agar perbandingan tersebut informatif, setiap model akan menerima bukti dan alat target yang sama. Untuk perbandingan khusus pelatihan, saya juga akan mempertahankan model dasar dan pengetahuan yang tersedia. Uji coba berulang akan membantu membedakan strategi pencarian yang andal dari kandidat solusi yang berhasil secara kebetulan.
+            </p>
+            <p>
+              Saya kemudian akan memisahkan dua kondisi awal: merekonstruksi suatu fungsi dari instruksinya, dan menutup beberapa perbedaan terakhir dalam sumber yang dipertahankan. Model AI khusus mungkin sangat baik dalam tugas kedua, sementara model AI tujuan umum melakukan banyak pekerjaan yang diperlukan untuk mencapainya. Mengukurnya secara terpisah akan mengungkapkan pembagian kerja tersebut.
+            </p>
+            <p>
+              Kedua tugas memerlukan contoh uji yang tidak ada dalam data pelatihan maupun bahan retrieval. Game Touhou yang terkait berbagi kode engine. Mengecualikan satu game saja masih bisa menyisakan fungsi yang hampir identik dalam data pelatihan. Saya akan menyisihkan seluruh kelompok kode yang terkait, dan memastikan jawaban terverifikasinya tidak masuk ke data pelatihan ataupun pustaka retrieval.
+            </p>
+            <p>
+              Untuk contoh-contoh ini, hasilnya akan berupa kecocokan yang lengkap dan terverifikasi secara independen. Anggaran yang sama untuk proposal kandidat atau upaya kompilasi akan membantu membandingkan kualitas pencarian. Mengukur total waktu dan biaya, termasuk kompilasi, akan menunjukkan apakah kualitas tersebut menghasilkan alur kerja yang efisien. Biaya pelatihan harus diukur secara terpisah.
+            </p>
+            <p>
+              Kedua pengukuran itu penting. Proposal yang murah dapat menyebabkan alur kerja yang mahal jika menyebabkan lebih banyak kompilasi yang tidak memberikan informasi berguna. Sebaliknya, model yang lebih lambat mungkin lebih ekonomis jika model tersebut menemukan eksperimen yang berguna lebih cepat. Perbandingannya harus mencakup biaya-biaya ini.
+            </p>
+            <p>
+              Menghitung hasil yang diterima juga menjaga kemajuan sementara tetap dalam perspektif. Salah satu TH09 <a
+                href="https://github.com/N0zoM1z0/th09/commit/ab72fd77728293fc0beacfc656ca701b0e266016"
+                >kandidat penyimpanan ulang</a
+              > tampak menjanjikan karena fungsi yang dikompilasi memiliki ukuran yang diharapkan, namun perbandingan penuh masih menemukan perbedaan besar. Perubahan dalam cara compiler menyusun instruksi juga dapat membuat kandidat tampak lebih dekat dengan target tanpa menyelesaikan masalah mendasarnya. Diagnostik semacam itu dapat memandu eksperimen berikutnya, namun saya akan memvalidasi imbalan apa pun karena "mendekati" dengan pemeriksaan penerimaan penuh.
+            </p>
+            <p>
+              Saya tertarik dengan pola hasil ini. Jika model AI khusus dapat berfungsi dengan baik dalam rangkaian kompiler yang sudah dikenal, apakah keunggulan tersebut dapat bertahan jika terjadi perubahan rantai alat? Dan ketika kedua model AI memiliki pengambilan yang baik, berapa banyak lagi yang bisa ditambahkan oleh pelatihan? Jawabannya akan membantu kita memutuskan model mana yang paling berguna.
+            </p>
+          </section>
+          <section class="article-section" id="future-agent">
+            <h2>Agen AI macam apa yang disarankan di sini?</h2>
+            <p>
+              Jika model-model tersebut terbukti membantu pada tahap-tahap yang berbeda, pengaturan yang berguna mungkin adalah agen luas yang memiliki akses ke model AI khusus. Setelah tugas menjadi pencarian kompiler yang familier, tugas tersebut dapat menanyakan kandidat pada model AI khusus. Jika hasilnya tidak masuk akal, agen yang lebih luas dapat kembali ke bukti target atau menyelidiki pengukuran itu sendiri.
+            </p>
+            <p>
+              Dalam pengaturan tersebut, spesialisasi menjadi alat yang dapat dipilih agen seiring berkembangnya penyelidikan. Agen mempunyai kebebasan untuk mengubah arah yang memungkinkan terobosan sebelumnya.
+            </p>
+            <p>
+              Hal ini tentu saja mengikuti pergeseran industri yang saya jelaskan di esai sebelumnya. Mampu menjalankan lebih banyak eksperimen mengubah cara kami mengatur pekerjaan. Hal ini juga memberi kita alasan untuk mempertanyakan keputusan mana yang memerlukan pertimbangan luas dan mana yang ditingkatkan melalui pengalaman berulang-ulang dengan bidang tertentu.
+            </p>
+            <p>
+              Untuk saat ini, model umum terkuat mendapat tempat dalam alur kerja saya karena menyelesaikan masalah yang sebelumnya belum terpecahkan. Keberhasilan itu membuat saya ingin mempelajari prosesnya: seberapa banyak bergantung pada keluasan kemampuan model, dan seberapa banyak bisa dikerjakan oleh model yang dilatih khusus untuk jenis rekonstruksi ini?
+            </p>
+            <p>
+              <strong
+                >Repositori memberi kita cara untuk menguji pertanyaan tersebut.</strong
+              > Saya ingin menggunakan data tersebut untuk membuat perbandingan dan melihat apa yang kita pelajari.
+            </p>
+          </section>
+          <section class="article-section" id="sources">
+            <details class="native-details">
+              <summary>Bukti dan atribusi model</summary>
+              <p>
+                <a
+                  href="https://github.com/morluto/rea/blob/main/website/evidence/reverse-engineering-models.md"
+                  >Catatan bukti terperinci</a
+                > memuat perbandingan yang dicatat dan konteks eksperimen.
+              </p>
+              <p>
+                Contoh-contoh ini menjelaskan perbandingan tingkat fungsi historis yang dicatat dalam penerapan tertaut. Pemeriksaan waktu proses keseluruhan permainan adalah pencapaian yang terpisah. Sumber dan catatan pencocokan ditinjau pada 13 Oktober 2026.
+              </p>
+              <p>
+                Label TH09 <code>gpt-dots</code> berarti GPT-6-Astra. Model yang terkait dengan <code>gpt-web</code> berubah seiring waktu, sehingga label saja tidak dapat mengidentifikasi model yang digunakan dalam proses tertentu. Nama model eksplisit dalam commit lain yang dikutip memberikan atribusi yang tercatat. Riwayat ini tidak mencakup pengukuran biaya atau upaya yang konsisten untuk setiap proses.
+              </p>
+              <ul>
+                <li>
+                  <strong>TH09 masa hidup objek sementara:</strong> <a
+                    href="https://github.com/N0zoM1z0/th09/commit/de63c0f9121963f3a6b1ab5471c4878625fd3425"
+                    >tinjauan konteks sebelumnya</a
+                  > dan <a
+                    href="https://github.com/N0zoM1z0/th09/commit/52929ed7c299f1a5f29cc13964e22510145fd616"
+                    >rekonstruksi lengkap yang diverifikasi melalui kompilasi ulang yang bersih dari sumber</a
+                  >.
+                </li>
+                <li>
+                  <strong>TH09 Front callback:</strong> <a
+                    href="https://github.com/N0zoM1z0/th09/commit/f8d12d72aaf02212ee1b585a8f3f86d7ed000269"
+                    >wilayah diagnostik yang tidak cocok</a
+                  >, <a
+                    href="https://github.com/N0zoM1z0/th09/commit/da33a646221198ceb7f3df2b96e2ca0e9b2f705f"
+                    >Astra grafik aliran kontrol baru</a
+                  > dan <a
+                    href="https://github.com/N0zoM1z0/th09/commit/5f825b28a862f8e1a6d4aea2f78a42f04c09a1c0"
+                    >pemeriksaan kompilasi ulang yang diterima</a
+                  >.
+                </li>
+                <li>
+                  <strong>Pengetahuan compiler:</strong> <a
+                    href="https://github.com/N0zoM1z0/th095/commit/26bb64bdb093a13f73abd0ee8ae7ce199ee4658f"
+                    >TH095 penggunaan kembali perilaku identifier-bucket</a
+                  >, <a
+                    href="https://github.com/N0zoM1z0/th04/commit/6dce0a79d5b931f0e2a08475b90e0c33d2321b98"
+                    >TH04 kode sumber pemain dan urutan linker</a
+                  > dan <a
+                    href="https://github.com/N0zoM1z0/th09/commit/1eb843383941d00065622a9e353146c4bb96979e"
+                    >Luna rekonstruksi lengkap fungsi penciptaan musuh TH09</a
+                  >.
+                </li>
+                <li>
+                  <strong>Pemeriksaan dan diagnostik:</strong> <a
+                    href="https://github.com/N0zoM1z0/th08/commit/a393f400786e4cc6cbb1000af0dad3276da12c78"
+                    >TH08 audit konstan floating-point</a
+                  >, <a
+                    href="https://github.com/N0zoM1z0/th08/commit/af9cb1d3e839b15a78b47ac1701506083cc82847"
+                    >TH08 investigasi numerik</a
+                  > dan <a
+                    href="https://github.com/N0zoM1z0/th09/commit/ab72fd77728293fc0beacfc656ca701b0e266016"
+                    >TH09 rekonstruksi penyimpanan ulangan</a
+                  >.
+                </li>
+              </ul>
+              <p>
+                Perbandingan yang diusulkan antara model khusus dan pelatihan RL adalah eksperimen di masa depan. Sejarah proyek memotivasi mereka. Tidak ada model khusus terlatih yang dievaluasi untuk esai ini.
+              </p>
+            </details>
+          </section>
+        </article>
+      </div>
+    </main>
+    <!-- website:footer:start -->
+    <!-- prettier-ignore -->
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <p>REA · Reverse Engineer Anything</p>
+        <div class="footer-links">
+          <a href="../../faq/">FAQ</a
+          ><a href="../../contributors/">Kontributor</a
+          ><a href="https://github.com/morluto/rea">Kode sumber</a
+          ><a href="https://github.com/morluto/rea/blob/main/LICENSE">Lisensi MIT</a
+          ><a href="https://discord.gg/GkcryMnJDM">Gabung komunitas</a
+          ><a href="https://x.com/reatools">Ikuti di X</a>
+        </div>
+      </div>
+    </footer>
+    <p class="sr-only" id="copy-status" role="status" aria-live="polite"></p>
+    <a class="back-to-top" href="#top" aria-label="Kembali ke atas">
+      <span aria-hidden="true">↑</span> Atas
+    </a>
+    <!-- website:footer:end -->
+  </body>
+</html>

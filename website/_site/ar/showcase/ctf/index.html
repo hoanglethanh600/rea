@@ -1,0 +1,730 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>كتف الهندسة العكسية: داونندركتف مدقق العلم — REA</title>
+    <meta
+      name="description"
+      content="استخدام REA لحل المربعات ملثمين مدقق العلم. ابحث عن وظائف الفحص واستخرج الأقنعة وقارن العلم المسترد بالبرنامج الأصلي."
+    />
+    <!-- website:sharing:start -->
+    <!-- prettier-ignore -->
+    <link rel="canonical" href="https://rea.tools/ar/showcase/ctf/" />
+    <!-- website:languages:start -->
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="en" href="https://rea.tools/showcase/ctf/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="zh-CN" href="https://rea.tools/zh-CN/showcase/ctf/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="zh-TW" href="https://rea.tools/zh-TW/showcase/ctf/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="ja" href="https://rea.tools/ja/showcase/ctf/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="ko" href="https://rea.tools/ko/showcase/ctf/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="tr" href="https://rea.tools/tr/showcase/ctf/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="ru" href="https://rea.tools/ru/showcase/ctf/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="vi" href="https://rea.tools/vi/showcase/ctf/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="th" href="https://rea.tools/th/showcase/ctf/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="de" href="https://rea.tools/de/showcase/ctf/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="es" href="https://rea.tools/es/showcase/ctf/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="fr" href="https://rea.tools/fr/showcase/ctf/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="uk" href="https://rea.tools/uk/showcase/ctf/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="pl" href="https://rea.tools/pl/showcase/ctf/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="pt-BR" href="https://rea.tools/pt-BR/showcase/ctf/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="ar" href="https://rea.tools/ar/showcase/ctf/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="fa" href="https://rea.tools/fa/showcase/ctf/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="id" href="https://rea.tools/id/showcase/ctf/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="it" href="https://rea.tools/it/showcase/ctf/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="el" href="https://rea.tools/el/showcase/ctf/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="x-default" href="https://rea.tools/showcase/ctf/" />
+<!-- website:languages:end -->
+    <!-- prettier-ignore -->
+    <meta property="og:type" content="website" />
+    <!-- prettier-ignore -->
+    <meta property="og:site_name" content="REA" />
+    <!-- prettier-ignore -->
+    <meta property="og:title" content="كتف الهندسة العكسية: داونندركتف مدقق العلم — REA" />
+    <!-- prettier-ignore -->
+    <meta property="og:description" content="استخدام REA لحل المربعات ملثمين مدقق العلم. ابحث عن وظائف الفحص واستخرج الأقنعة وقارن العلم المسترد بالبرنامج الأصلي." />
+    <!-- prettier-ignore -->
+    <meta property="og:url" content="https://rea.tools/ar/showcase/ctf/" />
+    <!-- prettier-ignore -->
+    <meta property="og:image" content="https://rea.tools/assets/social-card.png" />
+    <!-- prettier-ignore -->
+    <meta property="og:image:type" content="image/png" />
+    <!-- prettier-ignore -->
+    <meta property="og:image:width" content="1200" />
+    <!-- prettier-ignore -->
+    <meta property="og:image:height" content="630" />
+    <!-- prettier-ignore -->
+    <meta
+      property="og:image:alt"
+      content="REA - اكتشف كيف يعمل البرنامج. الهندسة العكسية مع مساعدك البرمجي."
+    />
+    <!-- prettier-ignore -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <!-- prettier-ignore -->
+    <meta name="twitter:title" content="كتف الهندسة العكسية: داونندركتف مدقق العلم — REA" />
+    <!-- prettier-ignore -->
+    <meta name="twitter:description" content="استخدام REA لحل المربعات ملثمين مدقق العلم. ابحث عن وظائف الفحص واستخرج الأقنعة وقارن العلم المسترد بالبرنامج الأصلي." />
+    <!-- prettier-ignore -->
+    <meta name="twitter:image" content="https://rea.tools/assets/social-card.png" />
+    <!-- prettier-ignore -->
+    <meta
+      name="twitter:image:alt"
+      content="REA - اكتشف كيف يعمل البرنامج. الهندسة العكسية مع مساعدك البرمجي."
+    />
+    <!-- website:sharing:end -->
+    <!-- website:theme:start -->
+    <meta name="theme-color" content="#ffffff" />
+    <!-- Apply the saved theme before styles load, to avoid a flash on navigation. -->
+    <script src="../../../assets/theme.js"></script>
+    <!-- website:theme:end -->
+    <link rel="icon" href="../../../assets/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="../../../assets/styles.css" />
+    <script src="../../../assets/main.js" defer></script>
+  <script id="website-messages" type="application/json">{"Copied": "نسخ", "Code copied to clipboard.": "رمز نسخ إلى الحافظة.", "Selected": "مختارة", "Code selected. Use your keyboard to copy it.": "رمز المحدد. استخدم لوحة المفاتيح لنسخها.", "REA on GitHub ({count})": "REA على GitHub ({count})", "Switch to light mode": "التبديل إلى الوضع الفاتح", "Switch to dark mode": "التبديل إلى الوضع الداكن"}</script>
+  </head>
+  <body id="top">
+    <a class="skip-link" href="#main">تخطي إلى المحتوى</a>
+    <!-- website:header:start -->
+    <!-- prettier-ignore -->
+    <header class="site-header">
+      <div class="container header-inner">
+        <a class="brand" href="../../" aria-label="الصفحة الرئيسية لـ REA"
+          ><span class="brand-name">REA</span
+          ><span class="brand-caption" data-i18n-skip>Reverse Engineer Anything</span></a
+        >
+        <nav class="navigation" aria-label="التنقل الرئيسي">
+          <a href="../../../get-started/" class="nav-start">ابدأ هنا</a>
+          <a href="../" aria-current="page">أمثلة عملية</a>
+          <a href="../../blog/">المدونة</a>
+          <a href="../../guides/">الأدلة</a>
+        </nav>
+        <div class="header-social">
+          <details class="language-picker" data-i18n-skip><summary><span aria-hidden="true">文 / A</span> <span>العربية</span></summary><nav aria-label="العربية"><a href="../../../showcase/ctf/" lang="en" dir="ltr" data-language="en">English</a><a href="../../../zh-CN/showcase/ctf/" lang="zh-CN" dir="ltr" data-language="zh-CN">简体中文</a><a href="../../../zh-TW/showcase/ctf/" lang="zh-TW" dir="ltr" data-language="zh-TW">繁體中文</a><a href="../../../ja/showcase/ctf/" lang="ja" dir="ltr" data-language="ja">日本語</a><a href="../../../ko/showcase/ctf/" lang="ko" dir="ltr" data-language="ko">한국어</a><a href="../../../tr/showcase/ctf/" lang="tr" dir="ltr" data-language="tr">Türkçe</a><a href="../../../ru/showcase/ctf/" lang="ru" dir="ltr" data-language="ru">Русский</a><a href="../../../vi/showcase/ctf/" lang="vi" dir="ltr" data-language="vi">Tiếng Việt</a><a href="../../../th/showcase/ctf/" lang="th" dir="ltr" data-language="th">ไทย</a><a href="../../../de/showcase/ctf/" lang="de" dir="ltr" data-language="de">Deutsch</a><a href="../../../es/showcase/ctf/" lang="es" dir="ltr" data-language="es">Español</a><a href="../../../fr/showcase/ctf/" lang="fr" dir="ltr" data-language="fr">Français</a><a href="../../../uk/showcase/ctf/" lang="uk" dir="ltr" data-language="uk">Українська</a><a href="../../../pl/showcase/ctf/" lang="pl" dir="ltr" data-language="pl">Polski</a><a href="../../../pt-BR/showcase/ctf/" lang="pt-BR" dir="ltr" data-language="pt-BR">Português (Brasil)</a><a href="../../../ar/showcase/ctf/" lang="ar" dir="rtl" data-language="ar" aria-current="true">العربية</a><a href="../../../fa/showcase/ctf/" lang="fa" dir="rtl" data-language="fa">فارسی</a><a href="../../../id/showcase/ctf/" lang="id" dir="ltr" data-language="id">Bahasa Indonesia</a><a href="../../../it/showcase/ctf/" lang="it" dir="ltr" data-language="it">Italiano</a><a href="../../../el/showcase/ctf/" lang="el" dir="ltr" data-language="el">Ελληνικά</a><a href="../../../ml/showcase/ctf/" lang="ml" dir="ltr" data-language="ml">മലയാളം · English</a><a href="../../../ur-Latn/showcase/ctf/" lang="ur-Latn" dir="ltr" data-language="ur-Latn">Roman Urdu · English</a><a href="../../../ro/showcase/ctf/" lang="ro" dir="ltr" data-language="ro">Română · English</a></nav></details>
+          <button class="theme-toggle" type="button" data-theme-toggle hidden>
+            <svg class="theme-moon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+              <path d="M20.9 13a9 9 0 0 1-9.9-9.9A9 9 0 1 0 20.9 13Z" />
+            </svg>
+            <svg class="theme-sun" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true" focusable="false">
+              <circle cx="12" cy="12" r="4" />
+              <path d="M12 2v2m0 16v2M2 12h2m16 0h2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42" />
+            </svg>
+          </button>
+          <a
+            class="nav-github"
+            href="https://github.com/morluto/rea"
+            aria-label="REA على GitHub"
+            title="REA على GitHub"
+          >
+            <svg
+              width="22"
+              height="22"
+              viewBox="0 0 16 16"
+              aria-hidden="true"
+              focusable="false"
+            >
+              <path
+                fill="currentColor"
+                d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82a7.65 7.65 0 0 1 2-.27c.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z"
+              />
+            </svg>
+            <span class="nav-github-count" hidden aria-hidden="true"></span>
+          </a>
+          <a
+            class="nav-discord"
+            href="https://discord.gg/GkcryMnJDM"
+            aria-label="انضم إلى REA على Discord"
+            title="انضم إلى REA على Discord"
+          >
+            <svg
+              width="22"
+              height="22"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+              focusable="false"
+            >
+              <path
+                fill="currentColor"
+                d="M20.317 4.3698a19.7913 19.7913 0 0 0-4.8851-1.5152.0741.0741 0 0 0-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 0 0-.0785-.037 19.7363 19.7363 0 0 0-4.8852 1.515.0699.0699 0 0 0-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 0 0 .0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 0 0 .0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 0 0-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 0 1-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 0 1 .0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 0 1 .0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 0 1-.0066.1276 12.2986 12.2986 0 0 1-1.873.8914.0766.0766 0 0 0-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 0 0 .0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 0 0 .0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 0 0-.0312-.0286ZM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189Zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189Z"
+              />
+            </svg>
+          </a>
+          <a
+            class="nav-x"
+            href="https://x.com/reatools"
+            aria-label="تابع REA على X"
+            title="تابع REA على X"
+          >
+            <svg
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+              focusable="false"
+            >
+              <path
+                fill="currentColor"
+                d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z"
+              />
+            </svg>
+          </a>
+        </div>
+      </div>
+    </header>
+    <!-- website:header:end -->
+    <main id="main" class="container">
+      <div class="page-heading">
+        <p class="breadcrumb">
+          <a href="../../">الرئيسية</a> / <a href="../">يعرض</a> / فرقة العمل
+        </p>
+        <p class="eyebrow">دراسة حالة * أسفل 2023</p>
+        <h1>ابحث عن العلم في<br />ثنائي كتف.</h1>
+        <p class="lede">
+          استخدام REA لفحص مدقق علم صغير ، حول قواعده إلى معادلات وابحث عن إدخال يجعل البرنامج الأصلي يطبع <code>Correct!</code>.
+        </p>
+        <p class="page-meta">
+          مربعات ملثمين مدقق العلم * سهل · Linux إكس 86-64
+        </p>
+        <a
+          class="text-link"
+          href="https://github.com/DownUnderCTF/Challenges_2023_Public/tree/b48f83db2984bc7fa2ec7879a32d7efb1be8d333/rev/masked-squares-flag-checker"
+          >عرض التحدي الأصلي</a
+        >
+      </div>
+
+      <figure class="workflow-figure case-figure">
+        <p class="figure-title">من ثنائي إلى إجابة محددة</p>
+        <ol class="flow-steps">
+          <li>
+            <span class="flow-label">01 * ابحث عن الشيك</span
+            ><strong class="flow-node">سلاسل-فحص وظائف</strong
+            ><span class="flow-note"
+              >REA يجد المطالبة ومراجعها والرمز الذي يقبل أو يرفض الإدخال.</span
+            >
+          </li>
+          <li>
+            <span class="flow-label">02 * استخراج القواعد</span
+            ><strong class="flow-node">36 حرفا * 26 مبالغ</strong
+            ><span class="flow-note"
+              >REA إرجاع التعليمات والبيانات وراء كل الاختيار. الوكيل يحولهم إلى معادلات.</span
+            >
+          </li>
+          <li>
+            <span class="flow-label">03 * حل وتشغيل</span
+            ><strong class="flow-node">العلم المسترد-صحيح!</strong
+            ><span class="flow-note"
+              >نص بيثون يحل المعادلات. REA يلتقط البرنامج الأصلي قبول النتيجة.</span
+            >
+          </li>
+        </ol>
+        <figcaption>
+          التحدي هو جوزيف ، الذي نشر في مستودع داوندركتف الرسمي.
+        </figcaption>
+      </figure>
+
+      <div class="article-layout">
+        <nav class="contents" aria-label="في هذه الصفحة">
+          <p>في دراسة الحالة هذه</p>
+          <ul>
+            <li><a href="#find">ابحث عن رمز التحقق</a></li>
+            <li><a href="#mask">قراءة قناع واحد</a></li>
+            <li><a href="#code">الجمعية إلى رمز قابل للقراءة</a></li>
+            <li><a href="#solve">حل المعادلات</a></li>
+            <li><a href="#verify">تحقق من الجواب</a></li>
+            <li><a href="#try">انها محاولة لنفسك</a></li>
+          </ul>
+        </nav>
+        <article class="article" aria-label="دراسة حالة مدقق العلم">
+          <section class="article-section" id="find">
+            <h2>ابحث عن رمز التحقق</h2>
+            <p>
+              النشرة هي ملف 15 كيلو بايت قابل للتنفيذ. يسأل عن العلم ، ثم يطبع <code>Correct!</code> أو <code>Incorrect!</code>. ابدأ بطلب بسيط إلى وكيلك.
+            </p>
+            <div class="agent-terminal">
+              <div class="terminal-header">
+                <span class="terminal-title"
+                  ><span class="terminal-dots" aria-hidden="true"
+                    ><i></i><i></i><i></i></span
+                  >مساعدك البرمجي</span
+                >
+                <button
+                  class="copy-button"
+                  type="button"
+                  data-copy="ctf-prompt"
+                  aria-label="نسخة كتف مثال موجه"
+                >
+                  نسخ
+                </button>
+              </div>
+              <p class="terminal-prompt">
+                <span class="prompt-symbol" aria-hidden="true">›</span
+                ><span id="ctf-prompt"
+                  >استخدام REA لتحليل مس-فلاغ-تشيكر والعثور على العلم. اشرح كيفية عمل الشيكات ، ثم تحقق من الإجابة باستخدام البرنامج الأصلي.</span
+                ><span class="terminal-cursor" aria-hidden="true"></span>
+              </p>
+            </div>
+            <p class="caption">
+              مثال موجه ، مع التحدي الذي تم تنزيله متاح محليا وتحليل موفر برامج رمز الجهاز المتصل.
+            </p>
+            <ol class="rea-queries">
+              <li>
+                <h4>اتبع موجه الإدخال إلى وظيفته</h4>
+                <div class="rea-query-pair">
+                  <div class="code-block">
+                    <div class="code-header"><span>وكيل → REA</span></div>
+                    <pre><code>open_binary
+{"path": "ms_flag_checker"}
+
+search_strings
+{"pattern": "flag|correct|wrong|input",
+ "mode": "regex", "case_sensitive": false}
+
+xrefs
+{"address": "0x102004"}
+
+resolve_containing_procedure
+{"address": "0x10126d"}</code></pre>
+                  </div>
+                  <div class="code-block">
+                    <div class="code-header">
+                      <span>REA - وكيل * نتائج مختارة</span>
+                    </div>
+                    <pre><code>0x102004  "What is the flag? "
+0x10201c  "Incorrect!"
+0x102027  "Correct!"
+
+Prompt referenced at: 0x10126d
+Containing function: 0x10124d</code></pre>
+                  </div>
+                </div>
+                <p>
+                  يعطي المرجع الوكيل مكانا للتحقيق ، على الرغم من إزالة أسماء الوظائف الأصلية القابلة للتنفيذ.
+                </p>
+              </li>
+              <li>
+                <h4>قراءة المدقق واثنين من المساعدين</h4>
+                <div class="rea-query-pair">
+                  <div class="code-block">
+                    <div class="code-header"><span>وكيل → REA</span></div>
+                    <pre><code>analyze_function
+{"procedure": "0x10124d"}
+
+analyze_function
+{"procedure": "0x101189"}
+
+analyze_function
+{"procedure": "0x101217"}</code></pre>
+                  </div>
+                  <div class="code-block">
+                    <div class="code-header">
+                      <span>REA - وكيل * تعليمات مختارة</span>
+                    </div>
+                    <pre><code>0x1012c1: CMP EDI, 0x24
+0x1012c6: LEA RBX, [0x1040e0]
+0x1012cd: LEA RBP, [0x104060]
+0x1012d4: LEA R13, [RBX + 0x270]
+0x1012e1: CALL 0x00101189
+0x1012ec: CALL 0x00101217
+0x1012f1: CMP dword ptr [RBP], EAX
+0x1012f4: JNZ 0x00101335
+0x1012f6: ADD RBX, 0x18</code></pre>
+                  </div>
+                </div>
+                <p>
+                  الحلقة الأولى نسخ 36 رموز الأحرف. تقوم حلقة الفحص بفك تشفير القناع ، وتلخص الرموز المحددة وتقارن النتيجة برقم مخزن. لها <code>0x18</code>- خطوات بايت عبر <code>0x270</code> بايت تعطي 26 أقنعة.
+                </p>
+              </li>
+            </ol>
+            <p class="caption">
+              يتم اختيار هذه النتائج من جديد REA تحليل. يتم تقصير مسار الهدف المحلي للعرض ؛ تشير العناوين إلى REAالصورة المستوردة.
+            </p>
+          </section>
+
+          <section class="article-section" id="mask">
+            <h2>شيك واحد يكشف عن حرف واحد</h2>
+            <p>
+              المدقق يرتب المدخلات في شبكة 6 6 6. يختار القناع الخلايا التي تساهم في المجموع. يستخدم ترميزه المضغوط أرقاما سالبة لتخطي الخلايا والأرقام الموجبة لتحديدها.
+            </p>
+            <figure class="explanatory-figure ctf-mask-figure">
+              <div
+                class="figure-viewport"
+                tabindex="0"
+                role="region"
+                aria-label="معادلة قناع كتف ؛ التمرير أفقيا على شاشات أصغر"
+              >
+                <img
+                  src="../../../assets/localized/ar/figures/ctf-mask-equation.svg"
+                  width="760"
+                  height="475"
+                  alt="يتخطى القناع السابع 21 خلية ، ويختار الموضع 21 ، ثم يتخطى 14. فقط تلك الخلية تساهم في المجموع. رمز الحرف المطلوب هو 55 ، مما يعني أن الحرف هو 7."
+                  decoding="async"
+                />
+              </div>
+              <figcaption>
+                الاختيار السابع يختار موقف واحد فقط. <a href="../../../assets/localized/ar/figures/ctf-mask-equation.svg"
+                  >الشكل المفتوح</a
+                >.
+              </figcaption>
+            </figure>
+            <h3 class="small-heading">
+              اقرأ القناع وهدفه من الثنائي
+            </h3>
+            <div class="rea-query-pair">
+              <div class="code-block">
+                <div class="code-header">
+                  <span>وكيل → REA * قراءة _ بايت</span>
+                </div>
+                <pre><code>{"address": "0x1040e0", "length": 624}
+{"address": "0x104060", "length": 144}</code></pre>
+              </div>
+              <div class="code-block">
+                <div class="code-header">
+                  <span>REA  agent الوكيل * الإدخالات السابعة</span>
+                </div>
+                <pre><code>Mask at 0x104170:
+eb 01 f2 00  →  -21, +1, -14, stop
+
+Target at 0x104078:
+37 00 00 00  →  55</code></pre>
+              </div>
+            </div>
+            <p>
+              التعليمات <code>MOVSX</code> يقرأ بايت القناع كقيم موقعة. هذا هو السبب <code>eb</code> يعني -21. الهدف هو عدد صحيح صغير. معا ، تخبر هذه البايتات الوكيل أن <code>code[21] = 55</code>، بحيث تكون هذه الشخصية <code>7</code>.
+            </p>
+          </section>
+
+          <section class="article-section" id="code">
+            <h2>من التعليمات إلى فحص قابل للقراءة</h2>
+            <p>
+              حدد خطوة لتوصيل مساعد التلخيص ووظيفة الاتصال الخاصة به بنفس القاعدة في ج.
+            </p>
+            <div class="step-comparison" data-step-comparison>
+              <div
+                class="step-selector"
+                role="group"
+                aria-label="اتبع الاختيار كتف"
+              >
+                <button
+                  type="button"
+                  data-select-step="1"
+                  aria-pressed="true"
+                  aria-controls="ctf-assembly ctf-check ctf-step-detail"
+                >
+                  <span>01</span> ابدأ
+                </button>
+                <button
+                  type="button"
+                  data-select-step="2"
+                  aria-pressed="false"
+                  aria-controls="ctf-assembly ctf-check ctf-step-detail"
+                >
+                  <span>02</span> اختر
+                </button>
+                <button
+                  type="button"
+                  data-select-step="3"
+                  aria-pressed="false"
+                  aria-controls="ctf-assembly ctf-check ctf-step-detail"
+                >
+                  <span>03</span> إضافة
+                </button>
+                <button
+                  type="button"
+                  data-select-step="4"
+                  aria-pressed="false"
+                  aria-controls="ctf-assembly ctf-check ctf-step-detail"
+                >
+                  <span>04</span> تقدم
+                </button>
+                <button
+                  type="button"
+                  data-select-step="5"
+                  aria-pressed="false"
+                  aria-controls="ctf-assembly ctf-check ctf-step-detail"
+                >
+                  <span>05</span> قارن
+                </button>
+              </div>
+              <div class="code-comparison">
+                <div class="code-block">
+                  <div class="code-header">
+                    <span>REA * تعليمات أصلية مختارة</span
+                    ><button
+                      class="copy-button"
+                      type="button"
+                      data-copy="ctf-assembly"
+                      aria-label="نسخ الجمعية كتف"
+                    >
+                      نسخ
+                    </button>
+                  </div>
+                  <pre><code id="ctf-assembly"><span class="code-step is-active" data-step="1">0x10121c: MOV ECX, 0x0</span>
+
+<span class="code-step" data-step="2">0x10122c: CMP dword ptr [RSI + RAX*0x1], 0x0
+0x101230: JZ 0x00101223</span>
+
+<span class="code-step" data-step="3">0x101232: ADD ECX, dword ptr [RDI + RAX*0x1]</span>
+
+<span class="code-step" data-step="4">0x101223: ADD RAX, 0x4</span>
+
+<span class="code-step" data-step="5">0x1012f1: CMP dword ptr [RBP], EAX
+0x1012f4: JNZ 0x00101335</span></code></pre>
+                </div>
+                <div class="code-block">
+                  <div class="code-header">
+                    <span>قراءة ج * ملخص الاختيار واحد</span
+                    ><button
+                      class="copy-button"
+                      type="button"
+                      data-copy="ctf-check"
+                      aria-label="نسخة قابلة للقراءة كتف الاختيار"
+                    >
+                      نسخ
+                    </button>
+                  </div>
+                  <pre><code id="ctf-check">int check_one_mask(const int codes[36],
+                   const int mask[36],
+                   int target) {
+<span class="code-step is-active" data-step="1">    int total = 0;</span>
+<span class="code-step" data-step="4">    for (int i = 0; i &lt; 36; ++i) {</span>
+<span class="code-step" data-step="2">        if (mask[i]) {</span>
+<span class="code-step" data-step="3">            total += codes[i];</span>
+        }
+    }
+<span class="code-step" data-step="5">    return total == target;</span>
+}</code></pre>
+                </div>
+              </div>
+              <div
+                class="step-detail"
+                id="ctf-step-detail"
+                aria-live="polite"
+                aria-atomic="true"
+              >
+                <p data-step-note="1">
+                  <strong>01 * ابدأ من الصفر.</strong> <code>ECX</code> يحمل المبلغ الجاري.
+                </p>
+                <p data-step-note="2" hidden>
+                  <strong>02 * تحقق من خلية القناع.</strong> القيمة الصفرية تتخطى الحرف ؛ القيمة غير الصفرية تتضمنها.
+                </p>
+                <p data-step-note="3" hidden>
+                  <strong>03 * إضافة رمز حرف.</strong> يتم إضافة عدد صحيح الإدخال في نفس الإزاحة إلى المجموع.
+                </p>
+                <p data-step-note="4" hidden>
+                  <strong>04 * الانتقال إلى الخلية التالية.</strong> تقدم الحلقة الأصلية أربعة بايت لكل عدد صحيح وتزور ستة صفوف من ست خلايا.
+                </p>
+                <p data-step-note="5" hidden>
+                  <strong>05 * مقارنة مع الهدف المخزن.</strong> تتلقى وظيفة الاستدعاء المبلغ في <code>EAX</code>. عدم تطابق يقفز إلى <code>Incorrect!</code>.
+                </p>
+              </div>
+            </div>
+            <p class="caption">
+              تأتي التعليمات من مساعد التلخيص ووظيفة الاتصال الخاصة به. ال ج هو ملخص توضيحي بأسماء وصفية وحلقة مسطحة من 36 خلية.
+            </p>
+          </section>
+
+          <section class="article-section" id="solve">
+            <h2>حل المعادلات 26</h2>
+            <p>
+              تختار معظم الأقنعة عدة خلايا. على سبيل المثال ، يضيف الفحص الأول 16 رمزا للأحرف ويتطلب إجمالي 1441. تعطي التحديدات المتداخلة معادلات يمكن أن يحلها نص بايثون صغير معا.
+            </p>
+            <div class="code-block">
+              <div class="code-header">
+                <span>بيثون * حلالا مقتطفات</span
+                ><button
+                  class="copy-button"
+                  type="button"
+                  data-copy="ctf-solver-excerpt"
+                  aria-label="نسخة كتف حلالا مقتطفات"
+                >
+                  نسخ
+                </button>
+              </div>
+              <pre><code id="ctf-solver-excerpt">from z3 import Int, Or, Solver, Sum, sat
+
+codes = [Int(f"code_{i}") for i in range(36)]
+solver = Solver()
+alphabet = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_{}"
+for code in codes:
+    solver.add(Or(*[code == ord(c) for c in alphabet]))
+for code, char in zip(codes, "DUCTF{"):
+    solver.add(code == ord(char))
+solver.add(codes[-1] == ord("}"))
+
+for selected, target in checks:
+    solver.add(Sum([codes[i] for i in selected]) == target)
+
+assert solver.check() == sat
+model = solver.model()
+print("".join(chr(model.eval(code).as_long()) for code in codes))</code></pre>
+            </div>
+            <p class="caption">
+              ض3 هو حلالا يجد قيما تفي بهذه المعادلات. يستخدم هذا المقتطف الشيكات المستخرجة ويفترض أ <code>DUCTF{…}</code> العلم مع الحروف والأرقام والشرطات السفلية والأقواس. يشمل التنزيل الكامل جميع الأقنعة والأهداف الـ 26.
+            </p>
+            <a class="text-link" href="../../../showcase/ctf/solve.py" download="solve.py"
+              >تحميل حلالا كاملة</a
+            >
+          </section>
+
+          <section class="article-section" id="verify">
+            <h2>تحقق من الإجابة مع البرنامج الأصلي</h2>
+            <p>
+              REAالصورة القبض على عملية يسجل تنفيذ الأصلي قبول العلم حلها. تغيير حرف واحد محدد من <code>z</code> إلى <code>y</code> يجعل المبلغ الأول 1440 بدلا من 1441, والبرنامج يرفض ذلك.
+            </p>
+            <div class="evidence-table-wrap">
+              <table class="evidence-table">
+                <thead>
+                  <tr>
+                    <th>المدخلات</th>
+                    <th>الإخراج المرصود</th>
+                    <th>رمز الخروج</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>علم حلالا</td>
+                    <td><code>Correct!</code></td>
+                    <td>0</td>
+                  </tr>
+                  <tr>
+                    <td>تم تغيير حرف واحد</td>
+                    <td><code>Incorrect!</code></td>
+                    <td>255</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <details class="evidence-details">
+              <summary>إظهار العلم المسترد والإخراج الملتقط</summary>
+              <div class="code-block">
+                <div class="code-header">
+                  <span>REA * إخراج البرنامج الأصلي</span
+                  ><button
+                    class="copy-button"
+                    type="button"
+                    data-copy="ctf-flag"
+                    aria-label="نسخ العلم المسترد"
+                  >
+                    نسخ العلم
+                  </button>
+                </div>
+                <pre><code>What is the flag? <span id="ctf-flag">DUCTF{ezzzpzzz_07bcda7bfe81faf43caa}</span>
+Correct!</code></pre>
+              </div>
+              <p>
+                تتطابق القيمة المستردة أيضا مع العلم في البيانات الوصفية للتحدي المنشورة للمنظمين ، والتي تم فحصها بعد حل الثنائي.
+              </p>
+            </details>
+            <details class="evidence-details">
+              <summary>المصدر والهوية المستهدفة وتفاصيل التحليل</summary>
+              <p>
+                تحليل جديد واثنين من عمليات الالتقاط في 8 أكتوبر 2026 ، باستخدام REA 4.1.0 مع Ghidra 12.1.4 على Linux 64. ثنائي هو جردت س 86-64 قزم ، 15 ، 248 بايت.
+              </p>
+              <div class="code-block">
+                <div class="code-header">
+                  <span>قابل للتنفيذ الأصلي · SHA-256</span>
+                </div>
+                <pre><code>dcd3bec4f608e11f3a12ce461100aaf5f621851ee63a1f870d7c90d4e3dd51ae</code></pre>
+              </div>
+              <p>
+                تم فحص مراجع السلسلة والوظائف والثوابت قبل قراءة مصدر أو حل المنظمين. تم بناء بيثون حلالا والرسم البياني من تلك REA النتائج.
+              </p>
+              <p>
+                <a
+                  href="https://github.com/DownUnderCTF/Challenges_2023_Public/blob/b48f83db2984bc7fa2ec7879a32d7efb1be8d333/rev/masked-squares-flag-checker/src/ms_flag_checker.c"
+                  >قارن مع مصدر المنظمين</a
+                > · <a
+                  href="https://github.com/DownUnderCTF/Challenges_2023_Public/blob/b48f83db2984bc7fa2ec7879a32d7efb1be8d333/rev/masked-squares-flag-checker/ctfcli.yaml"
+                  >تحدي البيانات الوصفية والعلم</a
+                > · <a
+                  href="https://github.com/morluto/rea/blob/main/website/evidence/ctf-masked-squares.md"
+                  >REA ملاحظات الأدلة</a
+                >
+              </p>
+            </details>
+          </section>
+
+          <section class="article-section" id="try">
+            <h2>انها محاولة لنفسك</h2>
+            <p>
+              تحميل التحدي الأصلي وحلالا في مجلد واحد. استخدم المطالبة أعلاه للتحقيق مع وكيلك ، أو قم بتشغيل البرنامج النصي المضمن.
+            </p>
+            <div class="actions">
+              <a
+                class="button"
+                href="https://raw.githubusercontent.com/DownUnderCTF/Challenges_2023_Public/b48f83db2984bc7fa2ec7879a32d7efb1be8d333/rev/masked-squares-flag-checker/publish/ms_flag_checker"
+                >تحميل التحدي الأصلي</a
+              ><a class="text-link" href="../../../showcase/ctf/solve.py" download="solve.py"
+                >تحميل حلالا</a
+              >
+            </div>
+            <div class="code-block">
+              <div class="code-header">
+                <span>محطة * حل وتشغيل</span
+                ><button
+                  class="copy-button"
+                  type="button"
+                  data-copy="ctf-run"
+                  aria-label="نسخ كتف حلالا الأوامر"
+                >
+                  نسخ
+                </button>
+              </div>
+              <pre><code id="ctf-run">python3 -m venv .venv
+.venv/bin/python -m pip install z3-solver
+.venv/bin/python solve.py
+
+chmod +x ms_flag_checker
+./ms_flag_checker</code></pre>
+            </div>
+            <p class="caption">
+              يقوم البرنامج النصي بطباعة علامة مرشح ؛ الصقه في موجه البرنامج. حل يحتاج بيثون و <code>z3-solver</code>. تشغيل الاحتياجات القابلة للتنفيذ الأصلي Linux س86-64.
+            </p>
+            <a class="text-link" href="../../../get-started/"
+              >إعداد REA مع مساعدك البرمجي</a
+            >
+          </section>
+        </article>
+      </div>
+    </main>
+    <!-- website:footer:start -->
+    <!-- prettier-ignore -->
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <p>REA · Reverse Engineer Anything</p>
+        <div class="footer-links">
+          <a href="../../faq/">FAQ</a
+          ><a href="../../contributors/">المساهمون</a
+          ><a href="https://github.com/morluto/rea">الكود المصدري</a
+          ><a href="https://github.com/morluto/rea/blob/main/LICENSE">رخصة MIT</a
+          ><a href="https://discord.gg/GkcryMnJDM">انضم إلى المجتمع</a
+          ><a href="https://x.com/reatools">تابعنا على X</a>
+        </div>
+      </div>
+    </footer>
+    <p class="sr-only" id="copy-status" role="status" aria-live="polite"></p>
+    <a class="back-to-top" href="#top" aria-label="العودة للأعلى">
+      <span aria-hidden="true">↑</span> أعلى
+    </a>
+    <!-- website:footer:end -->
+  </body>
+</html>

@@ -1,0 +1,784 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>انقلاب صنعتی مهندسی معکوس-REA</title>
+    <meta
+      name="description"
+      content="N0zoM1z0 در مهندسی معکوس دستی ، بازسازی Touhou با عوامل هوش مصنوعی و چگونگی ترکیبات دانش در TH08 ، TH095 و PC-98 TH04 منعکس می شود ."
+    />
+    <!-- website:sharing:start -->
+    <!-- prettier-ignore -->
+    <link rel="canonical" href="https://rea.tools/fa/blog/touhou-reconstruction/" />
+    <!-- website:languages:start -->
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="en" href="https://rea.tools/blog/touhou-reconstruction/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="zh-CN" href="https://rea.tools/zh-CN/blog/touhou-reconstruction/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="zh-TW" href="https://rea.tools/zh-TW/blog/touhou-reconstruction/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="ja" href="https://rea.tools/ja/blog/touhou-reconstruction/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="ko" href="https://rea.tools/ko/blog/touhou-reconstruction/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="tr" href="https://rea.tools/tr/blog/touhou-reconstruction/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="ru" href="https://rea.tools/ru/blog/touhou-reconstruction/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="vi" href="https://rea.tools/vi/blog/touhou-reconstruction/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="th" href="https://rea.tools/th/blog/touhou-reconstruction/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="de" href="https://rea.tools/de/blog/touhou-reconstruction/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="es" href="https://rea.tools/es/blog/touhou-reconstruction/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="fr" href="https://rea.tools/fr/blog/touhou-reconstruction/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="uk" href="https://rea.tools/uk/blog/touhou-reconstruction/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="pl" href="https://rea.tools/pl/blog/touhou-reconstruction/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="pt-BR" href="https://rea.tools/pt-BR/blog/touhou-reconstruction/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="ar" href="https://rea.tools/ar/blog/touhou-reconstruction/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="fa" href="https://rea.tools/fa/blog/touhou-reconstruction/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="id" href="https://rea.tools/id/blog/touhou-reconstruction/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="it" href="https://rea.tools/it/blog/touhou-reconstruction/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="el" href="https://rea.tools/el/blog/touhou-reconstruction/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="x-default" href="https://rea.tools/blog/touhou-reconstruction/" />
+<!-- website:languages:end -->
+    <!-- prettier-ignore -->
+    <meta property="og:type" content="website" />
+    <!-- prettier-ignore -->
+    <meta property="og:site_name" content="REA" />
+    <!-- prettier-ignore -->
+    <meta property="og:title" content="انقلاب صنعتی مهندسی معکوس-REA" />
+    <!-- prettier-ignore -->
+    <meta property="og:description" content="N0zoM1z0 در مهندسی معکوس دستی ، بازسازی Touhou با عوامل هوش مصنوعی و چگونگی ترکیبات دانش در TH08 ، TH095 و PC-98 TH04 منعکس می شود ." />
+    <!-- prettier-ignore -->
+    <meta property="og:url" content="https://rea.tools/fa/blog/touhou-reconstruction/" />
+    <!-- prettier-ignore -->
+    <meta property="og:image" content="https://rea.tools/assets/social-card.png" />
+    <!-- prettier-ignore -->
+    <meta property="og:image:type" content="image/png" />
+    <!-- prettier-ignore -->
+    <meta property="og:image:width" content="1200" />
+    <!-- prettier-ignore -->
+    <meta property="og:image:height" content="630" />
+    <!-- prettier-ignore -->
+    <meta
+      property="og:image:alt"
+      content="REA-پیدا کردن چگونه نرم افزار کار می کند. مهندسی معکوس با عامل برنامه نویسی شما."
+    />
+    <!-- prettier-ignore -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <!-- prettier-ignore -->
+    <meta name="twitter:title" content="انقلاب صنعتی مهندسی معکوس-REA" />
+    <!-- prettier-ignore -->
+    <meta name="twitter:description" content="N0zoM1z0 در مهندسی معکوس دستی ، بازسازی Touhou با عوامل هوش مصنوعی و چگونگی ترکیبات دانش در TH08 ، TH095 و PC-98 TH04 منعکس می شود ." />
+    <!-- prettier-ignore -->
+    <meta name="twitter:image" content="https://rea.tools/assets/social-card.png" />
+    <!-- prettier-ignore -->
+    <meta
+      name="twitter:image:alt"
+      content="REA-پیدا کردن چگونه نرم افزار کار می کند. مهندسی معکوس با عامل برنامه نویسی شما."
+    />
+    <!-- website:sharing:end -->
+    <!-- website:theme:start -->
+    <meta name="theme-color" content="#ffffff" />
+    <!-- Apply the saved theme before styles load, to avoid a flash on navigation. -->
+    <script src="../../../assets/theme.js"></script>
+    <!-- website:theme:end -->
+    <link rel="icon" href="../../../assets/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="../../../assets/styles.css" />
+    <script src="../../../assets/main.js" defer></script>
+  <script id="website-messages" type="application/json">{"Copied": "کپی شده", "Code copied to clipboard.": "کد کپی شده به کلیپ بورد.", "Selected": "انتخاب شده", "Code selected. Use your keyboard to copy it.": "کد انتخاب شده از صفحه کلید خود برای کپی کردن آن استفاده کنید.", "REA on GitHub ({count})": "REA در GitHub ({count})", "Switch to light mode": "تغییر به حالت روشن", "Switch to dark mode": "تغییر به حالت تیره"}</script>
+  </head>
+  <body id="top" class="blog-article">
+    <a class="skip-link" href="#main">پرش به محتوا</a>
+    <!-- website:header:start -->
+    <!-- prettier-ignore -->
+    <header class="site-header">
+      <div class="container header-inner">
+        <a class="brand" href="../../" aria-label="صفحهٔ اصلی REA"
+          ><span class="brand-name">REA</span
+          ><span class="brand-caption" data-i18n-skip>Reverse Engineer Anything</span></a
+        >
+        <nav class="navigation" aria-label="ناوبری اصلی">
+          <a href="../../../get-started/" class="nav-start">شروع کنید</a>
+          <a href="../../showcase/">نمونه‌ها</a>
+          <a href="../" aria-current="page">وبلاگ</a>
+          <a href="../../guides/">راهنماها</a>
+        </nav>
+        <div class="header-social">
+          <details class="language-picker" data-i18n-skip><summary><span aria-hidden="true">文 / A</span> <span>فارسی</span></summary><nav aria-label="فارسی"><a href="../../../blog/touhou-reconstruction/" lang="en" dir="ltr" data-language="en">English</a><a href="../../../zh-CN/blog/touhou-reconstruction/" lang="zh-CN" dir="ltr" data-language="zh-CN">简体中文</a><a href="../../../zh-TW/blog/touhou-reconstruction/" lang="zh-TW" dir="ltr" data-language="zh-TW">繁體中文</a><a href="../../../ja/blog/touhou-reconstruction/" lang="ja" dir="ltr" data-language="ja">日本語</a><a href="../../../ko/blog/touhou-reconstruction/" lang="ko" dir="ltr" data-language="ko">한국어</a><a href="../../../tr/blog/touhou-reconstruction/" lang="tr" dir="ltr" data-language="tr">Türkçe</a><a href="../../../ru/blog/touhou-reconstruction/" lang="ru" dir="ltr" data-language="ru">Русский</a><a href="../../../vi/blog/touhou-reconstruction/" lang="vi" dir="ltr" data-language="vi">Tiếng Việt</a><a href="../../../th/blog/touhou-reconstruction/" lang="th" dir="ltr" data-language="th">ไทย</a><a href="../../../de/blog/touhou-reconstruction/" lang="de" dir="ltr" data-language="de">Deutsch</a><a href="../../../es/blog/touhou-reconstruction/" lang="es" dir="ltr" data-language="es">Español</a><a href="../../../fr/blog/touhou-reconstruction/" lang="fr" dir="ltr" data-language="fr">Français</a><a href="../../../uk/blog/touhou-reconstruction/" lang="uk" dir="ltr" data-language="uk">Українська</a><a href="../../../pl/blog/touhou-reconstruction/" lang="pl" dir="ltr" data-language="pl">Polski</a><a href="../../../pt-BR/blog/touhou-reconstruction/" lang="pt-BR" dir="ltr" data-language="pt-BR">Português (Brasil)</a><a href="../../../ar/blog/touhou-reconstruction/" lang="ar" dir="rtl" data-language="ar">العربية</a><a href="../../../fa/blog/touhou-reconstruction/" lang="fa" dir="rtl" data-language="fa" aria-current="true">فارسی</a><a href="../../../id/blog/touhou-reconstruction/" lang="id" dir="ltr" data-language="id">Bahasa Indonesia</a><a href="../../../it/blog/touhou-reconstruction/" lang="it" dir="ltr" data-language="it">Italiano</a><a href="../../../el/blog/touhou-reconstruction/" lang="el" dir="ltr" data-language="el">Ελληνικά</a><a href="../../../ml/blog/touhou-reconstruction/" lang="ml" dir="ltr" data-language="ml">മലയാളം · English</a><a href="../../../ur-Latn/blog/touhou-reconstruction/" lang="ur-Latn" dir="ltr" data-language="ur-Latn">Roman Urdu · English</a><a href="../../../ro/blog/touhou-reconstruction/" lang="ro" dir="ltr" data-language="ro">Română · English</a></nav></details>
+          <button class="theme-toggle" type="button" data-theme-toggle hidden>
+            <svg class="theme-moon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+              <path d="M20.9 13a9 9 0 0 1-9.9-9.9A9 9 0 1 0 20.9 13Z" />
+            </svg>
+            <svg class="theme-sun" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true" focusable="false">
+              <circle cx="12" cy="12" r="4" />
+              <path d="M12 2v2m0 16v2M2 12h2m16 0h2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42" />
+            </svg>
+          </button>
+          <a
+            class="nav-github"
+            href="https://github.com/morluto/rea"
+            aria-label="REA در GitHub"
+            title="REA در GitHub"
+          >
+            <svg
+              width="22"
+              height="22"
+              viewBox="0 0 16 16"
+              aria-hidden="true"
+              focusable="false"
+            >
+              <path
+                fill="currentColor"
+                d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82a7.65 7.65 0 0 1 2-.27c.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z"
+              />
+            </svg>
+            <span class="nav-github-count" hidden aria-hidden="true"></span>
+          </a>
+          <a
+            class="nav-discord"
+            href="https://discord.gg/GkcryMnJDM"
+            aria-label="به REA در Discord بپیوندید"
+            title="به REA در Discord بپیوندید"
+          >
+            <svg
+              width="22"
+              height="22"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+              focusable="false"
+            >
+              <path
+                fill="currentColor"
+                d="M20.317 4.3698a19.7913 19.7913 0 0 0-4.8851-1.5152.0741.0741 0 0 0-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 0 0-.0785-.037 19.7363 19.7363 0 0 0-4.8852 1.515.0699.0699 0 0 0-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 0 0 .0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 0 0 .0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 0 0-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 0 1-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 0 1 .0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 0 1 .0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 0 1-.0066.1276 12.2986 12.2986 0 0 1-1.873.8914.0766.0766 0 0 0-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 0 0 .0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 0 0 .0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 0 0-.0312-.0286ZM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189Zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189Z"
+              />
+            </svg>
+          </a>
+          <a
+            class="nav-x"
+            href="https://x.com/reatools"
+            aria-label="REA را در X دنبال کنید"
+            title="REA را در X دنبال کنید"
+          >
+            <svg
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+              focusable="false"
+            >
+              <path
+                fill="currentColor"
+                d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z"
+              />
+            </svg>
+          </a>
+        </div>
+      </div>
+    </header>
+    <!-- website:header:end -->
+    <main id="main" class="container">
+      <div class="page-heading">
+        <p class="breadcrumb">
+          <a href="../../">خانه</a> / <a href="../">وبلاگ</a> / بازسازی توهو
+        </p>
+        <p class="eyebrow">مقاله * بازسازی توهو</p>
+        <h1>انقلاب صنعتی در مهندسی معکوس</h1>
+        <p class="page-meta">توسط N0zoM1z0 * 10 اکتبر 2026</p>
+        <div class="blog-takeaway">
+          <p class="eyebrow">نکات اصلی</p>
+          <ul>
+            <li>
+              <strong>به ماموران در مورد تحقيقات خودمختاري بده</strong> یک هدف مشخص و معیارهای پذیرش را تعیین کنید ، سپس اجازه دهید نماینده تصمیم بگیرد که چه چیزی را امتحان کند.
+            </li>
+            <li>
+              <strong>از مخزن و گیت به عنوان حافظه کاری استفاده کنید.</strong> استدلال را با کد نگه دارید. نقاط بازرسی گیت اجازه دهید جلسه بعدی پس از پایان مکالمه ادامه یابد.
+            </li>
+            <li>
+              <strong>بگذارید شواهد تصمیم بگیرند که شما چه ادعایی دارید.</strong> یک توضیح مطمئن هنوز نیاز به آزمایش دارد. "نامعلوم" پاسخ معتبر است وقتی شواهد ناقص است.
+            </li>
+            <li>
+              <strong>مرجع تأیید (اوراکل) را نیز آزمایش کنید.</strong> مواردی را امتحان کنید که باید رد شود. اگر یک اشکال را از دست داد ، نتایج قبلی را که به آن بستگی داشت ، دوباره بررسی کنید.
+            </li>
+            <li>
+              <strong
+                >ما در روزهای اولیه انقلاب صنعتی RE هستیم.</strong
+              > روش ها هنوز در حال شکل گرفتن هستند. هنوز چيزاي زيادي براي کشف کردن باقي مونده
+            </li>
+          </ul>
+        </div>
+      </div>
+      <figure class="reconstruction-flywheel" aria-labelledby="flywheel-title">
+        <div class="flywheel-heading">
+          <p class="eyebrow" id="flywheel-title">چگونه ترکیبات تجربه</p>
+          <p><strong>جهت گیری انسان</strong> * هدف و معیارهای پذیرش</p>
+        </div>
+        <div class="flywheel-diagram">
+          <svg
+            class="flywheel-arrows"
+            viewBox="0 0 720 470"
+            preserveAspectRatio="none"
+            aria-hidden="true"
+            focusable="false"
+          >
+            <defs>
+              <marker
+                id="flywheel-forward"
+                markerWidth="10"
+                markerHeight="10"
+                refX="7"
+                refY="4"
+                orient="auto"
+                markerUnits="userSpaceOnUse"
+              >
+                <path
+                  d="M 0 0 L 8 4 L 0 8"
+                  fill="none"
+                  stroke="#294f82"
+                  stroke-width="2"
+                />
+              </marker>
+              <marker
+                id="flywheel-revise"
+                markerWidth="10"
+                markerHeight="10"
+                refX="7"
+                refY="4"
+                orient="auto"
+                markerUnits="userSpaceOnUse"
+              >
+                <path
+                  d="M 0 0 L 8 4 L 0 8"
+                  fill="none"
+                  stroke="#5b6570"
+                  stroke-width="1.5"
+                />
+              </marker>
+            </defs>
+            <g
+              fill="none"
+              stroke="#294f82"
+              stroke-width="2.5"
+              marker-end="url(#flywheel-forward)"
+            >
+              <path
+                class="flywheel-path-desktop"
+                d="M 444 115 C 537 111 624 157 627 208"
+              />
+              <path d="M 528 365 C 456 437 263 437 191 365" />
+              <path
+                class="flywheel-path-desktop"
+                d="M 99 209 C 94 145 170 97 271 104"
+              />
+              <path
+                class="flywheel-path-mobile"
+                d="M 530 115 C 614 108 681 164 674 215"
+              />
+              <path
+                class="flywheel-path-mobile"
+                d="M 87 198 C 74 143 135 119 190 120"
+              />
+            </g>
+            <path
+              class="flywheel-path-desktop"
+              d="M 515 215 C 500 165 450 166 430 127"
+              fill="none"
+              stroke="#5b6570"
+              stroke-width="1.5"
+              stroke-dasharray="5 5"
+              marker-end="url(#flywheel-revise)"
+            />
+            <path
+              class="flywheel-path-mobile"
+              d="M 510 204 C 404 204 391 187 412 136"
+              fill="none"
+              stroke="#5b6570"
+              stroke-width="1.5"
+              stroke-dasharray="5 5"
+              marker-end="url(#flywheel-revise)"
+            />
+          </svg>
+          <div class="flywheel-node flywheel-agent">
+            <p class="flywheel-kicker">استقلال عمل</p>
+            <h3>دستیار</h3>
+            <p>یک آزمایش را انتخاب کنید.<br />یک فرضیه را پیشنهاد کنید.</p>
+          </div>
+          <div class="flywheel-node flywheel-oracle">
+            <p class="flywheel-kicker">اعتبارسنجی</p>
+            <h3>مرجع اعتبارسنجی</h3>
+            <p>تست در برابر یک<br />مرجع بتن.</p>
+          </div>
+          <div class="flywheel-node flywheel-memory">
+            <p class="flywheel-kicker">مخزن کد</p>
+            <h3>حافظهٔ کاری</h3>
+            <p>کد ، شواهد,<br />چک ها و درس ها</p>
+          </div>
+          <p class="flywheel-retry">
+            عدم تطابق<br /><strong>فرضیه را بازنگری کنید</strong>
+          </p>
+          <p class="flywheel-center">
+            بهتر<br /><strong>نقطه شروع</strong>
+          </p>
+          <p class="flywheel-reuse">استفادهٔ دوباره</p>
+          <p class="flywheel-pass">
+            <strong>گذرنامه</strong> * نتیجه و شواهد آن را حفظ کنید
+          </p>
+        </div>
+        <div
+          class="flywheel-projects"
+          aria-label="تجربه انجام شده بین پروژه ها"
+        >
+          <a href="#th08">TH08</a><span aria-hidden="true">→</span
+          ><a href="#th095">TH095</a><span aria-hidden="true">→</span
+          ><a href="#th04">TH04</a>
+        </div>
+        <figcaption>
+          هر پروژه با نقطه شروع بهتر از پروژه بعدی باقی می ماند. که شامل اصلاح چک ها هم ميشه وقتي که ما يه شکاف پيدا مي کنيم
+        </figcaption>
+      </figure>
+      <div class="article-layout">
+        <nav class="contents" aria-label="در این صفحه">
+          <p>در این مقاله</p>
+          <ul>
+            <li><a href="#august">آگوست 2026</a></li>
+            <li><a href="#th08"> TH08: ادامه</a></li>
+            <li><a href="#different-approaches">دو رویکرد</a></li>
+            <li><a href="#th095"> TH095: ترکیب</a></li>
+            <li><a href="#th04"> TH04: در سراسر معماری</a></li>
+            <li>
+              <a href="#semantic-reconstruction">از دقیق تا قابل خواندن</a>
+            </li>
+            <li><a href="#industrial-shift">شیفت صنعتی</a></li>
+            <li><a href="#possibilities">آنچه ممکن می شود</a></li>
+          </ul>
+        </nav>
+        <article class="article" aria-label="مقاله بازسازی توهو">
+          <section class="article-section" id="august">
+            <h2>آنچه در آگوست 2026 تغییر کرد</h2>
+            <p>
+              قبل از این کار ، من مهندسی معکوس دستی زیادی انجام داده بودم. من یک تابع را بررسی می کردم تا زمانی که یک توضیح داشتم ، سپس آن توضیح را در برابر برنامه تست می کردم. ادامه دادن به این معنی بود که بیشتر وقت خودم را صرف کار بعدی می کردم. همچنین به این معنی بود که یک تصویر بزرگ در ذهنم نگه دارم.
+            </p>
+            <p>
+              بسیاری از دوباره کار من در بازی است. من آنها را بازسازی می کنم تا رفتارشان درک شود و در نهایت به یک پورت نرم افزار یا یک مود منتقل شود. این تجربه پشت این مقاله است. این روش می تواند در جای دیگر مفید باشد ، اما هر فیلد باید مشخص کند که چه چیزی را می تواند با یک مرجع قابل اعتماد بررسی کند.
+            </p>
+            <p>
+              در اوت 2026, من شروع به کاوش دوباره عامل محور جدی. ميخواستم ببينم که يه مامور چقدر ميتونه با دسترسي به برنامه و ابزار توسعه معمولي به اينجا برسه بازسازی توهو به من یک پروژه قابل توجهی داد که در آن می توانستم بفهمم.
+            </p>
+            <p>
+              پیشرفت اولیه شگفت انگیز بود. يه تحقيق ميتونه بدون اينکه من هر قدم رو انتخاب کنم ادامه پيدا کنه يه مقايسه شکست خورده ممکنه مامور رو به يه تماس گيرنده ديگه بفرسته می تواند یک تشخیص کوچک بنویسد و از نتیجه استفاده کند تا تصمیم بگیرد که چه چیزی را امتحان کند. دادن این آزادی به آن تفاوت ایجاد کرد: من می توانم توجه بیشتری به جهت پروژه و اینکه آیا چک های آن قابل اعتماد است ، صرف کنم.
+            </p>
+            <p>
+              سرعت اول توجه من رو جلب کرد بعد شروع کردم به فکر کردن که چه چیزی فراتر از پروژه فعلی زنده می ماند. آیا بازی بعدی از هر چیزی که تازه یاد گرفته بودیم سود می برد ؟
+            </p>
+          </section>
+          <section class="article-section" id="th08">
+            <h2>TH08: ساخت بر روی کار انسانی</h2>
+            <p>
+              <a href="https://github.com/N0zoM1z0/th08"> TH08 </a>، شب فاسد نشدنی ، به عنوان ادامه <a href="https://github.com/GensokyoClub/th08"
+                > بازسازی GensokyoClub</a
+              >. منبع عمومی آنها به من یک پایه قابل توجهی داد. با دانش ساخت و ساز و سابقه کمک هایی که در ادامه حفظ کردم ، همراه بود.
+            </p>
+            <p>
+              تاریخ وارداتی در بازرسی عمومی 10 آگوست به پایان می رسد. ادامه مستقل من در 13 آگوست آغاز شد. تا 19 آگوست ، دفتر کل منبع ثبت شده برای تمام 1107 عملکرد بازی شناسایی شده بود.
+            </p>
+            <p>
+              یک پورت بازسازی Linux قابل بازی در 24 اوت ، تقریبا یازده روز پس از شروع ادامه ، انجام شد. یک نسخه وب به دنبال آن بود. نسخه بومی Linux 64 بیتی در 30 اوت وارد شد.
+            </p>
+            <p>
+              چیزی که مرا تحت تاثیر قرار داد این بود که کار به برنامه ای رسیده بود که مردم می توانستند اجرا کنند. رسیدن به آنجا نیاز به دنبال مشکلات فراتر از یک عملکرد فردی دارد. حتی وقتی دو تابع به صورت جداگانه درست به نظر می رسیدند ، می توانستند به طور تصادفی از نسخه های جداگانه ای از حالت استفاده کنند که باید به اشتراک گذاشته می شد.
+            </p>
+            <p>
+              این باعث شد که چک های مرجع در مرکز کار قرار بگیرند. من بهشون ميگم <strong>مراجع تأیید (اوراکل)</strong>. یک مقایسه کد می تواند به ما بگوید که آیا یک تابع بازسازی شده دستورالعمل های اصلی را بازتولید می کند. یک بررسی زمان اجرا می تواند به ما بگوید که آیا یک مسیر تمرین شده به حالت مورد انتظار می رسد. مامور توضیح می دهد و آن را آزمایش می کند ؛ عدم تطابق چیزی خاص برای تحقیق به آن می دهد.
+            </p>
+            <h3>مطابقت دقیق با ثابت اشتباه</h3>
+            <p>
+              یک مرجع تأیید (اوراکل) نرم افزاری است که کسی نوشته است.  TH08 به من یادآوری روشنی داد که چقدر می تواند به این نرم افزار بستگی داشته باشد.
+            </p>
+            <p>
+              در ماه سپتامبر ، یک اشکال گزارش شده توسط یک پورت سوئیچ پایین جریان منجر به جمع آوری خودکار آیتم شد. منبع بازسازی شده قدرت بازیکن را در برابر <code>0.0</code>. اصل مورد استفاده <code>128.0</code>، حد حداکثر قدرت
+            </p>
+            <p>
+              قدرت طبیعی منفی نیست ، بنابراین بررسی قدرت بازسازی شده به طور موثر همیشه راضی بود. بالاتر از خط جمع آوری ، بازی می تواند بدون نیاز به حداکثر قدرت ، آیتم ها را جذب کند. استثناهای دیگر در این شرایط درست بود. این یکی ثابت رفتار را تغییر داد.
+            </p>
+            <p>
+              <strong
+                >با این حال تابع قبلا مقایسه دقیق را پشت سر گذاشته بود.</strong
+              >
+            </p>
+            <p>
+              بازسازی می تواند ثابت را در آدرس دیگری قرار دهد. ابزار مقایسه این را با تنظیم آدرس ها در دستورالعمل های کامپایل شده قبل از مقایسه آنها با اصل توضیح می دهد. اما هرگز ارزش نقطه شناور ذخیره شده در آدرس مرجع را بررسی نکرد.
+            </p>
+            <p>
+              که يه سوراخ توي چک جا گذاشت ممکنه دستورالعمل بازسازی شده رو به سمت اصل نشون بده <code>128.0</code> در حالی که منبع هنوز گفت <code>0.0</code>. بایت های دستورالعمل با هم مطابقت داشتند. منبع به معنی چیز دیگری بود.
+            </p>
+            <p>
+              این <a href="https://github.com/N0zoM1z0/th08/pull/11"
+                >2 سپتامبر ثابت</a
+              > منبع را اصلاح کرد و مقایسه را انجام داد بایت های واقعی ثابت مرجع را بررسی کنید. A <a href="https://github.com/N0zoM1z0/th08/pull/13">حسابرسی گسترده تر</a> سپس 1548 مرجع ثابت نقطه شناور را بررسی کرد. این دوازده مرجع نادرست دیگر را در پنج تابع پذیرفته شده پیدا کرد.
+            </p>
+            <p>
+              این مقایسه اکنون هر ثابت نقطه شناور را بررسی می کند. تست های آن شامل مقادیر عمدا اشتباه برای اطمینان از رد شدن آنها است. ما همچنین مجبور بودیم نتایج را که از چک ضعیف تر عبور کرده بود ، دوباره بررسی کنیم.
+            </p>
+            <p>
+              <strong>مرجع تأیید (اوراکل) نیز نیاز به بازسازی داشت.</strong> تعمیر آن بخشی از تعمیر بازی بود.
+            </p>
+            <p>
+              این مهم است وقتی که تیم بیشتر یک نفر است که با ماموران کار می کند. من شخصا نمی توانم هر خطی را که تولید می کنند بازرسی کنم ، بنابراین اعتماد به نفس من بر روی چک های آنها استوار است. نقطه کور یک مرجع تایید مشترک (اوراکل) می تواند بسیاری از تحقیقات را قبل از اینکه متوجه آن شوم ، تحت تاثیر قرار دهد. باید بفهمم که چک کننده واقعا چه چیزی را تایید می کند و آن را در برابر مواردی که باید شکست بخورند تست می کند.
+            </p>
+            <p>
+              با ادامه کار ، این چک ها بخشی از مخزن شدند. همچنین دلایل تغییر منبع و یادداشت هایی که اجازه می داد جلسه بعدی از جایی که جلسه قبلی متوقف شده بود ، شروع شود. <strong
+                >مخزن کد منبع به حافظه کاری پروژه تبدیل شده بود.</strong
+              >
+            </p>
+            <p>
+              <strong
+                >یک دسته موفق به ما کد بازیابی شده و یک محیط بهتر برای دسته بعدی را داد.</strong
+              >
+            </p>
+          </section>
+          <section class="article-section" id="different-approaches">
+            <h2>دو ایده متفاوت از بازسازی</h2>
+            <p>
+              GensokyoClub <a
+                href="https://web.archive.org/web/20260909051514/https://github.com/GensokyoClub/th08#important-notice"
+                >عمومی README</a
+              > مخالفتش با این نوع کار را صریح می کند. این اطلاعیه اعلام می کند که توسعه بیشتر به صورت خصوصی تا زمان تکمیل اتفاق خواهد افتاد. در یکی از این بخش ها آمده است:
+            </p>
+            <blockquote>
+              <p>
+                ظهور grifters (تجزیه هوش مصنوعی و پورت ها) در این فضا گرفتن از کار ما یک تصویر بد برای تلاش های تجزیه آینده را نقاشی می کند…
+              </p>
+            </blockquote>
+            <p>
+              این اطلاعیه همچنین تلفات روانی را بر روی نگهدارنده ها توصیف می کند. سیاست مشارکت آنها درخواست های pull را که عمدتا با هوش مصنوعی تولید شده است ، حذف می کند. آنها وقت آزادشان را به کار سختی اختصاص داده اند ، و این کار به ادامه من کمک کرد. من به تلاش پشتش احترام ميذارم اختلاف نظر که می خواهم در مورد آن بحث کنم این است که بازسازی چگونه باید ادامه یابد و چگونه باید یک سهم را قضاوت کرد.
+            </p>
+            <p>
+              در جریان کاری دستی که می شناختم ، توسعه درک یک تابع و بازسازی آن معمولا به همان شخص می رسید. یک پروژه به شدت به تخصص آن شخص متکی بود. اعتماد به کمک کننده مهم بود چون خیلی از استدلال ها در حالی که کار می کردند اتفاق می افتاد.
+            </p>
+            <p>
+              پروژه های موجود در حال حاضر دانش را در منبع خود حفظ می کنند و ابزار می سازند. چیزی که برای من تغییر کرد این بود که یک مامور می توانست از این دانش برای پیگیری تحقیقات بعدی به تنهایی استفاده کند.
+            </p>
+            <p>
+              در ادامه ، من هدف و استاندارد پذیرش نتیجه را تعیین می کنم. مامور آزادی گسترده ای برای تحقیق داره بازسازی پیشنهادی آن باید از چک های مربوطه جان سالم به در ببرد. من می خواهم شخص دیگری بتواند بررسی کند که چرا ما یک پیاده سازی را انتخاب کردیم ، حتی اگر یک نماینده بیشتر کار را انجام دهد.
+            </p>
+            <p>
+              این می تواند یک انتقال دشوار باشد. سالها کار دقیق ممکن است پایه ای برای ادامه ای باشد که بسیار سریعتر حرکت می کند. این سوال های واقعی در مورد اعتبار را مطرح می کند. همچنین آنچه را که نگهدارندگان باید قبل از پذیرش سهم بدانند تغییر می دهد.
+            </p>
+            <p>
+              تشبیه صنعتی به من کمک می کند تا در مورد این فکر کنم. در یک کاردستی ، بیشتر فرآیند به مهارت فرد انجام دهنده آن بستگی دارد. ماشین آلات در جایی که این مهارت مورد نیاز است تغییر می کند. کسی هنوز باید فرآیند را طراحی کند و تشخیص دهد که خروجی آن اشتباه است. جوامع مختلف می توانند انتخاب کنند که چه مقدار از این تغییر را می خواهند انجام دهند.
+            </p>
+            <p>
+              انتخاب من اينه که به طور علني ادامه بدم ، با کار ارثي که اعتبار داده شده و تاريخش حفظ شده. ميخوام کار جديد قابل بازنگري باشه این به ما راهی می دهد تا بپرسیم این رویکرد تا چه حد می تواند پیش برود و از آنچه در طول مسیر اشتباه است یاد بگیریم.
+            </p>
+            <p class="caption">
+              منبع: GensokyoClub <a
+                href="https://github.com/GensokyoClub/th08/blob/e874b98e210b3be1ed21c5e03d54b883eac5069c/README.md#important-notice"
+                >اطلاعیه README</a
+              >، در 10 اکتبر 2026 بررسی شد و <a
+                href="https://github.com/GensokyoClub/th08/blob/f345c7dee07b849f2ff93a0029ab5ede126bf12c/CODE_OF_CONDUCT.md"
+                >سیاست مشارکت</a
+              >. نقل قول یک گزیده کوتاه است.  TH08 <a
+                href="https://github.com/N0zoM1z0/th08/blob/d2a00f4acb4a13916e07a00bd13f714961714628/README.md#credits-and-provenance"
+                >اعتبارات و منشأ</a
+              > مرز ادامه را ثبت کنید.
+            </p>
+          </section>
+          <section class="article-section" id="th095">
+            <h2>TH095: تجربه شروع به ترکیب می کند</h2>
+            <p>
+              <a href="https://github.com/N0zoM1z0/th095"> TH095 </a>، گلوله رو شلیک کن ، ارزش اون تجربه رو خیلی راحت تر دید. مخزن آن در 29 اوت با صفر عملکرد بازی تایید شده در دفتر کل آغاز شد. ما هنوز باید بازی را یاد می گرفتیم. اما ما قبلا خیلی بیشتر در مورد چگونگی شروع بازسازی و چگونگی حرکت آن می دانستیم.
+            </p>
+            <p>
+              تا 7 سپتامبر ، تمام 697 تابع بازی شناسایی شده منبع داشتند. تا 8 سپتامبر ، 696 مورد به عنوان مقایسه دقیق پذیرفته شده بود. کل برنامه در 9 سپتامبر به هم متصل شد. بازسازی Windows i386 در 10 سپتامبر ، حدود دوازده روز پس از شروع ، قابل بازی بود.
+            </p>
+            <p>
+              من این را هیجان انگیزتر از سرعت پروژه اول یافتم. یک هدف تازه می تواند از کار انجام شده در یک بازی دیگر بهره مند شود. این تجربه قبلا در ابزارها و نحوه سازماندهی پروژه وجود داشت.
+            </p>
+            <p>
+              به عنوان مثال ، TH08 به ما آموخته بود که زودتر به برنامه مونتاژ شده توجه کنیم. اگر چندین تابع بازیابی شده به همان حالت بستگی داشته باشند ، مقایسه های جداگانه آنها یک سوال مهم را باز می گذارد. ما باید ببینیم که اونا با هم کار می کنن این درس به شکل گیری نحوه ی نزدیک شدن ما به ساخت کل برنامه ی TH095 کمک کرد.
+            </p>
+            <p>
+              درسی که در ذهنم باقی می ماند در حالی که من آنجا هستم مفید است. وقتی که به یک چک تبدیل شد که یک جلسه دیگر می تواند اجرا شود ، می تواند کمک کند بعد از اینکه من حرکت کردم. عامل بعدی می تواند نتیجه را بدون تکرار تحقیقات منجر به آن استفاده کند.
+            </p>
+            <p>
+              باگ ثابت نقطه شناور هم به اون حافظه تعلق داره این توضیح می دهد که چرا بررسی یک مرجع نیز نیاز به بررسی داده های پشت آن دارد. حفظ این اصلاح با کد به پروژه های بعدی کمک می کند تا از ارث بردن نقطه کور چک قدیمی جلوگیری کنند.
+            </p>
+            <p>
+              <strong
+                >این روش بخشی از مواد اولیه برای بازی بعدی می شود.</strong
+              > ما می توانیم بیشتر از تلاش پروژه بعدی را صرف آنچه در واقع جدید در مورد هدف آن است.
+            </p>
+            <p>
+              همین مزایا برای افرادی که بعدا به این گروه می پیوندند ، در دسترس است. آنها می توانند قبل از ادامه کار ، یک تصمیم را بازرسی کرده و چک آن را مجددا اجرا کنند. آنها مجبور نیستند کل تاریخچه پروژه را بازسازی کنند تا بفهمند چرا منبع به این شکل به نظر می رسد.
+            </p>
+          </section>
+          <section class="article-section" id="th04">
+            <h2>TH04: جریان کار از یک معماری متفاوت جان سالم به در می برد</h2>
+            <p>
+              <a href="https://github.com/N0zoM1z0/th04"> TH04 </a>، داستان سرزمین لوتوس ، این کار را به دوران PC-98 dos برد. هدف در حال حاضر یک محیط 16 بیتی با چهار برنامه همکاری بود. درک رفتار سخت افزاری آن نیاز به شواهد متفاوتی از بازی های Windows داشت. موجود <a href="https://github.com/nmlgc/ReC98">کار ReC98</a> ما دانش ارزشمندی و منبع مواد را در اینجا نیز به ما داد.
+            </p>
+            <p>
+              بازسازی DOS در حال حاضر کار می کند. در تست دستی من ، من مسیرهای عادی کامل را از طریق پایان آنها بازی کردم و ذخیره ها را بررسی کردم. کار فعلی یک پورت 64 بیتی بومی است. ایجاد یک نسخه dos کار برای اولین بار به آن پورت یک مرجع می دهد.
+            </p>
+            <p>
+              معماری چیزی که ما برای تحقیق نیاز داشتیم را تغییر داد. همچنین کامپایلر و زمان اجرا را تغییر داد که با آن کار خود را بررسی کردیم. اما مامور هنوز می تواند یک سوال را تا نتیجه دنبال کند و اجازه دهد که نتیجه آزمایش بعدی را هدایت کند.
+            </p>
+            <p>
+              انتقال از گیم پلی به پایان را در نظر بگیرید. ما باید بدانیم که چه ایالتی از این مرز عبور می کند و کدام برنامه مسئول آن است. اين چيزيه که ما ميتونيم در مورد محصول DOS تحقيق کنيم هنگامی که شواهد و چک ها در دسترس هستند ، یک نماینده می تواند از طریق سوال کار کند ، همانطور که در عنوان Windows انجام شده است.
+            </p>
+            <p>
+              به همین دلیل TH04 برای استدلال مهم است. تغییر قابل توجهی در پلتفرم ما را مجبور نکرد که با یک روش جدید کار شروع کنیم. معماری مشکل را تعریف کرد ؛ جریان کار هنوز راهی برای حل آن به ما داد.
+            </p>
+            <p>
+              برای پورت 64 بیتی ، ما اکنون می توانیم پیاده سازی جدید را با رفتاری که قبلا در DOS بازیابی شده است ، بررسی کنیم. دانش از بازسازی به بندر چیزی برای ساخت می دهد.
+            </p>
+            <p class="caption">
+              وضعیت پروژه از 10 اکتبر 2026: <a
+                href="https://github.com/N0zoM1z0/th04/blob/bb9faca54e2eb3c0d6c757c75d59ac29d2cd5e93/docs/RE_HANDOFF.md"
+                >بازسازی DOS و تست دستی</a
+              > · <a href="https://github.com/N0zoM1z0/th04/tree/port/modern-64"
+                >پورت 64 بیتی</a
+              >. بندر همچنان در حال توسعه است.
+            </p>
+          </section>
+          <section class="article-section" id="semantic-reconstruction">
+            <h2>از کد دقیق تا کد قابل خواندن</h2>
+            <p>
+              وقتی بازسازی جواب داد ، میخوام یه نفر دیگه بتونه درکش کنه.
+            </p>
+            <p>
+              برای من ، مونتاژ و جبران خام می تواند مانند دوستان قدیمی احساس شود. میدونم که این یه تعریف کمی غیرمعموله از "قابل خواندن""اکثر مردم ترجیح می دهند منطق بازی را بدون نگه داشتن طرح حافظه اجرایی در سر خود دنبال کنند.
+            </p>
+            <p>
+              اینجاست که <strong>بازسازی معنایی</strong> وارد می شود. یک میدان بازیابی شده هنوز هم ممکن است عمدتا با جبران آن شناخته شود. ما دنبال می کنیم که چگونه بازی از آن استفاده می کند تا زمانی که بتوانیم نقش آن را توضیح دهیم. سپس می توانیم یک نام معنی دار و نوعی متناسب با شواهد به آن بدهیم. ما استدلال را با منبع نگه می داریم تا فرد بعدی بتواند ببیند که این تفسیر از کجا آمده است.
+            </p>
+            <p>
+              این امر به ویژه برای یک پورت نرم افزار مهم می شود. یک آدرس مطلق به من می گوید که چیزی در فایل اجرایی قدیمی کجا زندگی می کرد. این یک پیاده سازی 64 بیتی را در تصمیم گیری در مورد اینکه کدام شی باید مالک آن حالت باشد ، کمک کمی می کند. برای حرکت ایمن رفتار ، باید رابطه پشت دسترسی به حافظه قدیمی را بازیابی کنیم.
+            </p>
+            <p>سفارشي که الان ازش استفاده ميکنم:</p>
+            <ol>
+              <li>
+                <strong>یک خط پایه دقیق را بازیابی کنید.</strong> قطعات بازسازی شده را با کامپایلر تاریخی کامپایل کنید. کد و داده های مربوطه را با فایل اجرایی اصلی مقایسه کنید. تفاوت های حل نشده را ثبت کنید تا مرحله بعدی نقطه شروع مشخصی داشته باشد.
+              </li>
+              <li>
+                <strong>ساخت و پخش آن بر روی پلت فرم اصلی.</strong> این قطعات را با استفاده از معماری اصلی و کامپایلر به برنامه واقعی پیوند دهید. مسیرهای مهم گیم پلی را تمرین کنید. این جایی است که ما می توانیم مشکلات را با حالت مشترک یا شروع که یک مقایسه تابع جدا شده از دست داده است پیدا کنیم.
+              </li>
+              <li>
+                <strong
+                  >معناشناسی را در برابر هر دو مرجع بازسازی کنید.</strong
+                > یک قسمت منسجم از بازی را در یک زمان بگیرید و مشخص کنید که منبع بازیابی شده آن به چه معناست. بهبود نمایش آن در حالی که حفظ مقایسه دقیق و ساخت تاریخی قابل بازی.
+              </li>
+              <li>
+                <strong>بندر مدرن را بسازید.</strong> رفتار ثابت شده را به محیط جدید منتقل کنید ، مانند ساخت 64 بیتی بومی. بازی اصلی-پلتفرم بازسازی شده همچنان مرجع مقایسه رفتار بندر است.
+              </li>
+            </ol>
+            <p>
+              ساخت قابل پخش از مرحله دوم به یک <strong>مرجع تأیید دوم (اوراکل)</strong> در طول سوم. اولین مرجع تأیید (اوراکل) بررسی می کند که آیا منبع تغییر یافته ما هنوز کد و داده های اصلی مربوطه را بازتولید می کند یا خیر. دوم بررسی می کند که برنامه بازسازی شده هنوز در مسیرهایی که ما تمرین می کنیم درست می سازد و رفتار می کند.
+            </p>
+            <p>
+              آنها اشتباهات مختلفی را می گیرند. تغییر نوع می تواند دستورالعمل های تولید شده را تغییر دهد. تغییر مالکیت می تواند دو قسمت از بازی را با استفاده از نسخه های مختلف حالت ترک کند. نگه داشتن هر دو چک در دسترس به عامل یک شکست مشخص برای تحقیق قبل از حمل یک refactor بیشتر می دهد.
+            </p>
+            <p>
+              يه اسم به شواهد خودش نياز داره مقایسه دقیق نمی تواند به ما بگوید که آیا یک میدان واقعا به معنی "زمان آسیب پذیری است. ما باید این را از نحوه نوشتن و استفاده از بازی ثابت کنیم. اگر معنی نامشخص باقی بماند ، یک نام بی طرف برای خواننده بعدی مفیدتر از یک حدس مطمئن است.
+            </p>
+            <p>
+              ما این نظم را از طریق پروژه ها یاد گرفتیم.  TH08 قبل از برخی از حسابرسی های بعدی پلتفرم تاریخی خود ، پورت های قابل بازی داشت. این باعث شد که دیدن نقص های خاصی سخت تر شود. این <a
+                href="https://github.com/N0zoM1z0/touhou-reconstruction-factory/blob/717e1b8560783ed17a39fdf159d30aa16bb307a7/docs/semantic-reconstruction.md"
+                >جریان کاری فعلی کارخانه</a
+              > ساخت پلتفرم اصلی را در اولویت قرار می دهد ، بنابراین کار معنایی می تواند از آن به عنوان مرجع قبل از شروع پورت استفاده کند.
+            </p>
+            <p>
+              <strong
+                >بازسازی دقیق به ما مرجع می دهد. بازسازی معنایی دانش بازیابی شده را قابل استفاده می کند.</strong
+              > سپس یک پورت می تواند بر روی هر دو ساخته شود.
+            </p>
+          </section>
+          <section class="article-section" id="industrial-shift">
+            <h2>چه چیزی این را به یک تغییر صنعتی تبدیل می کند ؟</h2>
+            <p>
+              این پروژه ها جایی که من توجهم را صرف کردم تغییر کردند. وقتی ماموران می توانستند تحقیقات زیادی را به جلو ببرند ، بهبود محیط کارشان یکی از مفیدترین کارهایی بود که می توانستم انجام دهم. یک ابزار بهتر می تواند در هر عملکرد بعدی که به آن نیاز دارد کمک کند.
+            </p>
+            <p>
+              استقلال اینجا مهمه مرحله بعدی مفید اغلب تنها پس از یک آزمایش شکست خورده روشن می شود. یک مامور به آزادی کافی برای پیروی از این نتیجه در جایی غیر منتظره نیاز دارد. اگر باید منتظر بمانم تا هر مرحله را تجویز کنم ، بیشتر کار به توجه من وابسته است.
+            </p>
+            <p>
+              انتظار دارم که مامور فرضيه هاي اشتباهي بکنه مهم این است که آیا ما می توانیم آنها را آزمایش کنیم و از نتیجه یاد بگیریم. چک شکست خورده باید به آن کمک کند تا اشتباه را به اندازه کافی خوب درک کند تا دوباره امتحان کند. هنوز بايد تصميم بگيرم که آيا شواهد جمع شده از يک نقطه عطف پروژه حمايت ميکنه يا نه
+            </p>
+            <p>
+              REA به عامل دسترسی به ابزارهای تجزیه و تحلیل را می دهد. یک سوال در مورد تماس گیرنده یک تابع می تواند مستقیما به بازرسی آن تماس گیرنده منجر شود. پروژه بازسازی کامپایلر و چک های مرجع خود را تامین می کند. مامور می تواند از آن ها برای تست منبع پیشنهادی خود استفاده کند و ببیند که توضیح آن در کجا قرار دارد.
+            </p>
+            <p>
+              باگ TH08 نشان می دهد که چرا این چک ها مستحق توجه مهندسی خود هستند. هنگامی که همان مقایسه در صدها تابع استفاده می شود ، شکاف در آن می تواند بسیار بیشتر از یک اشتباه در یک پیاده سازی گسترش یابد. تست چک کننده بازخورد موجود برای تمام کارهای بعدی را بهبود می بخشد.
+            </p>
+            <p>
+              تشبیه صنعتی در اینجا یک مثال تاریخی مفید دارد. بولتون و وات یک <a
+                href="https://collection.sciencemuseumgroup.org.uk/objects/co51439/watts-steam-engine-indicator"
+                >نشانگر موتور بخار در سال 1796</a
+              > برای کمک به تنظیم دریچه های موتور. نسخه ضبط شده فشار را از طریق ضربه پیستون ردیابی می کرد. رفتار داخلی موتور را برای بازرسی در دسترس قرار داد. ابزار مقایسه ما به یک هدف مشابه خدمت می کند: آنها به ما اجازه می دهند تا بررسی کنیم که ماشین آلات چه کاری انجام می دهند در حالی که ما آن را بهبود می بخشیم.
+            </p>
+            <p>
+              <strong
+                >ما در مراحل اولیه این تغییر صنعتی هستیم.</strong
+              > بخش عمده ای از زیرساخت ها هنوز نابالغ هستند. ماموران می توانند سریع تر از چک های ما حرکت کنند که برای پشتیبانی طراحی شده اند ، بنابراین این فرآیند باید در کنار آنها توسعه یابد. وقتی یک نقص در یک ابزار مشترک پیدا می کنیم ، باید آن را تعمیر کنیم و نتایج تحت تاثیر آن را دوباره بررسی کنیم. پروژه بعدی می تواند یک ابزار قوی تر را به ارث ببرد.
+            </p>
+            <p>
+              همچنین یک محدودیت عملی برای هر مکالمه وجود دارد. قبل از اینکه یک بازسازی بزرگ به پایان برسد ، پایان خواهد یافت. مخزن کد منبع باید امکان ادامه جلسه دیگری را بدون از دست دادن دلیل تصمیم قبلی فراهم کند.
+            </p>
+            <p>
+              این <a
+                href="https://github.com/N0zoM1z0/touhou-reconstruction-factory"
+                >کارخانه بازسازی توهو</a
+              > از این نیاز رشد کرد. این به پروژه ها یک راه مشترک برای حمل چک ها و درس های خود را به جلو می دهد. کار بر روی یک بازی می تواند شرایط شروع را برای دیگری بهبود بخشد.
+            </p>
+            <p>
+              این چیزی است که تشبیه صنعتی را برای من معنی دار می کند. تجربه شروع به تبدیل شدن به بخشی از ابزارهایی می کند که دیگران می توانند از آن استفاده کنند. بهبود این ابزارها ، میزان کاری که فرد بعدی یا نماینده بعدی می تواند انجام دهد را تغییر می دهد.
+            </p>
+          </section>
+          <section class="article-section" id="possibilities">
+            <h2>پروژه هایی که اکنون می توانیم در نظر بگیریم</h2>
+            <p>
+              سرعت مهم است چون تصمیم برای شروع را تغییر می دهد. یک بازی می تواند برای مهندسی معکوس جذاب باشد و هنوز هم نیاز به توجه بیشتر از آنچه که من می توانم به طور واقع گرایانه به آن بدهم. بسیاری از پروژه ها ایده ها را حفظ می کنند.
+            </p>
+            <p>
+              حالا می توانم راهی برای ادامه چنین پروژه ای در تحقیقات مکرر ببینم. بازسازی کار یک پورت نرم افزار را عملی تر می کند. بازیابی معناشناسی قابل خواندن ، کشف یک مود را برای شخص دیگری آسان تر می کند. تلاش برای درک بازی می تواند پس از اجرای نسخه اول ادامه یابد.
+            </p>
+            <p>
+              حالا به برنامه ای ناآشنا نگاه می کنم و می پرسم: <strong
+                >چه دسترسی ، بازخورد و دانش انباشته شده ای به یک نماینده اجازه می دهد تا به طور قابل اعتماد روی این کار کند ؟ </strong
+              >
+            </p>
+            <p>
+              این سوال باعث می شود پروژه هایی را در نظر بگیرم که قبلا تنها می ماندم. هرکدام می توانند روش برخورد ما با روش بعدی را بهبود ببخشند. ميخوام به کاوش ادامه بدم که چقدر ميتونه ما رو ببره
+            </p>
+          </section>
+          <section class="article-section" id="sources">
+            <details class="native-details">
+              <summary>نقاط عطف و منابع پروژه</summary>
+              <p>
+                این تاریخ ها نقاط بازرسی ثبت شده پروژه را توصیف می کنند که در تاریخ 10 اکتبر 2026 با تاریخچه عمومی GitHub بررسی شده است. زمان سپری شده زمان تقویم بین commits است. حضور منبع ، مقایسه دقیق ، ساخت و نتیجه زمان اجرا هر نام یک نقطه عطف متفاوت است.
+              </p>
+              <ul>
+                <li>
+                  <strong> TH08 :</strong> <a
+                    href="https://github.com/N0zoM1z0/th08/commit/001bf3e9c91cc35b79c7a0e36b3565b86f494362"
+                    >13 آگوست ادامه</a
+                  >, <a
+                    href="https://github.com/N0zoM1z0/th08/blob/15caba73df6735fc44eac4783bc61b8d098ea830/docs/PROGRESS.md"
+                    >19 آگوست منبع دفتر کل</a
+                  >, <a
+                    href="https://github.com/N0zoM1z0/th08/commit/da07b21c8cb63230142b0a66228d6aac66555f3f"
+                    >24 اوت Linux پورت</a
+                  >, <a
+                    href="https://github.com/N0zoM1z0/th08/commit/529eb1a3afa05ae36467731eaccb12e3e50e132f"
+                    >26 آگوست نسخه وب</a
+                  > و <a
+                    href="https://github.com/N0zoM1z0/th08/releases/tag/v0.2.0-linux-64bit"
+                    >30 آگوست نسخه 64 بیتی Linux</a
+                  >.
+                </li>
+                <li>
+                  <strong> TH095 :</strong> <a
+                    href="https://github.com/N0zoM1z0/th095/blob/8c31e6f892d945423b7f7b439747a2bd915f82d8/docs/PROGRESS.md"
+                    >29 آگوست دفتر اولیه</a
+                  >, <a
+                    href="https://github.com/N0zoM1z0/th095/blob/0fa857fb2b2ec6237732e4d6be8d0a28069c9330/docs/PROGRESS.md"
+                    >7 سپتامبر منبع دفتر کل</a
+                  >, <a
+                    href="https://github.com/N0zoM1z0/th095/blob/74baddfccb712d1311a4d6e7487a63cd1100452e/docs/PROGRESS.md"
+                    >8 سپتامبر مقایسه</a
+                  >, <a
+                    href="https://github.com/N0zoM1z0/th095/commit/33d46a0ee48f37060d973125a1a7632a40f8d998"
+                    >9 سپتامبر ارتباط</a
+                  > و <a
+                    href="https://github.com/N0zoM1z0/th095/blob/3442dcf29d9e0b5bef384a49bd0c9ad32a711826/docs/WHOLE_BUILD_TODO.md"
+                    >10 سپتامبر قابل پخش-رکورد ساخت</a
+                  >.
+                </li>
+                <li>
+                  <strong> TH04 :</strong> <a
+                    href="https://github.com/N0zoM1z0/th04/blob/bb9faca54e2eb3c0d6c757c75d59ac29d2cd5e93/docs/RE_HANDOFF.md"
+                    >10 اکتبر تحویل</a
+                  > بازسازی dos کاری ، تست کامل مسیر عادی نگهدارنده و مرحله 64 بیتی فعلی را ثبت می کند.
+                </li>
+                <li>
+                  <strong> TH08 مرجع تأیید (اوراکل) اصلاح:</strong> <a href="https://github.com/N0zoM1z0/th08/issues/10"
+                    >گزارش شده باگ جمع آوری خودکار</a
+                  >, <a
+                    href="https://github.com/N0zoM1z0/th08/commit/7148a76ba224742677895c7160807a68897957d5"
+                    >منبع و اصلاح مقایسه</a
+                  > و <a
+                    href="https://github.com/N0zoM1z0/th08/commit/a393f400786e4cc6cbb1000af0dad3276da12c78"
+                    >حسابرسی مداوم کامل نقطه شناور</a
+                  >.
+                </li>
+                <li>
+                  <strong>بازسازی معنایی:</strong> <a
+                    href="https://github.com/N0zoM1z0/th08/blob/d2a00f4acb4a13916e07a00bd13f714961714628/docs/SEMANTIC_PLAYBOOK.md"
+                    > کتاب بازی قابلیت خواندن TH08</a
+                  > و <a
+                    href="https://github.com/N0zoM1z0/touhou-reconstruction-factory/blob/717e1b8560783ed17a39fdf159d30aa16bb307a7/docs/semantic-reconstruction.md"
+                    >سفارش فاز کارخانه و دو مسیر اعتبارسنجی</a
+                  >.
+                </li>
+                <li>
+                  <strong>تاریخچه صنعتی:</strong> <a
+                    href="https://collection.sciencemuseumgroup.org.uk/objects/co51439/watts-steam-engine-indicator"
+                    >رکورد شاخص موتور بخار گروه موزه علوم</a
+                  > مقدمه سال 1796 و مکانیسم ضبط فشار را توصیف می کند.
+                </li>
+                <li>
+                  <strong>روش:</strong> کارخانه <a
+                    href="https://github.com/N0zoM1z0/touhou-reconstruction-factory/blob/038b6bed51d273c8b3680553b6f43e1b97d19bd1/docs/agent-autonomy.md"
+                    >خودمختاری عامل</a
+                  > و <a
+                    href="https://github.com/N0zoM1z0/touhou-reconstruction-factory/blob/038b6bed51d273c8b3680553b6f43e1b97d19bd1/docs/knowledge-base.md"
+                    >دانش بازی های متقابل</a
+                  > اسناد اصول و درس های کاری را حفظ می کنند.
+                </li>
+              </ul>
+            </details>
+            <p>
+              <a class="text-link" href="../">مقالات بیشتر</a> · <a class="text-link" href="../../showcase/th04/"
+                >بررسی تحقیقات TH04</a
+              >
+            </p>
+          </section>
+        </article>
+      </div>
+    </main>
+    <!-- website:footer:start -->
+    <!-- prettier-ignore -->
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <p>REA · Reverse Engineer Anything</p>
+        <div class="footer-links">
+          <a href="../../faq/">FAQ</a
+          ><a href="../../contributors/">مشارکت‌کنندگان</a
+          ><a href="https://github.com/morluto/rea">کد منبع</a
+          ><a href="https://github.com/morluto/rea/blob/main/LICENSE">مجوز MIT</a
+          ><a href="https://discord.gg/GkcryMnJDM">به جامعه بپیوندید</a
+          ><a href="https://x.com/reatools">ما را در X دنبال کنید</a>
+        </div>
+      </div>
+    </footer>
+    <p class="sr-only" id="copy-status" role="status" aria-live="polite"></p>
+    <a class="back-to-top" href="#top" aria-label="بازگشت به بالا">
+      <span aria-hidden="true">↑</span> بالا
+    </a>
+    <!-- website:footer:end -->
+  </body>
+</html>

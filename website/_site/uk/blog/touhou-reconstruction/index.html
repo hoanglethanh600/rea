@@ -1,0 +1,784 @@
+<!doctype html>
+<html lang="uk" dir="ltr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Промислова революція в галузі реверс-інжинірингу-REA</title>
+    <meta
+      name="description"
+      content="N0zoM1z0 розповідає про ручне реінжиніринг, реконструкцію Touhou за допомогою агентів штучного інтелекту та про те, як знання об&#x27;єднуються в TH08, TH095 та PC-98, TH04 ."
+    />
+    <!-- website:sharing:start -->
+    <!-- prettier-ignore -->
+    <link rel="canonical" href="https://rea.tools/uk/blog/touhou-reconstruction/" />
+    <!-- website:languages:start -->
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="en" href="https://rea.tools/blog/touhou-reconstruction/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="zh-CN" href="https://rea.tools/zh-CN/blog/touhou-reconstruction/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="zh-TW" href="https://rea.tools/zh-TW/blog/touhou-reconstruction/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="ja" href="https://rea.tools/ja/blog/touhou-reconstruction/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="ko" href="https://rea.tools/ko/blog/touhou-reconstruction/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="tr" href="https://rea.tools/tr/blog/touhou-reconstruction/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="ru" href="https://rea.tools/ru/blog/touhou-reconstruction/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="vi" href="https://rea.tools/vi/blog/touhou-reconstruction/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="th" href="https://rea.tools/th/blog/touhou-reconstruction/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="de" href="https://rea.tools/de/blog/touhou-reconstruction/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="es" href="https://rea.tools/es/blog/touhou-reconstruction/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="fr" href="https://rea.tools/fr/blog/touhou-reconstruction/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="uk" href="https://rea.tools/uk/blog/touhou-reconstruction/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="pl" href="https://rea.tools/pl/blog/touhou-reconstruction/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="pt-BR" href="https://rea.tools/pt-BR/blog/touhou-reconstruction/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="ar" href="https://rea.tools/ar/blog/touhou-reconstruction/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="fa" href="https://rea.tools/fa/blog/touhou-reconstruction/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="id" href="https://rea.tools/id/blog/touhou-reconstruction/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="it" href="https://rea.tools/it/blog/touhou-reconstruction/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="el" href="https://rea.tools/el/blog/touhou-reconstruction/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="x-default" href="https://rea.tools/blog/touhou-reconstruction/" />
+<!-- website:languages:end -->
+    <!-- prettier-ignore -->
+    <meta property="og:type" content="website" />
+    <!-- prettier-ignore -->
+    <meta property="og:site_name" content="REA" />
+    <!-- prettier-ignore -->
+    <meta property="og:title" content="Промислова революція в галузі реверс-інжинірингу-REA" />
+    <!-- prettier-ignore -->
+    <meta property="og:description" content="N0zoM1z0 розповідає про ручне реінжиніринг, реконструкцію Touhou за допомогою агентів штучного інтелекту та про те, як знання об&#x27;єднуються в TH08, TH095 та PC-98, TH04 ." />
+    <!-- prettier-ignore -->
+    <meta property="og:url" content="https://rea.tools/uk/blog/touhou-reconstruction/" />
+    <!-- prettier-ignore -->
+    <meta property="og:image" content="https://rea.tools/assets/social-card.png" />
+    <!-- prettier-ignore -->
+    <meta property="og:image:type" content="image/png" />
+    <!-- prettier-ignore -->
+    <meta property="og:image:width" content="1200" />
+    <!-- prettier-ignore -->
+    <meta property="og:image:height" content="630" />
+    <!-- prettier-ignore -->
+    <meta
+      property="og:image:alt"
+      content="REA: Дізнайтеся, як працює програмне забезпечення. Зворотне проектування за допомогою вашого ШІ-помічника для програмування."
+    />
+    <!-- prettier-ignore -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <!-- prettier-ignore -->
+    <meta name="twitter:title" content="Промислова революція в галузі реверс-інжинірингу-REA" />
+    <!-- prettier-ignore -->
+    <meta name="twitter:description" content="N0zoM1z0 розповідає про ручне реінжиніринг, реконструкцію Touhou за допомогою агентів штучного інтелекту та про те, як знання об&#x27;єднуються в TH08, TH095 та PC-98, TH04 ." />
+    <!-- prettier-ignore -->
+    <meta name="twitter:image" content="https://rea.tools/assets/social-card.png" />
+    <!-- prettier-ignore -->
+    <meta
+      name="twitter:image:alt"
+      content="REA: Дізнайтеся, як працює програмне забезпечення. Зворотне проектування за допомогою вашого ШІ-помічника для програмування."
+    />
+    <!-- website:sharing:end -->
+    <!-- website:theme:start -->
+    <meta name="theme-color" content="#ffffff" />
+    <!-- Apply the saved theme before styles load, to avoid a flash on navigation. -->
+    <script src="../../../assets/theme.js"></script>
+    <!-- website:theme:end -->
+    <link rel="icon" href="../../../assets/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="../../../assets/styles.css" />
+    <script src="../../../assets/main.js" defer></script>
+  <script id="website-messages" type="application/json">{"Copied": "Скопійований", "Code copied to clipboard.": "Код копіюється в буфер обміну.", "Selected": "Вибраний", "Code selected. Use your keyboard to copy it.": "Обраний код. Скопіюйте його з клавіатури.", "REA on GitHub ({count})": "REA на GitHub ({count})", "Switch to light mode": "Перемкнути на світлу тему", "Switch to dark mode": "Перемкнути на темну тему"}</script>
+  </head>
+  <body id="top" class="blog-article">
+    <a class="skip-link" href="#main">Перейти до змісту</a>
+    <!-- website:header:start -->
+    <!-- prettier-ignore -->
+    <header class="site-header">
+      <div class="container header-inner">
+        <a class="brand" href="../../" aria-label="Головна REA"
+          ><span class="brand-name">REA</span
+          ><span class="brand-caption" data-i18n-skip>Reverse Engineer Anything</span></a
+        >
+        <nav class="navigation" aria-label="Основна навігація">
+          <a href="../../../get-started/" class="nav-start">Почати</a>
+          <a href="../../showcase/">Приклади</a>
+          <a href="../" aria-current="page">Блог</a>
+          <a href="../../guides/">Посібники</a>
+        </nav>
+        <div class="header-social">
+          <details class="language-picker" data-i18n-skip><summary><span aria-hidden="true">文 / A</span> <span>Українська</span></summary><nav aria-label="Українська"><a href="../../../blog/touhou-reconstruction/" lang="en" dir="ltr" data-language="en">English</a><a href="../../../zh-CN/blog/touhou-reconstruction/" lang="zh-CN" dir="ltr" data-language="zh-CN">简体中文</a><a href="../../../zh-TW/blog/touhou-reconstruction/" lang="zh-TW" dir="ltr" data-language="zh-TW">繁體中文</a><a href="../../../ja/blog/touhou-reconstruction/" lang="ja" dir="ltr" data-language="ja">日本語</a><a href="../../../ko/blog/touhou-reconstruction/" lang="ko" dir="ltr" data-language="ko">한국어</a><a href="../../../tr/blog/touhou-reconstruction/" lang="tr" dir="ltr" data-language="tr">Türkçe</a><a href="../../../ru/blog/touhou-reconstruction/" lang="ru" dir="ltr" data-language="ru">Русский</a><a href="../../../vi/blog/touhou-reconstruction/" lang="vi" dir="ltr" data-language="vi">Tiếng Việt</a><a href="../../../th/blog/touhou-reconstruction/" lang="th" dir="ltr" data-language="th">ไทย</a><a href="../../../de/blog/touhou-reconstruction/" lang="de" dir="ltr" data-language="de">Deutsch</a><a href="../../../es/blog/touhou-reconstruction/" lang="es" dir="ltr" data-language="es">Español</a><a href="../../../fr/blog/touhou-reconstruction/" lang="fr" dir="ltr" data-language="fr">Français</a><a href="../../../uk/blog/touhou-reconstruction/" lang="uk" dir="ltr" data-language="uk" aria-current="true">Українська</a><a href="../../../pl/blog/touhou-reconstruction/" lang="pl" dir="ltr" data-language="pl">Polski</a><a href="../../../pt-BR/blog/touhou-reconstruction/" lang="pt-BR" dir="ltr" data-language="pt-BR">Português (Brasil)</a><a href="../../../ar/blog/touhou-reconstruction/" lang="ar" dir="rtl" data-language="ar">العربية</a><a href="../../../fa/blog/touhou-reconstruction/" lang="fa" dir="rtl" data-language="fa">فارسی</a><a href="../../../id/blog/touhou-reconstruction/" lang="id" dir="ltr" data-language="id">Bahasa Indonesia</a><a href="../../../it/blog/touhou-reconstruction/" lang="it" dir="ltr" data-language="it">Italiano</a><a href="../../../el/blog/touhou-reconstruction/" lang="el" dir="ltr" data-language="el">Ελληνικά</a><a href="../../../ml/blog/touhou-reconstruction/" lang="ml" dir="ltr" data-language="ml">മലയാളം · English</a><a href="../../../ur-Latn/blog/touhou-reconstruction/" lang="ur-Latn" dir="ltr" data-language="ur-Latn">Roman Urdu · English</a><a href="../../../ro/blog/touhou-reconstruction/" lang="ro" dir="ltr" data-language="ro">Română · English</a></nav></details>
+          <button class="theme-toggle" type="button" data-theme-toggle hidden>
+            <svg class="theme-moon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+              <path d="M20.9 13a9 9 0 0 1-9.9-9.9A9 9 0 1 0 20.9 13Z" />
+            </svg>
+            <svg class="theme-sun" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true" focusable="false">
+              <circle cx="12" cy="12" r="4" />
+              <path d="M12 2v2m0 16v2M2 12h2m16 0h2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42" />
+            </svg>
+          </button>
+          <a
+            class="nav-github"
+            href="https://github.com/morluto/rea"
+            aria-label="REA на GitHub"
+            title="REA на GitHub"
+          >
+            <svg
+              width="22"
+              height="22"
+              viewBox="0 0 16 16"
+              aria-hidden="true"
+              focusable="false"
+            >
+              <path
+                fill="currentColor"
+                d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82a7.65 7.65 0 0 1 2-.27c.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z"
+              />
+            </svg>
+            <span class="nav-github-count" hidden aria-hidden="true"></span>
+          </a>
+          <a
+            class="nav-discord"
+            href="https://discord.gg/GkcryMnJDM"
+            aria-label="Приєднатися до REA в Discord"
+            title="Приєднатися до REA в Discord"
+          >
+            <svg
+              width="22"
+              height="22"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+              focusable="false"
+            >
+              <path
+                fill="currentColor"
+                d="M20.317 4.3698a19.7913 19.7913 0 0 0-4.8851-1.5152.0741.0741 0 0 0-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 0 0-.0785-.037 19.7363 19.7363 0 0 0-4.8852 1.515.0699.0699 0 0 0-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 0 0 .0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 0 0 .0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 0 0-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 0 1-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 0 1 .0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 0 1 .0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 0 1-.0066.1276 12.2986 12.2986 0 0 1-1.873.8914.0766.0766 0 0 0-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 0 0 .0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 0 0 .0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 0 0-.0312-.0286ZM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189Zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189Z"
+              />
+            </svg>
+          </a>
+          <a
+            class="nav-x"
+            href="https://x.com/reatools"
+            aria-label="Стежити за REA в X"
+            title="Стежити за REA в X"
+          >
+            <svg
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+              focusable="false"
+            >
+              <path
+                fill="currentColor"
+                d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z"
+              />
+            </svg>
+          </a>
+        </div>
+      </div>
+    </header>
+    <!-- website:header:end -->
+    <main id="main" class="container">
+      <div class="page-heading">
+        <p class="breadcrumb">
+          <a href="../../">Головний</a> сторінка / <a href="../">Блог</a> / Реконструкція Тохоу
+        </p>
+        <p class="eyebrow">Есе · Реконструкція Тохоу</p>
+        <h1>Промислова революція в області реверс-інжинірингу.</h1>
+        <p class="page-meta">Автор: N0zoM1z0 · 10 жовтня 2026</p>
+        <div class="blog-takeaway">
+          <p class="eyebrow">Головне</p>
+          <ul>
+            <li>
+              <strong>Надайте агентам самостійність у проведенні розслідування.</strong> Встановіть чітку мету та критерії прийнятності, а потім дозвольте агенту вирішити, що робити далі.
+            </li>
+            <li>
+              <strong>Використовуйте сховище та Git як робочу пам'ять.</strong> Зберігайте логіку в коді. Контрольні точки Git дозволяють продовжити наступний сеанс після завершення діалогу.
+            </li>
+            <li>
+              <strong>Дозвольте доказам вирішити, що ви стверджуєте.</strong> Переконливе пояснення все ще потребує перевірки. "Невідомо" - це правильна відповідь, коли докази неповні.
+            </li>
+            <li>
+              <strong>Перевірте також посилання для перевірки (oracle).</strong> Спробуйте варіанти, які він повинен відхилити. Якщо помилка не виявлена, перегляньте попередні результати, які залежали від неї.
+            </li>
+            <li>
+              <strong
+                >Ми знаходимося на зорі промислової революції в RE.</strong
+              > Методи все ще розробляються. Нам ще багато чого належить вивчити.
+            </li>
+          </ul>
+        </div>
+      </div>
+      <figure class="reconstruction-flywheel" aria-labelledby="flywheel-title">
+        <div class="flywheel-heading">
+          <p class="eyebrow" id="flywheel-title">Як досвід з'єднує</p>
+          <p><strong>Управління</strong> персоналом * мета і критерії прийнятності</p>
+        </div>
+        <div class="flywheel-diagram">
+          <svg
+            class="flywheel-arrows"
+            viewBox="0 0 720 470"
+            preserveAspectRatio="none"
+            aria-hidden="true"
+            focusable="false"
+          >
+            <defs>
+              <marker
+                id="flywheel-forward"
+                markerWidth="10"
+                markerHeight="10"
+                refX="7"
+                refY="4"
+                orient="auto"
+                markerUnits="userSpaceOnUse"
+              >
+                <path
+                  d="M 0 0 L 8 4 L 0 8"
+                  fill="none"
+                  stroke="#294f82"
+                  stroke-width="2"
+                />
+              </marker>
+              <marker
+                id="flywheel-revise"
+                markerWidth="10"
+                markerHeight="10"
+                refX="7"
+                refY="4"
+                orient="auto"
+                markerUnits="userSpaceOnUse"
+              >
+                <path
+                  d="M 0 0 L 8 4 L 0 8"
+                  fill="none"
+                  stroke="#5b6570"
+                  stroke-width="1.5"
+                />
+              </marker>
+            </defs>
+            <g
+              fill="none"
+              stroke="#294f82"
+              stroke-width="2.5"
+              marker-end="url(#flywheel-forward)"
+            >
+              <path
+                class="flywheel-path-desktop"
+                d="M 444 115 C 537 111 624 157 627 208"
+              />
+              <path d="M 528 365 C 456 437 263 437 191 365" />
+              <path
+                class="flywheel-path-desktop"
+                d="M 99 209 C 94 145 170 97 271 104"
+              />
+              <path
+                class="flywheel-path-mobile"
+                d="M 530 115 C 614 108 681 164 674 215"
+              />
+              <path
+                class="flywheel-path-mobile"
+                d="M 87 198 C 74 143 135 119 190 120"
+              />
+            </g>
+            <path
+              class="flywheel-path-desktop"
+              d="M 515 215 C 500 165 450 166 430 127"
+              fill="none"
+              stroke="#5b6570"
+              stroke-width="1.5"
+              stroke-dasharray="5 5"
+              marker-end="url(#flywheel-revise)"
+            />
+            <path
+              class="flywheel-path-mobile"
+              d="M 510 204 C 404 204 391 187 412 136"
+              fill="none"
+              stroke="#5b6570"
+              stroke-width="1.5"
+              stroke-dasharray="5 5"
+              marker-end="url(#flywheel-revise)"
+            />
+          </svg>
+          <div class="flywheel-node flywheel-agent">
+            <p class="flywheel-kicker">Самостійність</p>
+            <h3>Агент</h3>
+            <p>Виберіть експеримент.<br />Висуньте гіпотезу.</p>
+          </div>
+          <div class="flywheel-node flywheel-oracle">
+            <p class="flywheel-kicker">Перевірка</p>
+            <h3>Еталон перевірки</h3>
+            <p>Тестування на<br />конкретні посилання.</p>
+          </div>
+          <div class="flywheel-node flywheel-memory">
+            <p class="flywheel-kicker">Репозиторій</p>
+            <h3>Робоча пам’ять</h3>
+            <p>Кодекс, докази,<br />перевірки та уроки.</p>
+          </div>
+          <p class="flywheel-retry">
+            Невідповідність<br /><strong>Перегляньте гіпотезу</strong>
+          </p>
+          <p class="flywheel-center">
+            Краще<br /><strong>вихідна точка</strong>
+          </p>
+          <p class="flywheel-reuse">Повторне використання</p>
+          <p class="flywheel-pass">
+            <strong>Минути</strong> * Зберегти результат і його докази
+          </p>
+        </div>
+        <div
+          class="flywheel-projects"
+          aria-label="Досвід, накопичений в період між проектами"
+        >
+          <a href="#th08">TH08</a><span aria-hidden="true">→</span
+          ><a href="#th095">TH095</a><span aria-hidden="true">→</span
+          ><a href="#th04">TH04</a>
+        </div>
+        <figcaption>
+          Кожен наступний проект стає найкращою відправною точкою. Це включає виправлення перевірок, коли ми виявляємо прогалини.
+        </figcaption>
+      </figure>
+      <div class="article-layout">
+        <nav class="contents" aria-label="На цій сторінці">
+          <p>У цій статті</p>
+          <ul>
+            <li><a href="#august">Серпень 2026 року</a></li>
+            <li><a href="#th08"> TH08: продовження</a></li>
+            <li><a href="#different-approaches">Два підходи</a></li>
+            <li><a href="#th095"> TH095: рецептура</a></li>
+            <li><a href="#th04"> TH04: різні архітектури</a></li>
+            <li>
+              <a href="#semantic-reconstruction">Від точного до читабельного</a>
+            </li>
+            <li><a href="#industrial-shift">Промисловий зсув</a></li>
+            <li><a href="#possibilities">Що стає можливим</a></li>
+          </ul>
+        </nav>
+        <article class="article" aria-label="Есе про реконструкцію Тохоу">
+          <section class="article-section" id="august">
+            <h2>Що змінилося в серпні 2026 року</h2>
+            <p>
+              До цієї роботи я багато займався зворотним проектуванням вручну. Я перевіряв функцію, поки не знайшов пояснення, а потім перевірив це пояснення в програмі. Просуваючись далі, я витрачав більше свого часу на наступну функцію. Це також означало, що я тримав у голові все більш об'ємну картину.
+            </p>
+            <p>
+              Велика частина моєї роботи пов'язана з іграми. Я реконструюю їх, щоб я міг зрозуміти їх поведінку і врешті-решт перенести на програмний порт або мод. Саме цей досвід лежить в основі цієї статті. Цей метод може бути корисним в інших областях, але в кожній області потрібно встановити, що можна перевірити за допомогою надійних посилань.
+            </p>
+            <p>
+              У серпні 2026 року я почав серйозно вивчати re, керований агентами. Я хотів побачити, як далеко може зайти агент, маючи доступ до програми та звичайних інструментів розробки. Touhou reconstruction дав мені значний проект, де я міг це зрозуміти.
+            </p>
+            <p>
+              Перші результати були вражаючими. Розслідування могло б тривати без моєї участі у виборі кожного окремого кроку. Невдале порівняння могло б відправити агента до іншого абонента. Можна було б написати невелику діагностику і використати результат, щоб вирішити, що робити далі. Надання цієї свободи змінило ситуацію на краще: я зміг приділяти більше уваги напрямку проекту і тому, чи заслуговують довіри його перевірки.
+            </p>
+            <p>
+              В першу чергу мою увагу привернув темп. Потім я почав замислюватися над тим, що залишиться після поточного проекту. Чи буде в наступній грі корисно все, що ми тільки що дізналися?
+            </p>
+          </section>
+          <section class="article-section" id="th08">
+            <h2>TH08: опора на людську працю</h2>
+            <p>
+              <a href="https://github.com/N0zoM1z0/th08"> TH08</a> , "Вічна ніч", починався як продовження <a href="https://github.com/GensokyoClub/th08"
+                >реконструкція</a
+              > GensokyoClub. Їх відкрите джерело дало мені значну основу. Це прийшло разом із знанням конструкції та історією внеску, яку я зберіг у продовженні.
+            </p>
+            <p>
+              Імпортована історія закінчується на загальнодоступній контрольній точці 10 серпня. Моє самостійне продовження почалося 13 серпня. До 19 серпня в журналі були зареєстровані вихідні дані для всіх 1107 ідентифікованих ігрових функцій.
+            </p>
+            <p>
+              Відтворюваний порт реконструкції Linux був випущений 24 серпня, приблизно через одинадцять днів після початку роботи над продовженням. Потім була випущена веб-версія. 64-розрядна версія Linux для власної версії вийшла 30 Серпня.
+            </p>
+            <p>
+              Мене вразило те, що в результаті роботи була створена програма, яку могли запускати люди. Щоб досягти цього, потрібно було вирішити проблеми, що виходять за рамки окремої функції. Навіть якщо дві функції виглядали коректно окремо, вони могли випадково використовувати окремі копії state, які повинні були бути спільними.
+            </p>
+            <p>
+              Це зробило перевірку посилань центральною в роботі. Я називаю їх <strong>перевірочними посиланнями (оракулами)</strong>. Порівняння коду може сказати нам, чи відновлена функція відтворює оригінальні інструкції. Перевірка під час виконання може сказати нам, чи реалізований маршрут досягає очікуваного стану. Агент пропонує пояснення та перевіряє його; невідповідність дає йому можливість дослідити щось конкретне.
+            </p>
+            <h3>Точний збіг з неправильною константою</h3>
+            <p>
+              Посилання для перевірки (oracle)-це програмне забезпечення, яке хтось написав.  TH08 дав мені чітке нагадування про те, наскільки це програмне забезпечення може залежати.
+            </p>
+            <p>
+              У вересні помилка, про яку повідомив порт комутатора, знову призвела до автоматичного збору предметів. У відновленому джерелі потужність програвача була перевірена на рівні <code>0.0</code>. В оригіналі використовувалося значення <code>128.0</code> - поріг максимальної потужності.
+            </p>
+            <p>
+              Нормальна потужність невід'ємна, тому перевірка відновленої потужності фактично завжди виконувалася. Вище лінії збору гра могла залучати предмети, не вимагаючи максимальної потужності. Інші винятки з умови були вірними. Ця константа змінила поведінку.
+            </p>
+            <p>
+              <strong
+                >Однак функція вже пройшла точне порівняння.</strong
+              >
+            </p>
+            <p>
+              При перестроюванні константа може бути поміщена за іншою адресою. Інструмент порівняння враховував це, коригуючи адреси в складених інструкціях, перш ніж порівнювати їх з оригінальними. Але він ніколи не перевіряв значення з плаваючою комою, збережене за вказаною адресою.
+            </p>
+            <p>
+              Це залишило прогалину в перевірці. Це може призвести до того, що відновлена команда вказує на початкове значення <code>128.0</code>, тоді як джерело все ще вказувало <code>0.0</code>. Байти інструкції збіглися. Джерело мав на увазі щось інше.
+            </p>
+            <p>
+              Виправлення, випущене <a href="https://github.com/N0zoM1z0/th08/pull/11"
+                >2 вересня, виправило</a
+              > вихідний код і змусило при порівнянні перевіряти фактичні байти константи, на яку посилається посилання. Потім було проведено більше <a href="https://github.com/N0zoM1z0/th08/pull/13">широкий аудит</a>, в ході якого було проаналізовано 1548 посилань на константи з плаваючою комою. Було виявлено ще дванадцять неправильних посилань у п'яти прийнятих функціях.
+            </p>
+            <p>
+              При порівнянні тепер перевіряється кожна така константа з плаваючою комою. Тести використовують відомі неправильні значення, щоб переконатися, що вони відхилені. Нам також довелося переглянути результати, які пройшли більш слабку перевірку.
+            </p>
+            <p>
+              <strong>Посилання для перевірки (oracle) також потребувало відновлення.</strong> Її виправлення було частиною оновлення гри.
+            </p>
+            <p>
+              Це важливо, коли команда складається в основному з однієї людини, яка працює з агентами. Я не можу особисто перевіряти кожен рядок, який вони створюють, тому багато в чому я довіряю їх перевіркам. "Сліпа пляма" в системі загального контролю (oracle) може вплинути на багато розслідувань, перш ніж я це помічу. Я повинен зрозуміти, що насправді перевіряє засіб перевірки, і протестувати його на предмет випадків, які повинні завершитися невдачею.
+            </p>
+            <p>
+              У міру продовження роботи ці перевірки ставали частиною репозиторію. Так само і причини змін вихідного коду і примітки, які дозволяли більш пізнього сеансу продовжити роботу з того місця, на якому зупинилася попередня сесія. <strong
+                >Репозиторій вихідного коду ставав робочою пам'яттю проекту.</strong
+              >
+            </p>
+            <p>
+              <strong
+                >Успішний запуск пакета дозволив нам відновити код та покращити середовище для наступного пакета.</strong
+              >
+            </p>
+          </section>
+          <section class="article-section" id="different-approaches">
+            <h2>Дві різні ідеї реконструкції</h2>
+            <p>
+              <a
+                href="https://web.archive.org/web/20260909051514/https://github.com/GensokyoClub/th08#important-notice"
+                >Публічний сайт GensokyoClub явно висловлює</a
+              > свою незгоду з такого роду роботою. У повідомленні повідомляється, що подальша розробка буде вестися в приватному порядку до завершення. В одному уривку сказано:
+            </p>
+            <blockquote>
+              <p>
+                Зростання кількості шахраїв (декомпіляторів та портаторів штучного інтелекту) у цій галузі на основі нашої роботи створює погану картину для майбутніх зусиль з декомпіляції…
+              </p>
+            </blockquote>
+            <p>
+              У повідомленні також описується психологічне навантаження на супроводжуючих. Їх політика щодо вкладів виключає запити на перенесення, зроблені в основному за допомогою штучного інтелекту. Вони присвятили свій вільний час складній роботі, і ця робота допомогла мені продовжувати працювати. Я поважаю зусилля, які стоять за цим. Розбіжності, які я хочу обговорити, стосуються того, як повинна проходити реконструкція і як слід оцінювати внесок.
+            </p>
+            <p>
+              У звичному мені ручному робочому процесі розробка розуміння функції і її реконструкція зазвичай покладалися на одного і того ж людини. Проект значною мірою залежав від досвіду цієї людини. Довіра до розробника мала значення, оскільки більша частина міркувань виникла під час його роботи.
+            </p>
+            <p>
+              Існуючі проекти вже зберігають знання у своїх оригінальних текстах та інструментах для створення. Для мене змінилося те, що агент може використовувати ці знання для проведення наступного розслідування самостійно.
+            </p>
+            <p>
+              У своєму продовженні я визначаю мету і стандарт прийняття результату. Агент має широку свободу у проведенні розслідування. Потім запропонована реконструкція повинна пройти відповідні перевірки. Я хочу, щоб інша людина могла проаналізувати, чому ми вибрали певну реалізацію, навіть якщо агент зробив більшу частину роботи.
+            </p>
+            <p>
+              Це може бути важким переходом. Роки ретельної роботи можуть стати основою для подальшого розвитку, яке буде просуватися набагато швидше. У зв'язку з цим виникають серйозні питання про кредитоспроможність. Це також змінює те, що розробники повинні знати, перш ніж приймати внесок.
+            </p>
+            <p>
+              Аналогія з промисловістю допомагає мені задуматися над цим. У ремеслі більша частина процесу залежить від майстерності людини, яка його виконує. Обладнання змінюється там, де потрібна ця навичка. Хтось все одно повинен розробляти процес і розпізнавати, коли його результати неправильні. Різні спільноти можуть вибрати, яку частину цих змін вони хочуть взяти на себе.
+            </p>
+            <p>
+              Мій вибір - продовжувати відкрито, враховуючи успадковану роботу та зберігаючи її історію. Я хочу, щоб нова робота була доступна для рецензування. Це дає нам можливість оцінити, наскільки далеко може пройти цей підхід, і навчитися з того, що на цьому шляху йде не так.
+            </p>
+            <p class="caption">
+              Джерело: <a
+                href="https://github.com/GensokyoClub/th08/blob/e874b98e210b3be1ed21c5e03d54b883eac5069c/README.md#important-notice"
+                >Повідомлення GensokyoClub на README</a
+              >, перевірене 10 жовтня 2026 року, і його <a
+                href="https://github.com/GensokyoClub/th08/blob/f345c7dee07b849f2ff93a0029ab5ede126bf12c/CODE_OF_CONDUCT.md"
+                >Політика щодо внесків</a
+              >. Цитата є скороченою витримкою.  <a
+                href="https://github.com/N0zoM1z0/th08/blob/d2a00f4acb4a13916e07a00bd13f714961714628/README.md#credits-and-provenance"
+                >Титри та Походження</a
+              > TH08 вказують на межу продовження.
+            </p>
+          </section>
+          <section class="article-section" id="th095">
+            <h2>TH095: досвід починає накопичуватися</h2>
+            <p>
+              <a href="https://github.com/N0zoM1z0/th095"> TH095</a>, Shoot the Bullet, значно спростив сприйняття цього досвіду. 29 серпня почалося його оновлення з нульовими підтвердженими ігровими функціями в реєстрі. Ми все ще мали вивчити гру. Але ми вже знали набагато більше про те, як розпочати реконструкцію та як підтримувати її в робочому стані.
+            </p>
+            <p>
+              До 7 вересня всі 697 ідентифікованих ігрових функцій мали вихідний код. До 8 вересня 696 були прийняті як точні порівняння. 9 вересня вся програма була підключена. Реконструкція Windows i386 була позначена як відтворювана 10 вересня, приблизно через дванадцять днів після ініціалізації.
+            </p>
+            <p>
+              Я знайшов це більш захоплюючим, ніж швидкість першого проекту. Нова мета могла б отримати вигоду від роботи над іншою грою. Досвід вже був присутній в інструментах і в тому, як був організований проект.
+            </p>
+            <p>
+              Наприклад, TH08 навчив нас звертати увагу на зібрану програму з самого початку. Якщо кілька відновлених функцій залежать від одного стану, їх ізольоване порівняння залишає відкритим важливе питання. Нам потрібно побачити, як вони працюють разом. Цей урок допоміг нам сформулювати підхід до побудови всієї програми TH095.
+            </p>
+            <p>
+              Урок, який залишається в моїй голові, корисний, поки я там. Як тільки він стає перевіркою, що можна запустити інший сеанс, він може продовжувати допомагати і після того, як я перейду далі. Наступний агент може використати результат, не повторюючи розслідування, яке призвело до нього.
+            </p>
+            <p>
+              Помилка, пов'язана з константою з плаваючою комою, також стосується цієї пам'яті. Це пояснює, чому перевірка посилання також вимагає перевірки даних, які стоять за ним. Збереження цього виправлення в коді допомагає подальшим проектам уникнути" сліпої плями " Старої перевірки.
+            </p>
+            <p>
+              <strong
+                >Цей метод стає частиною вихідного матеріалу для наступної гри.</strong
+              > У наступному проекті ми можемо витратити більше зусиль, щоб внести щось справді нове у свою мету.
+            </p>
+            <p>
+              Ті ж переваги доступні для тих, хто приєднається пізніше. Вони можуть переглянути рішення та повторно перевірити його, перш ніж продовжувати роботу. Їм не потрібно відновлювати всю історію проекту, щоб з'ясувати, чому вихідний код виглядає саме так.
+            </p>
+          </section>
+          <section class="article-section" id="th04">
+            <h2>TH04: робочий процес функціонує відповідно до іншої архітектури</h2>
+            <p>
+              <a href="https://github.com/N0zoM1z0/th04"> TH04</a>, Розробник Lotus Land Story, переніс цю роботу в епоху PC-98 для DOS. Тепер метою було 16-розрядне середовище з чотирма взаємодіючими програмами. Для розуміння поведінки апаратного забезпечення були потрібні інші дані, отримані з ігор Windows. Існуючий <a href="https://github.com/nmlgc/ReC98">робота</a> за ReC98 також дала нам цінні знання та вихідні матеріали.
+            </p>
+            <p>
+              Відновлення DOS зараз працює. Під час мого ручного тестування я відтворив усі звичайні маршрути до їх закінчення та перевірив збереження. В даний час використовується власний 64-розрядний порт. При установці робочої версії DOS спочатку вказується посилання на цей порт.
+            </p>
+            <p>
+              Архітектура змінила те, що нам потрібно було дослідити. Це також змінило компілятор та час виконання, за допомогою яких ми перевіряли свою роботу. Але агент все-таки міг довести питання до результату і використати цей результат для наступного експерименту.
+            </p>
+            <p>
+              Розглянемо перехід від ігрового процесу до завершення. Нам потрібно знати, який стан переходить через цю межу і яка програма відповідає за це. Це те, що ми можемо дослідити на прикладі продукту DOS. Як тільки докази та чеки будуть доступні, агент зможе опрацювати питання приблизно так само, як це було з заголовком Windows.
+            </p>
+            <p>
+              Ось чому TH04 важливий для нашого аргументу. Суттєва зміна платформи не змусила нас почати все спочатку з нового способу роботи. Архітектура визначила проблему; робочий процес все ще давав нам можливість її вирішити.
+            </p>
+            <p>
+              Що стосується 64-розрядного порту, то тепер ми можемо порівняти нову реалізацію з поведінкою, вже відновленою в DOS. Знання, отримані в результаті реконструкції, дають порту основу для подальшого розвитку.
+            </p>
+            <p class="caption">
+              Стан проекту на 10 жовтня 2026 року: <a
+                href="https://github.com/N0zoM1z0/th04/blob/bb9faca54e2eb3c0d6c757c75d59ac29d2cd5e93/docs/RE_HANDOFF.md"
+                >реконструкція DOS та ручне тестування</a
+              > · <a href="https://github.com/N0zoM1z0/th04/tree/port/modern-64"
+                >64-розрядний порт</a
+              >. Порт знаходиться в розробці.
+            </p>
+          </section>
+          <section class="article-section" id="semantic-reconstruction">
+            <h2>Від точного коду до читабельного коду</h2>
+            <p>
+              Як тільки реконструкція завершиться, я хочу, щоб хтось інший міг це зрозуміти.
+            </p>
+            <p>
+              Для мене асемблер і необроблені зміщення здаються старими друзями. Я розумію, що це дещо незвичне визначення слова "читабельний". Більшість людей воліли б слідувати логіці гри, не тримаючи в голові розташування виконуваного файлу в пам'яті.
+            </p>
+            <p>
+              Саме тут потрібно <strong>семантична реконструкція</strong>. Відновлене поле все ще може бути відоме в основному з його зміщення. Ми стежимо за тим, як він використовується в грі, поки не зможемо пояснити його роль. Тоді ми можемо дати йому значущу назву та тип, який відповідає доказам. Ми аргументуємо відповідно до джерела, щоб наступна людина могла зрозуміти, звідки походить ця інтерпретація.
+            </p>
+            <p>
+              Це стає особливо важливим для програмного порту. Абсолютна адреса вказує мені, де щось було у Старому виконуваному файлі. Це мало допомагає 64-розрядної реалізації вирішити, якому об'єкту має належати цей стан. Щоб безпечно змінити поведінку, нам потрібно відновити зв'язок, що стоїть за старим доступом до пам'яті.
+            </p>
+            <p>Порядок, який я зараз використовую, такий:</p>
+            <ol>
+              <li>
+                <strong>Відновіть точну базову лінію.</strong> Скомпілюйте відновлені фрагменти за допомогою історичного компілятора. Порівняйте відповідний код та дані з оригінальним виконуваним файлом. Запишіть невирішені відмінності, щоб наступний етап мав чітку відправну точку.
+              </li>
+              <li>
+                <strong>Створіть і грайте в неї на оригінальній платформі.</strong> Об'єднайте ці фрагменти в реальну програму, використовуючи оригінальну архітектуру і компілятор. Використовуйте важливі елементи геймплея. Саме тут ми можемо виявити проблеми із загальним станом або ініціалізацією, які були пропущені при порівнянні ізольованих функцій.
+              </li>
+              <li>
+                <strong
+                  >Реконструюйте семантику відповідно до обох посилань.</strong
+                > Виділіть одну цілісну частину гри за раз і з'ясуйте, що означає Відновлене джерело. Поліпшіть її уявлення, зберігши точні порівняння і відтворювану історичну структуру.
+              </li>
+              <li>
+                <strong>Створіть сучасний порт.</strong> Перенесіть усталену поведінку в нове середовище, наприклад, у власну 64-розрядну збірку. Реконструйована гра на оригінальній платформі залишається еталоном для порівняння поведінки порту.
+              </li>
+            </ol>
+            <p>
+              Відтворювана збірка, отримана на другому етапі, стає <strong>друге посилання для перевірки (oracle)</strong> на третьому етапі. Перше посилання для перевірки (oracle) перевіряє, чи все ще наш змінений вихідний код відтворює відповідний вихідний код та дані. Другий перевіряє, що відновлена програма як і раніше будує і поводиться коректно відповідно до обраних нами шляхами.
+            </p>
+            <p>
+              Вони виявляють різні помилки. Зміна типу може призвести до зміни згенерованих інструкцій. Зміна власника може призвести до того, що дві частини гри використовуватимуть різні копії state. Якщо обидві перевірки будуть доступні, агенту не вдасться провести розслідування, перш ніж проводити подальший рефакторинг.
+            </p>
+            <p>
+              Назва сама по собі вимагає підтвердження. Точне порівняння не може сказати нам, чи дійсно поле означає "Час невразливості". Ми повинні встановити це по тому, як гра його записує і використовує. Якщо значення залишається невизначеним, нейтральний заголовок буде кориснішим для наступного читача, ніж впевнене припущення.
+            </p>
+            <p>
+              Ми вивчили цей порядок в ході роботи над проектами.  TH08 вже мав доступні для відтворення порти до деяких пізніших перевірок історичних платформ. Це ускладнювало виявлення деяких дефектів. <a
+                href="https://github.com/N0zoM1z0/touhou-reconstruction-factory/blob/717e1b8560783ed17a39fdf159d30aa16bb307a7/docs/semantic-reconstruction.md"
+                >Поточний робочий процес фабрики</a
+              > ставить збірку оригінальної платформи на перше місце, тому semantic work може використовувати її як довідковий матеріал перед початком перенесення.
+            </p>
+            <p>
+              <strong
+                >Точна реконструкція дає нам посилання. Семантична реконструкція дозволяє використовувати відновлені знання.</strong
+              > Потім порт може використовувати обидва.
+            </p>
+          </section>
+          <section class="article-section" id="industrial-shift">
+            <h2>Що робить це промисловим зрушенням</h2>
+            <p>
+              Ці проекти змінили напрямок моєї уваги. Після того, як агенти отримали можливість проводити більшість розслідувань, покращення їх робочого середовища стало однією з найкорисніших речей, які я міг зробити. Більш досконалий інструмент міг би допомогти в будь-якій подальшій роботі, яка його потребувала.
+            </p>
+            <p>
+              Тут важлива самостійність. Корисний наступний крок часто стає зрозумілим лише після невдалого експерименту. Агенту потрібна достатня свобода, щоб досягти результату в несподіваному місці. Якщо йому доводиться чекати, поки я пропишу кожен крок, більша частина роботи залишається залежною від моєї уваги.
+            </p>
+            <p>
+              Я очікую, що агент висуне неправильні гіпотези. Важливо те, чи зможемо ми перевірити їх і навчитися з результату. Невдала перевірка повинна допомогти йому зрозуміти помилку досить добре, щоб спробувати ще раз. Мені все ще потрібно вирішити, чи зібрані дані відповідають етапу проекту.
+            </p>
+            <p>
+              REA надає агенту доступ до інструментів аналізу. Питання про викликає об'єкт функції може привести безпосередньо до перевірки цього викликає об'єкта. Проект реконструкції надає компілятор і свої власні перевірки посилань. Агент може використовувати їх, щоб протестувати запропоноване джерело та перевірити, чи відповідає його пояснення дійсності.
+            </p>
+            <p>
+              Помилка TH08 показує, чому ці перевірки самі по собі заслуговують на увагу інженерів. Коли одне і те ж порівняння використовується в сотнях функцій, пробіл у ньому може поширитися набагато далі, ніж помилка в одній реалізації. Тестування засобу перевірки покращує зворотний зв'язок, доступний для всієї подальшої роботи.
+            </p>
+            <p>
+              Промислова аналогія має тут корисний історичний приклад. <a
+                href="https://collection.sciencemuseumgroup.org.uk/objects/co51439/watts-steam-engine-indicator"
+                >У 1796 році Боултон і Ватт представили індикатор для парової машини, який допомагав регулювати клапани двигуна</a
+              >. Версія для запису тиску відстежувала хід поршня. Це зробило доступним для контролю внутрішній стан двигуна. Наші інструменти порівняння служать тій же меті: вони дозволяють нам вивчати, що робить обладнання, і одночасно вдосконалювати його.
+            </p>
+            <p>
+              <strong
+                >Ми знаходимося на ранній стадії цього промислового зсуву.</strong
+              > Більша частина інфраструктури все ще знаходиться в стадії розробки. Агенти можуть працювати швидше, ніж це передбачено нашими чеками, тому процес повинен розвиватися паралельно з ними. Коли ми виявляємо дефект у загальному інструменті, ми повинні його усунути та переглянути результати, на які він вплинув. Наступний проект може успадкувати більш потужний інструмент.
+            </p>
+            <p>
+              Також існує практична межа для будь-якого окремого діалогу. Він завершиться до завершення масштабної реконструкції. Сховище вихідного коду повинно забезпечувати можливість продовження наступного сеансу без втрати причини, по якій було прийнято останнє рішення.
+            </p>
+            <p>
+              Проект <a
+                href="https://github.com/N0zoM1z0/touhou-reconstruction-factory"
+                >Touhou Reconstruction Factory</a
+              > виріс з цієї потреби. Він дає проектам можливість спільно проводити перевірки і витягувати уроки. Робота над однією грою може покращити стартові умови для іншої.
+            </p>
+            <p>
+              Саме це робить аналогію з промисловістю значущою для мене. Досвід стає частиною інструментів, які можуть використовувати інші. Вдосконалення цих інструментів впливає на те, скільки може зробити наступна людина — або наступний агент.
+            </p>
+          </section>
+          <section class="article-section" id="possibilities">
+            <h2>Проекти, які ми тепер можемо розглянути</h2>
+            <p>
+              Темп важливий, оскільки він змінює рішення про початок роботи. Гра може бути цікавою для реінжинірингу і все одно вимагати від мене більше уваги, ніж я міг би їй приділити. Багато проектів так і залишаться ідеями.
+            </p>
+            <p>
+              Тепер я бачу спосіб просунути такий проект за допомогою повторних досліджень. Отримання робочої реконструкції робить порт програмного забезпечення більш практичним. Відновлення читабельної семантики полегшує комусь іншому вивчення мода. Зусилля, витрачені на розуміння гри, можуть окупитися після запуску першої версії.
+            </p>
+            <p>
+              Тепер я дивлюся на незнайому програму і запитую: <strong
+                >який доступ, зворотній зв'язок та накопичені знання дозволили б агенту надійно працювати з нею?</strong
+              >
+            </p>
+            <p>
+              Це питання змушує мене замислитися над проектами, які я б раніше залишив у спокої. Кожен з них може покращити наш підхід до наступного. Я хочу продовжувати вивчати, як далеко це може нас завести.
+            </p>
+          </section>
+          <section class="article-section" id="sources">
+            <details class="native-details">
+              <summary>Основні етапи та джерела реалізації проекту</summary>
+              <p>
+                Дати описують зареєстровані контрольні точки проекту, звірені з загальнодоступною історією GitHub на 10 жовтня 2026 року. Минулий час-це календарний час між фіксаціями. Наявність вихідного коду, точні порівняння, збірка та результат виконання - все це вказує на різні етапи.
+              </p>
+              <ul>
+                <li>
+                  <strong> TH08:</strong> <a
+                    href="https://github.com/N0zoM1z0/th08/commit/001bf3e9c91cc35b79c7a0e36b3565b86f494362"
+                    >продовження від 13 серпня</a
+                  >, <a
+                    href="https://github.com/N0zoM1z0/th08/blob/15caba73df6735fc44eac4783bc61b8d098ea830/docs/PROGRESS.md"
+                    >вихідний код від 19 </a
+                  >серпня, порт Linux<a
+                    href="https://github.com/N0zoM1z0/th08/commit/da07b21c8cb63230142b0a66228d6aac66555f3f"
+                    > від 24</a
+                  > серпень, <a
+                    href="https://github.com/N0zoM1z0/th08/commit/529eb1a3afa05ae36467731eaccb12e3e50e132f"
+                    >веб-версія від 26 серпня</a
+                  > і <a
+                    href="https://github.com/N0zoM1z0/th08/releases/tag/v0.2.0-linux-64bit"
+                    >64-розрядний реліз Linux від 30 Серпня</a
+                  >.
+                </li>
+                <li>
+                  <strong> TH095 :</strong> оригінальна бухгалтерська книга за <a
+                    href="https://github.com/N0zoM1z0/th095/blob/8c31e6f892d945423b7f7b439747a2bd915f82d8/docs/PROGRESS.md"
+                    >29 серпня, </a
+                  >Початкова бухгалтерська<a
+                    href="https://github.com/N0zoM1z0/th095/blob/0fa857fb2b2ec6237732e4d6be8d0a28069c9330/docs/PROGRESS.md"
+                    > книга за 7 вересня</a
+                  >, <a
+                    href="https://github.com/N0zoM1z0/th095/blob/74baddfccb712d1311a4d6e7487a63cd1100452e/docs/PROGRESS.md"
+                    >порівняння за 8 вересня</a
+                  >, <a
+                    href="https://github.com/N0zoM1z0/th095/commit/33d46a0ee48f37060d973125a1a7632a40f8d998"
+                    >прив'язка за 9 вересня</a
+                  > і <a
+                    href="https://github.com/N0zoM1z0/th095/blob/3442dcf29d9e0b5bef384a49bd0c9ad32a711826/docs/WHOLE_BUILD_TODO.md"
+                    >запис про створення гри за 10 вересня</a
+                  >.
+                </li>
+                <li>
+                  <strong> TH04 :</strong> <a
+                    href="https://github.com/N0zoM1z0/th04/blob/bb9faca54e2eb3c0d6c757c75d59ac29d2cd5e93/docs/RE_HANDOFF.md"
+                    >передача від 10 жовтня</a
+                  > фіксує відновлення робочої DOS, повне тестування розробником звичайного маршруту і поточну 64-розрядну фазу.
+                </li>
+                <li>
+                  <strong> Виправлення TH08 verification reference (oracle):</strong> <a href="https://github.com/N0zoM1z0/th08/issues/10"
+                    >помилка автоматичного збору даних, </a
+                  >виправлення<a
+                    href="https://github.com/N0zoM1z0/th08/commit/7148a76ba224742677895c7160807a68897957d5"
+                    > вихідного коду та порівняння</a
+                  >, а <a
+                    href="https://github.com/N0zoM1z0/th08/commit/a393f400786e4cc6cbb1000af0dad3276da12c78"
+                    >також повний аудит констант з плаваючою комою</a
+                  >.
+                </li>
+                <li>
+                  <strong>Семантична реконструкція:</strong> <a
+                    href="https://github.com/N0zoM1z0/th08/blob/d2a00f4acb4a13916e07a00bd13f714961714628/docs/SEMANTIC_PLAYBOOK.md"
+                    >Керівництво по читабельності</a
+                  > TH08, <a
+                    href="https://github.com/N0zoM1z0/touhou-reconstruction-factory/blob/717e1b8560783ed17a39fdf159d30aa16bb307a7/docs/semantic-reconstruction.md"
+                    >заводський порядок етапів і два шляхи перевірки</a
+                  >.
+                </li>
+                <li>
+                  <strong>Промислова історія:</strong> в <a
+                    href="https://collection.sciencemuseumgroup.org.uk/objects/co51439/watts-steam-engine-indicator"
+                    >архіві групи наукових музеїв, присвяченому індикаторам парових двигунів</a
+                  >, описується введення в експлуатацію в 1796 році і механізм реєстрації тиску.
+                </li>
+                <li>
+                  <strong>Метод:</strong> у документах Factory по <a
+                    href="https://github.com/N0zoM1z0/touhou-reconstruction-factory/blob/038b6bed51d273c8b3680553b6f43e1b97d19bd1/docs/agent-autonomy.md"
+                    >автономії агентів</a
+                  > і <a
+                    href="https://github.com/N0zoM1z0/touhou-reconstruction-factory/blob/038b6bed51d273c8b3680553b6f43e1b97d19bd1/docs/knowledge-base.md"
+                    >знань про крос-іграх</a
+                  > зберігаються принципи роботи і уроки.
+                </li>
+              </ul>
+            </details>
+            <p>
+              <a class="text-link" href="../">Додаткові статті</a> · <a class="text-link" href="../../showcase/th04/"
+                >Ознайомтеся з дослідженням TH04</a
+              >
+            </p>
+          </section>
+        </article>
+      </div>
+    </main>
+    <!-- website:footer:start -->
+    <!-- prettier-ignore -->
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <p>REA · Reverse Engineer Anything</p>
+        <div class="footer-links">
+          <a href="../../faq/">FAQ</a
+          ><a href="../../contributors/">Учасники</a
+          ><a href="https://github.com/morluto/rea">Вихідний код</a
+          ><a href="https://github.com/morluto/rea/blob/main/LICENSE">Ліцензія MIT</a
+          ><a href="https://discord.gg/GkcryMnJDM">Приєднатися до спільноти</a
+          ><a href="https://x.com/reatools">Стежити в X</a>
+        </div>
+      </div>
+    </footer>
+    <p class="sr-only" id="copy-status" role="status" aria-live="polite"></p>
+    <a class="back-to-top" href="#top" aria-label="Нагору">
+      <span aria-hidden="true">↑</span> Топ
+    </a>
+    <!-- website:footer:end -->
+  </body>
+</html>

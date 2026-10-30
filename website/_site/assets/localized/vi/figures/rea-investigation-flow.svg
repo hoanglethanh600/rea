@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1774" height="887" viewBox="0 0 1774 887" role="img" aria-labelledby="title desc">
+  <title id="title">REA dòng điều tra</title>
+  <desc id="desc">Đặt câu hỏi về một mục tiêu địa phương.  REA kiểm tra và theo dõi thông qua các bộ điều hợp phân tích cục bộ, trả về bằng chứng và hỗ trợ các câu hỏi tiếp theo như agent của bạn giải thích, thực hiện và kiểm tra.</desc>
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto-start-reverse" markerUnits="userSpaceOnUse"><path d="M1 1 L8 5 L1 9" fill="none" stroke="#5b6570" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></marker>
+    <marker id="blue-arrow" markerWidth="12" markerHeight="12" refX="9" refY="6" orient="auto" markerUnits="userSpaceOnUse"><path d="M1 1 L9 6 L1 11" fill="none" stroke="#294f82" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></marker>
+  </defs>
+<style>
+@media (prefers-color-scheme: dark){
+svg{background-color:#181825}
+[fill="#20252b"]{fill:#cdd6f4}
+[fill="#294f82"]{fill:#89b4fa}
+[stroke="#294f82"]{stroke:#89b4fa}
+[fill="#5b6570"]{fill:#a6adc8}
+[stroke="#5b6570"]{stroke:#a6adc8}
+[stroke="#87929e"]{stroke:#7f849c}
+[fill="#ffffff"]{fill:#181825}
+}
+</style>
+  <rect width="1774" height="887" fill="#ffffff"/>
+  <g font-family="Arial, Helvetica, sans-serif" fill="#20252b">
+    <text x="40" y="96" font-size="68" font-weight="700">REA dòng điều tra</text>
+    <g fill="none" stroke="#87929e" stroke-width="3.5">
+      <rect x="28" y="282" width="384" height="255" rx="15"/>
+      <rect x="477" y="282" width="377" height="255" rx="15" stroke="#294f82"/>
+      <rect x="919" y="282" width="380" height="255" rx="15"/>
+      <rect x="1364" y="282" width="382" height="255" rx="15"/>
+      <rect x="453" y="617" width="425" height="205" rx="15"/>
+    </g>
+    <g text-anchor="middle">
+      <text x="220" y="365" font-size="50" font-weight="700">1. Hỏi</text>
+      <text x="220" y="435" font-size="31" fill="#5b6570">Agent + tệp cục bộ</text>
+      <text x="220" y="496" font-size="31" fill="#5b6570">App / tệp / trình duyệt</text>
+      <text x="665" y="357" font-size="37" font-weight="700">2. Phân tích</text>
+      <text x="665" y="454" font-size="80" font-weight="700" fill="#294f82">REA</text>
+      <text x="665" y="508" font-size="35" fill="#5b6570">CLI / MCP</text>
+      <text x="1109" y="363" font-size="35" font-weight="700">3. Đọc bằng chứng</text>
+      <text x="1109" y="438" font-size="32" fill="#5b6570">Mã / tham chiếu /</text>
+      <text x="1109" y="480" font-size="32" fill="#5b6570">điểm chưa rõ</text>
+      <text x="1555" y="362" font-size="34" font-weight="700">4. Áp dụng</text>
+      <text x="1555" y="440" font-size="53" font-weight="700">Agent của bạn</text>
+      <text x="1555" y="496" font-size="30" fill="#5b6570">Giải thích / viết / kiểm tra</text>
+      <text x="665" y="690" font-size="42" font-weight="700">Công cụ phân tích</text>
+      <text x="665" y="755" font-size="32" fill="#5b6570">Bộ phân tích cục bộ</text>
+      <text x="1118" y="199" font-size="33" font-weight="700" fill="#294f82">Câu hỏi tiếp theo</text>
+    </g>
+  </g>
+  <g fill="none" stroke="#5b6570" stroke-width="4" marker-end="url(#arrow)">
+    <path d="M414 410 H469"/>
+    <path d="M856 410 H911"/>
+    <path d="M1301 410 H1356"/>
+    <path d="M665 615 V545"/>
+  </g>
+  <path d="M1555 280 V248 Q1555 217 1524 217 H696 Q665 217 665 248 V273" fill="none" stroke="#294f82" stroke-width="4" marker-end="url(#blue-arrow)"/>
+</svg>

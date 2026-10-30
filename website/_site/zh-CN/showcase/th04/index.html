@@ -1,0 +1,734 @@
+<!doctype html>
+<html lang="zh-CN" dir="ltr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>TH04 逆向工程：DOS 弹幕图案 — REA</title>
+    <meta
+      name="description"
+      content="用 REA 检查 TH04 的原始 16 位 DOS 代码。对照汇编与还原的 C++，了解环形弹幕如何等分方向并瞄准玩家。"
+    />
+    <!-- website:sharing:start -->
+    <!-- prettier-ignore -->
+    <link rel="canonical" href="https://rea.tools/zh-CN/showcase/th04/" />
+    <!-- website:languages:start -->
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="en" href="https://rea.tools/showcase/th04/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="zh-CN" href="https://rea.tools/zh-CN/showcase/th04/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="zh-TW" href="https://rea.tools/zh-TW/showcase/th04/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="ja" href="https://rea.tools/ja/showcase/th04/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="ko" href="https://rea.tools/ko/showcase/th04/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="tr" href="https://rea.tools/tr/showcase/th04/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="ru" href="https://rea.tools/ru/showcase/th04/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="vi" href="https://rea.tools/vi/showcase/th04/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="th" href="https://rea.tools/th/showcase/th04/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="de" href="https://rea.tools/de/showcase/th04/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="es" href="https://rea.tools/es/showcase/th04/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="fr" href="https://rea.tools/fr/showcase/th04/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="uk" href="https://rea.tools/uk/showcase/th04/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="pl" href="https://rea.tools/pl/showcase/th04/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="pt-BR" href="https://rea.tools/pt-BR/showcase/th04/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="ar" href="https://rea.tools/ar/showcase/th04/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="fa" href="https://rea.tools/fa/showcase/th04/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="id" href="https://rea.tools/id/showcase/th04/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="it" href="https://rea.tools/it/showcase/th04/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="el" href="https://rea.tools/el/showcase/th04/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="x-default" href="https://rea.tools/showcase/th04/" />
+<!-- website:languages:end -->
+    <!-- prettier-ignore -->
+    <meta property="og:type" content="website" />
+    <!-- prettier-ignore -->
+    <meta property="og:site_name" content="REA" />
+    <!-- prettier-ignore -->
+    <meta property="og:title" content="TH04 逆向工程：DOS 弹幕图案 — REA" />
+    <!-- prettier-ignore -->
+    <meta property="og:description" content="用 REA 检查 TH04 的原始 16 位 DOS 代码。对照汇编与还原的 C++，了解环形弹幕如何等分方向并瞄准玩家。" />
+    <!-- prettier-ignore -->
+    <meta property="og:url" content="https://rea.tools/zh-CN/showcase/th04/" />
+    <!-- prettier-ignore -->
+    <meta property="og:image" content="https://rea.tools/assets/social-card.png" />
+    <!-- prettier-ignore -->
+    <meta property="og:image:type" content="image/png" />
+    <!-- prettier-ignore -->
+    <meta property="og:image:width" content="1200" />
+    <!-- prettier-ignore -->
+    <meta property="og:image:height" content="630" />
+    <!-- prettier-ignore -->
+    <meta
+      property="og:image:alt"
+      content="REA: 了解软件如何工作。和你的编程助手一起做逆向工程。"
+    />
+    <!-- prettier-ignore -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <!-- prettier-ignore -->
+    <meta name="twitter:title" content="TH04 逆向工程：DOS 弹幕图案 — REA" />
+    <!-- prettier-ignore -->
+    <meta name="twitter:description" content="用 REA 检查 TH04 的原始 16 位 DOS 代码。对照汇编与还原的 C++，了解环形弹幕如何等分方向并瞄准玩家。" />
+    <!-- prettier-ignore -->
+    <meta name="twitter:image" content="https://rea.tools/assets/social-card.png" />
+    <!-- prettier-ignore -->
+    <meta
+      name="twitter:image:alt"
+      content="REA: 了解软件如何工作。和你的编程助手一起做逆向工程。"
+    />
+    <!-- website:sharing:end -->
+    <!-- website:theme:start -->
+    <meta name="theme-color" content="#ffffff" />
+    <!-- Apply the saved theme before styles load, to avoid a flash on navigation. -->
+    <script src="../../../assets/theme.js"></script>
+    <!-- website:theme:end -->
+    <link rel="icon" href="../../../assets/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="../../../assets/styles.css" />
+    <script src="../../../assets/main.js" defer></script>
+  <script id="website-messages" type="application/json">{"Copied": "已复制", "Code copied to clipboard.": "代码已复制到剪贴板。", "Selected": "已选中", "Code selected. Use your keyboard to copy it.": "代码已选中，请用键盘快捷键复制。", "REA on GitHub ({count})": "REA 在 GitHub 上（{count}）", "Switch to light mode": "切换到浅色模式", "Switch to dark mode": "切换到深色模式"}</script>
+  </head>
+  <body id="top">
+    <a class="skip-link" href="#main">跳转到内容</a>
+    <!-- website:header:start -->
+    <!-- prettier-ignore -->
+    <header class="site-header">
+      <div class="container header-inner">
+        <a class="brand" href="../../" aria-label="REA 首页"
+          ><span class="brand-name">REA</span
+          ><span class="brand-caption" data-i18n-skip>Reverse Engineer Anything</span></a
+        >
+        <nav class="navigation" aria-label="主导航">
+          <a href="../../../get-started/" class="nav-start">开始使用</a>
+          <a href="../" aria-current="page">案例展示</a>
+          <a href="../../blog/">博客</a>
+          <a href="../../guides/">指南</a>
+        </nav>
+        <div class="header-social">
+          <details class="language-picker" data-i18n-skip><summary><span aria-hidden="true">文 / A</span> <span>简体中文</span></summary><nav aria-label="简体中文"><a href="../../../showcase/th04/" lang="en" dir="ltr" data-language="en">English</a><a href="../../../zh-CN/showcase/th04/" lang="zh-CN" dir="ltr" data-language="zh-CN" aria-current="true">简体中文</a><a href="../../../zh-TW/showcase/th04/" lang="zh-TW" dir="ltr" data-language="zh-TW">繁體中文</a><a href="../../../ja/showcase/th04/" lang="ja" dir="ltr" data-language="ja">日本語</a><a href="../../../ko/showcase/th04/" lang="ko" dir="ltr" data-language="ko">한국어</a><a href="../../../tr/showcase/th04/" lang="tr" dir="ltr" data-language="tr">Türkçe</a><a href="../../../ru/showcase/th04/" lang="ru" dir="ltr" data-language="ru">Русский</a><a href="../../../vi/showcase/th04/" lang="vi" dir="ltr" data-language="vi">Tiếng Việt</a><a href="../../../th/showcase/th04/" lang="th" dir="ltr" data-language="th">ไทย</a><a href="../../../de/showcase/th04/" lang="de" dir="ltr" data-language="de">Deutsch</a><a href="../../../es/showcase/th04/" lang="es" dir="ltr" data-language="es">Español</a><a href="../../../fr/showcase/th04/" lang="fr" dir="ltr" data-language="fr">Français</a><a href="../../../uk/showcase/th04/" lang="uk" dir="ltr" data-language="uk">Українська</a><a href="../../../pl/showcase/th04/" lang="pl" dir="ltr" data-language="pl">Polski</a><a href="../../../pt-BR/showcase/th04/" lang="pt-BR" dir="ltr" data-language="pt-BR">Português (Brasil)</a><a href="../../../ar/showcase/th04/" lang="ar" dir="rtl" data-language="ar">العربية</a><a href="../../../fa/showcase/th04/" lang="fa" dir="rtl" data-language="fa">فارسی</a><a href="../../../id/showcase/th04/" lang="id" dir="ltr" data-language="id">Bahasa Indonesia</a><a href="../../../it/showcase/th04/" lang="it" dir="ltr" data-language="it">Italiano</a><a href="../../../el/showcase/th04/" lang="el" dir="ltr" data-language="el">Ελληνικά</a><a href="../../../ml/showcase/th04/" lang="ml" dir="ltr" data-language="ml">മലയാളം · English</a><a href="../../../ur-Latn/showcase/th04/" lang="ur-Latn" dir="ltr" data-language="ur-Latn">Roman Urdu · English</a><a href="../../../ro/showcase/th04/" lang="ro" dir="ltr" data-language="ro">Română · English</a></nav></details>
+          <button class="theme-toggle" type="button" data-theme-toggle hidden>
+            <svg class="theme-moon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+              <path d="M20.9 13a9 9 0 0 1-9.9-9.9A9 9 0 1 0 20.9 13Z" />
+            </svg>
+            <svg class="theme-sun" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true" focusable="false">
+              <circle cx="12" cy="12" r="4" />
+              <path d="M12 2v2m0 16v2M2 12h2m16 0h2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42" />
+            </svg>
+          </button>
+          <a
+            class="nav-github"
+            href="https://github.com/morluto/rea"
+            aria-label="在 GitHub 查看 REA"
+            title="在 GitHub 查看 REA"
+          >
+            <svg
+              width="22"
+              height="22"
+              viewBox="0 0 16 16"
+              aria-hidden="true"
+              focusable="false"
+            >
+              <path
+                fill="currentColor"
+                d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82a7.65 7.65 0 0 1 2-.27c.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z"
+              />
+            </svg>
+            <span class="nav-github-count" hidden aria-hidden="true"></span>
+          </a>
+          <a
+            class="nav-discord"
+            href="https://discord.gg/GkcryMnJDM"
+            aria-label="加入 REA 的 Discord 社区"
+            title="加入 REA 的 Discord 社区"
+          >
+            <svg
+              width="22"
+              height="22"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+              focusable="false"
+            >
+              <path
+                fill="currentColor"
+                d="M20.317 4.3698a19.7913 19.7913 0 0 0-4.8851-1.5152.0741.0741 0 0 0-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 0 0-.0785-.037 19.7363 19.7363 0 0 0-4.8852 1.515.0699.0699 0 0 0-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 0 0 .0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 0 0 .0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 0 0-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 0 1-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 0 1 .0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 0 1 .0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 0 1-.0066.1276 12.2986 12.2986 0 0 1-1.873.8914.0766.0766 0 0 0-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 0 0 .0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 0 0 .0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 0 0-.0312-.0286ZM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189Zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189Z"
+              />
+            </svg>
+          </a>
+          <a
+            class="nav-x"
+            href="https://x.com/reatools"
+            aria-label="在 X 上关注 REA"
+            title="在 X 上关注 REA"
+          >
+            <svg
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+              focusable="false"
+            >
+              <path
+                fill="currentColor"
+                d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z"
+              />
+            </svg>
+          </a>
+        </div>
+      </div>
+    </header>
+    <!-- website:header:end -->
+    <main id="main" class="container">
+      <div class="page-heading">
+        <p class="breadcrumb">
+          <a href="../../">首页</a> / <a href="../">案例展示</a> / TH04
+        </p>
+        <p class="eyebrow">个案研究·东方4：莲花地故事</p>
+        <h1>重建TH04<br />子弹图案。</h1>
+        <p class="lede">
+          一圈弹幕从一段简短的角度计算开始。用 REA 检查原始 DOS 函数，再把指令对应到可读的 C++ 代码。
+        </p>
+        <p class="page-meta">PC-98·16位DOS · C++和汇编</p>
+        <a class="text-link" href="https://github.com/N0zoM1z0/th04"
+          >查看TH04重建</a
+        >
+      </div>
+
+      <figure class="workflow-figure th04-overview">
+        <p class="figure-title">从原始指令到经过验证的源码</p>
+        <ol class="flow-steps th04-flow">
+          <li>
+            <span class="flow-label">01 · 原版游戏</span
+            ><strong class="flow-node">MAIN.EXE</strong
+            ><span class="flow-note"
+              >该 PC-98 可执行文件及其弹幕角度辅助函数。</span
+            >
+          </li>
+          <li>
+            <span class="flow-label">02 · 用 REA 检查</span
+            ><strong class="flow-node">指令 + 引用</strong
+            ><span class="flow-note"
+              >验证加载的 DOS 代码，再从可执行文件中读取角度计算。</span
+            >
+          </li>
+          <li>
+            <span class="flow-label">03 · 阅读 C++</span
+            ><strong class="flow-node">等分 → 瞄准 → 旋转</strong
+            ><span class="flow-note"
+              >把每个操作对应到维护中的重建源码。</span
+            >
+          </li>
+          <li>
+            <span class="flow-label">04 · 验证源码</span
+            ><strong class="flow-node">2,139 字节匹配</strong
+            ><span class="flow-note"
+              >已记录的编译器检查覆盖了包含这个辅助函数的弹幕生成代码。</span
+            >
+          </li>
+        </ol>
+        <figcaption>
+          REA 返回原始代码和分析证据。TH04 项目提供维护中的源码，以及编译器检查结果。
+        </figcaption>
+      </figure>
+
+      <div class="article-layout">
+        <nav class="contents" aria-label="在本页">
+          <p>在本个案研究中</p>
+          <ul>
+            <li><a href="#ring">子弹环</a></li>
+            <li><a href="#rea">REA 返回什么</a></li>
+            <li><a href="#source">汇编到C++</a></li>
+            <li><a href="#checking">检查源码</a></li>
+            <li><a href="#project">完整项目</a></li>
+          </ul>
+        </nav>
+        <article class="article" aria-label="TH04子弹型案例研究">
+          <section class="article-section" id="ring">
+            <h2>环形弹幕如何瞄准玩家</h2>
+            <p>
+              Elly 的攻击请求一个初始数量为 16 的自机狙环形弹幕。辅助函数计算每颗子弹的方向。同一圈弹幕既可以朝向固定方向，也可以转向玩家。
+            </p>
+            <div class="agent-terminal">
+              <div class="terminal-header">
+                <span class="terminal-title"
+                  ><span class="terminal-dots" aria-hidden="true"
+                    ><i></i><i></i><i></i></span
+                  >你的编程助手</span
+                >
+                <button
+                  class="copy-button"
+                  type="button"
+                  data-copy="th04-prompt"
+                  aria-label="复制TH04示例提示"
+                >
+                  复制
+                </button>
+              </div>
+              <p class="terminal-prompt">
+                <span class="prompt-symbol" aria-hidden="true">›</span
+                ><span id="th04-prompt"
+                  >使用REA查找TH04如何创建一个子弹环并将其瞄准玩家。 解释计算并显示代码。</span
+                ><span class="terminal-cursor" aria-hidden="true"></span>
+              </p>
+            </div>
+            <p class="caption">
+              一个示例提示，原始可执行文件和重建签出可在本地使用。
+            </p>
+            <p>
+              TH04 用 256 个角度单位表示顺时针转一整圈。16 颗子弹之间各隔 16 个单位：<code>0, 16, 32, …, 240</code>。再加上玩家方向，就能让所有方向一起旋转。
+            </p>
+            <figure class="explanatory-figure th04-ring-figure">
+              <div
+                class="figure-viewport"
+                tabindex="0"
+                role="region"
+                aria-label="TH04 固定环形与自机狙环形弹幕；在小屏幕上可横向滚动"
+              >
+                <img
+                  src="../../../assets/localized/zh-CN/figures/th04-bullet-ring.svg"
+                  width="1000"
+                  height="520"
+                  alt="两幅图展示 16 颗子弹的环。固定环从角度 0 开始。加上玩家方向 40 后，每个方向都旋转相同角度，高亮的第一颗子弹指向玩家。两者都保持 16 个角度单位的间距，即 22.5 度。"
+                  decoding="async"
+                />
+              </div>
+              <figcaption>
+                图中演示还原出的角度计算：子弹数量为 16，玩家方向为 40，模板旋转角为 0。<a href="../../../assets/localized/zh-CN/figures/th04-bullet-ring.svg"
+                  >查看大图</a
+                >
+              </figcaption>
+            </figure>
+            <h3 class="small-heading">
+              还原源码中的发射模板
+            </h3>
+            <div class="code-block">
+              <div class="code-header">
+                <span>Elly 的环形攻击 · 源码节选</span
+                ><button
+                  class="copy-button"
+                  type="button"
+                  data-copy="th04-template"
+                  aria-label="复制 TH04 发射模板"
+                >
+                  复制
+                </button>
+              </div>
+              <pre><code id="th04-template">bullet_template.angle = 0;
+bullet_template.group = BG_RING_AIMED;
+bullet_template.count = 16;
+bullet_template_tune();</code></pre>
+            </div>
+            <p class="caption">
+              这几行代码在难度与性能调整之前选定弹幕图案。<a
+                href="https://github.com/N0zoM1z0/th04/blob/0d72e9801a5c14c10384efcbb6734ceccb74ee63/src/main/boss/elly_phase_ring16.cpp#L26"
+                >阅读该攻击的源码</a
+              >。
+            </p>
+          </section>
+
+          <section class="article-section" id="rea">
+            <h2>REA 返回什么</h2>
+            <p>
+              我们检查设置每颗子弹速度和角度的函数 <code>bullet_velocity_and_angle_set()</code>。REA 返回指令、伪代码和引用，其中三部分解释了这种弹幕如何生成。
+            </p>
+            <ol class="rea-queries">
+              <li>
+                <h4>在阅读其代码之前检查DOS映像</h4>
+                <div class="rea-query-pair">
+                  <div class="code-block">
+                    <div class="code-header"><span>编程助手→ REA</span></div>
+                    <pre><code>open_binary
+{"path": "MAIN.EXE"}
+
+inspect_native_load_image
+{}</code></pre>
+                  </div>
+                  <div class="code-block">
+                    <div class="code-header">
+                      <span>REA →编程助手 · 选定字段</span>
+                    </div>
+                    <pre><code>status: "verified"
+format: "dos-mz"
+load_segment: 4096
+header_bytes: 6144
+module_bytes: 150114</code></pre>
+                  </div>
+                </div>
+                <p>
+                  这项检查确认加载的代码和重定位记录对应提供的可执行文件。上方路径为便于显示而缩短。
+                </p>
+              </li>
+              <li>
+                <h4>查看环形弹幕的乘除计算</h4>
+                <div class="rea-query-pair">
+                  <div class="code-block">
+                    <div class="code-header">
+                      <span>编程助手→ REA · <code>analyze_function</code></span>
+                    </div>
+                    <pre><code>{"procedure": "0x2cfc8"}</code></pre>
+                  </div>
+                  <div class="code-block">
+                    <div class="code-header">
+                      <span>REA →编程助手·指令摘录</span>
+                    </div>
+                    <pre><code>0x2d0eb: MOV AX, SI
+0x2d0ed: SHL AX, 0x8
+0x2d0f0: MOV DL, byte ptr [0x53af]
+0x2d0f9: IDIV BX</code></pre>
+                  </div>
+                </div>
+                <p>
+                  <code>SI</code> 保存子弹索引。移位将它乘以 256，再除以从 <code>DS:53AF</code> 读取的数量。重建源码把这个字段命名为 <code>bullet_template.count</code>。完整指令序列见下文。
+                </p>
+              </li>
+              <li>
+                <h4>找到弹幕转向玩家的那一段</h4>
+                <div class="rea-query-pair">
+                  <div class="code-block">
+                    <div class="code-header">
+                      <span>同一函数的结果 · 瞄准部分摘录</span>
+                    </div>
+                    <pre><code>0x2d190: SUB AX, word ptr [0x53a6]
+0x2d198: SUB AX, word ptr [0x53a4]
+0x2d19d: CALLF 0x1000:1da8
+0x2d1a2: ADD word ptr [BP + -0x2], AX</code></pre>
+                  </div>
+                  <div class="code-block">
+                    <div class="code-header">
+                      <span>对应的维护版 C++</span>
+                    </div>
+                    <pre><code>group_angle_offset += iatan2(
+  player_pos.cur.y - bullet_template.origin.y,
+  player_pos.cur.x - bullet_template.origin.x
+);</code></pre>
+                  </div>
+                </div>
+                <p>
+                  指令操作数显示了两个坐标差，以及一个计算方向的辅助函数。它的返回值加到相对环形角度上。源码名称让这些地址的含义更易读；REA 则帮助助手核对地址背后的原始操作。
+                </p>
+              </li>
+            </ol>
+          </section>
+
+          <section class="article-section" id="source">
+            <h2>从汇编到可读C++</h2>
+            <p>
+              点击每一步，对照原始指令和角度计算。这份摘要展示自机狙环形弹幕的路径；完整源码还处理散射、叠层和随机模式。
+            </p>
+            <div class="step-comparison" data-step-comparison>
+              <div
+                class="step-selector"
+                role="group"
+                aria-label="跟着 TH04 自机狙环形弹幕的计算过程走一遍"
+              >
+                <button
+                  type="button"
+                  data-select-step="1"
+                  aria-pressed="true"
+                  aria-controls="ring-assembly ring-source ring-step-detail"
+                >
+                  <span>01</span> 索引
+                </button>
+                <button
+                  type="button"
+                  data-select-step="2"
+                  aria-pressed="false"
+                  aria-controls="ring-assembly ring-source ring-step-detail"
+                >
+                  <span>02</span> 等分
+                </button>
+                <button
+                  type="button"
+                  data-select-step="3"
+                  aria-pressed="false"
+                  aria-controls="ring-assembly ring-source ring-step-detail"
+                >
+                  <span>03</span> 瞄准
+                </button>
+                <button
+                  type="button"
+                  data-select-step="4"
+                  aria-pressed="false"
+                  aria-controls="ring-assembly ring-source ring-step-detail"
+                >
+                  <span>04</span> 旋转
+                </button>
+                <button
+                  type="button"
+                  data-select-step="5"
+                  aria-pressed="false"
+                  aria-controls="ring-assembly ring-source ring-step-detail"
+                >
+                  <span>05</span> 存储
+                </button>
+              </div>
+              <div class="code-comparison">
+                <div class="code-block">
+                  <div class="code-header">
+                    <span>REA · 原始 16 位指令</span
+                    ><button
+                      class="copy-button"
+                      type="button"
+                      data-copy="ring-assembly"
+                      aria-label="复制TH04汇编摘录"
+                    >
+                      复制
+                    </button>
+                  </div>
+                  <pre><code id="ring-assembly"><span class="code-step is-active" data-step="1">0x2cfcf: MOV SI, word ptr [BP + 0x4]
+0x2d0eb: MOV AX, SI</span>
+<span class="code-step" data-step="2">0x2d0ed: SHL AX, 0x8
+0x2d0f0: MOV DL, byte ptr [0x53af]
+0x2d0f4: MOV DH, 0x0
+0x2d0f6: PUSH DX
+0x2d0f7: CWD
+0x2d0f8: POP BX
+0x2d0f9: IDIV BX
+0x2d0fb: MOV word ptr [BP + -0x2], AX</span>
+<span class="code-step" data-step="3">0x2d18d: MOV AX, [0x4650]
+0x2d190: SUB AX, word ptr [0x53a6]
+0x2d194: PUSH AX
+0x2d195: MOV AX, [0x464e]
+0x2d198: SUB AX, word ptr [0x53a4]
+0x2d19c: PUSH AX
+0x2d19d: CALLF 0x1000:1da8
+0x2d1a2: ADD word ptr [BP + -0x2], AX</span>
+<span class="code-step" data-step="4">0x2d1b9: MOV AL, byte ptr [BP + -0x2]
+0x2d1bc: ADD AL, byte ptr [0x53ad]</span>
+<span class="code-step" data-step="5">0x2d1c0: MOV [0xbcc8], AL</span></code></pre>
+                </div>
+                <div class="code-block">
+                  <div class="code-header">
+                    <span>可读 C++ · 自机狙环形弹幕摘要</span
+                    ><button
+                      class="copy-button"
+                      type="button"
+                      data-copy="ring-source"
+                      aria-label="复制可读瞄准环计算"
+                    >
+                      复制
+                    </button>
+                  </div>
+                  <pre><code id="ring-source">unsigned char aimed_ring_angle(
+    <span class="is-active" data-step="1">int index</span>, int count,
+    int player_direction,
+    unsigned char rotation)
+{
+<span class="code-step is-active" data-step="1">    int angle = index;</span>
+<span class="code-step" data-step="2">    angle = (angle * 256) / count;</span>
+<span class="code-step" data-step="3">    angle += player_direction;</span>
+<span class="code-step" data-step="4">    angle += rotation;</span>
+<span class="code-step" data-step="5">    return (unsigned char)angle;</span>
+}</code></pre>
+                </div>
+              </div>
+              <div
+                class="step-detail"
+                id="ring-step-detail"
+                aria-live="polite"
+                aria-atomic="true"
+              >
+                <p data-step-note="1">
+                  <strong>01 · 读取子弹索引。</strong> 栈参数加载到 <code>SI</code>。在 16 颗子弹的环中，索引从 0 到 15。
+                </p>
+                <p data-step-note="2" hidden>
+                  <strong>02 · 在整圈中等分方向。</strong> <code>SHL AX,8</code> 将索引乘以 256。数量先零扩展为一个字，再由 <code>IDIV</code> 用乘积除以数量。数量为 16 时，每个索引前进 16 个角度单位。
+                </p>
+                <p data-step-note="3" hidden>
+                  <strong>03 · 加上玩家方向。</strong> 两次减法得到玩家坐标与原点坐标的差。方向辅助函数在 <code>AX</code> 中返回角度；加上这个值，就能把整圈弹幕转向玩家。
+                </p>
+                <p data-step-note="4" hidden>
+                  <strong>04 · 加上模板旋转角。</strong> <code>ADD AL,[0x53ad]</code> 加上模板中的角度。Elly 的初始模板将它设为零；其他弹幕可以用同一个辅助函数进行旋转。
+                </p>
+                <p data-step-note="5" hidden>
+                  <strong>05 · 用一个字节保存最终角度。</strong> 存储指令把 <code>AL</code> 写入子弹生成角度字段。值超过 255 后回绕，与无符号字节转换一致。周围源码还会根据这个角度和速率计算速度分量。
+                </p>
+              </div>
+            </div>
+            <p class="caption">
+              汇编节选展示自机狙环形分支、瞄准计算和最终存储。上面的 C++ 是便于阅读的摘要。下方的编译器检查针对链接项目中维护的源码。
+            </p>
+            <details class="evidence-details">
+              <summary>阅读维护中的环形弹幕与瞄准源码</summary>
+              <div class="code-block">
+                <div class="code-header">
+                  <span>环宏 · TH04分支，摘录</span>
+                </div>
+                <pre><code>angle_offset = (i * BULLET_ANGLE_FULL_TURN) / count;
+if (i &gt;= (count - 1)) {
+    group_complete = true;
+}
+goto aim_or_no_aim;</code></pre>
+              </div>
+              <div class="code-block">
+                <div class="code-header">
+                  <span>角度和速度 · 源摘录</span>
+                </div>
+                <pre><code>aim:
+    group_angle_offset += iatan2(
+        (player_pos.cur.y - bullet_template.origin.y),
+        (player_pos.cur.x - bullet_template.origin.x)
+    );
+
+no_aim:
+    vector2_near(
+        bullet_template.velocity,
+        (group_angle_offset + bullet_template.angle),
+        speed
+    );
+    bullet_spawn_angle = (group_angle_offset + bullet_template.angle);</code></pre>
+              </div>
+              <p class="caption">
+                <a
+                  href="https://github.com/N0zoM1z0/th04/blob/0d72e9801a5c14c10384efcbb6734ceccb74ee63/src/main/bullet/add_impl.hpp#L4"
+                  >环形弹幕宏</a
+                > · <a
+                  href="https://github.com/N0zoM1z0/th04/blob/0d72e9801a5c14c10384efcbb6734ceccb74ee63/src/main/bullet/add.cpp#L422"
+                  >瞄准与速度源码</a
+                > · <a
+                  href="https://github.com/N0zoM1z0/th04/blob/0d72e9801a5c14c10384efcbb6734ceccb74ee63/src/main/bullet/types.hpp#L6"
+                  >角度表示</a
+                >
+              </p>
+            </details>
+          </section>
+
+          <section class="article-section" id="checking">
+            <h2>检查维护中的源码</h2>
+            <p>
+              TH04 项目记录的检查使用指定的 Turbo C++ 4.0J 工具链，编译包含这个辅助函数的弹幕生成代码。
+            </p>
+            <div class="verification">
+              <div>
+                <h3>2,139匹配字节</h3>
+                <p>
+                  编译的子弹生成代码与原始可执行文件的2,139字节部分相匹配。
+                </p>
+              </div>
+              <div>
+                <h3>两个干净的构建</h3>
+                <p>
+                  两个单独的构建产生相同的匹配字节。 记录的输入哈希值与此处显示的维护源匹配。
+                </p>
+              </div>
+            </div>
+            <p class="caption">
+              记录于 2026 年 10 月 3 日。<a
+                href="https://github.com/N0zoM1z0/th04/blob/0d72e9801a5c14c10384efcbb6734ceccb74ee63/docs/reconstruction/product/TH04_SEMANTIC_BULLET_GENERATION_V1236.md#validation"
+                >阅读编译器检查</a
+              >。
+            </p>
+            <details class="evidence-details">
+              <summary>目标身份和分析范围</summary>
+              <div class="evidence-table-wrap">
+                <table class="evidence-table">
+                  <tbody>
+                    <tr>
+                      <th scope="row">原始目标</th>
+                      <td><code>MAIN.EXE</code>,156,258字节,DOS MZ</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">辅助函数入口</th>
+                      <td><code>0x2cfc8</code>（位于 REA 的加载映像中）</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">原始文件偏移量</th>
+                      <td>
+                        <code>0x1e7c8</code>，返回 <code>address_to_file_offset</code>
+                      </td>
+                    </tr>
+                    <tr>
+                      <th scope="row">已记录的代码检查</th>
+                      <td>Notion Desktop 7.6.1 · JavaScript · REA</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <p>
+                编译器检查覆盖完整的弹幕添加代码段，包括这个辅助函数。检查还比较它在 map 文件中的贡献，以及重叠的重定位项。
+              </p>
+              <p>
+                REA 验证了加载段为 <code>0x1000</code> 的静态 DOS 加载映像。地址描述的是分析映像。函数结果在一个 517 字节范围内报告了两段代码，共 503 字节；上方节选的指令都位于这些已报告的代码范围内。
+              </p>
+              <p>
+                源码名称和编译器检查来自 TH04 检查点 <code>0d72e980</code>。较早的重建分析使用项目自身的脚本；这个页面新增了用 REA 对同一原始目标的检查。游戏文件的身份由仓库清单确定，独立原始转储的来源仍未确定。
+              </p>
+              <p>
+                图中说明的是角度计算。完整游戏的控制、时序和 PC-98 硬件行为，在重建项目中有各自的运行时检查。
+              </p>
+            </details>
+          </section>
+
+          <section class="article-section" id="project">
+            <h2>完整的TH04重建</h2>
+            <p>
+              项目用维护中的 C++ 和汇编构建游戏的四个 DOS 程序。除了弹幕生成，源码还覆盖关卡、Boss、渲染、输入、菜单、结局和分数处理。
+            </p>
+            <p>
+              <a class="text-link" href="https://github.com/N0zoM1z0/th04"
+                >探索 TH04 代码仓库</a
+              >
+            </p>
+            <ul class="reading-list">
+              <li>
+                <a
+                  href="https://github.com/N0zoM1z0/th04/blob/0d72e9801a5c14c10384efcbb6734ceccb74ee63/src/main/bullet/add.cpp#L292"
+                  >弹幕生成源码</a
+                ><span
+                  >完整的辅助函数、其他弹幕类型与模板调整。</span
+                >
+              </li>
+              <li>
+                <a
+                  href="https://github.com/N0zoM1z0/th04/blob/0d72e9801a5c14c10384efcbb6734ceccb74ee63/docs/DOS_BUILD.md"
+                  >DOS构建和运行指南</a
+                ><span
+                  >构建源代码并在项目的PC-98仿真器工作流中进行测试。</span
+                >
+              </li>
+              <li>
+                <a
+                  href="https://github.com/N0zoM1z0/th04/blob/0d72e9801a5c14c10384efcbb6734ceccb74ee63/docs/RE_HANDOFF.md"
+                  >当前项目状态</a
+                ><span>DOS验证和单独的原生x64移植版。</span>
+              </li>
+            </ul>
+          </section>
+        </article>
+      </div>
+    </main>
+    <!-- website:footer:start -->
+    <!-- prettier-ignore -->
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <p>REA · Reverse Engineer Anything</p>
+        <div class="footer-links">
+          <a href="../../faq/">FAQ</a
+          ><a href="../../contributors/">贡献者</a
+          ><a href="https://github.com/morluto/rea">源代码</a
+          ><a href="https://github.com/morluto/rea/blob/main/LICENSE">MIT 许可证</a
+          ><a href="https://discord.gg/GkcryMnJDM">加入社区</a
+          ><a href="https://x.com/reatools">在 X 上关注我们</a>
+        </div>
+      </div>
+    </footer>
+    <p class="sr-only" id="copy-status" role="status" aria-live="polite"></p>
+    <a class="back-to-top" href="#top" aria-label="回到顶部">
+      <span aria-hidden="true">↑</span> 顶部
+    </a>
+    <!-- website:footer:end -->
+  </body>
+</html>

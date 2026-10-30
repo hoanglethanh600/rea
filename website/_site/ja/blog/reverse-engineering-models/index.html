@@ -1,0 +1,621 @@
+<!doctype html>
+<html lang="ja" dir="ltr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>リバースエンジニアリングに、より大きなモデルは必要か？ | REA</title>
+    <meta
+      name="description"
+      content="Touhou の再構築から考える、汎用モデルと特化モデル、そしてコンパイラのフィードバックからよりよい仮説を学ぶ可能性。"
+    />
+    <!-- website:sharing:start -->
+    <!-- prettier-ignore -->
+    <link rel="canonical" href="https://rea.tools/ja/blog/reverse-engineering-models/" />
+    <!-- website:languages:start -->
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="en" href="https://rea.tools/blog/reverse-engineering-models/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="zh-CN" href="https://rea.tools/zh-CN/blog/reverse-engineering-models/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="zh-TW" href="https://rea.tools/zh-TW/blog/reverse-engineering-models/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="ja" href="https://rea.tools/ja/blog/reverse-engineering-models/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="ko" href="https://rea.tools/ko/blog/reverse-engineering-models/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="tr" href="https://rea.tools/tr/blog/reverse-engineering-models/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="ru" href="https://rea.tools/ru/blog/reverse-engineering-models/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="vi" href="https://rea.tools/vi/blog/reverse-engineering-models/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="th" href="https://rea.tools/th/blog/reverse-engineering-models/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="de" href="https://rea.tools/de/blog/reverse-engineering-models/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="es" href="https://rea.tools/es/blog/reverse-engineering-models/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="fr" href="https://rea.tools/fr/blog/reverse-engineering-models/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="uk" href="https://rea.tools/uk/blog/reverse-engineering-models/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="pl" href="https://rea.tools/pl/blog/reverse-engineering-models/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="pt-BR" href="https://rea.tools/pt-BR/blog/reverse-engineering-models/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="ar" href="https://rea.tools/ar/blog/reverse-engineering-models/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="fa" href="https://rea.tools/fa/blog/reverse-engineering-models/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="id" href="https://rea.tools/id/blog/reverse-engineering-models/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="it" href="https://rea.tools/it/blog/reverse-engineering-models/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="el" href="https://rea.tools/el/blog/reverse-engineering-models/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="x-default" href="https://rea.tools/blog/reverse-engineering-models/" />
+<!-- website:languages:end -->
+    <!-- prettier-ignore -->
+    <meta property="og:type" content="website" />
+    <!-- prettier-ignore -->
+    <meta property="og:site_name" content="REA" />
+    <!-- prettier-ignore -->
+    <meta property="og:title" content="リバースエンジニアリングに、より大きなモデルは必要か？ | REA" />
+    <!-- prettier-ignore -->
+    <meta property="og:description" content="Touhou の再構築から考える、汎用モデルと特化モデル、そしてコンパイラのフィードバックからよりよい仮説を学ぶ可能性。" />
+    <!-- prettier-ignore -->
+    <meta property="og:url" content="https://rea.tools/ja/blog/reverse-engineering-models/" />
+    <!-- prettier-ignore -->
+    <meta property="og:image" content="https://rea.tools/assets/social-card.png" />
+    <!-- prettier-ignore -->
+    <meta property="og:image:type" content="image/png" />
+    <!-- prettier-ignore -->
+    <meta property="og:image:width" content="1200" />
+    <!-- prettier-ignore -->
+    <meta property="og:image:height" content="630" />
+    <!-- prettier-ignore -->
+    <meta
+      property="og:image:alt"
+      content="REA: ソフトウェアがどのように動作するかを調べます。 コーディングエージェントとのリバースエンジニアリング。"
+    />
+    <!-- prettier-ignore -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <!-- prettier-ignore -->
+    <meta name="twitter:title" content="リバースエンジニアリングに、より大きなモデルは必要か？ | REA" />
+    <!-- prettier-ignore -->
+    <meta name="twitter:description" content="Touhou の再構築から考える、汎用モデルと特化モデル、そしてコンパイラのフィードバックからよりよい仮説を学ぶ可能性。" />
+    <!-- prettier-ignore -->
+    <meta name="twitter:image" content="https://rea.tools/assets/social-card.png" />
+    <!-- prettier-ignore -->
+    <meta
+      name="twitter:image:alt"
+      content="REA: ソフトウェアがどのように動作するかを調べます。 コーディングエージェントとのリバースエンジニアリング。"
+    />
+    <!-- website:sharing:end -->
+    <!-- website:theme:start -->
+    <meta name="theme-color" content="#ffffff" />
+    <!-- Apply the saved theme before styles load, to avoid a flash on navigation. -->
+    <script src="../../../assets/theme.js"></script>
+    <!-- website:theme:end -->
+    <link rel="icon" href="../../../assets/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="../../../assets/styles.css" />
+    <script src="../../../assets/main.js" defer></script>
+  <script id="website-messages" type="application/json">{"Copied": "コピーされた", "Code copied to clipboard.": "クリップボードにコピーされたコード。", "Selected": "選択された", "Code selected. Use your keyboard to copy it.": "コードが選択されています。 キーボードを使ってコピーします。", "REA on GitHub ({count})": "REA上のGitHub({count})", "Switch to light mode": "ライトモードに切り替える", "Switch to dark mode": "ダークモードに切り替える"}</script>
+  </head>
+  <body id="top">
+    <a class="skip-link" href="#main">コンテンツにスキップ</a>
+    <!-- website:header:start -->
+    <!-- prettier-ignore -->
+    <header class="site-header">
+      <div class="container header-inner">
+        <a class="brand" href="../../" aria-label="REA ホーム"
+          ><span class="brand-name">REA</span
+          ><span class="brand-caption" data-i18n-skip>Reverse Engineer Anything</span></a
+        >
+        <nav class="navigation" aria-label="メインナビゲーション">
+          <a href="../../../get-started/" class="nav-start">はじめる</a>
+          <a href="../../showcase/">事例</a>
+          <a href="../" aria-current="page">ブログ</a>
+          <a href="../../guides/">ガイド</a>
+        </nav>
+        <div class="header-social">
+          <details class="language-picker" data-i18n-skip><summary><span aria-hidden="true">文 / A</span> <span>日本語</span></summary><nav aria-label="日本語"><a href="../../../blog/reverse-engineering-models/" lang="en" dir="ltr" data-language="en">English</a><a href="../../../zh-CN/blog/reverse-engineering-models/" lang="zh-CN" dir="ltr" data-language="zh-CN">简体中文</a><a href="../../../zh-TW/blog/reverse-engineering-models/" lang="zh-TW" dir="ltr" data-language="zh-TW">繁體中文</a><a href="../../../ja/blog/reverse-engineering-models/" lang="ja" dir="ltr" data-language="ja" aria-current="true">日本語</a><a href="../../../ko/blog/reverse-engineering-models/" lang="ko" dir="ltr" data-language="ko">한국어</a><a href="../../../tr/blog/reverse-engineering-models/" lang="tr" dir="ltr" data-language="tr">Türkçe</a><a href="../../../ru/blog/reverse-engineering-models/" lang="ru" dir="ltr" data-language="ru">Русский</a><a href="../../../vi/blog/reverse-engineering-models/" lang="vi" dir="ltr" data-language="vi">Tiếng Việt</a><a href="../../../th/blog/reverse-engineering-models/" lang="th" dir="ltr" data-language="th">ไทย</a><a href="../../../de/blog/reverse-engineering-models/" lang="de" dir="ltr" data-language="de">Deutsch</a><a href="../../../es/blog/reverse-engineering-models/" lang="es" dir="ltr" data-language="es">Español</a><a href="../../../fr/blog/reverse-engineering-models/" lang="fr" dir="ltr" data-language="fr">Français</a><a href="../../../uk/blog/reverse-engineering-models/" lang="uk" dir="ltr" data-language="uk">Українська</a><a href="../../../pl/blog/reverse-engineering-models/" lang="pl" dir="ltr" data-language="pl">Polski</a><a href="../../../pt-BR/blog/reverse-engineering-models/" lang="pt-BR" dir="ltr" data-language="pt-BR">Português (Brasil)</a><a href="../../../ar/blog/reverse-engineering-models/" lang="ar" dir="rtl" data-language="ar">العربية</a><a href="../../../fa/blog/reverse-engineering-models/" lang="fa" dir="rtl" data-language="fa">فارسی</a><a href="../../../id/blog/reverse-engineering-models/" lang="id" dir="ltr" data-language="id">Bahasa Indonesia</a><a href="../../../it/blog/reverse-engineering-models/" lang="it" dir="ltr" data-language="it">Italiano</a><a href="../../../el/blog/reverse-engineering-models/" lang="el" dir="ltr" data-language="el">Ελληνικά</a><a href="../../../ml/blog/reverse-engineering-models/" lang="ml" dir="ltr" data-language="ml">മലയാളം · English</a><a href="../../../ur-Latn/blog/reverse-engineering-models/" lang="ur-Latn" dir="ltr" data-language="ur-Latn">Roman Urdu · English</a><a href="../../../ro/blog/reverse-engineering-models/" lang="ro" dir="ltr" data-language="ro">Română · English</a></nav></details>
+          <button class="theme-toggle" type="button" data-theme-toggle hidden>
+            <svg class="theme-moon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+              <path d="M20.9 13a9 9 0 0 1-9.9-9.9A9 9 0 1 0 20.9 13Z" />
+            </svg>
+            <svg class="theme-sun" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true" focusable="false">
+              <circle cx="12" cy="12" r="4" />
+              <path d="M12 2v2m0 16v2M2 12h2m16 0h2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42" />
+            </svg>
+          </button>
+          <a
+            class="nav-github"
+            href="https://github.com/morluto/rea"
+            aria-label="GitHub で REA を見る"
+            title="GitHub で REA を見る"
+          >
+            <svg
+              width="22"
+              height="22"
+              viewBox="0 0 16 16"
+              aria-hidden="true"
+              focusable="false"
+            >
+              <path
+                fill="currentColor"
+                d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82a7.65 7.65 0 0 1 2-.27c.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z"
+              />
+            </svg>
+            <span class="nav-github-count" hidden aria-hidden="true"></span>
+          </a>
+          <a
+            class="nav-discord"
+            href="https://discord.gg/GkcryMnJDM"
+            aria-label="REA の Discord に参加"
+            title="REA の Discord に参加"
+          >
+            <svg
+              width="22"
+              height="22"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+              focusable="false"
+            >
+              <path
+                fill="currentColor"
+                d="M20.317 4.3698a19.7913 19.7913 0 0 0-4.8851-1.5152.0741.0741 0 0 0-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 0 0-.0785-.037 19.7363 19.7363 0 0 0-4.8852 1.515.0699.0699 0 0 0-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 0 0 .0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 0 0 .0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 0 0-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 0 1-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 0 1 .0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 0 1 .0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 0 1-.0066.1276 12.2986 12.2986 0 0 1-1.873.8914.0766.0766 0 0 0-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 0 0 .0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 0 0 .0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 0 0-.0312-.0286ZM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189Zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189Z"
+              />
+            </svg>
+          </a>
+          <a
+            class="nav-x"
+            href="https://x.com/reatools"
+            aria-label="X で REA をフォロー"
+            title="X で REA をフォロー"
+          >
+            <svg
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+              focusable="false"
+            >
+              <path
+                fill="currentColor"
+                d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z"
+              />
+            </svg>
+          </a>
+        </div>
+      </div>
+    </header>
+    <!-- website:header:end -->
+    <main id="main" class="container">
+      <div class="page-heading">
+        <p class="breadcrumb">
+          <a href="../../">ホーム</a> / <a href="../">ブログ</a> / モデルとリバース エンジニアリング
+        </p>
+        <p class="eyebrow">エッセイ</p>
+        <h1>リバースエンジニアリングに、より大きなモデルは必要か？</h1>
+        <p class="page-meta">N0zoM1z0 著 · 2026 年 10 月 13 日</p>
+        <div class="blog-takeaway">
+          <p class="eyebrow">要点</p>
+          <ul>
+            <li>
+              <strong
+                >モデルの能力によって、エージェントが見つけられる仮説は変わる。</strong
+              > 後の作業では、それまで解決できなかった問題が解決された。
+            </li>
+            <li>
+              <strong
+                >使い慣れたコンパイラには、特化モデルが学べる具体的なパターンがある。</strong
+              > 完全一致の中には、細かな、再利用可能なソースコードのパターンに依存するものもある。
+            </li>
+            <li>
+              <strong>リポジトリに蓄積した知識も、公平に比較したい。</strong> 小さなモデルでも、適切に知識を検索できれば、作業を進めるのに十分かもしれない。
+            </li>
+            <li>
+              <strong
+                >次の有用な実験を選ぶ力を学習させ、その検証器も確かめる。</strong
+              > フィードバックの価値は、検証器が実際に何を確認しているかで決まる。
+            </li>
+            <li>
+              <strong
+                >検証を通った再構築の成果を、時間とコストと合わせて評価する。</strong
+              > エージェントのワークフロー全体で測りたいのは、その結果だ。
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="article-layout">
+        <nav class="contents" aria-label="このページでは">
+          <p>この記事の内容</p>
+          <ul>
+            <li><a href="#model-capability">強いモデルで何が変わったか</a></li>
+            <li><a href="#specialization">なぜ特化を考えるのか</a></li>
+            <li><a href="#repository-knowledge">その経験はどこに蓄積すべきか？</a></li>
+            <li><a href="#learning-search">次の有用な実験を選ぶ力を学ぶ</a></li>
+            <li><a href="#re-and-rl">リバース エンジニアリングと強化学習</a></li>
+            <li><a href="#oracle">検証器が間違っていたら</a></li>
+            <li><a href="#comparison">実行する価値のある比較</a></li>
+            <li><a href="#future-agent">どんなエージェントが必要なのか？</a></li>
+          </ul>
+        </nav>
+        <article
+          class="article"
+          aria-label="モデルとリバース エンジニアリングのエッセイ"
+        >
+          <section class="article-section" id="model-capability">
+            <h2>強いモデルで何が変わったか</h2>
+            <p>
+              2026年8月から、プログラムにアクセスし、自分の作業を検証できるエージェントが、どこまでリバースエンジニアリングを進められるかを探ってきた。私の経験は主にゲーム、特に Touhou（東方）の再構築から得たものだ。モデルを変えるたびに、各セッションで何を復元できたかがリポジトリに残った。
+            </p>
+            <p>
+              その多くは完全一致を目指す再構築だ。バージョンを固定した当時のツールチェーンで、保守しているソースをコンパイルし、対象の関数を再現できるか確かめる。後のモデルが以前の行き詰まりを解消したとき、ソースの変更を見ると、何が進歩を可能にしたかがわかる。
+            </p>
+            <h3>一時的な値を同時に有効にしておく必要があった</h3>
+            <p>
+              TH09 のある攻撃関数は、ロジックの大部分が復元済みだった。それでも、コンパイラが一時的な結果を格納する方法は原版と違っていた。残る問題は、その結果がいつまで有効であるべきか、そして格納領域をいつ再利用できるかだった。
+            </p>
+            <p>
+              いくつかの通常のソースコード配置をテストした後、<a
+                href="https://github.com/N0zoM1z0/th09/commit/de63c0f9121963f3a6b1ab5471c4878625fd3425"
+                >GPT-6-Sol セッション レコード</a
+              > でこの不一致が報告されました。 <a
+                href="https://github.com/N0zoM1z0/th09/commit/52929ed7c299f1a5f29cc13964e22510145fd616"
+                >GPT-6.1-Sol がこの問題を再度調査したとき</a
+              >、これらの一時変数の存続期間に関する有用な仮説が提案されました。
+            </p>
+            <p>
+              この関数は一時的な結果を作り、アニメーションの位置にコピーする。C++ の一時的な結果は、それを使う式が終わるまで生存する。実際の処理を一つの式にまとめると、結果の生存期間が重なり、コンパイラはすべての結果に同じ格納領域を使い回せなくなる。
+            </p>
+            <p>
+              一つの結果だけは、後の衝突判定に使う値と領域を共有していた。その値に独立した生存期間を与えると、最後の重なりも解消された。いくつかの絞り込んだ実験の後、<strong
+                >クリーンビルドで関数全体の一致が確認された</strong
+              >。
+            </p>
+            <p>
+              発見とテストがどのように相互にサポートし合っていたのかに興味があります。一時オブジェクトの存続期間に関する仮説は、AI エージェントに新しい方向性を与えました。コンパイラーからのフィードバックにより、その仮説を改良して、一致するソースコードの配置を実現することができました。
+            </p>
+            <h3>別の制御フロー グラフ</h3>
+            <p>
+              2 番目の TH09 関数は、その新しい方向が重要である理由を示しています。ここでの障害は、複数のブランチが最終的な作業をどのように共有するかでした。 <a
+                href="https://github.com/N0zoM1z0/th09/commit/f8d12d72aaf02212ee1b585a8f3f86d7ed000269"
+                >GPT-6.1-Sol の以前の作業</a
+              > では、関数の一部が一致していましたが、分岐の結合方法は依然としてオリジナルとは異なっていました。
+            </p>
+            <p>
+              <a
+                href="https://github.com/N0zoM1z0/th09/commit/da33a646221198ceb7f3df2b96e2ca0e9b2f705f"
+                >GPT-6-Astra が周囲の制御フロー グラフを変更しました</a
+              >。メイン パスは共有された最終更新と復帰につながりました。そのソース構造では、コンパイラはオリジナルと同じ方法でブランチを結合しました。完全な関数は一致しており、<a
+                href="https://github.com/N0zoM1z0/th09/commit/5f825b28a862f8e1a6d4aea2f78a42f04c09a1c0"
+                >別のリビルド チェックでそれが確認されました</a
+              >。
+            </p>
+            <p>
+              <strong
+                >表現を変えたことで、より有望な探索空間が開けた。</strong
+              > この二つの例から、汎用モデルの能力は重要だと感じる。エージェントは局所的な変更を長く試した末に、周囲の処理を表すもっとよい方法を見つけることがある。
+            </p>
+            <p>
+              ただし、後のセッションは、それまでのソースと失敗の記録を引き継いでいる。その蓄積も有利に働いた。履歴から発見と検証の過程は調べられるが、モデルの効果と引き継いだ経験の効果を分けるには、条件をそろえた比較が必要だ。
+            </p>
+            <p>
+              これが私にとってこの質問が興味深い理由です。新しい表現を見つけることである程度の進歩が得られました。残りの作業の多くには、使い慣れたコンパイラに対してさまざまなソース コードの配置をテストすることが含まれていました。このうちどの程度の範囲で幅広い推論能力が必要でしょうか?モデルはそのコンパイラーとコードを繰り返し操作することでどれだけ学習できるでしょうか?
+            </p>
+          </section>
+          <section class="article-section" id="specialization">
+            <h2>特化モデルがうまく働く可能性は？</h2>
+            <p>
+              Touhou には、経験の蓄積が役立つと考える具体的な理由がある。多くのゲームコードを ZUN 一人が書いているため、繰り返し現れる書き方を最初の仮説にできる。実際、リポジトリには、似たループや補助関数の構成が別のゲームの仮説につながった例がある。
+            </p>
+            <p>
+              コンパイラを含めると、これらのソース パターンがより具体的になります。特定のバージョンとオプションのセットでは、ソースに小さな変更を加えると、マシンコードに再現性のある差異が生じる可能性があります。これらの違いの中には、驚くほどわかりにくいものもあります。
+            </p>
+            <p>
+              たとえば、TH095 では、<strong
+                >ローカル変数の名前であっても、VC7.1 がそれを格納する場所に影響を与える可能性があります</strong
+              >。その宣言を移動してもストレージ レイアウトは解決されませんでした。ただし、以前のバックグラウンド関数では、コンパイラの選択に影響を与える名前付けパターンが明らかになっていました。これは、<a
+                href="https://github.com/N0zoM1z0/th095/commit/26bb64bdb093a13f73abd0ee8ae7ce199ee4658f"
+                ><code>Supervisor::LoadDat</code></a
+              > を再構築するためのより有望な仮説を示唆しました。
+            </p>
+            <p>
+              そのパターンをファイルサイズの変数に使うと、格納領域を増やさずに必要な配置が得られた。続いて関数全体が一致した。
+            </p>
+            <p>
+              これは非常に具体的な詳細であり、汎用 AI モデルが最初に問題に遭遇したときには認識できない可能性があります。このコンパイラに特化したモデルは、そのようなケースを多数確認し、どのソース コードのバリエーションが最初にテストする価値があるかを学習できます。
+            </p>
+            <p>
+              動作を理解したうえで最後の差分を詰める場面では、この可能性が特にはっきりする。問うのは、このコンパイラがどの通常の書き方を観測された命令に変換するかだ。特化した学習によって候補を効率よく出せるかもしれないが、どの仮説が正しいかは対象のプログラムが決める。
+            </p>
+            <p>
+              ただし、パターンには適用条件を残す必要がある。TH08 は TH095 や TH09 より古い Visual C++ を使う。TH04 は DOS 時代の別のコンパイラを使い、<a
+                href="https://github.com/N0zoM1z0/th04/commit/6dce0a79d5b931f0e2a08475b90e0c33d2321b98"
+                >プレイヤーのコードの再構築</a
+              >では、書き方や実行ファイルへのリンク順序について別の仮説が必要だった。同じ作者であることは手がかりになるが、適用できるかは各対象で確かめる。その区別も特化モデルが学ぶべきことだ。
+            </p>
+          </section>
+          <section class="article-section" id="repository-knowledge">
+            <h2>その経験はどこに蓄積すべきか？</h2>
+            <p>
+              モデルの学習でこうしたパターンを覚えさせる前に、まずリポジトリに保存している知識を見たい。<a href="../touhou-reconstruction/">前のエッセイ</a>では、リポジトリがプロジェクトの作業記憶になっていると書いた。そこにはコンパイラから学んだことと、それを裏付けるソースや失敗した実験が残っている。
+            </p>
+            <p>
+              そのレコードを取得することで、エージェントは既知の結果から開始し、どのようにしてその結果に到達したかを検査できます。また、同じコンテキストですでに失敗した代替案を回避することもできます。モデルのトレーニング済みパラメーターを変更することなく、開始点が改善されます。
+            </p>
+            <p>
+              TH09 の敵生成関数を再構築した<a
+                href="https://github.com/N0zoM1z0/th09/commit/1eb843383941d00065622a9e353146c4bb96979e"
+                >GPT-6-Luna-max のセッション</a
+              >は、TH08 の関連するソースから仮説を得た。以前のコードが、ループの構成と失敗時の処理の手がかりになった。TH09 自体の証拠でゲーム固有の細部を補い、クリーンビルドで関数全体の一致を確認した。
+            </p>
+            <p>
+              <strong
+                >「モデルがそのコンパイラの癖を知らない」と「知っていても使えない」は別の問題だ。</strong
+              > 検索で前者を解決できても、知識を有用な候補にするには能力がいる。候補が失敗すれば、その結果が次の試みに何を意味するかも判断しなければならない。関連するパターンを知るのは、出発点にすぎない。
+            </p>
+            <p>
+              だから比較には、知識を適切に検索できる小さな汎用モデルも加えたい。同じ経験のライブラリを与えれば、学習が何を加えるかを調べられる。候補を作る力なのか、フィードバック後の判断なのか、それとも両方なのか。
+            </p>
+          </section>
+          <section class="article-section" id="learning-search">
+            <h2>次の有用な実験を選ぶ力を学ぶ</h2>
+            <p>
+              私が最も研究したいのは、フィードバック後の判断だ。エージェントによる再構築では、モデルが説明を提案し、プログラムに照らして検証する。候補が失敗しても、可能性を絞り、次の有用な実験を考える材料になる。
+            </p>
+            <p>
+              一時的な結果の例をもう一度考えてみましょう。最終的なソースには、機能した配置が示されていますが、そのソースへのルートにはさらに多くの情報が含まれています。以下の各実験は、まだ変更する必要があるものを特定するのに役立ちました。
+            </p>
+            <div class="evidence-table-wrap">
+              <table
+                class="evidence-table"
+                aria-label="厳選された復元実験"
+              >
+                <thead>
+                  <tr>
+                    <th scope="col">実験</th>
+                    <th scope="col">その結果が私たちに教えてくれたこと</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>別の方法で結果をコピーしてみてください</td>
+                    <td>
+                      コピーのコードは変わったが、関数にはまだ差分がある。
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>戻り値を直接使用する</td>
+                    <td>
+                      コピーは元のパターンに従いますが、一時ストレージは依然として異なります。
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>一時的な結果を同時に有効にしておく</td>
+                    <td>
+                      これらは別々のストレージを取得しますが、1 つは、後で衝突チェックに使用される値と依然として重複します。
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>衝突判定の値を独立させる</td>
+                    <td>ソースからクリーンに再コンパイルすると、完全に一致していることが確認されます。</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <p class="caption">
+              上記の攻撃関数の再構築から選択した実験を、教えられた内容ごとにグループ化しました。
+            </p>
+            <p>
+              この順序を維持したトレーニング記録は、最終的なソースだけよりも多くのことを教えることができます。提案された各変更を観察された結果と次の決定に結び付けます。効果のないバリエーションを維持することも重要です。バリエーションは、後のエージェントに、そのコンテキストでどの仮説がすでにテストされているかを伝えます。
+            </p>
+            <p>
+              <strong
+                >モデルにはフィードバックの使い方を学んでほしい。</strong
+              > 結果が変わらなければ、その変更を考え直す理由になる。差分が変われば、別の原因が見えてくるかもしれない。局所的な編集から情報が得られなくなったら、全体の書き方を見直したり、証拠を再確認したりできるべきだ。
+            </p>
+            <p>
+              これらの選択を行うことを学ぶには自主性が必要です。場合によっては、別の編集をコンパイルするのではなく、別の呼び出し元を検査することが次のステップとして役立つ場合があります。必要な書き換えを厳密に繰り返すと、モデルに学習させたい動作の一部とともに、その選択肢が削除されてしまいます。
+            </p>
+          </section>
+          <section class="article-section" id="re-and-rl">
+            <h2>リバースエンジニアリングが強化学習にとって興味深い理由</h2>
+            <p>
+              範囲を定めた再構築は、こうした判断を研究するための実用的な環境になる。対象とコンパイラのバージョンを固定すれば、多くのソースの実験で素早く再現可能なフィードバックを得られる。エージェントは候補をコンパイルし、差分を調べ、次の行動を選べる。
+            </p>
+            <p>
+              強化学習なら、得られたフィードバックからこの判断を学習できるかもしれない。定義された検証を通った候補は具体的な成果になり、試行の記録から、そこに至るまでの労力も調べられる。
+            </p>
+            <p>
+              この方向を支える研究はすでにある。<a href="https://aclanthology.org/2024.emnlp-main.203/"
+                >LLM4Decompile</a
+              >は逆コンパイルに特化したモデルを研究している。<a href="https://arxiv.org/html/2606.16162v1">AutoDecompiler</a>はコンパイルと実行のフィードバックを使って複数ターンの改善を学習する。両者が扱うのは機能の復元だ。私はそこを出発点に、当時のコンパイラの出力に一致するソースを探すという関連した課題を研究したい。
+            </p>
+            <p>
+              ただし、このように明確に定義されたタスクに到達するには、まず関数が所有するリソースを確立するか、実行中のプログラムの状態や振る舞いを観測する新しい方法を考案する必要があるかもしれません。たとえば、TH08 では、<a
+                href="https://github.com/N0zoM1z0/th08/commit/af9cb1d3e839b15a78b47ac1701506083cc82847"
+                >衝突の違いにより、元のプログラムでの浮動小数点計算の処理方法が問題になりました</a
+              >。エージェントが有用な補正をテストする前に、何を測定するかを決定する必要がありました。
+            </p>
+            <p>
+              ここから、幅広い能力を持つモデルのもう一つの役割が見える。まず問題を検証可能にすることだ。検証方法ができて初めて、学習した探索方針がどこまで進めるかを調べられる。
+            </p>
+          </section>
+          <section class="article-section" id="oracle">
+            <h2>検証器が間違っていたら</h2>
+            <p>
+              その検証を使って学習すると、検証範囲も学習環境の一部になる。私はこうした参照基準や検証器を oracle と呼んでいる。答えが再現可能でも、それが何を確認した答えなのかを理解する必要がある。
+            </p>
+            <p>
+              TH08 では、検証範囲の外に問題が隠れていた。誤った浮動小数点定数を使っていても、完全一致の比較を通る関数があった。比較器は命令を確認する前に再配置されたアドレスを調整するが、そのアドレスが指す値まで確認するのは、検証対象として明示的に登録された場合だけだった。ほかの定数への参照は、値を調べずに通ってしまう可能性があった。
+            </p>
+            <p>
+              このギャップに対処するために、<a
+                href="https://github.com/N0zoM1z0/th08/commit/a393f400786e4cc6cbb1000af0dad3276da12c78"
+                >広範な監査</a
+              >により、すでに検証に合格した関数内に不正な定数が見つかりました。ある計算では、再構成されたソース コードでは <code>1.0f</code> が追加されましたが、元のコードでは <code>32.0f</code> が追加されました。
+            </p>
+            <p>
+              <strong
+                >古い検証結果で報酬を与えれば、モデルは誤った再構築を学習してしまうかもしれない。</strong
+              > この検証器で RL モデルを訓練したわけではない。観測したのは検証そのものの不具合だ。ただ、それを報酬に使えば、同じ盲点が学習環境に入ることになる。
+            </p>
+            <p>
+              機能テストにも同様の盲点がある可能性があります。 <a href="https://arxiv.org/html/2609.05370v1"
+                >LLM デコンパイラで差分ファジングを使用した研究</a
+              >では、提供されたテスト以外の動作の違いが見つかりました。したがって、合格したテストを、実行されるケースの観点から理解する必要があります。同様に、命令の一致は、検証されるバイトとデータの観点から理解する必要があります。
+            </p>
+            <p>
+              どちらの種類の検証チェックも報酬として使用する前に、意図的に間違った結果でテストします。また、最終的な承認は、AI エージェントが編集できるソース コードとは別にしておきます。モデルはプログラムを正しく再構築することで検証に合格する必要があります。そうしないと、ターゲットからバイト配列をコピーするだけで、有用なソース コードを回復せずに、単純なスコアリング システムを騙してしまう可能性があります。
+            </p>
+            <p>
+              <strong
+                >学習するモデルの改善と、その検証器の改善は同じ研究課題だ。</strong
+              > モデルが与えられたフィードバックを上手に最適化するほど、そのフィードバックを理解することも重要になる。
+            </p>
+          </section>
+          <section class="article-section" id="comparison">
+            <h2>実行する価値のある比較</h2>
+            <p>
+              これらのチェックを実施したら、固定の VC7.1 タスク ファミリで比較を開始します。まず、強力な汎用 AI モデルと小規模な AI モデルのベースラインを確立します。リポジトリの知識をより小さなモデルに追加すると、取得によってどのような変化が生じるのかがわかります。そこから、教師付き特殊化と RL でトレーニングされたバージョンを使用して、トレーニングによって追加される内容を検証できるようになります。
+            </p>
+            <p>
+              これらの比較を有益なものにするために、各モデルは同じターゲットの証拠とツールを受け取ります。トレーニング固有の比較の場合、基本モデルと利用可能な知識も固定したままにします。試行を繰り返すことは、信頼できる検索戦略と偶然成功した候補ソリューションを区別するのに役立ちます。
+            </p>
+            <p>
+              二つの出発点も分けたい。命令から関数を再構築する場合と、保守しているソースの最後の差分を詰める場合だ。特化モデルが後者に優れていても、そこまでの作業の多くは汎用モデルが担っているかもしれない。別々に測れば、その分担が見える。
+            </p>
+            <p>
+              どちらのタスクも、トレーニングと取得から除外されたテスト例が必要です。関連する Touhou ゲームはエンジン コードを共有します。トレーニングから 1 つのゲームを除外しても、トレーニング セットにほぼ同じ機能が残る可能性があります。代わりに、関連するソース コードのグループ全体を除外し、検証済みの回答をトレーニング データと検索ライブラリの両方から除外します。
+            </p>
+            <p>
+              測る成果は、関数全体が独立した検証を通って一致したことだ。候補数やコンパイル回数の予算をそろえれば探索の質を比べられる。コンパイルを含む総時間と総費用を測れば、それが効率的なワークフローにつながるかがわかる。学習費用は別に計上したい。
+            </p>
+            <p>
+              どちらの測定値も重要です。安価な提案により、有用な情報を提供しないコンパイルが増加すると、ワークフローが高価になる可能性があります。逆に、有用な実験がすぐに見つかった場合、遅いモデルの方が経済的になる可能性があります。比較にはこれらのコストも含める必要があります。
+            </p>
+            <p>
+              受け入れられた結果をカウントすることで、中間の進捗状況も把握できます。 1 つの TH09 <a
+                href="https://github.com/N0zoM1z0/th09/commit/ab72fd77728293fc0beacfc656ca701b0e266016"
+                >再生保存候補</a
+              >は、コンパイルされた関数が予想どおりのサイズを持っていたため有望に見えましたが、完全な比較では依然として大きな違いが見つかりました。コンパイラが命令を配置する方法を変更すると、根本的な問題が解決されずに、候補がより近くに見える可能性もあります。このような診断は次の実験を導くことができますが、私は「近づく」ことに対する報酬を完全な受け入れチェックと照らし合わせて検証します。
+            </p>
+            <p>
+              結果全体にどんな傾向があるかを知りたい。特化モデルが使い慣れたコンパイラで優れていても、ツールチェーンを変えた後にその強みは残るだろうか。両方が十分に知識を検索できるとき、学習はどれだけ価値を加えるのか。答えは、各モデルをどこで使うべきかを考える助けになる。
+            </p>
+          </section>
+          <section class="article-section" id="future-agent">
+            <h2>どんなエージェントが必要なのか？</h2>
+            <p>
+              モデルが段階ごとに違う強みを持つなら、汎用エージェントが特化モデルを呼び出せる構成が役立つかもしれない。問題が慣れたコンパイラでの探索になったら、特化モデルに候補を求める。結果が納得できなくなったら、汎用エージェントが対象の証拠や測定そのものを調べ直す。
+            </p>
+            <p>
+              この構成では、特化モデルは調査の進み方に応じて選べる道具になる。エージェントには、以前の突破口を可能にした方向転換の自由が残る。
+            </p>
+            <p>
+              これは、前回のエッセイで説明した産業の変化から自然に生じます。さらに多くの実験を実行できるようになると、作業の組織化の方法が変わります。また、どの決定には広範な判断が必要なのか、どの決定は特定の技術での繰り返しの経験によって改善されるのかを尋ねる理由も得られます。
+            </p>
+            <p>
+              今のところ、未解決のまま残されていた問題を解決することで、最強の汎用 AI モデルが私のワークフローにその地位を獲得しました。これらの成功により、私はこの作業をさらに詳しく調べてみたいと思うようになりました。どの程度がモデルの範囲に依存しているのか、また、この特定の種類の再構成でトレーニングされたモデルでどの程度の処理が可能でしょうか?
+            </p>
+            <p>
+              <strong
+                >リポジトリは、質問をテストする方法を提供します。</strong
+              >その記録を使用して比較を構築し、何が分かるかを確認したいと思います。
+            </p>
+          </section>
+          <section class="article-section" id="sources">
+            <details class="native-details">
+              <summary>証拠とモデルの帰属</summary>
+              <p>
+                <a
+                  href="https://github.com/morluto/rea/blob/main/website/evidence/reverse-engineering-models.md"
+                  >詳しい証拠の記録</a
+                >には、比較結果と実験の背景をまとめている。
+              </p>
+              <p>
+                この例では、リンクされたコミットに記録された関数レベルの比較の履歴について説明します。ゲーム全体のランタイム チェックは別のマイルストーンです。ソースと一致する記録は 2026 年 10 月 13 日に確認されました。
+              </p>
+              <p>
+                TH09 ラベル <code>gpt-dots</code> は GPT-6-Astra を意味します。 <code>gpt-web</code> に関連付けられたモデルは時間の経過とともに変化したため、ラベルだけでは特定の実行で使用されたモデルを識別できません。他の引用されたコミット内の明示的なモデル名は、記録された帰属を示します。これらの履歴には、実行ごとのコストや労力の一貫した測定値は含まれていません。
+              </p>
+              <ul>
+                <li>
+                  <strong>TH09 一時オブジェクトの有効期間:</strong> <a
+                    href="https://github.com/N0zoM1z0/th09/commit/de63c0f9121963f3a6b1ab5471c4878625fd3425"
+                    >以前のコンテキスト レビュー</a
+                  >と、<a
+                    href="https://github.com/N0zoM1z0/th09/commit/52929ed7c299f1a5f29cc13964e22510145fd616"
+                    >ソースからのクリーンな再コンパイルによって検証された完全な再構築</a
+                  >。
+                </li>
+                <li>
+                  <strong>TH09 Front コールバック:</strong> <a
+                    href="https://github.com/N0zoM1z0/th09/commit/f8d12d72aaf02212ee1b585a8f3f86d7ed000269"
+                    >一致しなかった診断領域</a
+                  >、<a
+                    href="https://github.com/N0zoM1z0/th09/commit/da33a646221198ceb7f3df2b96e2ca0e9b2f705f"
+                    >Astra の新しい制御フロー グラフ</a
+                  >、およびその <a
+                    href="https://github.com/N0zoM1z0/th09/commit/5f825b28a862f8e1a6d4aea2f78a42f04c09a1c0"
+                    >受け入れられた再コンパイル チェック</a
+                  >。
+                </li>
+                <li>
+                  <strong>コンパイラーの知識:</strong> <a
+                    href="https://github.com/N0zoM1z0/th095/commit/26bb64bdb093a13f73abd0ee8ae7ce199ee4658f"
+                    >TH095 識別子バケットの動作の再利用</a
+                  >、<a
+                    href="https://github.com/N0zoM1z0/th04/commit/6dce0a79d5b931f0e2a08475b90e0c33d2321b98"
+                    >TH04 プレーヤーのソース コードとリンカーの順序</a
+                  >、および <a
+                    href="https://github.com/N0zoM1z0/th09/commit/1eb843383941d00065622a9e353146c4bb96979e"
+                    >Luna による TH09 の敵作成関数の完全な再構築</a
+                  >。
+                </li>
+                <li>
+                  <strong>チェックと診断:</strong> <a
+                    href="https://github.com/N0zoM1z0/th08/commit/a393f400786e4cc6cbb1000af0dad3276da12c78"
+                    >TH08 浮動小数点定数監査</a
+                  >、<a
+                    href="https://github.com/N0zoM1z0/th08/commit/af9cb1d3e839b15a78b47ac1701506083cc82847"
+                    >TH08 数値調査</a
+                  >、および <a
+                    href="https://github.com/N0zoM1z0/th09/commit/ab72fd77728293fc0beacfc656ca701b0e266016"
+                    >TH09 リプレイ保存再構築</a
+                  >。
+                </li>
+              </ul>
+              <p>
+                特化モデルと RL の比較は、これから行いたい実験だ。プロジェクトの履歴がその動機になっているが、このエッセイで学習済みの特化モデルを評価したわけではない。
+              </p>
+            </details>
+          </section>
+        </article>
+      </div>
+    </main>
+    <!-- website:footer:start -->
+    <!-- prettier-ignore -->
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <p>REA · Reverse Engineer Anything</p>
+        <div class="footer-links">
+          <a href="../../faq/">FAQ</a
+          ><a href="../../contributors/">貢献者</a
+          ><a href="https://github.com/morluto/rea">ソースコード</a
+          ><a href="https://github.com/morluto/rea/blob/main/LICENSE">MIT ライセンス</a
+          ><a href="https://discord.gg/GkcryMnJDM">コミュニティに参加</a
+          ><a href="https://x.com/reatools">X でフォロー</a>
+        </div>
+      </div>
+    </footer>
+    <p class="sr-only" id="copy-status" role="status" aria-live="polite"></p>
+    <a class="back-to-top" href="#top" aria-label="ページ上部へ">
+      <span aria-hidden="true">↑</span> トップ
+    </a>
+    <!-- website:footer:end -->
+  </body>
+</html>

@@ -1,0 +1,734 @@
+<!doctype html>
+<html lang="pl" dir="ltr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>TH04 inżynieria odwrotna: wzory pocisków dos-REA</title>
+    <meta
+      name="description"
+      content="Sprawdź oryginalny 16-bitowy kod dos TH04 za pomocą REA . Postępuj zgodnie z montażem i odzyskanym C++, aby zobaczyć, jak pierścień pocisków jest rozmieszczony i wycelowany w gracza."
+    />
+    <!-- website:sharing:start -->
+    <!-- prettier-ignore -->
+    <link rel="canonical" href="https://rea.tools/pl/showcase/th04/" />
+    <!-- website:languages:start -->
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="en" href="https://rea.tools/showcase/th04/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="zh-CN" href="https://rea.tools/zh-CN/showcase/th04/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="zh-TW" href="https://rea.tools/zh-TW/showcase/th04/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="ja" href="https://rea.tools/ja/showcase/th04/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="ko" href="https://rea.tools/ko/showcase/th04/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="tr" href="https://rea.tools/tr/showcase/th04/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="ru" href="https://rea.tools/ru/showcase/th04/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="vi" href="https://rea.tools/vi/showcase/th04/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="th" href="https://rea.tools/th/showcase/th04/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="de" href="https://rea.tools/de/showcase/th04/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="es" href="https://rea.tools/es/showcase/th04/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="fr" href="https://rea.tools/fr/showcase/th04/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="uk" href="https://rea.tools/uk/showcase/th04/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="pl" href="https://rea.tools/pl/showcase/th04/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="pt-BR" href="https://rea.tools/pt-BR/showcase/th04/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="ar" href="https://rea.tools/ar/showcase/th04/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="fa" href="https://rea.tools/fa/showcase/th04/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="id" href="https://rea.tools/id/showcase/th04/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="it" href="https://rea.tools/it/showcase/th04/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="el" href="https://rea.tools/el/showcase/th04/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="x-default" href="https://rea.tools/showcase/th04/" />
+<!-- website:languages:end -->
+    <!-- prettier-ignore -->
+    <meta property="og:type" content="website" />
+    <!-- prettier-ignore -->
+    <meta property="og:site_name" content="REA" />
+    <!-- prettier-ignore -->
+    <meta property="og:title" content="TH04 inżynieria odwrotna: wzory pocisków dos-REA" />
+    <!-- prettier-ignore -->
+    <meta property="og:description" content="Sprawdź oryginalny 16-bitowy kod dos TH04 za pomocą REA . Postępuj zgodnie z montażem i odzyskanym C++, aby zobaczyć, jak pierścień pocisków jest rozmieszczony i wycelowany w gracza." />
+    <!-- prettier-ignore -->
+    <meta property="og:url" content="https://rea.tools/pl/showcase/th04/" />
+    <!-- prettier-ignore -->
+    <meta property="og:image" content="https://rea.tools/assets/social-card.png" />
+    <!-- prettier-ignore -->
+    <meta property="og:image:type" content="image/png" />
+    <!-- prettier-ignore -->
+    <meta property="og:image:width" content="1200" />
+    <!-- prettier-ignore -->
+    <meta property="og:image:height" content="630" />
+    <!-- prettier-ignore -->
+    <meta
+      property="og:image:alt"
+      content="REA-dowiedz się, jak działa oprogramowanie. Inżynieria odwrotna z twoim agentem kodującym."
+    />
+    <!-- prettier-ignore -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <!-- prettier-ignore -->
+    <meta name="twitter:title" content="TH04 inżynieria odwrotna: wzory pocisków dos-REA" />
+    <!-- prettier-ignore -->
+    <meta name="twitter:description" content="Sprawdź oryginalny 16-bitowy kod dos TH04 za pomocą REA . Postępuj zgodnie z montażem i odzyskanym C++, aby zobaczyć, jak pierścień pocisków jest rozmieszczony i wycelowany w gracza." />
+    <!-- prettier-ignore -->
+    <meta name="twitter:image" content="https://rea.tools/assets/social-card.png" />
+    <!-- prettier-ignore -->
+    <meta
+      name="twitter:image:alt"
+      content="REA-dowiedz się, jak działa oprogramowanie. Inżynieria odwrotna z twoim agentem kodującym."
+    />
+    <!-- website:sharing:end -->
+    <!-- website:theme:start -->
+    <meta name="theme-color" content="#ffffff" />
+    <!-- Apply the saved theme before styles load, to avoid a flash on navigation. -->
+    <script src="../../../assets/theme.js"></script>
+    <!-- website:theme:end -->
+    <link rel="icon" href="../../../assets/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="../../../assets/styles.css" />
+    <script src="../../../assets/main.js" defer></script>
+  <script id="website-messages" type="application/json">{"Copied": "Skopiowano", "Code copied to clipboard.": "Kod skopiowany do schowka.", "Selected": "Wybrane", "Code selected. Use your keyboard to copy it.": "Wybrany kod. Użyj klawiatury, aby ją skopiować.", "REA on GitHub ({count})": "REA na GitHub ({count})", "Switch to light mode": "Przełącz na jasny motyw", "Switch to dark mode": "Przełącz na ciemny motyw"}</script>
+  </head>
+  <body id="top">
+    <a class="skip-link" href="#main">Przejdź do treści</a>
+    <!-- website:header:start -->
+    <!-- prettier-ignore -->
+    <header class="site-header">
+      <div class="container header-inner">
+        <a class="brand" href="../../" aria-label="Strona główna REA"
+          ><span class="brand-name">REA</span
+          ><span class="brand-caption" data-i18n-skip>Reverse Engineer Anything</span></a
+        >
+        <nav class="navigation" aria-label="Główna nawigacja">
+          <a href="../../../get-started/" class="nav-start">Pierwsze kroki</a>
+          <a href="../" aria-current="page">Przykłady</a>
+          <a href="../../blog/">Blog</a>
+          <a href="../../guides/">Poradniki</a>
+        </nav>
+        <div class="header-social">
+          <details class="language-picker" data-i18n-skip><summary><span aria-hidden="true">文 / A</span> <span>Polski</span></summary><nav aria-label="Polski"><a href="../../../showcase/th04/" lang="en" dir="ltr" data-language="en">English</a><a href="../../../zh-CN/showcase/th04/" lang="zh-CN" dir="ltr" data-language="zh-CN">简体中文</a><a href="../../../zh-TW/showcase/th04/" lang="zh-TW" dir="ltr" data-language="zh-TW">繁體中文</a><a href="../../../ja/showcase/th04/" lang="ja" dir="ltr" data-language="ja">日本語</a><a href="../../../ko/showcase/th04/" lang="ko" dir="ltr" data-language="ko">한국어</a><a href="../../../tr/showcase/th04/" lang="tr" dir="ltr" data-language="tr">Türkçe</a><a href="../../../ru/showcase/th04/" lang="ru" dir="ltr" data-language="ru">Русский</a><a href="../../../vi/showcase/th04/" lang="vi" dir="ltr" data-language="vi">Tiếng Việt</a><a href="../../../th/showcase/th04/" lang="th" dir="ltr" data-language="th">ไทย</a><a href="../../../de/showcase/th04/" lang="de" dir="ltr" data-language="de">Deutsch</a><a href="../../../es/showcase/th04/" lang="es" dir="ltr" data-language="es">Español</a><a href="../../../fr/showcase/th04/" lang="fr" dir="ltr" data-language="fr">Français</a><a href="../../../uk/showcase/th04/" lang="uk" dir="ltr" data-language="uk">Українська</a><a href="../../../pl/showcase/th04/" lang="pl" dir="ltr" data-language="pl" aria-current="true">Polski</a><a href="../../../pt-BR/showcase/th04/" lang="pt-BR" dir="ltr" data-language="pt-BR">Português (Brasil)</a><a href="../../../ar/showcase/th04/" lang="ar" dir="rtl" data-language="ar">العربية</a><a href="../../../fa/showcase/th04/" lang="fa" dir="rtl" data-language="fa">فارسی</a><a href="../../../id/showcase/th04/" lang="id" dir="ltr" data-language="id">Bahasa Indonesia</a><a href="../../../it/showcase/th04/" lang="it" dir="ltr" data-language="it">Italiano</a><a href="../../../el/showcase/th04/" lang="el" dir="ltr" data-language="el">Ελληνικά</a><a href="../../../ml/showcase/th04/" lang="ml" dir="ltr" data-language="ml">മലയാളം · English</a><a href="../../../ur-Latn/showcase/th04/" lang="ur-Latn" dir="ltr" data-language="ur-Latn">Roman Urdu · English</a><a href="../../../ro/showcase/th04/" lang="ro" dir="ltr" data-language="ro">Română · English</a></nav></details>
+          <button class="theme-toggle" type="button" data-theme-toggle hidden>
+            <svg class="theme-moon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+              <path d="M20.9 13a9 9 0 0 1-9.9-9.9A9 9 0 1 0 20.9 13Z" />
+            </svg>
+            <svg class="theme-sun" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true" focusable="false">
+              <circle cx="12" cy="12" r="4" />
+              <path d="M12 2v2m0 16v2M2 12h2m16 0h2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42" />
+            </svg>
+          </button>
+          <a
+            class="nav-github"
+            href="https://github.com/morluto/rea"
+            aria-label="REA na GitHub"
+            title="REA na GitHub"
+          >
+            <svg
+              width="22"
+              height="22"
+              viewBox="0 0 16 16"
+              aria-hidden="true"
+              focusable="false"
+            >
+              <path
+                fill="currentColor"
+                d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82a7.65 7.65 0 0 1 2-.27c.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z"
+              />
+            </svg>
+            <span class="nav-github-count" hidden aria-hidden="true"></span>
+          </a>
+          <a
+            class="nav-discord"
+            href="https://discord.gg/GkcryMnJDM"
+            aria-label="Dołącz do REA na Discordzie"
+            title="Dołącz do REA na Discordzie"
+          >
+            <svg
+              width="22"
+              height="22"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+              focusable="false"
+            >
+              <path
+                fill="currentColor"
+                d="M20.317 4.3698a19.7913 19.7913 0 0 0-4.8851-1.5152.0741.0741 0 0 0-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 0 0-.0785-.037 19.7363 19.7363 0 0 0-4.8852 1.515.0699.0699 0 0 0-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 0 0 .0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 0 0 .0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 0 0-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 0 1-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 0 1 .0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 0 1 .0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 0 1-.0066.1276 12.2986 12.2986 0 0 1-1.873.8914.0766.0766 0 0 0-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 0 0 .0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 0 0 .0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 0 0-.0312-.0286ZM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189Zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189Z"
+              />
+            </svg>
+          </a>
+          <a
+            class="nav-x"
+            href="https://x.com/reatools"
+            aria-label="Obserwuj REA na X"
+            title="Obserwuj REA na X"
+          >
+            <svg
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+              focusable="false"
+            >
+              <path
+                fill="currentColor"
+                d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z"
+              />
+            </svg>
+          </a>
+        </div>
+      </div>
+    </header>
+    <!-- website:header:end -->
+    <main id="main" class="container">
+      <div class="page-heading">
+        <p class="breadcrumb">
+          <a href="../../">Spis treści</a> / <a href="../">Gabloty</a> / TH04
+        </p>
+        <p class="eyebrow">Studium przypadku * Touhou 4: Lotus Land Story</p>
+        <h1>Rekonstrukcja TH04<br />wzory pocisków.</h1>
+        <p class="lede">
+          Pierścień pocisków zaczyna się od obliczenia krótkiego kąta. Użyj REA, aby sprawdzić oryginalną funkcję DOS, a następnie postępuj zgodnie z jej instrukcjami w czytelnym C++.
+        </p>
+        <p class="page-meta">PC-98 * 16-bitowy DOS · C++ i montaż</p>
+        <a class="text-link" href="https://github.com/N0zoM1z0/th04"
+          >Zobacz rekonstrukcję TH04</a
+        >
+      </div>
+
+      <figure class="workflow-figure th04-overview">
+        <p class="figure-title">Od oryginalnych instrukcji do sprawdzonego źródła</p>
+        <ol class="flow-steps th04-flow">
+          <li>
+            <span class="flow-label">01 * oryginalna gra</span
+            ><strong class="flow-node">Główny.EXE</strong
+            ><span class="flow-note"
+              >Plik wykonywalny PC-98 i jego pomocnik kąta pocisku.</span
+            >
+          </li>
+          <li>
+            <span class="flow-label">02 * sprawdź za pomocą REA </span
+            ><strong class="flow-node">Instrukcje + referencje</strong
+            ><span class="flow-note"
+              >Sprawdź załadowany kod DOS i odczytaj obliczenie kąta z pliku wykonywalnego.</span
+            >
+          </li>
+          <li>
+            <span class="flow-label">03 * przeczytaj C++</span
+            ><strong class="flow-node">Przestrzeń → cel → obróć</strong
+            ><span class="flow-note"
+              >Połącz każdą operację z utrzymaną rekonstrukcją.</span
+            >
+          </li>
+          <li>
+            <span class="flow-label">04 * Sprawdź źródło</span
+            ><strong class="flow-node">2139 pasujących bajtów</strong
+            ><span class="flow-note"
+              >Zarejestrowane kontrole kompilatora obejmują kod generowania punktorów, który zawiera ten Pomocnik.</span
+            >
+          </li>
+        </ol>
+        <figcaption>
+          REA zwraca oryginalny kod i jego dowody analizy. Projekt TH04 zapewnia utrzymywane kontrole źródła i kompilatora.
+        </figcaption>
+      </figure>
+
+      <div class="article-layout">
+        <nav class="contents" aria-label="Na tej stronie">
+          <p>W tym studium przypadku</p>
+          <ul>
+            <li><a href="#ring">Pierścień kuli</a></li>
+            <li><a href="#rea">Co zwraca REA</a></li>
+            <li><a href="#source">Montaż do C++</a></li>
+            <li><a href="#checking">Sprawdzanie źródła</a></li>
+            <li><a href="#project">Pełny projekt</a></li>
+          </ul>
+        </nav>
+        <article class="article" aria-label="TH04 bullet-pattern case study">
+          <section class="article-section" id="ring">
+            <h2>Jak pierścień celuje w gracza</h2>
+            <p>
+              Atak Elly wymaga wycelowanego pierścienia z początkową liczbą 16. Jeden Pomocnik oblicza kierunek każdego pocisku. Ten sam pierścień może być skierowany w ustalonym kierunku lub skręcić w kierunku gracza.
+            </p>
+            <div class="agent-terminal">
+              <div class="terminal-header">
+                <span class="terminal-title"
+                  ><span class="terminal-dots" aria-hidden="true"
+                    ><i></i><i></i><i></i></span
+                  >Twój agent kodowania</span
+                >
+                <button
+                  class="copy-button"
+                  type="button"
+                  data-copy="th04-prompt"
+                  aria-label="Skopiuj przykładowy monit TH04"
+                >
+                  Kopiuj
+                </button>
+              </div>
+              <p class="terminal-prompt">
+                <span class="prompt-symbol" aria-hidden="true">›</span
+                ><span id="th04-prompt"
+                  >Użyj REA, aby dowiedzieć się, jak TH04 tworzy pierścień pocisków i celuje w gracza. Wyjaśnij obliczenia i pokaż kod.</span
+                ><span class="terminal-cursor" aria-hidden="true"></span>
+              </p>
+            </div>
+            <p class="caption">
+              Przykładowy monit z oryginalnym plikiem wykonywalnym i kasą rekonstrukcji dostępną lokalnie.
+            </p>
+            <p>
+              TH04 przechowuje pełny obrót zgodnie z ruchem wskazówek zegara w jednostkach kąta 256. Dla 16 pocisków każdy indeks dodaje 16 jednostek: <code>0, 16, 32, …, 240</code>. Dodanie kierunku gracza obraca te pozycje razem.
+            </p>
+            <figure class="explanatory-figure th04-ring-figure">
+              <div
+                class="figure-viewport"
+                tabindex="0"
+                role="region"
+                aria-label="TH04 stałe i wycelowane pierścienie pocisku; przewijaj poziomo na mniejszych ekranach"
+              >
+                <img
+                  src="../../../assets/localized/pl/figures/th04-bullet-ring.svg"
+                  width="1000"
+                  height="520"
+                  alt="Dwa schematy pierścienia z 16 kulami. Stały pierścień zaczyna się pod kątem zerowym. Dodanie kierunku gracza 40 obraca się w każdym kierunku o tę samą wartość; podświetlona pierwsza wypunktowanie wskazuje na gracza. Oba zachowują odstęp 16 jednostek kąta lub 22,5 stopnia."
+                  decoding="async"
+                />
+              </div>
+              <figcaption>
+                Ilustracja odzyskanej matematyki kąta dla liczby 16, kierunku gracza 40 i obrotu szablonu 0. <a href="../../../assets/localized/pl/figures/th04-bullet-ring.svg"
+                  >Otwórz rysunek</a
+                >
+              </figcaption>
+            </figure>
+            <h3 class="small-heading">
+              Szablon wypalania w odzyskanym źródle
+            </h3>
+            <div class="code-block">
+              <div class="code-header">
+                <span>Atak pierścienia Elly * fragment źródłowy</span
+                ><button
+                  class="copy-button"
+                  type="button"
+                  data-copy="th04-template"
+                  aria-label="Kopiuj szablon TH04"
+                >
+                  Kopiuj
+                </button>
+              </div>
+              <pre><code id="th04-template">bullet_template.angle = 0;
+bullet_template.group = BG_RING_AIMED;
+bullet_template.count = 16;
+bullet_template_tune();</code></pre>
+            </div>
+            <p class="caption">
+              Linie te wybierają wzór przed trudnością i strojeniem wydajności. <a
+                href="https://github.com/N0zoM1z0/th04/blob/0d72e9801a5c14c10384efcbb6734ceccb74ee63/src/main/boss/elly_phase_ring16.cpp#L26"
+                >Przeczytaj źródło ataku</a
+              >.
+            </p>
+          </section>
+
+          <section class="article-section" id="rea">
+            <h2>Co zwraca REA</h2>
+            <p>
+              Sprawdzamy <code>bullet_velocity_and_angle_set()</code>, funkcja, która ustawia prędkość i kąt każdego pocisku.  REA zwraca instrukcje, pseudokod i odwołania. Trzy części tego wyniku wyjaśniają wzór.
+            </p>
+            <ol class="rea-queries">
+              <li>
+                <h4>Sprawdź obraz DOS przed przeczytaniem jego kodu</h4>
+                <div class="rea-query-pair">
+                  <div class="code-block">
+                    <div class="code-header"><span>Agent → REA</span></div>
+                    <pre><code>open_binary
+{"path": "MAIN.EXE"}
+
+inspect_native_load_image
+{}</code></pre>
+                  </div>
+                  <div class="code-block">
+                    <div class="code-header">
+                      <span>REA → agent * wybrane pola</span>
+                    </div>
+                    <pre><code>status: "verified"
+format: "dos-mz"
+load_segment: 4096
+header_bytes: 6144
+module_bytes: 150114</code></pre>
+                  </div>
+                </div>
+                <p>
+                  Sprawdzenie wiąże załadowany kod i rekordy relokacji z dostarczonym plikiem wykonywalnym. Ścieżka powyżej jest skrócona do wyświetlania.
+                </p>
+              </li>
+              <li>
+                <h4>Przeczytaj mnożenie i dzielenie pierścienia</h4>
+                <div class="rea-query-pair">
+                  <div class="code-block">
+                    <div class="code-header">
+                      <span>Agent → REA  · <code>analyze_function</code></span>
+                    </div>
+                    <pre><code>{"procedure": "0x2cfc8"}</code></pre>
+                  </div>
+                  <div class="code-block">
+                    <div class="code-header">
+                      <span>REA → agent * fragment instrukcji</span>
+                    </div>
+                    <pre><code>0x2d0eb: MOV AX, SI
+0x2d0ed: SHL AX, 0x8
+0x2d0f0: MOV DL, byte ptr [0x53af]
+0x2d0f9: IDIV BX</code></pre>
+                  </div>
+                </div>
+                <p>
+                  <code>SI</code> posiada indeks punktora. Przesunięcie mnoży go przez 256, a następnie podział wykorzystuje liczbę odczytaną z <code>DS:53AF</code>. Utrzymane nazwy źródłowe tego pola <code>bullet_template.count</code>. Pełna sekwencja pojawia się poniżej.
+                </p>
+              </li>
+              <li>
+                <h4>Znajdź, gdzie wzór obraca się w kierunku gracza</h4>
+                <div class="rea-query-pair">
+                  <div class="code-block">
+                    <div class="code-header">
+                      <span>Ta sama funkcja wynik * aim fragment</span>
+                    </div>
+                    <pre><code>0x2d190: SUB AX, word ptr [0x53a6]
+0x2d198: SUB AX, word ptr [0x53a4]
+0x2d19d: CALLF 0x1000:1da8
+0x2d1a2: ADD word ptr [BP + -0x2], AX</code></pre>
+                  </div>
+                  <div class="code-block">
+                    <div class="code-header">
+                      <span>Odpowiadający utrzymywany C++</span>
+                    </div>
+                    <pre><code>group_angle_offset += iatan2(
+  player_pos.cur.y - bullet_template.origin.y,
+  player_pos.cur.x - bullet_template.origin.x
+);</code></pre>
+                  </div>
+                </div>
+                <p>
+                  Operandy instrukcji ujawniają dwie różnice współrzędnych i pomocnika kierunku. Jego wartość zwracana jest dodawana do względnego kąta pierścienia. Nazwy źródeł sprawiają, że adresy te są czytelne; REA pozwala agentowi sprawdzić oryginalne operacje za nimi.
+                </p>
+              </li>
+            </ol>
+          </section>
+
+          <section class="article-section" id="source">
+            <h2>Od zestawu do czytelnego C++</h2>
+            <p>
+              Wybierz krok, aby dopasować oryginalne instrukcje do obliczenia kąta. To podsumowanie podąża ścieżką ukierunkowanego pierścienia; pełne źródło obsługuje również spready, stosy i losowe wzory.
+            </p>
+            <div class="step-comparison" data-step-comparison>
+              <div
+                class="step-selector"
+                role="group"
+                aria-label="Postępuj zgodnie z obliczeniem pierścienia celowanego TH04"
+              >
+                <button
+                  type="button"
+                  data-select-step="1"
+                  aria-pressed="true"
+                  aria-controls="ring-assembly ring-source ring-step-detail"
+                >
+                  <span>01</span> Indeks
+                </button>
+                <button
+                  type="button"
+                  data-select-step="2"
+                  aria-pressed="false"
+                  aria-controls="ring-assembly ring-source ring-step-detail"
+                >
+                  <span>02</span> Kosmos
+                </button>
+                <button
+                  type="button"
+                  data-select-step="3"
+                  aria-pressed="false"
+                  aria-controls="ring-assembly ring-source ring-step-detail"
+                >
+                  <span>03</span> Aim
+                </button>
+                <button
+                  type="button"
+                  data-select-step="4"
+                  aria-pressed="false"
+                  aria-controls="ring-assembly ring-source ring-step-detail"
+                >
+                  <span>04</span> Rotate
+                </button>
+                <button
+                  type="button"
+                  data-select-step="5"
+                  aria-pressed="false"
+                  aria-controls="ring-assembly ring-source ring-step-detail"
+                >
+                  <span>05</span> Sklep
+                </button>
+              </div>
+              <div class="code-comparison">
+                <div class="code-block">
+                  <div class="code-header">
+                    <span>REA * oryginalne 16-bitowe instrukcje</span
+                    ><button
+                      class="copy-button"
+                      type="button"
+                      data-copy="ring-assembly"
+                      aria-label="Skopiuj fragment zespołu TH04"
+                    >
+                      Kopiuj
+                    </button>
+                  </div>
+                  <pre><code id="ring-assembly"><span class="code-step is-active" data-step="1">0x2cfcf: MOV SI, word ptr [BP + 0x4]
+0x2d0eb: MOV AX, SI</span>
+<span class="code-step" data-step="2">0x2d0ed: SHL AX, 0x8
+0x2d0f0: MOV DL, byte ptr [0x53af]
+0x2d0f4: MOV DH, 0x0
+0x2d0f6: PUSH DX
+0x2d0f7: CWD
+0x2d0f8: POP BX
+0x2d0f9: IDIV BX
+0x2d0fb: MOV word ptr [BP + -0x2], AX</span>
+<span class="code-step" data-step="3">0x2d18d: MOV AX, [0x4650]
+0x2d190: SUB AX, word ptr [0x53a6]
+0x2d194: PUSH AX
+0x2d195: MOV AX, [0x464e]
+0x2d198: SUB AX, word ptr [0x53a4]
+0x2d19c: PUSH AX
+0x2d19d: CALLF 0x1000:1da8
+0x2d1a2: ADD word ptr [BP + -0x2], AX</span>
+<span class="code-step" data-step="4">0x2d1b9: MOV AL, byte ptr [BP + -0x2]
+0x2d1bc: ADD AL, byte ptr [0x53ad]</span>
+<span class="code-step" data-step="5">0x2d1c0: MOV [0xbcc8], AL</span></code></pre>
+                </div>
+                <div class="code-block">
+                  <div class="code-header">
+                    <span>Czytelne podsumowanie C++ · aimed-ring</span
+                    ><button
+                      class="copy-button"
+                      type="button"
+                      data-copy="ring-source"
+                      aria-label="Kopiuj czytelne wyliczenie pierścienia"
+                    >
+                      Kopiuj
+                    </button>
+                  </div>
+                  <pre><code id="ring-source">unsigned char aimed_ring_angle(
+    <span class="is-active" data-step="1">int index</span>, int count,
+    int player_direction,
+    unsigned char rotation)
+{
+<span class="code-step is-active" data-step="1">    int angle = index;</span>
+<span class="code-step" data-step="2">    angle = (angle * 256) / count;</span>
+<span class="code-step" data-step="3">    angle += player_direction;</span>
+<span class="code-step" data-step="4">    angle += rotation;</span>
+<span class="code-step" data-step="5">    return (unsigned char)angle;</span>
+}</code></pre>
+                </div>
+              </div>
+              <div
+                class="step-detail"
+                id="ring-step-detail"
+                aria-live="polite"
+                aria-atomic="true"
+              >
+                <p data-step-note="1">
+                  <strong>01 * przeczytaj indeks punktora.</strong> Argument stosu jest ładowany do <code>SI</code>. W pierścieniu z 16 pociskami ten indeks członków biegnie od 0 do 15.
+                </p>
+                <p data-step-note="2" hidden>
+                  <strong>02 * Rozmieść Kierunki wokół pełnego obrotu.</strong> <code>SHL AX,8</code> mnoży się przez 256. Liczba jest zerowa-rozszerzona na słowo, a następnie <code>IDIV</code> dzieli produkt przez tę liczbę. W przypadku liczby 16 każdy indeks przesuwa się o 16 jednostek kąta.
+                </p>
+                <p data-step-note="3" hidden>
+                  <strong>03 * Dodaj kierunek gracza.</strong> Dwa odejmowania tworzą współrzędne player-minus-origin. Pomocnik kierunku zwraca kąt w <code>AX</code>; dodanie go obraca cały pierścień w kierunku gracza.
+                </p>
+                <p data-step-note="4" hidden>
+                  <strong>04 * Dodaj obrót wzoru.</strong> <code>ADD AL,[0x53ad]</code> dodaje kąt szablonu. Początkowy szablon Elly ustawia go na zero; inne wzory mogą używać tego samego pomocnika z obrotem.
+                </p>
+                <p data-step-note="5" hidden>
+                  <strong>05 * Zachowaj ostateczny kąt w jednym bajcie.</strong> Sklep pisze <code>AL</code> do pola kąta odrodzenia. Wartości zawijają się po 255, tak jak robi to odlewanie bez znaku. Otaczające źródło również przekształca ten kąt i prędkość w prędkość.
+                </p>
+              </div>
+            </div>
+            <p class="caption">
+              Zespół wybiera gałąź pierścienia celowanego, obliczenie celu i końcowy magazyn. Powyższy C++ jest czytelnym podsumowaniem. Poniższe kontrole kompilatora dotyczą utrzymywanego źródła w połączonym projekcie.
+            </p>
+            <details class="evidence-details">
+              <summary>Przeczytaj utrzymane źródło pierścienia i celu</summary>
+              <div class="code-block">
+                <div class="code-header">
+                  <span>Pierścień makro * TH04 oddział, fragment</span>
+                </div>
+                <pre><code>angle_offset = (i * BULLET_ANGLE_FULL_TURN) / count;
+if (i &gt;= (count - 1)) {
+    group_complete = true;
+}
+goto aim_or_no_aim;</code></pre>
+              </div>
+              <div class="code-block">
+                <div class="code-header">
+                  <span>Kąt i prędkość * fragment źródła</span>
+                </div>
+                <pre><code>aim:
+    group_angle_offset += iatan2(
+        (player_pos.cur.y - bullet_template.origin.y),
+        (player_pos.cur.x - bullet_template.origin.x)
+    );
+
+no_aim:
+    vector2_near(
+        bullet_template.velocity,
+        (group_angle_offset + bullet_template.angle),
+        speed
+    );
+    bullet_spawn_angle = (group_angle_offset + bullet_template.angle);</code></pre>
+              </div>
+              <p class="caption">
+                <a
+                  href="https://github.com/N0zoM1z0/th04/blob/0d72e9801a5c14c10384efcbb6734ceccb74ee63/src/main/bullet/add_impl.hpp#L4"
+                  >Makro pierścienia</a
+                > · <a
+                  href="https://github.com/N0zoM1z0/th04/blob/0d72e9801a5c14c10384efcbb6734ceccb74ee63/src/main/bullet/add.cpp#L422"
+                  >Cel i źródło prędkości</a
+                > · <a
+                  href="https://github.com/N0zoM1z0/th04/blob/0d72e9801a5c14c10384efcbb6734ceccb74ee63/src/main/bullet/types.hpp#L6"
+                  >Reprezentacja kąta</a
+                >
+              </p>
+            </details>
+          </section>
+
+          <section class="article-section" id="checking">
+            <h2>Sprawdzanie utrzymywanego źródła</h2>
+            <p>
+              Zarejestrowane kontrole projektu TH04 kompilują kod generowania pocisków, w tym ten pomocnik, z przypiętym łańcuchem narzędzi Turbo C++ 4.0 J.
+            </p>
+            <div class="verification">
+              <div>
+                <h3>2139 pasujących bajtów</h3>
+                <p>
+                  Skompilowany kod generowania punktorów pasuje do 2139-bajtowej sekcji oryginalnego pliku wykonywalnego.
+                </p>
+              </div>
+              <div>
+                <h3>Dwie czyste Kompilacje</h3>
+                <p>
+                  Dwie oddzielne Kompilacje dają te same pasujące bajty. Zapisane skróty wejściowe odpowiadają wyświetlonemu tutaj utrzymywanemu źródłu.
+                </p>
+              </div>
+            </div>
+            <p class="caption">
+              Zarejestrowany 3 października 2026 roku. <a
+                href="https://github.com/N0zoM1z0/th04/blob/0d72e9801a5c14c10384efcbb6734ceccb74ee63/docs/reconstruction/product/TH04_SEMANTIC_BULLET_GENERATION_V1236.md#validation"
+                >Przeczytaj kontrole kompilatora</a
+              >.
+            </p>
+            <details class="evidence-details">
+              <summary>Tożsamość celu i zakres analizy</summary>
+              <div class="evidence-table-wrap">
+                <table class="evidence-table">
+                  <tbody>
+                    <tr>
+                      <th scope="row">Oryginalny cel</th>
+                      <td><code>MAIN.EXE</code>, 156 258 bajtów, DOS MZ</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Wpis pomocnika</th>
+                      <td><code>0x2cfc8</code> w załadowanym obrazie REA</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Oryginalny plik offset</th>
+                      <td>
+                        <code>0x1e7c8</code>, zwrócony przez <code>address_to_file_offset</code>
+                      </td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Rejestrowana Kontrola kodu</th>
+                      <td>REA 4.1.0 * 7 października 2026</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <p>
+                Kontrole kompilatora obejmują pełną sekcję bullet-add code, w tym tego pomocnika. Porównują również wkład Mapy i nakładające się relokacje.
+              </p>
+              <p>
+                REA zweryfikował statyczny obraz obciążenia DOS w segmencie obciążenia <code>0x1000</code>. Jego adresy opisują ten obraz analizy. Wynik funkcji zgłasza 503 bajty treści w dwóch zakresach w zakresie 517 bajtów; wybrane instrukcje powyżej znajdują się w tych zgłaszanych zakresach.
+              </p>
+              <p>
+                Nazwy źródeł i kontrole kompilatora pochodzą z punktu kontrolnego TH04 <code>0d72e980</code>. Wcześniejsze obserwacje rekonstrukcji wykorzystywały własne skrypty analityczne projektu; ta strona dodaje nową inspekcję REA tego samego oryginalnego celu. Tożsamość dostarczonej gry jest przypięta przez manifest repozytorium, a niezależne pochodzenie nieskazitelnego zrzutu jest nadal otwarte.
+              </p>
+              <p>
+                Rysunek ilustruje obliczenie kąta. Sterowanie pełną grą, czas i zachowanie sprzętowe PC-98 mają oddzielne kontrole środowiska wykonawczego w projekcie rekonstrukcji.
+              </p>
+            </details>
+          </section>
+
+          <section class="article-section" id="project">
+            <h2>Pełna rekonstrukcja TH04</h2>
+            <p>
+              Projekt buduje cztery produkty dos gry z utrzymanego C++ i assembly. Poza generowaniem pocisków, źródło obejmuje etapy, bossów, renderowanie, wprowadzanie, menu, zakończenia i obsługę punktów.
+            </p>
+            <p>
+              <a class="text-link" href="https://github.com/N0zoM1z0/th04"
+                >Poznaj repozytorium TH04</a
+              >
+            </p>
+            <ul class="reading-list">
+              <li>
+                <a
+                  href="https://github.com/N0zoM1z0/th04/blob/0d72e9801a5c14c10384efcbb6734ceccb74ee63/src/main/bullet/add.cpp#L292"
+                  >Źródło generowania pocisków</a
+                ><span
+                  >Kompletny Pomocnik, inne typy wzorów i strojenie szablonów.</span
+                >
+              </li>
+              <li>
+                <a
+                  href="https://github.com/N0zoM1z0/th04/blob/0d72e9801a5c14c10384efcbb6734ceccb74ee63/docs/DOS_BUILD.md"
+                  >Dos build and run guide</a
+                ><span
+                  >Zbuduj źródło i przetestuj je w przepływie pracy emulatora PC-98 projektu.</span
+                >
+              </li>
+              <li>
+                <a
+                  href="https://github.com/N0zoM1z0/th04/blob/0d72e9801a5c14c10384efcbb6734ceccb74ee63/docs/RE_HANDOFF.md"
+                  >Aktualny stan projektu</a
+                ><span>Weryfikacja DOS i oddzielny natywny port x64.</span>
+              </li>
+            </ul>
+          </section>
+        </article>
+      </div>
+    </main>
+    <!-- website:footer:start -->
+    <!-- prettier-ignore -->
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <p>REA · Reverse Engineer Anything</p>
+        <div class="footer-links">
+          <a href="../../faq/">FAQ</a
+          ><a href="../../contributors/">Współtwórcy</a
+          ><a href="https://github.com/morluto/rea">Kod źródłowy</a
+          ><a href="https://github.com/morluto/rea/blob/main/LICENSE">Licencja MIT</a
+          ><a href="https://discord.gg/GkcryMnJDM">Dołącz do społeczności</a
+          ><a href="https://x.com/reatools">Obserwuj na X</a>
+        </div>
+      </div>
+    </footer>
+    <p class="sr-only" id="copy-status" role="status" aria-live="polite"></p>
+    <a class="back-to-top" href="#top" aria-label="Do góry">
+      <span aria-hidden="true">↑</span> Top
+    </a>
+    <!-- website:footer:end -->
+  </body>
+</html>

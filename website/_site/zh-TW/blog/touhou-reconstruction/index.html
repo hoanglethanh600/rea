@@ -1,0 +1,784 @@
+<!doctype html>
+<html lang="zh-TW" dir="ltr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>逆向工程的工業革命-REA</title>
+    <meta
+      name="description"
+      content="N0zoM1z0 回顧從手工逆向到程式設計助手參與的東方遊戲重建，以及經驗如何在 TH08、TH095 和 PC-98 TH04 之間積累。"
+    />
+    <!-- website:sharing:start -->
+    <!-- prettier-ignore -->
+    <link rel="canonical" href="https://rea.tools/zh-TW/blog/touhou-reconstruction/" />
+    <!-- website:languages:start -->
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="en" href="https://rea.tools/blog/touhou-reconstruction/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="zh-CN" href="https://rea.tools/zh-CN/blog/touhou-reconstruction/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="zh-TW" href="https://rea.tools/zh-TW/blog/touhou-reconstruction/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="ja" href="https://rea.tools/ja/blog/touhou-reconstruction/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="ko" href="https://rea.tools/ko/blog/touhou-reconstruction/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="tr" href="https://rea.tools/tr/blog/touhou-reconstruction/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="ru" href="https://rea.tools/ru/blog/touhou-reconstruction/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="vi" href="https://rea.tools/vi/blog/touhou-reconstruction/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="th" href="https://rea.tools/th/blog/touhou-reconstruction/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="de" href="https://rea.tools/de/blog/touhou-reconstruction/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="es" href="https://rea.tools/es/blog/touhou-reconstruction/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="fr" href="https://rea.tools/fr/blog/touhou-reconstruction/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="uk" href="https://rea.tools/uk/blog/touhou-reconstruction/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="pl" href="https://rea.tools/pl/blog/touhou-reconstruction/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="pt-BR" href="https://rea.tools/pt-BR/blog/touhou-reconstruction/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="ar" href="https://rea.tools/ar/blog/touhou-reconstruction/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="fa" href="https://rea.tools/fa/blog/touhou-reconstruction/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="id" href="https://rea.tools/id/blog/touhou-reconstruction/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="it" href="https://rea.tools/it/blog/touhou-reconstruction/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="el" href="https://rea.tools/el/blog/touhou-reconstruction/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="x-default" href="https://rea.tools/blog/touhou-reconstruction/" />
+<!-- website:languages:end -->
+    <!-- prettier-ignore -->
+    <meta property="og:type" content="website" />
+    <!-- prettier-ignore -->
+    <meta property="og:site_name" content="REA" />
+    <!-- prettier-ignore -->
+    <meta property="og:title" content="逆向工程的工業革命-REA" />
+    <!-- prettier-ignore -->
+    <meta property="og:description" content="N0zoM1z0 回顧從手工逆向到程式設計助手參與的東方遊戲重建，以及經驗如何在 TH08、TH095 和 PC-98 TH04 之間積累。" />
+    <!-- prettier-ignore -->
+    <meta property="og:url" content="https://rea.tools/zh-TW/blog/touhou-reconstruction/" />
+    <!-- prettier-ignore -->
+    <meta property="og:image" content="https://rea.tools/assets/social-card.png" />
+    <!-- prettier-ignore -->
+    <meta property="og:image:type" content="image/png" />
+    <!-- prettier-ignore -->
+    <meta property="og:image:width" content="1200" />
+    <!-- prettier-ignore -->
+    <meta property="og:image:height" content="630" />
+    <!-- prettier-ignore -->
+    <meta
+      property="og:image:alt"
+      content="REA-瞭解軟體的工作原理。 逆向工程與你的程式設計助手."
+    />
+    <!-- prettier-ignore -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <!-- prettier-ignore -->
+    <meta name="twitter:title" content="逆向工程的工業革命-REA" />
+    <!-- prettier-ignore -->
+    <meta name="twitter:description" content="N0zoM1z0 回顧從手工逆向到程式設計助手參與的東方遊戲重建，以及經驗如何在 TH08、TH095 和 PC-98 TH04 之間積累。" />
+    <!-- prettier-ignore -->
+    <meta name="twitter:image" content="https://rea.tools/assets/social-card.png" />
+    <!-- prettier-ignore -->
+    <meta
+      name="twitter:image:alt"
+      content="REA-瞭解軟體的工作原理。 逆向工程與你的程式設計助手."
+    />
+    <!-- website:sharing:end -->
+    <!-- website:theme:start -->
+    <meta name="theme-color" content="#ffffff" />
+    <!-- Apply the saved theme before styles load, to avoid a flash on navigation. -->
+    <script src="../../../assets/theme.js"></script>
+    <!-- website:theme:end -->
+    <link rel="icon" href="../../../assets/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="../../../assets/styles.css" />
+    <script src="../../../assets/main.js" defer></script>
+  <script id="website-messages" type="application/json">{"Copied": "已複製", "Code copied to clipboard.": "程式碼已複製到剪貼簿。", "Selected": "已選中", "Code selected. Use your keyboard to copy it.": "程式碼已選中，請用鍵盤快捷鍵複製。", "REA on GitHub ({count})": "REA在GitHub（{count})", "Switch to light mode": "切換至淺色模式", "Switch to dark mode": "切換至深色模式"}</script>
+  </head>
+  <body id="top" class="blog-article">
+    <a class="skip-link" href="#main">跳轉到內容</a>
+    <!-- website:header:start -->
+    <!-- prettier-ignore -->
+    <header class="site-header">
+      <div class="container header-inner">
+        <a class="brand" href="../../" aria-label="REA 首頁"
+          ><span class="brand-name">REA</span
+          ><span class="brand-caption" data-i18n-skip>Reverse Engineer Anything</span></a
+        >
+        <nav class="navigation" aria-label="主導航">
+          <a href="../../../get-started/" class="nav-start">開始使用</a>
+          <a href="../../showcase/">案例展示</a>
+          <a href="../" aria-current="page">部落格</a>
+          <a href="../../guides/">指南</a>
+        </nav>
+        <div class="header-social">
+          <details class="language-picker" data-i18n-skip><summary><span aria-hidden="true">文 / A</span> <span>繁體中文</span></summary><nav aria-label="繁體中文"><a href="../../../blog/touhou-reconstruction/" lang="en" dir="ltr" data-language="en">English</a><a href="../../../zh-CN/blog/touhou-reconstruction/" lang="zh-CN" dir="ltr" data-language="zh-CN">简体中文</a><a href="../../../zh-TW/blog/touhou-reconstruction/" lang="zh-TW" dir="ltr" data-language="zh-TW" aria-current="true">繁體中文</a><a href="../../../ja/blog/touhou-reconstruction/" lang="ja" dir="ltr" data-language="ja">日本語</a><a href="../../../ko/blog/touhou-reconstruction/" lang="ko" dir="ltr" data-language="ko">한국어</a><a href="../../../tr/blog/touhou-reconstruction/" lang="tr" dir="ltr" data-language="tr">Türkçe</a><a href="../../../ru/blog/touhou-reconstruction/" lang="ru" dir="ltr" data-language="ru">Русский</a><a href="../../../vi/blog/touhou-reconstruction/" lang="vi" dir="ltr" data-language="vi">Tiếng Việt</a><a href="../../../th/blog/touhou-reconstruction/" lang="th" dir="ltr" data-language="th">ไทย</a><a href="../../../de/blog/touhou-reconstruction/" lang="de" dir="ltr" data-language="de">Deutsch</a><a href="../../../es/blog/touhou-reconstruction/" lang="es" dir="ltr" data-language="es">Español</a><a href="../../../fr/blog/touhou-reconstruction/" lang="fr" dir="ltr" data-language="fr">Français</a><a href="../../../uk/blog/touhou-reconstruction/" lang="uk" dir="ltr" data-language="uk">Українська</a><a href="../../../pl/blog/touhou-reconstruction/" lang="pl" dir="ltr" data-language="pl">Polski</a><a href="../../../pt-BR/blog/touhou-reconstruction/" lang="pt-BR" dir="ltr" data-language="pt-BR">Português (Brasil)</a><a href="../../../ar/blog/touhou-reconstruction/" lang="ar" dir="rtl" data-language="ar">العربية</a><a href="../../../fa/blog/touhou-reconstruction/" lang="fa" dir="rtl" data-language="fa">فارسی</a><a href="../../../id/blog/touhou-reconstruction/" lang="id" dir="ltr" data-language="id">Bahasa Indonesia</a><a href="../../../it/blog/touhou-reconstruction/" lang="it" dir="ltr" data-language="it">Italiano</a><a href="../../../el/blog/touhou-reconstruction/" lang="el" dir="ltr" data-language="el">Ελληνικά</a><a href="../../../ml/blog/touhou-reconstruction/" lang="ml" dir="ltr" data-language="ml">മലയാളം · English</a><a href="../../../ur-Latn/blog/touhou-reconstruction/" lang="ur-Latn" dir="ltr" data-language="ur-Latn">Roman Urdu · English</a><a href="../../../ro/blog/touhou-reconstruction/" lang="ro" dir="ltr" data-language="ro">Română · English</a></nav></details>
+          <button class="theme-toggle" type="button" data-theme-toggle hidden>
+            <svg class="theme-moon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+              <path d="M20.9 13a9 9 0 0 1-9.9-9.9A9 9 0 1 0 20.9 13Z" />
+            </svg>
+            <svg class="theme-sun" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true" focusable="false">
+              <circle cx="12" cy="12" r="4" />
+              <path d="M12 2v2m0 16v2M2 12h2m16 0h2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42" />
+            </svg>
+          </button>
+          <a
+            class="nav-github"
+            href="https://github.com/morluto/rea"
+            aria-label="在 GitHub 檢視 REA"
+            title="在 GitHub 檢視 REA"
+          >
+            <svg
+              width="22"
+              height="22"
+              viewBox="0 0 16 16"
+              aria-hidden="true"
+              focusable="false"
+            >
+              <path
+                fill="currentColor"
+                d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82a7.65 7.65 0 0 1 2-.27c.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z"
+              />
+            </svg>
+            <span class="nav-github-count" hidden aria-hidden="true"></span>
+          </a>
+          <a
+            class="nav-discord"
+            href="https://discord.gg/GkcryMnJDM"
+            aria-label="加入 REA 的 Discord 社群"
+            title="加入 REA 的 Discord 社群"
+          >
+            <svg
+              width="22"
+              height="22"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+              focusable="false"
+            >
+              <path
+                fill="currentColor"
+                d="M20.317 4.3698a19.7913 19.7913 0 0 0-4.8851-1.5152.0741.0741 0 0 0-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 0 0-.0785-.037 19.7363 19.7363 0 0 0-4.8852 1.515.0699.0699 0 0 0-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 0 0 .0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 0 0 .0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 0 0-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 0 1-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 0 1 .0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 0 1 .0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 0 1-.0066.1276 12.2986 12.2986 0 0 1-1.873.8914.0766.0766 0 0 0-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 0 0 .0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 0 0 .0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 0 0-.0312-.0286ZM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189Zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189Z"
+              />
+            </svg>
+          </a>
+          <a
+            class="nav-x"
+            href="https://x.com/reatools"
+            aria-label="在 X 上關注 REA"
+            title="在 X 上關注 REA"
+          >
+            <svg
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+              focusable="false"
+            >
+              <path
+                fill="currentColor"
+                d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z"
+              />
+            </svg>
+          </a>
+        </div>
+      </div>
+    </header>
+    <!-- website:header:end -->
+    <main id="main" class="container">
+      <div class="page-heading">
+        <p class="breadcrumb">
+          <a href="../../">首頁</a> / <a href="../">部落格</a> / 東方遊戲重建
+        </p>
+        <p class="eyebrow">隨筆 · 東方遊戲重建</p>
+        <h1>逆向工程的工業革命。</h1>
+        <p class="page-meta">作者 N0zoM1z0 · 2026 年 10 月 10 日</p>
+        <div class="blog-takeaway">
+          <p class="eyebrow">要點</p>
+          <ul>
+            <li>
+              <strong>讓程式設計助手自主開展調查。</strong>明確目標和驗收標準，再讓它決定下一步嘗試什麼。
+            </li>
+            <li>
+              <strong>把程式碼儲存庫和 Git 當作工作記憶。</strong>推理過程和程式碼一起儲存。用 Git 留下檢查點，下一次會話就能在對話結束後接著做。
+            </li>
+            <li>
+              <strong>結論要由證據決定。</strong>說得再肯定，也需要驗證。證據不足時，“尚不清楚”是合理的答案。
+            </li>
+            <li>
+              <strong>驗證基準本身也要測試。</strong>故意給它應當拒絕的錯誤案例。如果它漏掉了 bug，就重新檢查依賴這套基準的早期結果。
+            </li>
+            <li>
+              <strong
+                >我們正處於逆向工程工業革命的早期。</strong
+              >方法還在成形，還有很多值得探索的地方。
+            </li>
+          </ul>
+        </div>
+      </div>
+      <figure class="reconstruction-flywheel" aria-labelledby="flywheel-title">
+        <div class="flywheel-heading">
+          <p class="eyebrow" id="flywheel-title">經驗如何產生複利</p>
+          <p><strong>人來定方向</strong> · 目標和驗收標準</p>
+        </div>
+        <div class="flywheel-diagram">
+          <svg
+            class="flywheel-arrows"
+            viewBox="0 0 720 470"
+            preserveAspectRatio="none"
+            aria-hidden="true"
+            focusable="false"
+          >
+            <defs>
+              <marker
+                id="flywheel-forward"
+                markerWidth="10"
+                markerHeight="10"
+                refX="7"
+                refY="4"
+                orient="auto"
+                markerUnits="userSpaceOnUse"
+              >
+                <path
+                  d="M 0 0 L 8 4 L 0 8"
+                  fill="none"
+                  stroke="#294f82"
+                  stroke-width="2"
+                />
+              </marker>
+              <marker
+                id="flywheel-revise"
+                markerWidth="10"
+                markerHeight="10"
+                refX="7"
+                refY="4"
+                orient="auto"
+                markerUnits="userSpaceOnUse"
+              >
+                <path
+                  d="M 0 0 L 8 4 L 0 8"
+                  fill="none"
+                  stroke="#5b6570"
+                  stroke-width="1.5"
+                />
+              </marker>
+            </defs>
+            <g
+              fill="none"
+              stroke="#294f82"
+              stroke-width="2.5"
+              marker-end="url(#flywheel-forward)"
+            >
+              <path
+                class="flywheel-path-desktop"
+                d="M 444 115 C 537 111 624 157 627 208"
+              />
+              <path d="M 528 365 C 456 437 263 437 191 365" />
+              <path
+                class="flywheel-path-desktop"
+                d="M 99 209 C 94 145 170 97 271 104"
+              />
+              <path
+                class="flywheel-path-mobile"
+                d="M 530 115 C 614 108 681 164 674 215"
+              />
+              <path
+                class="flywheel-path-mobile"
+                d="M 87 198 C 74 143 135 119 190 120"
+              />
+            </g>
+            <path
+              class="flywheel-path-desktop"
+              d="M 515 215 C 500 165 450 166 430 127"
+              fill="none"
+              stroke="#5b6570"
+              stroke-width="1.5"
+              stroke-dasharray="5 5"
+              marker-end="url(#flywheel-revise)"
+            />
+            <path
+              class="flywheel-path-mobile"
+              d="M 510 204 C 404 204 391 187 412 136"
+              fill="none"
+              stroke="#5b6570"
+              stroke-width="1.5"
+              stroke-dasharray="5 5"
+              marker-end="url(#flywheel-revise)"
+            />
+          </svg>
+          <div class="flywheel-node flywheel-agent">
+            <p class="flywheel-kicker">自主探索</p>
+            <h3>程式設計助手</h3>
+            <p>選擇實驗。<br />提出假設。</p>
+          </div>
+          <div class="flywheel-node flywheel-oracle">
+            <p class="flywheel-kicker">驗證</p>
+            <h3>驗證基準</h3>
+            <p>對照<br />具體的基準驗證。</p>
+          </div>
+          <div class="flywheel-node flywheel-memory">
+            <p class="flywheel-kicker">程式碼儲存庫</p>
+            <h3>工作記憶</h3>
+            <p>程式碼、證據、<br />檢查和經驗。</p>
+          </div>
+          <p class="flywheel-retry">
+            不匹配<br /><strong>修正假設</strong>
+          </p>
+          <p class="flywheel-center">
+            更好的<br /><strong>起點</strong>
+          </p>
+          <p class="flywheel-reuse">複用</p>
+          <p class="flywheel-pass">
+            <strong>透過</strong> · 保留結果及其證據
+          </p>
+        </div>
+        <div
+          class="flywheel-projects"
+          aria-label="在專案之間傳遞經驗"
+        >
+          <a href="#th08">TH08</a><span aria-hidden="true">→</span
+          ><a href="#th095">TH095</a><span aria-hidden="true">→</span
+          ><a href="#th04">TH04</a>
+        </div>
+        <figcaption>
+          每個專案都為下一個專案留下更好的起點。發現檢查有漏洞時，也要把檢查修好。
+        </figcaption>
+      </figure>
+      <div class="article-layout">
+        <nav class="contents" aria-label="在本頁">
+          <p>在本文中</p>
+          <ul>
+            <li><a href="#august">2026年8月</a></li>
+            <li><a href="#th08">TH08：接續前人的工作</a></li>
+            <li><a href="#different-approaches">兩種方法</a></li>
+            <li><a href="#th095">TH095：經驗的複利</a></li>
+            <li><a href="#th04"> TH04：跨架構</a></li>
+            <li>
+              <a href="#semantic-reconstruction">從精確到可讀</a>
+            </li>
+            <li><a href="#industrial-shift">工業化的轉變</a></li>
+            <li><a href="#possibilities">新的可能性</a></li>
+          </ul>
+        </nav>
+        <article class="article" aria-label="東方遊戲重建隨筆">
+          <section class="article-section" id="august">
+            <h2>2026年8月發生了什麼變化</h2>
+            <p>
+              在這之前，我做過很多手工逆向。我會反覆檢視一個函式，直到能解釋它，再對照程式驗證這個解釋。想推進專案，就得親自花更多時間研究下一個函式，腦子裡也要記住越來越多的整體關係。
+            </p>
+            <p>
+              我的逆向工作主要圍繞遊戲。我希望透過重建弄清遊戲的行為，最終做出移植版或 mod。這篇文章來自這些經歷。方法可以遷移到其他領域，但每個領域都需要先明確：什麼可以用可靠的基準來驗證。
+            </p>
+            <p>
+              2026 年 8 月，我開始認真探索讓程式設計助手做逆向。有了程式本身和常用開發工具，它究竟能走多遠？東方遊戲重建給了我一個足夠完整的專案來尋找答案。
+            </p>
+            <p>
+              早期的進展讓我吃驚。我不再需要為每一步作選擇，調查也能持續推進。對比失敗後，助手可能轉去檢視另一個呼叫方，寫一段診斷程式，再根據結果決定下一步。這種自主性改變了我的工作：我可以更多關注專案方向，以及檢查是否可靠。
+            </p>
+            <p>
+              速度先引起了我的注意。隨後我開始想：當前專案結束後，什麼會留下來？下一個遊戲能不能用上我們剛學到的經驗？
+            </p>
+          </section>
+          <section class="article-section" id="th08">
+            <h2>TH08：接續前人的工作</h2>
+            <p>
+              <a href="https://github.com/N0zoM1z0/th08">TH08</a>，也就是《東方永夜抄》，從接續<a href="https://github.com/GensokyoClub/th08"
+                >GensokyoClub 的重建工作</a
+              >開始。他們的公開原始碼提供了紮實的基礎，也留下了構建經驗和貢獻歷史。我在後續工作中保留了這些歷史。
+            </p>
+            <p>
+              匯入的歷史截至 8 月 10 日的公開檢查點。我的獨立續作從 8 月 13 日開始。到 8 月 19 日，進度臺賬中已識別的 1,107 個遊戲函式都有了原始碼。
+            </p>
+            <p>
+              8 月 24 日，我們提交了可玩的 Linux 重建移植版，距離開始續作約十一天。隨後做出了 Web 版。8 月 30 日，原生 Linux 64 位版釋出。
+            </p>
+            <p>
+              最打動我的是，這些工作最終變成了大家能執行的程式。為此必須解決單個函式以外的問題。即使兩個函式分別看起來都對，也可能各自使用一份本應共享的狀態。
+            </p>
+            <p>
+              這讓對照檢查成為工作的核心。我把這些基準稱為<strong>驗證基準（oracle）</strong>。程式碼對比可以檢查重建函式是否復現原始指令；執行時檢查可以確認已走過的路徑是否到達預期狀態。助手提出解釋，再驗證它。發現不匹配，就有了具體的調查方向。
+            </p>
+            <h3>常量錯了，卻仍然“精確匹配”</h3>
+            <p>
+              校驗工具也是人寫的軟體。TH08 讓我清楚地看到，多少結論都依賴著它。
+            </p>
+            <p>
+              9 月，下游 Switch 移植版報告了一個 bug，最後追溯到道具自動收集。重建原始碼把玩家火力與 <code>0.0</code> 比較，而原版用的是 <code>128.0</code>，即滿火力的閾值。
+            </p>
+            <p>
+              正常火力不會小於零，所以重建版的火力條件幾乎總是滿足。玩家到了收集線上方，不用滿火力也會吸取道具。條件裡的其他例外沒有問題，但這一個常量就改變了行為。
+            </p>
+            <p>
+              <strong
+                >可這個函式之前已經透過了精確對比。</strong
+              >
+            </p>
+            <p>
+              重新編譯後，常量可能出現在不同地址。比較工具會先調整編譯後指令中的地址，再和原版比較，以處理這種差異。問題是，它從未檢查被引用地址中實際存放的浮點值。
+            </p>
+            <p>
+              漏洞就在這裡：工具可以把重建指令的引用地址調整為原版的 <code>128.0</code>，而原始碼裡寫的仍然是 <code>0.0</code>。指令位元組匹配了，原始碼含義卻不同。
+            </p>
+            <p>
+              <a href="https://github.com/N0zoM1z0/th08/pull/11"
+                >9 月 2 日的修復</a
+              >糾正了原始碼，並讓比較工具檢查被引用常量的實際位元組。隨後進行的<a href="https://github.com/N0zoM1z0/th08/pull/13">全面審計</a>檢查了 1,548 處浮點常量引用，又在五個已透過驗收的函式中發現十二處錯誤引用。
+            </p>
+            <p>
+              現在工具會檢查每一處這樣的浮點常量。測試還會故意使用錯誤值，確保工具能夠拒絕它們。我們也重新檢查了曾經透過舊版檢查的結果。
+            </p>
+            <p>
+              <strong>驗證基準本身也需要重建。</strong>修復它，就是修復遊戲的一部分。
+            </p>
+            <p>
+              當團隊幾乎就是一個人加一群程式設計助手時，這一點尤其重要。我無法逐行檢查它們寫出的所有程式碼，很多信心都來自檢查結果。共享驗證基準中的盲點，可能在我發現之前就影響許多調查。我必須弄清工具到底驗證了什麼，再用應當失敗的案例測試它。
+            </p>
+            <p>
+              隨著專案推進，檢查程式進入了程式碼儲存庫。原始碼修改的理由也儲存在裡面，還有讓下一次會話能夠接著做的記錄。<strong
+                >程式碼儲存庫正在成為專案的工作記憶。</strong
+              >
+            </p>
+            <p>
+              <strong
+                >每完成一批工作，我們既得到了還原的程式碼，也改善了下一批工作的環境。</strong
+              >
+            </p>
+          </section>
+          <section class="article-section" id="different-approaches">
+            <h2>兩種不同的重建理念</h2>
+            <p>
+              GensokyoClub 的<a
+                href="https://web.archive.org/web/20260909051514/https://github.com/GensokyoClub/th08#important-notice"
+                >公開 README</a
+              >明確表達了對這種工作的異議。公告說，專案完成前，後續開發將在私下進行。其中有這樣一段話：
+            </p>
+            <blockquote>
+              <p>
+                “這個領域裡出現了利用我們成果的投機者（AI 反編譯和移植專案），給未來的反編譯工作留下了不好的印象……”
+              </p>
+            </blockquote>
+            <p>
+              公告也提到了維護者承受的心理壓力。他們的貢獻政策不接受主要由 AI 生成的 PR。他們用業餘時間投入了艱難的工作，這些成果讓我的續作成為可能。我尊重他們付出的努力。我想討論的分歧，是重建應當如何推進，以及貢獻應當如何評價。
+            </p>
+            <p>
+              在我熟悉的手工流程中，理解一個函式和重建它，通常由同一個人完成。專案非常依賴這個人的專業能力。很多推理發生在工作過程中，所以對貢獻者本人的信任很重要。
+            </p>
+            <p>
+              已有專案本就會在原始碼和構建工具中儲存知識。對我而言，變化在於：程式設計助手能利用這些知識，自主推進下一次調查。
+            </p>
+            <p>
+              在我的續作中，我來確定目標和驗收標準，助手有充分的調查自由。它提出的重建方案必須透過相應檢查。我希望其他人能夠看懂我們為什麼選擇這個實現，即使大部分工作由助手完成。
+            </p>
+            <p>
+              這可能是一個艱難的轉變。多年的細緻工作，可能成為一個推進得更快的續作的基礎。這會帶來真實的歸屬與署名問題，也改變維護者在接受貢獻前需要了解的事情。
+            </p>
+            <p>
+              工業化的比喻有助於理解這一點。手工作業的過程往往依賴操作者的技藝。機器改變了這些技藝發揮作用的位置，但仍然需要人設計流程、識別錯誤產出。不同社群可以選擇接受多少這樣的變化。
+            </p>
+            <p>
+              我的選擇是公開繼續，註明繼承的工作並保留其歷史。我希望新工作可以被審查。這樣，我們才能探索這種方法能走多遠，也從沿途的問題中學習。
+            </p>
+            <p class="caption">
+              來源：GensokyoClub 的<a
+                href="https://github.com/GensokyoClub/th08/blob/e874b98e210b3be1ed21c5e03d54b883eac5069c/README.md#important-notice"
+                >README 公告</a
+              >（於 2026 年 10 月 10 日核對）及其<a
+                href="https://github.com/GensokyoClub/th08/blob/f345c7dee07b849f2ff93a0029ab5ede126bf12c/CODE_OF_CONDUCT.md"
+                >貢獻政策</a
+              >。上面的引文為節選譯文。TH08 的<a
+                href="https://github.com/N0zoM1z0/th08/blob/d2a00f4acb4a13916e07a00bd13f714961714628/README.md#credits-and-provenance"
+                >貢獻署名與來源記錄</a
+              >說明了獨立續作的起點。
+            </p>
+          </section>
+          <section class="article-section" id="th095">
+            <h2>TH095：經驗開始產生複利</h2>
+            <p>
+              <a href="https://github.com/N0zoM1z0/th095">TH095</a>，也就是《東方文花帖》，讓這些經驗的價值更容易看清。儲存庫於 8 月 29 日建立，當時臺賬中確認的遊戲函式數量為零。我們仍需研究遊戲本身，但已經更清楚如何開始重建，以及怎樣持續推進。
+            </p>
+            <p>
+              到 9 月 7 日，全部 697 個已識別遊戲函式都有了原始碼。9 月 8 日，其中 696 個透過了精確對比。9 月 9 日，整個程式完成連結。9 月 10 日，Windows i386 重建版被記錄為可玩，距離初始化約十二天。
+            </p>
+            <p>
+              這比第一個專案的速度更讓我興奮。新目標能受益於另一個遊戲的工作。經驗已經進入工具，也進入了專案的組織方式。
+            </p>
+            <p>
+              例如，TH08 教會我們儘早關注整個程式。如果幾個還原函式依賴同一份狀態，分別對比它們仍然會留下一個關鍵問題：它們能否一起正常工作？這條經驗影響了 TH095 的整程式構建方式。
+            </p>
+            <p>
+              經驗只記在我腦子裡，我在場時它才有用。變成其他會話能執行的檢查後，即使我離開，它仍能幫助專案。下一個助手可以利用檢查結果，不用重複當初得出這條經驗的調查。
+            </p>
+            <p>
+              浮點常量的 bug 也屬於這份記憶。它說明，檢查引用時，還要檢查引用背後的資料。把修正儲存在程式碼旁邊，可以幫助後續專案避免繼承舊工具的盲點。
+            </p>
+            <p>
+              <strong
+                >方法本身成了下一個遊戲的起始材料。</strong
+              >我們可以把更多精力放在新目標真正不同的地方。
+            </p>
+            <p>
+              後來加入的人也能受益。他們可以檢視某個決定，重新執行檢查，再繼續工作。不用先重走整個專案的歷史，才能理解原始碼為何這樣寫。
+            </p>
+          </section>
+          <section class="article-section" id="th04">
+            <h2>TH04：換了架構，工作方式仍然適用</h2>
+            <p>
+              <a href="https://github.com/N0zoM1z0/th04">TH04</a>，也就是《東方幻想鄉》，把這套工作帶到了 PC-98 DOS 時代。這次是一個由四個程式協作的 16 位環境。理解硬體行為，需要和 Windows 遊戲不同的證據。已有的<a href="https://github.com/nmlgc/ReC98">ReC98 工作</a>同樣提供了寶貴的知識與原始碼材料。
+            </p>
+            <p>
+              DOS 重建版現在已經能執行。我手工打完了完整的 Normal 路線，看到結局，並檢查了存檔。目前正在做原生 64 位移植。先得到一個正常工作的 DOS 版，就為移植提供了參照。
+            </p>
+            <p>
+              架構改變了要調查的問題，也改變了用來驗證的編譯器和執行時。但助手依然能沿著問題找到結果，再用結果指導下一次實驗。
+            </p>
+            <p>
+              比如從遊戲過程切換到結局：哪些狀態需要跨越這個邊界？哪個程式負責它們？我們可以對照 DOS 原版調查。只要證據和檢查可用，助手就能像研究 Windows 遊戲一樣推進這個問題。
+            </p>
+            <p>
+              這就是 TH04 對這篇文章的意義。大幅的平臺變化，並沒有迫使我們重新發明一套工作方式。架構決定了問題，工作流程仍然提供瞭解決問題的方法。
+            </p>
+            <p>
+              做 64 位移植時，我們可以把新實現與 DOS 上已經還原的行為對照。重建得到的知識為移植提供了基礎。
+            </p>
+            <p class="caption">
+              截至 2026 年 10 月 10 日：<a
+                href="https://github.com/N0zoM1z0/th04/blob/bb9faca54e2eb3c0d6c757c75d59ac29d2cd5e93/docs/RE_HANDOFF.md"
+                >DOS 重建與手工測試</a
+              > · <a href="https://github.com/N0zoM1z0/th04/tree/port/modern-64"
+                >64 位移植</a
+              >。移植仍在開發中。
+            </p>
+          </section>
+          <section class="article-section" id="semantic-reconstruction">
+            <h2>從精確還原到可讀原始碼</h2>
+            <p>
+              重建版能執行之後，我還希望別人能讀懂它。
+            </p>
+            <p>
+              對我而言，彙編和原始偏移就像老朋友。我知道，這種“可讀”的定義有點特別。多數人更希望直接看懂遊戲邏輯，而不用在腦中記住可執行檔案的記憶體佈局。
+            </p>
+            <p>
+              這就需要<strong>語義重建</strong>。一個還原欄位可能仍然只有偏移作為標識。我們追蹤遊戲如何使用它，直到能解釋其作用，再依據證據賦予合適的名稱和型別。推理過程和原始碼一起儲存，後來的人就能知道這個解釋從何而來。
+            </p>
+            <p>
+              移植時，語義尤其重要。絕對地址能告訴我資料在舊程式中的位置，卻很難幫助 64 位實現決定哪個物件應當持有這份狀態。要正確遷移行為，就得還原舊記憶體訪問背後的關係。
+            </p>
+            <p>我現在採用這樣的順序：</p>
+            <ol>
+              <li>
+                <strong>先建立精確還原的基線。</strong>用當年的編譯器編譯重建程式碼，與原始可執行檔案對比相關程式碼和資料。記錄尚未解決的差異，讓下一階段有明確的起點。
+              </li>
+              <li>
+                <strong>在原平臺上構建，並實際遊玩。</strong>用原架構和編譯器把各部分連結為真正的程式，走過重要的遊戲路徑。這能發現單函式對比漏掉的共享狀態或初始化問題。
+              </li>
+              <li>
+                <strong
+                  >對照兩套基準做語義重建。</strong
+                >每次處理遊戲中一個完整、連貫的部分，明確還原原始碼的含義。改善程式碼表達，同時保留精確對比和可玩的原平臺構建。
+              </li>
+              <li>
+                <strong>再做現代平臺移植。</strong>把已經確定的行為帶入新環境，例如原生 64 位構建。原平臺重建版繼續作為比較移植行為的參照。
+              </li>
+            </ol>
+            <p>
+              第二階段的可玩構建，在第三階段成為<strong>第二套驗證基準</strong>。第一套檢查修改後的原始碼是否仍然復現原版相關程式碼和資料；第二套檢查重建程式是否能構建，並在實際測試的路徑上保持正確行為。
+            </p>
+            <p>
+              它們能發現不同型別的錯誤。型別修改可能改變生成的指令。狀態歸屬的修改，可能讓遊戲的兩部分各自使用一份狀態。保留兩套檢查，助手就能在繼續重構之前，針對具體的失敗展開調查。
+            </p>
+            <p>
+              命名也需要自己的證據。精確對比不能證明某欄位一定是“無敵時間”。我們必須從遊戲如何寫入和使用它來確認。如果含義仍不明確，中性名稱比自信的猜測更有利於下一位讀者。
+            </p>
+            <p>
+              這個順序來自專案中的教訓。TH08 在後來的一些原平臺審計之前，就已經有了可玩的移植版，一些缺陷因此更難察覺。<a
+                href="https://github.com/N0zoM1z0/touhou-reconstruction-factory/blob/717e1b8560783ed17a39fdf159d30aa16bb307a7/docs/semantic-reconstruction.md"
+                >Factory 目前的工作流程</a
+              >把原平臺構建放在前面，讓語義重建先有參照，再開始移植。
+            </p>
+            <p>
+              <strong
+                >精確重建提供基準，語義重建讓還原的知識可用。</strong
+              >移植隨後建立在兩者之上。
+            </p>
+          </section>
+          <section class="article-section" id="industrial-shift">
+            <h2>為什麼這是工業化的轉變</h2>
+            <p>
+              這些專案改變了我投入注意力的地方。助手能自主推進大部分調查之後，改善它們的工作環境，就成了我最值得做的事情之一。一項工具的改進，可以幫助之後所有需要它的函式。
+            </p>
+            <p>
+              自主性在這裡很重要。下一步該怎麼做，常常在實驗失敗後才清楚。助手需要足夠的自由，沿著結果探索意料之外的方向。如果每一步都要等我指定，大部分工作仍然綁在我的注意力上。
+            </p>
+            <p>
+              我預期助手會提出錯誤假設。關鍵是我們能否驗證它們，並從結果中學習。失敗的檢查應該幫助它理解錯誤，再次嘗試。我仍要判斷：累積的證據是否足以支援某個專案里程碑。
+            </p>
+            <p>
+              REA 讓助手能夠使用分析工具。調查某函式的呼叫方時，它可以直接繼續檢查那個呼叫方。重建專案提供編譯器和自己的對照檢查。助手用它們驗證提出的原始碼，看看解釋在哪些地方成立。
+            </p>
+            <p>
+              TH08 的 bug 說明，檢查工具本身也值得認真工程化。相同的比較用於數百個函式時，一個漏洞的影響可能遠大於某個實現中的錯誤。測試檢查器，能改善所有後續工作得到的反饋。
+            </p>
+            <p>
+              工業史中有一個合適的例子：博爾頓和瓦特在<a
+                href="https://collection.sciencemuseumgroup.org.uk/objects/co51439/watts-steam-engine-indicator"
+                >1796 年引入蒸汽機示功器</a
+              >，幫助調節閥門。記錄式示功器能繪出活塞行程中的壓力變化，讓人看到機器內部的執行情況。我們的比較工具也有類似作用：改進機器時，能看清它究竟做了什麼。
+            </p>
+            <p>
+              <strong
+                >我們正處於這場工業化轉變的早期。</strong
+              >許多基礎設施還不成熟。助手推進工作的速度，可能超過原有檢查的承受能力，所以流程也要一起發展。共享工具出現缺陷時，要修好它，並重查受影響的結果。下一個專案才能繼承更可靠的工具。
+            </p>
+            <p>
+              任何一段對話都有實際的長度限制。大型重建完成之前，對話就會結束。程式碼儲存庫必須讓下一次會話能繼續工作，而不丟失上一次決定背後的理由。
+            </p>
+            <p>
+              <a
+                href="https://github.com/N0zoM1z0/touhou-reconstruction-factory"
+                >Touhou Reconstruction Factory</a
+              >正是為此而建立。它提供一種共用方式，讓專案把檢查和經驗傳遞下去。一個遊戲的工作，可以改善另一個遊戲的起點。
+            </p>
+            <p>
+              這就是工業化比喻對我的意義：經驗開始進入別人也能使用的工具。改善工具，就能改變下一個人或下一個助手能完成多少工作。
+            </p>
+          </section>
+          <section class="article-section" id="possibilities">
+            <h2>現在值得嘗試的專案</h2>
+            <p>
+              速度的意義在於，它改變了是否開始一個專案的決定。某個遊戲也許很值得逆向，卻需要我投入遠超現實所能承受的精力。很多專案因此一直停留在想法裡。
+            </p>
+            <p>
+              現在，我看到了透過一次次調查持續推進它們的可能。得到能執行的重建版，讓移植更可行；還原可讀的語義，讓別人更容易探索 mod。理解遊戲的投入，可以在第一版執行之後繼續帶來回報。
+            </p>
+            <p>
+              現在看到一個陌生程式，我會問：<strong
+                >怎樣的工具訪問、反饋和知識積累，能讓助手可靠地推進這個專案？</strong
+              >
+            </p>
+            <p>
+              這個問題讓我考慮以前會放棄的專案。每個專案都能改善下一個專案的工作方式。我想繼續探索，這能帶我們走多遠。
+            </p>
+          </section>
+          <section class="article-section" id="sources">
+            <details class="native-details">
+              <summary>專案里程碑與來源</summary>
+              <p>
+                這些日期是已記錄的專案檢查點，於 2026 年 10 月 10 日對照公開 GitHub 歷史核實。耗時是提交之間經過的日曆時間。“有原始碼”“透過精確對比”“完成構建”和“得到執行結果”是不同的里程碑。
+              </p>
+              <ul>
+                <li>
+                  <strong>TH08：</strong><a
+                    href="https://github.com/N0zoM1z0/th08/commit/001bf3e9c91cc35b79c7a0e36b3565b86f494362"
+                    >8 月 13 日開始續作</a
+                  >、<a
+                    href="https://github.com/N0zoM1z0/th08/blob/15caba73df6735fc44eac4783bc61b8d098ea830/docs/PROGRESS.md"
+                    >8 月 19 日原始碼臺賬</a
+                  >、<a
+                    href="https://github.com/N0zoM1z0/th08/commit/da07b21c8cb63230142b0a66228d6aac66555f3f"
+                    >8 月 24 日 Linux 移植</a
+                  >、<a
+                    href="https://github.com/N0zoM1z0/th08/commit/529eb1a3afa05ae36467731eaccb12e3e50e132f"
+                    >8 月 26 日 Web 版</a
+                  >、<a
+                    href="https://github.com/N0zoM1z0/th08/releases/tag/v0.2.0-linux-64bit"
+                    >8 月 30 日 64 位 Linux 釋出</a
+                  >。
+                </li>
+                <li>
+                  <strong>TH095：</strong><a
+                    href="https://github.com/N0zoM1z0/th095/blob/8c31e6f892d945423b7f7b439747a2bd915f82d8/docs/PROGRESS.md"
+                    >8 月 29 日初始臺賬</a
+                  >、<a
+                    href="https://github.com/N0zoM1z0/th095/blob/0fa857fb2b2ec6237732e4d6be8d0a28069c9330/docs/PROGRESS.md"
+                    >9 月 7 日原始碼臺賬</a
+                  >、<a
+                    href="https://github.com/N0zoM1z0/th095/blob/74baddfccb712d1311a4d6e7487a63cd1100452e/docs/PROGRESS.md"
+                    >9 月 8 日對比結果</a
+                  >、<a
+                    href="https://github.com/N0zoM1z0/th095/commit/33d46a0ee48f37060d973125a1a7632a40f8d998"
+                    >9 月 9 日連結</a
+                  >、<a
+                    href="https://github.com/N0zoM1z0/th095/blob/3442dcf29d9e0b5bef384a49bd0c9ad32a711826/docs/WHOLE_BUILD_TODO.md"
+                    >9 月 10 日可玩構建記錄</a
+                  >。
+                </li>
+                <li>
+                  <strong>TH04：</strong><a
+                    href="https://github.com/N0zoM1z0/th04/blob/bb9faca54e2eb3c0d6c757c75d59ac29d2cd5e93/docs/RE_HANDOFF.md"
+                    >10 月 10 日交接記錄</a
+                  >包含可執行的 DOS 重建版、維護者完成的 Normal 路線測試，以及當前的 64 位移植階段。
+                </li>
+                <li>
+                  <strong>TH08 驗證基準修正：</strong><a href="https://github.com/N0zoM1z0/th08/issues/10"
+                    >道具自動收集 bug 報告</a
+                  >、<a
+                    href="https://github.com/N0zoM1z0/th08/commit/7148a76ba224742677895c7160807a68897957d5"
+                    >原始碼與比較工具修復</a
+                  >、<a
+                    href="https://github.com/N0zoM1z0/th08/commit/a393f400786e4cc6cbb1000af0dad3276da12c78"
+                    >全部浮點常量審計</a
+                  >。
+                </li>
+                <li>
+                  <strong>語義重建：</strong><a
+                    href="https://github.com/N0zoM1z0/th08/blob/d2a00f4acb4a13916e07a00bd13f714961714628/docs/SEMANTIC_PLAYBOOK.md"
+                    >TH08 可讀性指南</a
+                  >和<a
+                    href="https://github.com/N0zoM1z0/touhou-reconstruction-factory/blob/717e1b8560783ed17a39fdf159d30aa16bb307a7/docs/semantic-reconstruction.md"
+                    >Factory 的階段順序及兩條驗證路徑</a
+                  >。
+                </li>
+                <li>
+                  <strong>工業史：</strong><a
+                    href="https://collection.sciencemuseumgroup.org.uk/objects/co51439/watts-steam-engine-indicator"
+                    >英國科學博物館集團的蒸汽機示功器記錄</a
+                  >介紹了 1796 年的引入及壓力記錄機制。
+                </li>
+                <li>
+                  <strong>方法：</strong>Factory 的<a
+                    href="https://github.com/N0zoM1z0/touhou-reconstruction-factory/blob/038b6bed51d273c8b3680553b6f43e1b97d19bd1/docs/agent-autonomy.md"
+                    >助手自主性</a
+                  >與<a
+                    href="https://github.com/N0zoM1z0/touhou-reconstruction-factory/blob/038b6bed51d273c8b3680553b6f43e1b97d19bd1/docs/knowledge-base.md"
+                    >跨遊戲知識</a
+                  >文件儲存了工作原則和經驗。
+                </li>
+              </ul>
+            </details>
+            <p>
+              <a class="text-link" href="../">更多文章</a> · <a class="text-link" href="../../showcase/th04/"
+                >檢視 TH04 逆向案例</a
+              >
+            </p>
+          </section>
+        </article>
+      </div>
+    </main>
+    <!-- website:footer:start -->
+    <!-- prettier-ignore -->
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <p>REA · Reverse Engineer Anything</p>
+        <div class="footer-links">
+          <a href="../../faq/">FAQ</a
+          ><a href="../../contributors/">貢獻者</a
+          ><a href="https://github.com/morluto/rea">原始碼</a
+          ><a href="https://github.com/morluto/rea/blob/main/LICENSE">MIT 許可證</a
+          ><a href="https://discord.gg/GkcryMnJDM">加入社群</a
+          ><a href="https://x.com/reatools">在 X 上關注我們</a>
+        </div>
+      </div>
+    </footer>
+    <p class="sr-only" id="copy-status" role="status" aria-live="polite"></p>
+    <a class="back-to-top" href="#top" aria-label="回到頂部">
+      <span aria-hidden="true">↑</span> 頂部
+    </a>
+    <!-- website:footer:end -->
+  </body>
+</html>

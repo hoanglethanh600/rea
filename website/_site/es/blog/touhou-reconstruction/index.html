@@ -1,0 +1,784 @@
+<!doctype html>
+<html lang="es" dir="ltr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Revolución Industrial de la Ingeniería Inversa-REA</title>
+    <meta
+      name="description"
+      content="N0zoM1z0 reflexiona sobre la ingeniería inversa manual, la reconstrucción de Touhou con agentes de IA y cómo el conocimiento se compone en TH08 , TH095 y PC-98 TH04 ."
+    />
+    <!-- website:sharing:start -->
+    <!-- prettier-ignore -->
+    <link rel="canonical" href="https://rea.tools/es/blog/touhou-reconstruction/" />
+    <!-- website:languages:start -->
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="en" href="https://rea.tools/blog/touhou-reconstruction/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="zh-CN" href="https://rea.tools/zh-CN/blog/touhou-reconstruction/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="zh-TW" href="https://rea.tools/zh-TW/blog/touhou-reconstruction/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="ja" href="https://rea.tools/ja/blog/touhou-reconstruction/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="ko" href="https://rea.tools/ko/blog/touhou-reconstruction/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="tr" href="https://rea.tools/tr/blog/touhou-reconstruction/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="ru" href="https://rea.tools/ru/blog/touhou-reconstruction/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="vi" href="https://rea.tools/vi/blog/touhou-reconstruction/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="th" href="https://rea.tools/th/blog/touhou-reconstruction/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="de" href="https://rea.tools/de/blog/touhou-reconstruction/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="es" href="https://rea.tools/es/blog/touhou-reconstruction/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="fr" href="https://rea.tools/fr/blog/touhou-reconstruction/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="uk" href="https://rea.tools/uk/blog/touhou-reconstruction/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="pl" href="https://rea.tools/pl/blog/touhou-reconstruction/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="pt-BR" href="https://rea.tools/pt-BR/blog/touhou-reconstruction/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="ar" href="https://rea.tools/ar/blog/touhou-reconstruction/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="fa" href="https://rea.tools/fa/blog/touhou-reconstruction/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="id" href="https://rea.tools/id/blog/touhou-reconstruction/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="it" href="https://rea.tools/it/blog/touhou-reconstruction/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="el" href="https://rea.tools/el/blog/touhou-reconstruction/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="x-default" href="https://rea.tools/blog/touhou-reconstruction/" />
+<!-- website:languages:end -->
+    <!-- prettier-ignore -->
+    <meta property="og:type" content="website" />
+    <!-- prettier-ignore -->
+    <meta property="og:site_name" content="REA" />
+    <!-- prettier-ignore -->
+    <meta property="og:title" content="Revolución Industrial de la Ingeniería Inversa-REA" />
+    <!-- prettier-ignore -->
+    <meta property="og:description" content="N0zoM1z0 reflexiona sobre la ingeniería inversa manual, la reconstrucción de Touhou con agentes de IA y cómo el conocimiento se compone en TH08 , TH095 y PC-98 TH04 ." />
+    <!-- prettier-ignore -->
+    <meta property="og:url" content="https://rea.tools/es/blog/touhou-reconstruction/" />
+    <!-- prettier-ignore -->
+    <meta property="og:image" content="https://rea.tools/assets/social-card.png" />
+    <!-- prettier-ignore -->
+    <meta property="og:image:type" content="image/png" />
+    <!-- prettier-ignore -->
+    <meta property="og:image:width" content="1200" />
+    <!-- prettier-ignore -->
+    <meta property="og:image:height" content="630" />
+    <!-- prettier-ignore -->
+    <meta
+      property="og:image:alt"
+      content="REA: Descubra cómo funciona el software. Ingeniería inversa con su agente de codificación."
+    />
+    <!-- prettier-ignore -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <!-- prettier-ignore -->
+    <meta name="twitter:title" content="Revolución Industrial de la Ingeniería Inversa-REA" />
+    <!-- prettier-ignore -->
+    <meta name="twitter:description" content="N0zoM1z0 reflexiona sobre la ingeniería inversa manual, la reconstrucción de Touhou con agentes de IA y cómo el conocimiento se compone en TH08 , TH095 y PC-98 TH04 ." />
+    <!-- prettier-ignore -->
+    <meta name="twitter:image" content="https://rea.tools/assets/social-card.png" />
+    <!-- prettier-ignore -->
+    <meta
+      name="twitter:image:alt"
+      content="REA: Descubra cómo funciona el software. Ingeniería inversa con su agente de codificación."
+    />
+    <!-- website:sharing:end -->
+    <!-- website:theme:start -->
+    <meta name="theme-color" content="#ffffff" />
+    <!-- Apply the saved theme before styles load, to avoid a flash on navigation. -->
+    <script src="../../../assets/theme.js"></script>
+    <!-- website:theme:end -->
+    <link rel="icon" href="../../../assets/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="../../../assets/styles.css" />
+    <script src="../../../assets/main.js" defer></script>
+  <script id="website-messages" type="application/json">{"Copied": "Copiado", "Code copied to clipboard.": "Código copiado al portapapeles.", "Selected": "Seleccionados", "Code selected. Use your keyboard to copy it.": "Código seleccionado. Usa el teclado para copiarlo.", "REA on GitHub ({count})": "REA en GitHub ({count})", "Switch to light mode": "Cambiar al modo claro", "Switch to dark mode": "Cambiar al modo oscuro"}</script>
+  </head>
+  <body id="top" class="blog-article">
+    <a class="skip-link" href="#main">Saltar al contenido</a>
+    <!-- website:header:start -->
+    <!-- prettier-ignore -->
+    <header class="site-header">
+      <div class="container header-inner">
+        <a class="brand" href="../../" aria-label="Inicio de REA"
+          ><span class="brand-name">REA</span
+          ><span class="brand-caption" data-i18n-skip>Reverse Engineer Anything</span></a
+        >
+        <nav class="navigation" aria-label="Navegación principal">
+          <a href="../../../get-started/" class="nav-start">Primeros pasos</a>
+          <a href="../../showcase/">Casos prácticos</a>
+          <a href="../" aria-current="page">Blog</a>
+          <a href="../../guides/">Guías</a>
+        </nav>
+        <div class="header-social">
+          <details class="language-picker" data-i18n-skip><summary><span aria-hidden="true">文 / A</span> <span>Español</span></summary><nav aria-label="Español"><a href="../../../blog/touhou-reconstruction/" lang="en" dir="ltr" data-language="en">English</a><a href="../../../zh-CN/blog/touhou-reconstruction/" lang="zh-CN" dir="ltr" data-language="zh-CN">简体中文</a><a href="../../../zh-TW/blog/touhou-reconstruction/" lang="zh-TW" dir="ltr" data-language="zh-TW">繁體中文</a><a href="../../../ja/blog/touhou-reconstruction/" lang="ja" dir="ltr" data-language="ja">日本語</a><a href="../../../ko/blog/touhou-reconstruction/" lang="ko" dir="ltr" data-language="ko">한국어</a><a href="../../../tr/blog/touhou-reconstruction/" lang="tr" dir="ltr" data-language="tr">Türkçe</a><a href="../../../ru/blog/touhou-reconstruction/" lang="ru" dir="ltr" data-language="ru">Русский</a><a href="../../../vi/blog/touhou-reconstruction/" lang="vi" dir="ltr" data-language="vi">Tiếng Việt</a><a href="../../../th/blog/touhou-reconstruction/" lang="th" dir="ltr" data-language="th">ไทย</a><a href="../../../de/blog/touhou-reconstruction/" lang="de" dir="ltr" data-language="de">Deutsch</a><a href="../../../es/blog/touhou-reconstruction/" lang="es" dir="ltr" data-language="es" aria-current="true">Español</a><a href="../../../fr/blog/touhou-reconstruction/" lang="fr" dir="ltr" data-language="fr">Français</a><a href="../../../uk/blog/touhou-reconstruction/" lang="uk" dir="ltr" data-language="uk">Українська</a><a href="../../../pl/blog/touhou-reconstruction/" lang="pl" dir="ltr" data-language="pl">Polski</a><a href="../../../pt-BR/blog/touhou-reconstruction/" lang="pt-BR" dir="ltr" data-language="pt-BR">Português (Brasil)</a><a href="../../../ar/blog/touhou-reconstruction/" lang="ar" dir="rtl" data-language="ar">العربية</a><a href="../../../fa/blog/touhou-reconstruction/" lang="fa" dir="rtl" data-language="fa">فارسی</a><a href="../../../id/blog/touhou-reconstruction/" lang="id" dir="ltr" data-language="id">Bahasa Indonesia</a><a href="../../../it/blog/touhou-reconstruction/" lang="it" dir="ltr" data-language="it">Italiano</a><a href="../../../el/blog/touhou-reconstruction/" lang="el" dir="ltr" data-language="el">Ελληνικά</a><a href="../../../ml/blog/touhou-reconstruction/" lang="ml" dir="ltr" data-language="ml">മലയാളം · English</a><a href="../../../ur-Latn/blog/touhou-reconstruction/" lang="ur-Latn" dir="ltr" data-language="ur-Latn">Roman Urdu · English</a><a href="../../../ro/blog/touhou-reconstruction/" lang="ro" dir="ltr" data-language="ro">Română · English</a></nav></details>
+          <button class="theme-toggle" type="button" data-theme-toggle hidden>
+            <svg class="theme-moon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+              <path d="M20.9 13a9 9 0 0 1-9.9-9.9A9 9 0 1 0 20.9 13Z" />
+            </svg>
+            <svg class="theme-sun" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true" focusable="false">
+              <circle cx="12" cy="12" r="4" />
+              <path d="M12 2v2m0 16v2M2 12h2m16 0h2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42" />
+            </svg>
+          </button>
+          <a
+            class="nav-github"
+            href="https://github.com/morluto/rea"
+            aria-label="REA en GitHub"
+            title="REA en GitHub"
+          >
+            <svg
+              width="22"
+              height="22"
+              viewBox="0 0 16 16"
+              aria-hidden="true"
+              focusable="false"
+            >
+              <path
+                fill="currentColor"
+                d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82a7.65 7.65 0 0 1 2-.27c.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z"
+              />
+            </svg>
+            <span class="nav-github-count" hidden aria-hidden="true"></span>
+          </a>
+          <a
+            class="nav-discord"
+            href="https://discord.gg/GkcryMnJDM"
+            aria-label="Únete a REA en Discord"
+            title="Únete a REA en Discord"
+          >
+            <svg
+              width="22"
+              height="22"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+              focusable="false"
+            >
+              <path
+                fill="currentColor"
+                d="M20.317 4.3698a19.7913 19.7913 0 0 0-4.8851-1.5152.0741.0741 0 0 0-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 0 0-.0785-.037 19.7363 19.7363 0 0 0-4.8852 1.515.0699.0699 0 0 0-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 0 0 .0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 0 0 .0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 0 0-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 0 1-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 0 1 .0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 0 1 .0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 0 1-.0066.1276 12.2986 12.2986 0 0 1-1.873.8914.0766.0766 0 0 0-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 0 0 .0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 0 0 .0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 0 0-.0312-.0286ZM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189Zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189Z"
+              />
+            </svg>
+          </a>
+          <a
+            class="nav-x"
+            href="https://x.com/reatools"
+            aria-label="Sigue a REA en X"
+            title="Sigue a REA en X"
+          >
+            <svg
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+              focusable="false"
+            >
+              <path
+                fill="currentColor"
+                d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z"
+              />
+            </svg>
+          </a>
+        </div>
+      </div>
+    </header>
+    <!-- website:header:end -->
+    <main id="main" class="container">
+      <div class="page-heading">
+        <p class="breadcrumb">
+          <a href="../../">Inicio</a> / <a href="../">Blog</a> / Reconstrucción Touhou
+        </p>
+        <p class="eyebrow">Ensayo * Reconstrucción de Touhou</p>
+        <h1>La revolución industrial en ingeniería inversa.</h1>
+        <p class="page-meta">Por N0zoM1z0 * 10 octubre 2026</p>
+        <div class="blog-takeaway">
+          <p class="eyebrow">Ideas clave</p>
+          <ul>
+            <li>
+              <strong>Dar autonomía a los agentes sobre la investigación.</strong> Establezca un objetivo claro y criterios de aceptación, luego deje que el agente decida qué probar a continuación.
+            </li>
+            <li>
+              <strong>Usa el repositorio y Git como memoria de trabajo.</strong> Mantén el razonamiento con el código. Los puntos de control de Git permiten que la próxima sesión continúe después de que finalice la conversación.
+            </li>
+            <li>
+              <strong>Deje que la evidencia decida lo que reclama.</strong> Una explicación confiable aún necesita ser probada. "Desconocido" es una respuesta válida cuando la evidencia está incompleta.
+            </li>
+            <li>
+              <strong>Pruebe también la referencia de verificación (oracle).</strong> Pruebe los casos que debería rechazar. Si pasa por alto un error, revise los resultados anteriores que dependían de él.
+            </li>
+            <li>
+              <strong
+                >Estamos en los primeros días de la revolución industrial de ER.</strong
+              > Los métodos aún están tomando forma. Queda mucho por explorar.
+            </li>
+          </ul>
+        </div>
+      </div>
+      <figure class="reconstruction-flywheel" aria-labelledby="flywheel-title">
+        <div class="flywheel-heading">
+          <p class="eyebrow" id="flywheel-title">Cómo se compone la experiencia</p>
+          <p><strong>Dirección humana</strong> * Objetivo y criterios de aceptación</p>
+        </div>
+        <div class="flywheel-diagram">
+          <svg
+            class="flywheel-arrows"
+            viewBox="0 0 720 470"
+            preserveAspectRatio="none"
+            aria-hidden="true"
+            focusable="false"
+          >
+            <defs>
+              <marker
+                id="flywheel-forward"
+                markerWidth="10"
+                markerHeight="10"
+                refX="7"
+                refY="4"
+                orient="auto"
+                markerUnits="userSpaceOnUse"
+              >
+                <path
+                  d="M 0 0 L 8 4 L 0 8"
+                  fill="none"
+                  stroke="#294f82"
+                  stroke-width="2"
+                />
+              </marker>
+              <marker
+                id="flywheel-revise"
+                markerWidth="10"
+                markerHeight="10"
+                refX="7"
+                refY="4"
+                orient="auto"
+                markerUnits="userSpaceOnUse"
+              >
+                <path
+                  d="M 0 0 L 8 4 L 0 8"
+                  fill="none"
+                  stroke="#5b6570"
+                  stroke-width="1.5"
+                />
+              </marker>
+            </defs>
+            <g
+              fill="none"
+              stroke="#294f82"
+              stroke-width="2.5"
+              marker-end="url(#flywheel-forward)"
+            >
+              <path
+                class="flywheel-path-desktop"
+                d="M 444 115 C 537 111 624 157 627 208"
+              />
+              <path d="M 528 365 C 456 437 263 437 191 365" />
+              <path
+                class="flywheel-path-desktop"
+                d="M 99 209 C 94 145 170 97 271 104"
+              />
+              <path
+                class="flywheel-path-mobile"
+                d="M 530 115 C 614 108 681 164 674 215"
+              />
+              <path
+                class="flywheel-path-mobile"
+                d="M 87 198 C 74 143 135 119 190 120"
+              />
+            </g>
+            <path
+              class="flywheel-path-desktop"
+              d="M 515 215 C 500 165 450 166 430 127"
+              fill="none"
+              stroke="#5b6570"
+              stroke-width="1.5"
+              stroke-dasharray="5 5"
+              marker-end="url(#flywheel-revise)"
+            />
+            <path
+              class="flywheel-path-mobile"
+              d="M 510 204 C 404 204 391 187 412 136"
+              fill="none"
+              stroke="#5b6570"
+              stroke-width="1.5"
+              stroke-dasharray="5 5"
+              marker-end="url(#flywheel-revise)"
+            />
+          </svg>
+          <div class="flywheel-node flywheel-agent">
+            <p class="flywheel-kicker">Autonomía</p>
+            <h3>Agente</h3>
+            <p>Elige un experimento.<br />Propón una hipótesis.</p>
+          </div>
+          <div class="flywheel-node flywheel-oracle">
+            <p class="flywheel-kicker">Verificación</p>
+            <h3>Referencia de validación</h3>
+            <p>Prueba contra a<br />referencia concreta.</p>
+          </div>
+          <div class="flywheel-node flywheel-memory">
+            <p class="flywheel-kicker">Repositorio</p>
+            <h3>Memoria de trabajo</h3>
+            <p>Código, evidencia,<br />cheques y lecciones.</p>
+          </div>
+          <p class="flywheel-retry">
+            Desajuste<br /><strong>Revisar la hipótesis</strong>
+          </p>
+          <p class="flywheel-center">
+            Una mejor<br /><strong>punto de partida</strong>
+          </p>
+          <p class="flywheel-reuse">Reutilización</p>
+          <p class="flywheel-pass">
+            <strong>Pase</strong> * Conservar el resultado y su evidencia
+          </p>
+        </div>
+        <div
+          class="flywheel-projects"
+          aria-label="Experiencia transmitida entre proyectos"
+        >
+          <a href="#th08">TH08</a><span aria-hidden="true">→</span
+          ><a href="#th095">TH095</a><span aria-hidden="true">→</span
+          ><a href="#th04">TH04</a>
+        </div>
+        <figcaption>
+          Cada proyecto deja al siguiente con un mejor punto de partida. Eso incluye arreglar los cheques cuando descubrimos una brecha.
+        </figcaption>
+      </figure>
+      <div class="article-layout">
+        <nav class="contents" aria-label="En esta página">
+          <p>En este artículo</p>
+          <ul>
+            <li><a href="#august">Agosto de 2026</a></li>
+            <li><a href="#th08"> TH08: la continuación</a></li>
+            <li><a href="#different-approaches">Dos enfoques</a></li>
+            <li><a href="#th095"> TH095: composición</a></li>
+            <li><a href="#th04"> TH04: entre arquitecturas</a></li>
+            <li>
+              <a href="#semantic-reconstruction">De exacto a legible</a>
+            </li>
+            <li><a href="#industrial-shift">El cambio industrial</a></li>
+            <li><a href="#possibilities">Lo que se hace posible</a></li>
+          </ul>
+        </nav>
+        <article class="article" aria-label="Ensayo de reconstrucción de Touhou">
+          <section class="article-section" id="august">
+            <h2>Qué cambió en agosto de 2026</h2>
+            <p>
+              Antes de este trabajo, había hecho mucha ingeniería inversa manual. Inspeccionaba una función hasta que tenía una explicación, luego probaba esa explicación con el programa. Llegar más lejos significaba dedicar más tiempo a la siguiente función. También significaba mantener una imagen cada vez más grande en mi cabeza.
+            </p>
+            <p>
+              La mayor parte de mi trabajo de RE es en juegos. Los reconstruyo para que su comportamiento pueda entenderse y eventualmente llevarse a un puerto de software o un mod. Esa es la experiencia detrás de este artículo. El método puede ser útil en otros lugares, pero cada campo necesita establecer qué puede verificar con una referencia confiable.
+            </p>
+            <p>
+              En agosto de 2026, comencé a explorar seriamente la realidad aumentada impulsada por agentes. Quería ver hasta dónde podía llegar un agente con acceso al programa y las herramientas de desarrollo ordinarias. La reconstrucción de Touhou me dio un proyecto sustancial en el que averiguarlo.
+            </p>
+            <p>
+              El progreso inicial fue sorprendente. Una investigación podría seguir avanzando sin que yo eligiera cada paso individual. Una comparación fallida podría enviar al agente a otra persona que llama. Podría escribir un pequeño diagnóstico y usar el resultado para decidir qué probar a continuación. Darle esa libertad marcó la diferencia: pude dedicar más atención a la dirección del proyecto y a si sus controles eran confiables.
+            </p>
+            <p>
+              El ritmo llamó mi atención primero. Entonces comencé a preguntarme qué sobreviviría más allá del proyecto actual. ¿Se beneficiaría el próximo juego de todo lo que acabábamos de aprender?
+            </p>
+          </section>
+          <section class="article-section" id="th08">
+            <h2>TH08: construyendo sobre el trabajo humano</h2>
+            <p>
+              <a href="https://github.com/N0zoM1z0/th08"> TH08 </a>, Noche Imperecedera, comenzó como una continuación de <a href="https://github.com/GensokyoClub/th08"
+                > Reconstrucción de GensokyoClub</a
+              >. Su fuente pública me dio una base sustancial. Vino con el conocimiento de la construcción y una historia de contribuciones que conservé en la continuación.
+            </p>
+            <p>
+              El historial importado finaliza en el punto de control público del 10 de agosto. Mi continuación independiente comenzó el 13 de agosto. Para el 19 de agosto, el libro mayor registró la fuente de las 1.107 funciones de juego identificadas.
+            </p>
+            <p>
+              Un puerto de reconstrucción Linux jugable se comprometió el 24 de agosto, aproximadamente once días después de que comenzara la continuación. Siguió una edición web. La versión nativa Linux de 64 bits llegó el 30 de agosto.
+            </p>
+            <p>
+              Lo que me llamó la atención fue que el trabajo había llegado a un programa que la gente podía ejecutar. Llegar allí requería seguir problemas más allá de una función individual. Incluso cuando dos funciones parecían correctas de forma aislada, accidentalmente podían usar copias separadas de estado que deberían haberse compartido.
+            </p>
+            <p>
+              Esto hizo que las verificaciones de referencias fueran fundamentales para el trabajo. Yo los llamo <strong>referencias de verificación (oráculos)</strong>. Una comparación de código puede decirnos si una función reconstruida reproduce las instrucciones originales. Una verificación en tiempo de ejecución puede indicarnos si una ruta ejercitada alcanza el estado esperado. El agente propone una explicación y la prueba; un desajuste le da algo específico para investigar.
+            </p>
+            <h3>Una coincidencia exacta con la constante incorrecta</h3>
+            <p>
+              Una referencia de verificación (oracle)es un software que alguien escribió.  TH08 me dio un claro recordatorio de cuánto puede depender de ese software.
+            </p>
+            <p>
+              En septiembre, un error reportado por un puerto de conmutador descendente condujo de nuevo a la recopilación automática de elementos. La fuente reconstruida verificó la potencia del jugador contra <code>0.0</code>. El original usado <code>128.0</code>, el umbral de potencia máxima.
+            </p>
+            <p>
+              La potencia normal no es negativa, por lo que la comprobación de potencia reconstruida siempre se cumplió de manera efectiva. Por encima de la línea de recolección, el juego podría atraer elementos sin requerir la máxima potencia. Las otras excepciones en la condición eran correctas. Esta constante cambió el comportamiento.
+            </p>
+            <p>
+              <strong
+                >Sin embargo, la función ya había pasado la comparación exacta.</strong
+              >
+            </p>
+            <p>
+              Una reconstrucción puede colocar una constante en una dirección diferente. La herramienta de comparación explicó eso ajustando las direcciones en las instrucciones compiladas antes de compararlas con las originales. Pero nunca verificó el valor de coma flotante almacenado en la dirección a la que se hace referencia.
+            </p>
+            <p>
+              Eso dejó un agujero en el cheque. Podría apuntar la instrucción reconstruida a la del original <code>128.0</code> mientras que la fuente todavía dijo <code>0.0</code>. Los bytes de instrucción coincidieron. La fuente significaba algo diferente.
+            </p>
+            <p>
+              El <a href="https://github.com/N0zoM1z0/th08/pull/11"
+                >Corrección del 2 de septiembre</a
+              > corrigió la fuente e hizo que la comparación verificara los bytes reales de la constante referenciada. A <a href="https://github.com/N0zoM1z0/th08/pull/13">auditoría más amplia</a> luego examinó 1.548 referencias constantes de coma flotante. Encontró otras doce referencias incorrectas en cinco funciones aceptadas.
+            </p>
+            <p>
+              La comparación ahora verifica cada una de esas constantes de coma flotante. Sus pruebas incluyen valores deliberadamente incorrectos para asegurarse de que sean rechazados. También tuvimos que revisar los resultados que habían pasado la verificación más débil.
+            </p>
+            <p>
+              <strong>La referencia de verificación (oracle) también necesitaba reconstrucción.</strong> Repararlo era parte de reparar el juego.
+            </p>
+            <p>
+              Eso importa cuando el equipo es principalmente una persona que trabaja con agentes. No puedo inspeccionar personalmente cada línea que producen, por lo que gran parte de mi confianza se basa en sus controles. El punto ciego de una referencia de verificación compartida (oracle) puede afectar muchas investigaciones antes de que me dé cuenta. Tengo que entender qué verifica realmente el verificador y probarlo con los casos que deberían fallar.
+            </p>
+            <p>
+              A medida que continuaba el trabajo, esas comprobaciones pasaron a formar parte del repositorio. También lo hicieron los motivos de los cambios de origen y las notas que permitían que una sesión posterior retomara donde se detuvo una anterior. <strong
+                >El repositorio de código fuente se estaba convirtiendo en la memoria de trabajo del proyecto.</strong
+              >
+            </p>
+            <p>
+              <strong
+                >Un lote exitoso nos dio tanto el código recuperado como un mejor entorno para el siguiente lote.</strong
+              >
+            </p>
+          </section>
+          <section class="article-section" id="different-approaches">
+            <h2>Dos ideas diferentes de reconstrucción</h2>
+            <p>
+              GensokyoClub ' s <a
+                href="https://web.archive.org/web/20260909051514/https://github.com/GensokyoClub/th08#important-notice"
+                >LÉAME público</a
+              > explicita su desacuerdo con este tipo de trabajo. El aviso anuncia que se realizarán desarrollos adicionales de forma privada hasta su finalización. Un pasaje dice:
+            </p>
+            <blockquote>
+              <p>
+                El aumento de estafadores (descompilaciones y puertos de IA) en este espacio que se aleja de nuestro trabajo pinta una mala imagen para futuros esfuerzos de descompilación…
+              </p>
+            </blockquote>
+            <p>
+              El aviso también describe el costo psicológico para los mantenedores. Su política de contribución excluye las solicitudes de extracción producidas principalmente con IA. Han dedicado su tiempo libre a un trabajo difícil, y ese trabajo ayudó a que mi continuación fuera posible. Respeto el esfuerzo que hay detrás. El desacuerdo que quiero discutir es sobre cómo debe proceder la reconstrucción y cómo debe juzgarse una contribución.
+            </p>
+            <p>
+              En el flujo de trabajo manual que conocía, desarrollar una comprensión de una función y reconstruirla generalmente recaía en la misma persona. Un proyecto dependía en gran medida de la experiencia de esa persona. La confianza en el colaborador importaba porque gran parte del razonamiento ocurría mientras trabajaban.
+            </p>
+            <p>
+              Los proyectos existentes ya preservan el conocimiento en su fuente y crean herramientas. Lo que cambió para mí fue que un agente podía usar ese conocimiento para llevar a cabo la próxima investigación por su cuenta.
+            </p>
+            <p>
+              En mi continuación, decido el objetivo y el estándar para aceptar un resultado. El agente tiene amplia libertad para investigar. Su reconstrucción propuesta tiene que sobrevivir a los controles pertinentes. Quiero que otra persona pueda examinar por qué elegimos una implementación, incluso si un agente hizo la mayor parte del trabajo.
+            </p>
+            <p>
+              Esta puede ser una transición difícil. Años de trabajo cuidadoso pueden convertirse en la base para una continuación que avanza mucho más rápido. Eso plantea preguntas reales sobre el crédito. También cambia lo que los mantenedores necesitan saber antes de aceptar una contribución.
+            </p>
+            <p>
+              La analogía industrial me ayuda a pensar en esto. En un oficio, gran parte del proceso depende de la habilidad de la persona que lo lleva a cabo. La maquinaria cambia donde se necesita esa habilidad. Alguien todavía tiene que diseñar el proceso y reconocer cuándo su resultado es incorrecto. Diferentes comunidades pueden elegir cuánto de ese cambio quieren asumir.
+            </p>
+            <p>
+              Mi elección es continuar abiertamente, con el trabajo heredado acreditado y su historia preservada. Quiero que el nuevo trabajo sea revisable. Eso nos da una forma de preguntarnos hasta dónde puede llegar este enfoque y de aprender de lo que sale mal en el camino.
+            </p>
+            <p class="caption">
+              Fuente: GensokyoClub ' s <a
+                href="https://github.com/GensokyoClub/th08/blob/e874b98e210b3be1ed21c5e03d54b883eac5069c/README.md#important-notice"
+                >Aviso léame</a
+              >, revisado el 10 de octubre de 2026, y su <a
+                href="https://github.com/GensokyoClub/th08/blob/f345c7dee07b849f2ff93a0029ab5ede126bf12c/CODE_OF_CONDUCT.md"
+                >política de contribuciones</a
+              >. La cita es un extracto abreviado.  TH08 ' s <a
+                href="https://github.com/N0zoM1z0/th08/blob/d2a00f4acb4a13916e07a00bd13f714961714628/README.md#credits-and-provenance"
+                >créditos y procedencia</a
+              > registre el límite de continuación.
+            </p>
+          </section>
+          <section class="article-section" id="th095">
+            <h2>TH095: la experiencia comienza a agravarse</h2>
+            <p>
+              <a href="https://github.com/N0zoM1z0/th095"> TH095 </a>, Dispara la bala, hizo que el valor de esa experiencia fuera mucho más fácil de ver. Su repositorio comenzó el 29 de agosto con cero funciones de juego confirmadas en el libro mayor. Todavía teníamos que aprender el juego. Pero ya sabíamos mucho más sobre cómo comenzar una reconstrucción y cómo mantenerla en marcha.
+            </p>
+            <p>
+              Para el 7 de septiembre, las 697 funciones de juego identificadas tenían fuente. Para el 8 de septiembre, 696 habían sido aceptadas como comparaciones exactas. Todo el programa enlazado el 9 de septiembre. La reconstrucción del Windows i386 se marcó como jugable el 10 de septiembre, aproximadamente doce días después de la inicialización.
+            </p>
+            <p>
+              Encontré esto más emocionante que la velocidad del primer proyecto. Un objetivo nuevo podría beneficiarse del trabajo realizado en otro juego. La experiencia ya estaba presente en las herramientas y en la forma en que se organizó el proyecto.
+            </p>
+            <p>
+              Por ejemplo, TH08 nos había enseñado a prestar atención al programa ensamblado temprano. Si varias funciones recuperadas dependen del mismo estado, sus comparaciones aisladas dejan abierta una pregunta importante. Necesitamos verlos trabajar juntos. Esa lección ayudó a dar forma a la forma en que abordamos la compilación de todo el programa de TH095.
+            </p>
+            <p>
+              Una lección que se queda en mi cabeza es útil mientras estoy allí. Una vez que se convierte en una verificación de que se puede ejecutar otra sesión, puede seguir ayudándome después de que haya seguido adelante. El siguiente agente puede usar el resultado sin repetir la investigación que lo condujo.
+            </p>
+            <p>
+              El error constante de coma flotante también pertenece a esa memoria. Explica por qué verificar una referencia también requiere verificar los datos detrás de ella. Mantener esa corrección con el código ayuda a que los proyectos posteriores eviten heredar el punto ciego del cheque anterior.
+            </p>
+            <p>
+              <strong
+                >El método se convierte en parte del material de partida para el próximo juego.</strong
+              > Podemos dedicar más esfuerzo del próximo proyecto a lo que realmente es nuevo sobre su objetivo.
+            </p>
+            <p>
+              El mismo beneficio está disponible para las personas que se unan más tarde. Pueden inspeccionar una decisión y volver a ejecutar su verificación antes de continuar con el trabajo. No tienen que reconstruir todo el historial del proyecto para descubrir por qué la fuente se ve de la manera en que lo hace.
+            </p>
+          </section>
+          <section class="article-section" id="th04">
+            <h2>TH04: el flujo de trabajo sobrevive a una arquitectura diferente</h2>
+            <p>
+              <a href="https://github.com/N0zoM1z0/th04"> TH04 </a>, Lotus Land Story, llevó este trabajo a la era PC-98 DOS. El objetivo ahora era un entorno de 16 bits con cuatro programas cooperantes. Comprender su comportamiento de hardware requirió evidencia diferente de los juegos Windows. Existentes <a href="https://github.com/nmlgc/ReC98">Trabajo ReC98</a> también nos dio valiosos conocimientos y material de origen aquí.
+            </p>
+            <p>
+              La reconstrucción de DOS ahora está funcionando. En mis pruebas manuales, jugué rutas normales completas a través de sus finales y verifiqué las salvaciones. El trabajo actual es un puerto nativo de 64 bits. Establecer una versión de DOS que funcione primero le da a ese puerto una referencia.
+            </p>
+            <p>
+              La arquitectura cambió lo que necesitábamos investigar. También cambió el compilador y el tiempo de ejecución con los que verificamos nuestro trabajo. Pero el agente aún podría seguir una pregunta hasta un resultado y dejar que ese resultado guíe el próximo experimento.
+            </p>
+            <p>
+              Considere la transición del juego a un final. Necesitamos saber qué estado cruza esa frontera y qué programa es responsable de ello. Eso es algo que podemos investigar contra el producto DOS. Una vez que las pruebas y los controles estén disponibles, un agente puede resolver la pregunta de la misma manera que lo hizo con un título Windows.
+            </p>
+            <p>
+              Es por eso que TH04 es importante para el argumento. Un cambio sustancial en la plataforma no nos obligó a empezar de nuevo con una nueva forma de trabajar. La arquitectura definió el problema; el flujo de trabajo aún nos dio una forma de resolverlo.
+            </p>
+            <p>
+              Para el puerto de 64 bits, ahora podemos examinar la nueva implementación con el comportamiento ya recuperado en DOS. El conocimiento de la reconstrucción le da al puerto algo sobre lo que construir.
+            </p>
+            <p class="caption">
+              Estado del proyecto al 10 de octubre de 2026: <a
+                href="https://github.com/N0zoM1z0/th04/blob/bb9faca54e2eb3c0d6c757c75d59ac29d2cd5e93/docs/RE_HANDOFF.md"
+                >Reconstrucción de DOS y pruebas manuales</a
+              > · <a href="https://github.com/N0zoM1z0/th04/tree/port/modern-64"
+                >puerto de 64 bits</a
+              >. El puerto permanece en desarrollo.
+            </p>
+          </section>
+          <section class="article-section" id="semantic-reconstruction">
+            <h2>Del código exacto al código legible</h2>
+            <p>
+              Una vez que una reconstrucción funciona, quiero que alguien más pueda entenderla.
+            </p>
+            <p>
+              Para mí, el ensamblaje y las compensaciones brutas pueden parecer viejos amigos. Me doy cuenta de que esta es una definición un poco inusual de "legible."La mayoría de la gente preferiría seguir la lógica del juego sin tener en mente el diseño de la memoria del ejecutable.
+            </p>
+            <p>
+              Ahí es donde <strong>reconstrucción semántica</strong> entra. Un campo recuperado aún puede conocerse principalmente por su desplazamiento. Seguimos cómo lo usa el juego hasta que podamos explicar su función. Entonces podemos darle un nombre significativo y un tipo que se ajuste a la evidencia. Mantenemos el razonamiento con la fuente para que la siguiente persona pueda ver de dónde vino esa interpretación.
+            </p>
+            <p>
+              Esto se vuelve especialmente importante para un puerto de software. Una dirección absoluta me dice dónde vivía algo en el antiguo ejecutable. Le da a una implementación de 64 bits poca ayuda para decidir qué objeto debería poseer ese estado. Para mover el comportamiento de manera segura, necesitamos recuperar la relación detrás del antiguo acceso a la memoria.
+            </p>
+            <p>El orden que uso ahora es:</p>
+            <ol>
+              <li>
+                <strong>Recupere una línea de base exacta.</strong> Compila las piezas reconstruidas con el compilador histórico. Compare el código y los datos relevantes con el ejecutable original. Registre las diferencias no resueltas para que la siguiente fase tenga un punto de partida claro.
+              </li>
+              <li>
+                <strong>Compílalo y reprodúcelo en la plataforma original.</strong> Vincule esas piezas al programa real utilizando la arquitectura y el compilador originales. Ejercita rutas de juego importantes. Aquí es donde podemos encontrar problemas con el estado compartido o la inicialización que una comparación de funciones aisladas pasó por alto.
+              </li>
+              <li>
+                <strong
+                  >Reconstruye la semántica contra ambas referencias.</strong
+                > Tome una parte coherente del juego a la vez y establezca qué significa su fuente recuperada. Mejore su representación al tiempo que conserva las comparaciones exactas y la construcción histórica jugable.
+              </li>
+              <li>
+                <strong>Haz el puerto moderno.</strong> Mueva el comportamiento establecido al nuevo entorno, como una compilación nativa de 64 bits. El juego de plataformas original reconstruido sigue siendo una referencia para comparar cómo se comporta el puerto.
+              </li>
+            </ol>
+            <p>
+              La construcción jugable de la segunda etapa se convierte en un <strong>segunda referencia de verificación (oracle)</strong> durante la tercera. La primera referencia de verificación (oracle) verifica si nuestra fuente modificada aún reproduce el código y los datos originales relevantes. El segundo verifica que el programa reconstruido aún se construya y se comporte correctamente a lo largo de las rutas que ejercitamos.
+            </p>
+            <p>
+              Detectan diferentes errores. Un cambio de tipo puede alterar las instrucciones generadas. Un cambio de propietario puede dejar dos partes del juego usando diferentes copias de estado. Mantener ambos controles disponibles le da al agente una falla concreta para investigar antes de llevar a cabo una refactorización adicional.
+            </p>
+            <p>
+              Un nombre necesita evidencia propia. Una comparación exacta no puede decirnos si un campo realmente significa "tiempo de invulnerabilidad"."Tenemos que establecer eso a partir de cómo el juego lo escribe y lo usa. Si el significado sigue siendo incierto, un nombre neutral es más útil para el próximo lector que una suposición segura.
+            </p>
+            <p>
+              Aprendimos este orden a través de los proyectos.  TH08 ya tenía puertos reproducibles antes de algunas de sus auditorías históricas posteriores de la plataforma. Eso hizo que ciertos defectos fueran más difíciles de ver. El <a
+                href="https://github.com/N0zoM1z0/touhou-reconstruction-factory/blob/717e1b8560783ed17a39fdf159d30aa16bb307a7/docs/semantic-reconstruction.md"
+                >Flujo de trabajo actual de la fábrica</a
+              > coloca la compilación de la plataforma original en primer lugar, de modo que el trabajo semántico pueda usarla como referencia antes de que comience la migración.
+            </p>
+            <p>
+              <strong
+                >La reconstrucción exacta nos da una referencia. La reconstrucción semántica hace utilizable el conocimiento recuperado.</strong
+              > Entonces, un puerto puede basarse en ambos.
+            </p>
+          </section>
+          <section class="article-section" id="industrial-shift">
+            <h2>Qué hace que esto sea un cambio industrial</h2>
+            <p>
+              Estos proyectos cambiaron donde dediqué mi atención. Una vez que los agentes pudieron llevar adelante gran parte de una investigación, mejorar su entorno de trabajo se convirtió en una de las cosas más útiles que pude hacer. Una herramienta mejor podría ayudar con cada función posterior que la necesitara.
+            </p>
+            <p>
+              La autonomía importa aquí. El siguiente paso útil a menudo se aclara solo después de un experimento fallido. Un agente necesita suficiente libertad para seguir ese resultado en algún lugar inesperado. Si tiene que esperar a que prescriba cada paso, gran parte del trabajo permanece atado a mi atención.
+            </p>
+            <p>
+              Espero que el agente haga hipótesis equivocadas. Lo que importa es si podemos probarlos y aprender del resultado. Una verificación fallida debería ayudarlo a comprender el error lo suficientemente bien como para intentarlo de nuevo. Todavía tengo que decidir si la evidencia acumulada respalda un hito del proyecto.
+            </p>
+            <p>
+              REA le da al agente acceso a herramientas de análisis. Una pregunta sobre la persona que llama a una función puede llevar directamente a inspeccionar a esa persona que llama. El proyecto de reconstrucción proporciona el compilador y sus propias comprobaciones de referencia. El agente puede usarlos para probar la fuente que propone y ver dónde se sostiene su explicación.
+            </p>
+            <p>
+              El error TH08 muestra por qué esas comprobaciones merecen su propia atención de ingeniería. Cuando se usa la misma comparación en cientos de funciones, una brecha en ella puede extenderse mucho más allá de un error en una implementación. Probar el verificador mejora la retroalimentación disponible para todo ese trabajo posterior.
+            </p>
+            <p>
+              La analogía industrial tiene un ejemplo histórico útil aquí. Boulton y Watt introdujeron un <a
+                href="https://collection.sciencemuseumgroup.org.uk/objects/co51439/watts-steam-engine-indicator"
+                >indicador de máquina de vapor en 1796</a
+              > para ayudar a ajustar las válvulas del motor. Una versión de registro trazó la presión a través de la carrera del pistón. Hizo que el comportamiento interno del motor estuviera disponible para su inspección. Nuestras herramientas de comparación tienen un propósito similar: nos permiten examinar qué está haciendo la maquinaria mientras la mejoramos.
+            </p>
+            <p>
+              <strong
+                >Estamos en las primeras etapas de este cambio industrial.</strong
+              > Gran parte de la infraestructura aún es inmadura. Los agentes pueden moverse más rápido de lo que nuestras verificaciones fueron diseñadas para soportar, por lo que el proceso debe desarrollarse junto con ellos. Cuando encontramos un defecto en una herramienta compartida, tenemos que repararlo y revisar los resultados afectados. El próximo proyecto puede heredar una herramienta más sólida.
+            </p>
+            <p>
+              También hay un límite práctico para cualquier conversación. Terminará antes de que se termine una gran reconstrucción. El repositorio de código fuente tiene que hacer posible que continúe otra sesión sin perder el motivo de la última decisión.
+            </p>
+            <p>
+              El <a
+                href="https://github.com/N0zoM1z0/touhou-reconstruction-factory"
+                >Fábrica de Reconstrucción de Touhou</a
+              > surgió de esa necesidad. Brinda a los proyectos una forma compartida de llevar adelante sus controles y lecciones. Trabajar en un juego puede mejorar las condiciones iniciales de otro.
+            </p>
+            <p>
+              Eso es lo que hace que la analogía industrial tenga sentido para mí. La experiencia comienza a formar parte de herramientas que otros pueden usar. Mejorar esas herramientas cambia cuánto puede hacer la próxima persona, o el próximo agente.
+            </p>
+          </section>
+          <section class="article-section" id="possibilities">
+            <h2>Los proyectos que ahora podemos considerar</h2>
+            <p>
+              El ritmo importa porque cambia la decisión de comenzar. Un juego podría ser fascinante para la ingeniería inversa y aún así exigir más de mi propia atención de la que podría prestarle de manera realista. Muchos proyectos se quedarían en ideas.
+            </p>
+            <p>
+              Ahora puedo ver una manera de mantener ese proyecto en marcha a través de repetidas investigaciones. Obtener una reconstrucción funcional hace que un puerto de software sea más práctico. Recuperar semántica legible hace que sea más fácil para otra persona explorar un mod. El esfuerzo realizado para comprender el juego puede seguir dando sus frutos después de que se ejecute la primera versión.
+            </p>
+            <p>
+              Ahora miro un programa desconocido y pregunto: <strong
+                >¿qué acceso, retroalimentación y conocimiento acumulado le permitirían a un agente trabajar en esto de manera confiable?</strong
+              >
+            </p>
+            <p>
+              Esa pregunta me hace considerar proyectos que antes habría dejado solos. Cada uno puede mejorar la forma en que nos acercamos al siguiente. Quiero seguir explorando hasta dónde nos puede llevar eso.
+            </p>
+          </section>
+          <section class="article-section" id="sources">
+            <details class="native-details">
+              <summary>Hitos y fuentes del proyecto</summary>
+              <p>
+                Las fechas describen los puntos de control registrados del proyecto, cotejados con el historial público de GitHub el 10 de octubre de 2026. El tiempo transcurrido es el tiempo del calendario entre confirmaciones. La presencia de la fuente, las comparaciones exactas, una compilación y un resultado en tiempo de ejecución nombran cada uno un hito diferente.
+              </p>
+              <ul>
+                <li>
+                  <strong> TH08 :</strong> <a
+                    href="https://github.com/N0zoM1z0/th08/commit/001bf3e9c91cc35b79c7a0e36b3565b86f494362"
+                    >Continuación del 13 de agosto</a
+                  >, <a
+                    href="https://github.com/N0zoM1z0/th08/blob/15caba73df6735fc44eac4783bc61b8d098ea830/docs/PROGRESS.md"
+                    >Libro mayor de fuentes del 19 de agosto</a
+                  >, <a
+                    href="https://github.com/N0zoM1z0/th08/commit/da07b21c8cb63230142b0a66228d6aac66555f3f"
+                    >24 de agosto Puerto Linux</a
+                  >, <a
+                    href="https://github.com/N0zoM1z0/th08/commit/529eb1a3afa05ae36467731eaccb12e3e50e132f"
+                    >Edición web del 26 de agosto</a
+                  >, y <a
+                    href="https://github.com/N0zoM1z0/th08/releases/tag/v0.2.0-linux-64bit"
+                    >Lanzamiento de Linux de 64 bits el 30 de agosto</a
+                  >.
+                </li>
+                <li>
+                  <strong> TH095 :</strong> <a
+                    href="https://github.com/N0zoM1z0/th095/blob/8c31e6f892d945423b7f7b439747a2bd915f82d8/docs/PROGRESS.md"
+                    >Libro mayor inicial del 29 de agosto</a
+                  >, <a
+                    href="https://github.com/N0zoM1z0/th095/blob/0fa857fb2b2ec6237732e4d6be8d0a28069c9330/docs/PROGRESS.md"
+                    >Libro mayor de fuentes del 7 de septiembre</a
+                  >, <a
+                    href="https://github.com/N0zoM1z0/th095/blob/74baddfccb712d1311a4d6e7487a63cd1100452e/docs/PROGRESS.md"
+                    >Comparaciones del 8 de septiembre</a
+                  >, <a
+                    href="https://github.com/N0zoM1z0/th095/commit/33d46a0ee48f37060d973125a1a7632a40f8d998"
+                    >Vinculación del 9 de septiembre</a
+                  >, y <a
+                    href="https://github.com/N0zoM1z0/th095/blob/3442dcf29d9e0b5bef384a49bd0c9ad32a711826/docs/WHOLE_BUILD_TODO.md"
+                    >10 de septiembre jugable-registro de compilación</a
+                  >.
+                </li>
+                <li>
+                  <strong> TH04 :</strong> <a
+                    href="https://github.com/N0zoM1z0/th04/blob/bb9faca54e2eb3c0d6c757c75d59ac29d2cd5e93/docs/RE_HANDOFF.md"
+                    >Traspaso del 10 de octubre</a
+                  > registra la reconstrucción de DOS en funcionamiento, la prueba completa de ruta normal del mantenedor y la fase actual de 64 bits.
+                </li>
+                <li>
+                  <strong> Corrección de referencia de verificación TH08 (oracle) :</strong> <a href="https://github.com/N0zoM1z0/th08/issues/10"
+                    >el error de recopilación automática reportado</a
+                  >, <a
+                    href="https://github.com/N0zoM1z0/th08/commit/7148a76ba224742677895c7160807a68897957d5"
+                    >la corrección de origen y comparación</a
+                  >, y <a
+                    href="https://github.com/N0zoM1z0/th08/commit/a393f400786e4cc6cbb1000af0dad3276da12c78"
+                    >la auditoría constante completa de coma flotante</a
+                  >.
+                </li>
+                <li>
+                  <strong>Reconstrucción semántica:</strong> <a
+                    href="https://github.com/N0zoM1z0/th08/blob/d2a00f4acb4a13916e07a00bd13f714961714628/docs/SEMANTIC_PLAYBOOK.md"
+                    > Libro de jugadas de legibilidad de TH08</a
+                  > y <a
+                    href="https://github.com/N0zoM1z0/touhou-reconstruction-factory/blob/717e1b8560783ed17a39fdf159d30aa16bb307a7/docs/semantic-reconstruction.md"
+                    >orden de fase de la fábrica y dos rutas de validación</a
+                  >.
+                </li>
+                <li>
+                  <strong>Historia industrial:</strong> <a
+                    href="https://collection.sciencemuseumgroup.org.uk/objects/co51439/watts-steam-engine-indicator"
+                    >registro de indicadores de motores de vapor del Grupo de Museos de Ciencias</a
+                  > describe la introducción de 1796 y el mecanismo de registro de presión.
+                </li>
+                <li>
+                  <strong>Método:</strong> la Fábrica <a
+                    href="https://github.com/N0zoM1z0/touhou-reconstruction-factory/blob/038b6bed51d273c8b3680553b6f43e1b97d19bd1/docs/agent-autonomy.md"
+                    >autonomía del agente</a
+                  > y <a
+                    href="https://github.com/N0zoM1z0/touhou-reconstruction-factory/blob/038b6bed51d273c8b3680553b6f43e1b97d19bd1/docs/knowledge-base.md"
+                    >conocimiento entre juegos</a
+                  > los documentos conservan los principios de trabajo y las lecciones.
+                </li>
+              </ul>
+            </details>
+            <p>
+              <a class="text-link" href="../">Más artículos</a> · <a class="text-link" href="../../showcase/th04/"
+                >Explore una investigación sobre TH04</a
+              >
+            </p>
+          </section>
+        </article>
+      </div>
+    </main>
+    <!-- website:footer:start -->
+    <!-- prettier-ignore -->
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <p>REA · Reverse Engineer Anything</p>
+        <div class="footer-links">
+          <a href="../../faq/">FAQ</a
+          ><a href="../../contributors/">Colaboradores</a
+          ><a href="https://github.com/morluto/rea">Código fuente</a
+          ><a href="https://github.com/morluto/rea/blob/main/LICENSE">Licencia MIT</a
+          ><a href="https://discord.gg/GkcryMnJDM">Únete a la comunidad</a
+          ><a href="https://x.com/reatools">Síguenos en X</a>
+        </div>
+      </div>
+    </footer>
+    <p class="sr-only" id="copy-status" role="status" aria-live="polite"></p>
+    <a class="back-to-top" href="#top" aria-label="Volver arriba">
+      <span aria-hidden="true">↑</span> Arriba
+    </a>
+    <!-- website:footer:end -->
+  </body>
+</html>

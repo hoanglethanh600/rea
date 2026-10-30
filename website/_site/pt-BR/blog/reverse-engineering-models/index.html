@@ -1,0 +1,621 @@
+<!doctype html>
+<html lang="pt-BR" dir="ltr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>A engenharia reversa precisa de um modelo maior? | REA</title>
+    <meta
+      name="description"
+      content="O que a reconstrução Touhou me ensinou sobre modelos gerais, modelos especializados e como aprender a propor melhores hipóteses a partir do feedback do compilador."
+    />
+    <!-- website:sharing:start -->
+    <!-- prettier-ignore -->
+    <link rel="canonical" href="https://rea.tools/pt-BR/blog/reverse-engineering-models/" />
+    <!-- website:languages:start -->
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="en" href="https://rea.tools/blog/reverse-engineering-models/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="zh-CN" href="https://rea.tools/zh-CN/blog/reverse-engineering-models/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="zh-TW" href="https://rea.tools/zh-TW/blog/reverse-engineering-models/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="ja" href="https://rea.tools/ja/blog/reverse-engineering-models/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="ko" href="https://rea.tools/ko/blog/reverse-engineering-models/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="tr" href="https://rea.tools/tr/blog/reverse-engineering-models/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="ru" href="https://rea.tools/ru/blog/reverse-engineering-models/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="vi" href="https://rea.tools/vi/blog/reverse-engineering-models/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="th" href="https://rea.tools/th/blog/reverse-engineering-models/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="de" href="https://rea.tools/de/blog/reverse-engineering-models/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="es" href="https://rea.tools/es/blog/reverse-engineering-models/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="fr" href="https://rea.tools/fr/blog/reverse-engineering-models/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="uk" href="https://rea.tools/uk/blog/reverse-engineering-models/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="pl" href="https://rea.tools/pl/blog/reverse-engineering-models/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="pt-BR" href="https://rea.tools/pt-BR/blog/reverse-engineering-models/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="ar" href="https://rea.tools/ar/blog/reverse-engineering-models/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="fa" href="https://rea.tools/fa/blog/reverse-engineering-models/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="id" href="https://rea.tools/id/blog/reverse-engineering-models/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="it" href="https://rea.tools/it/blog/reverse-engineering-models/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="el" href="https://rea.tools/el/blog/reverse-engineering-models/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="x-default" href="https://rea.tools/blog/reverse-engineering-models/" />
+<!-- website:languages:end -->
+    <!-- prettier-ignore -->
+    <meta property="og:type" content="website" />
+    <!-- prettier-ignore -->
+    <meta property="og:site_name" content="REA" />
+    <!-- prettier-ignore -->
+    <meta property="og:title" content="A engenharia reversa precisa de um modelo maior? | REA" />
+    <!-- prettier-ignore -->
+    <meta property="og:description" content="O que a reconstrução Touhou me ensinou sobre modelos gerais, modelos especializados e como aprender a propor melhores hipóteses a partir do feedback do compilador." />
+    <!-- prettier-ignore -->
+    <meta property="og:url" content="https://rea.tools/pt-BR/blog/reverse-engineering-models/" />
+    <!-- prettier-ignore -->
+    <meta property="og:image" content="https://rea.tools/assets/social-card.png" />
+    <!-- prettier-ignore -->
+    <meta property="og:image:type" content="image/png" />
+    <!-- prettier-ignore -->
+    <meta property="og:image:width" content="1200" />
+    <!-- prettier-ignore -->
+    <meta property="og:image:height" content="630" />
+    <!-- prettier-ignore -->
+    <meta
+      property="og:image:alt"
+      content="REA-descubra como o software funciona. Engenharia reversa com seu agente de codificação."
+    />
+    <!-- prettier-ignore -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <!-- prettier-ignore -->
+    <meta name="twitter:title" content="A engenharia reversa precisa de um modelo maior? | REA" />
+    <!-- prettier-ignore -->
+    <meta name="twitter:description" content="O que a reconstrução Touhou me ensinou sobre modelos gerais, modelos especializados e como aprender a propor melhores hipóteses a partir do feedback do compilador." />
+    <!-- prettier-ignore -->
+    <meta name="twitter:image" content="https://rea.tools/assets/social-card.png" />
+    <!-- prettier-ignore -->
+    <meta
+      name="twitter:image:alt"
+      content="REA-descubra como o software funciona. Engenharia reversa com seu agente de codificação."
+    />
+    <!-- website:sharing:end -->
+    <!-- website:theme:start -->
+    <meta name="theme-color" content="#ffffff" />
+    <!-- Apply the saved theme before styles load, to avoid a flash on navigation. -->
+    <script src="../../../assets/theme.js"></script>
+    <!-- website:theme:end -->
+    <link rel="icon" href="../../../assets/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="../../../assets/styles.css" />
+    <script src="../../../assets/main.js" defer></script>
+  <script id="website-messages" type="application/json">{"Copied": "Copiados", "Code copied to clipboard.": "Código copiado para a área de transferência.", "Selected": "Seleccionado", "Code selected. Use your keyboard to copy it.": "Código seleccionado. Use o teclado para copiá-lo.", "REA on GitHub ({count})": "REA em GitHub ({count})", "Switch to light mode": "Alternar para o modo claro", "Switch to dark mode": "Alternar para o modo escuro"}</script>
+  </head>
+  <body id="top">
+    <a class="skip-link" href="#main">Ir para o conteúdo</a>
+    <!-- website:header:start -->
+    <!-- prettier-ignore -->
+    <header class="site-header">
+      <div class="container header-inner">
+        <a class="brand" href="../../" aria-label="Página inicial do REA"
+          ><span class="brand-name">REA</span
+          ><span class="brand-caption" data-i18n-skip>Reverse Engineer Anything</span></a
+        >
+        <nav class="navigation" aria-label="Navegação principal">
+          <a href="../../../get-started/" class="nav-start">Começar</a>
+          <a href="../../showcase/">Casos práticos</a>
+          <a href="../" aria-current="page">Blog</a>
+          <a href="../../guides/">Guias</a>
+        </nav>
+        <div class="header-social">
+          <details class="language-picker" data-i18n-skip><summary><span aria-hidden="true">文 / A</span> <span>Português (Brasil)</span></summary><nav aria-label="Português (Brasil)"><a href="../../../blog/reverse-engineering-models/" lang="en" dir="ltr" data-language="en">English</a><a href="../../../zh-CN/blog/reverse-engineering-models/" lang="zh-CN" dir="ltr" data-language="zh-CN">简体中文</a><a href="../../../zh-TW/blog/reverse-engineering-models/" lang="zh-TW" dir="ltr" data-language="zh-TW">繁體中文</a><a href="../../../ja/blog/reverse-engineering-models/" lang="ja" dir="ltr" data-language="ja">日本語</a><a href="../../../ko/blog/reverse-engineering-models/" lang="ko" dir="ltr" data-language="ko">한국어</a><a href="../../../tr/blog/reverse-engineering-models/" lang="tr" dir="ltr" data-language="tr">Türkçe</a><a href="../../../ru/blog/reverse-engineering-models/" lang="ru" dir="ltr" data-language="ru">Русский</a><a href="../../../vi/blog/reverse-engineering-models/" lang="vi" dir="ltr" data-language="vi">Tiếng Việt</a><a href="../../../th/blog/reverse-engineering-models/" lang="th" dir="ltr" data-language="th">ไทย</a><a href="../../../de/blog/reverse-engineering-models/" lang="de" dir="ltr" data-language="de">Deutsch</a><a href="../../../es/blog/reverse-engineering-models/" lang="es" dir="ltr" data-language="es">Español</a><a href="../../../fr/blog/reverse-engineering-models/" lang="fr" dir="ltr" data-language="fr">Français</a><a href="../../../uk/blog/reverse-engineering-models/" lang="uk" dir="ltr" data-language="uk">Українська</a><a href="../../../pl/blog/reverse-engineering-models/" lang="pl" dir="ltr" data-language="pl">Polski</a><a href="../../../pt-BR/blog/reverse-engineering-models/" lang="pt-BR" dir="ltr" data-language="pt-BR" aria-current="true">Português (Brasil)</a><a href="../../../ar/blog/reverse-engineering-models/" lang="ar" dir="rtl" data-language="ar">العربية</a><a href="../../../fa/blog/reverse-engineering-models/" lang="fa" dir="rtl" data-language="fa">فارسی</a><a href="../../../id/blog/reverse-engineering-models/" lang="id" dir="ltr" data-language="id">Bahasa Indonesia</a><a href="../../../it/blog/reverse-engineering-models/" lang="it" dir="ltr" data-language="it">Italiano</a><a href="../../../el/blog/reverse-engineering-models/" lang="el" dir="ltr" data-language="el">Ελληνικά</a><a href="../../../ml/blog/reverse-engineering-models/" lang="ml" dir="ltr" data-language="ml">മലയാളം · English</a><a href="../../../ur-Latn/blog/reverse-engineering-models/" lang="ur-Latn" dir="ltr" data-language="ur-Latn">Roman Urdu · English</a><a href="../../../ro/blog/reverse-engineering-models/" lang="ro" dir="ltr" data-language="ro">Română · English</a></nav></details>
+          <button class="theme-toggle" type="button" data-theme-toggle hidden>
+            <svg class="theme-moon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+              <path d="M20.9 13a9 9 0 0 1-9.9-9.9A9 9 0 1 0 20.9 13Z" />
+            </svg>
+            <svg class="theme-sun" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true" focusable="false">
+              <circle cx="12" cy="12" r="4" />
+              <path d="M12 2v2m0 16v2M2 12h2m16 0h2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42" />
+            </svg>
+          </button>
+          <a
+            class="nav-github"
+            href="https://github.com/morluto/rea"
+            aria-label="REA no GitHub"
+            title="REA no GitHub"
+          >
+            <svg
+              width="22"
+              height="22"
+              viewBox="0 0 16 16"
+              aria-hidden="true"
+              focusable="false"
+            >
+              <path
+                fill="currentColor"
+                d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82a7.65 7.65 0 0 1 2-.27c.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z"
+              />
+            </svg>
+            <span class="nav-github-count" hidden aria-hidden="true"></span>
+          </a>
+          <a
+            class="nav-discord"
+            href="https://discord.gg/GkcryMnJDM"
+            aria-label="Participe do Discord do REA"
+            title="Participe do Discord do REA"
+          >
+            <svg
+              width="22"
+              height="22"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+              focusable="false"
+            >
+              <path
+                fill="currentColor"
+                d="M20.317 4.3698a19.7913 19.7913 0 0 0-4.8851-1.5152.0741.0741 0 0 0-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 0 0-.0785-.037 19.7363 19.7363 0 0 0-4.8852 1.515.0699.0699 0 0 0-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 0 0 .0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 0 0 .0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 0 0-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 0 1-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 0 1 .0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 0 1 .0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 0 1-.0066.1276 12.2986 12.2986 0 0 1-1.873.8914.0766.0766 0 0 0-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 0 0 .0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 0 0 .0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 0 0-.0312-.0286ZM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189Zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189Z"
+              />
+            </svg>
+          </a>
+          <a
+            class="nav-x"
+            href="https://x.com/reatools"
+            aria-label="Siga o REA no X"
+            title="Siga o REA no X"
+          >
+            <svg
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+              focusable="false"
+            >
+              <path
+                fill="currentColor"
+                d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z"
+              />
+            </svg>
+          </a>
+        </div>
+      </div>
+    </header>
+    <!-- website:header:end -->
+    <main id="main" class="container">
+      <div class="page-heading">
+        <p class="breadcrumb">
+          <a href="../../">Página inicial</a> / <a href="../">Blog</a> / Modelos e engenharia reversa
+        </p>
+        <p class="eyebrow">Ensaio</p>
+        <h1>A engenharia reversa precisa de um modelo maior?</h1>
+        <p class="page-meta">Por N0zoM1z0 · 13 de outubro de 2026</p>
+        <div class="blog-takeaway">
+          <p class="eyebrow">Pontos principais</p>
+          <ul>
+            <li>
+              <strong
+                >A capacidade do modelo afeta quais hipóteses um agente de IA pode propor.</strong
+              > Sessões posteriores resolveram problemas que trabalhos anteriores haviam deixado sem solução.
+            </li>
+            <li>
+              <strong
+                >Um compilador familiar oferece padrões concretos para um modelo especializado aprender.</strong
+              > Algumas correspondências exatas de código de máquina dependem de padrões de código-fonte específicos e reutilizáveis.
+            </li>
+            <li>
+              <strong>Inclua o conhecimento do repositório em uma comparação justa.</strong> Um modelo menor com boa recuperação de conhecimento pode já ter informações suficientes para progredir.
+            </li>
+            <li>
+              <strong
+                >Treine o modelo para escolher o próximo experimento útil e teste seu verificador.</strong
+              > O feedback é útil apenas na medida em que o verificador verifica as coisas certas.
+            </li>
+            <li>
+              <strong
+                >Avalie os resultados verificados da reconstrução juntamente com o tempo e o custo.</strong
+              > É isso que quero medir para o fluxo de trabalho completo do agente de IA.
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="article-layout">
+        <nav class="contents" aria-label="Nesta página">
+          <p>Neste artigo</p>
+          <ul>
+            <li><a href="#model-capability">O que os modelos mais capazes mudaram</a></li>
+            <li><a href="#specialization">Por que se especializar?</a></li>
+            <li><a href="#repository-knowledge">Onde essa experiência deve ser armazenada?</a></li>
+            <li><a href="#learning-search">Aprendendo o próximo experimento útil</a></li>
+            <li><a href="#re-and-rl">Engenharia reversa e aprendizagem por reforço</a></li>
+            <li><a href="#oracle">Quando o verificador está errado</a></li>
+            <li><a href="#comparison">Uma comparação que vale a pena fazer</a></li>
+            <li><a href="#future-agent">Que tipo de agente de IA isso sugere?</a></li>
+          </ul>
+        </nav>
+        <article
+          class="article"
+          aria-label="Modelos e ensaio de engenharia reversa"
+        >
+          <section class="article-section" id="model-capability">
+            <h2>O que os modelos mais capazes mudaram</h2>
+            <p>
+              Desde agosto de 2026 venho explorando o quanto de engenharia reversa um agente pode realizar com acesso a um programa e uma forma de verificar seu funcionamento. A maior parte da minha experiência vem da reconstrução de jogos, especialmente Touhou. Como mudei de modelo, os repositórios mantiveram um registro do que cada sessão conseguiu recuperar.
+            </p>
+            <p>
+              Grande parte desse trabalho visa a reconstrução exata: compilamos a fonte mantida sob um conjunto de ferramentas histórico com versões fixas e verificamos se ela reproduz a função alvo. Quando um modelo posterior é bem-sucedido onde o trabalho anterior estagnou, as mudanças na origem mostram o que tornou esse progresso possível.
+            </p>
+            <h3>As variáveis temporárias precisavam de vidas sobrepostas</h3>
+            <p>
+              Grande parte da lógica da função de ataque TH09 já havia sido reconstruída, mas o compilador ainda armazenava resultados temporários de maneira diferente do original. O problema restante era quanto tempo esses resultados precisavam para permanecer vivos e quando seu armazenamento poderia ser reutilizado.
+            </p>
+            <p>
+              Um <a
+                href="https://github.com/N0zoM1z0/th09/commit/de63c0f9121963f3a6b1ab5471c4878625fd3425"
+                >GPT-6-Sol registro de sessão</a
+              > relatou essa incompatibilidade após testar vários arranjos comuns de código-fonte. Quando <a
+                href="https://github.com/N0zoM1z0/th09/commit/52929ed7c299f1a5f29cc13964e22510145fd616"
+                >GPT-6.1-Sol examinou o problema novamente</a
+              >, propôs uma hipótese útil sobre o tempo de vida dessas variáveis ​​temporárias.
+            </p>
+            <p>
+              A função produziu resultados temporários e os copiou em posições de animação. Em C++, um resultado temporário permanece ativo até que a expressão que o utiliza termine. O agrupamento das operações reais em uma expressão manteve esses resultados vivos juntos, de modo que o compilador não pudesse mais reutilizar o mesmo armazenamento para todos eles.
+            </p>
+            <p>
+              Um resultado ainda compartilha o armazenamento com um valor usado posteriormente para verificações de colisão. Dar a esse valor seu próprio tempo de vida resolveu a sobreposição restante. Após vários experimentos direcionados, <strong
+                >uma recompilação limpa da fonte confirmou que a função completa correspondia a</strong
+              >.
+            </p>
+            <p>
+              Estou interessado em saber como a descoberta e os testes se apoiaram. A hipótese sobre a vida útil dos objetos temporários deu ao agente de IA uma nova direção. O feedback do compilador ajudou a refinar essa hipótese em um arranjo de código-fonte correspondente.
+            </p>
+            <h3>Um gráfico de fluxo de controle diferente</h3>
+            <p>
+              Uma segunda função TH09 mostra por que essa nova direção pode ser importante. Aqui, o obstáculo foi a forma como diversas filiais compartilharam seu trabalho final. O trabalho anterior de <a
+                href="https://github.com/N0zoM1z0/th09/commit/f8d12d72aaf02212ee1b585a8f3f86d7ed000269"
+                >GPT-6.1-Sol</a
+              > fez com que partes da função correspondessem, mas as ramificações ainda se uniram de maneira diferente do original.
+            </p>
+            <p>
+              <a
+                href="https://github.com/N0zoM1z0/th09/commit/da33a646221198ceb7f3df2b96e2ca0e9b2f705f"
+                >GPT-6-Astra alterou o gráfico de fluxo de controle circundante</a
+              >. Os principais caminhos levaram agora a uma atualização e retorno final partilhado. Nessa estrutura de origem, o compilador combinou as ramificações da mesma forma que o original. A função completa correspondeu e uma <a
+                href="https://github.com/N0zoM1z0/th09/commit/5f825b28a862f8e1a6d4aea2f78a42f04c09a1c0"
+                >verificação de reconstrução separada confirmou isso</a
+              >.
+            </p>
+            <p>
+              <strong
+                >Mudar a representação abriu um espaço de pesquisa mais produtivo.</strong
+              > Ambos os casos me dão um motivo para levar a sério a capacidade geral do modelo: um agente pode continuar tentando variações locais por um longo tempo antes de encontrar uma maneira melhor de expressar o trabalho circundante.
+            </p>
+            <p>
+              As sessões posteriores também herdaram o código anterior e os experimentos fracassados já registrados. Esse trabalho acumulado fazia parte da vantagem delas. O histórico permite examinar as descobertas e suas verificações; uma comparação controlada ajudaria a separar o efeito do modelo do efeito da experiência herdada.
+            </p>
+            <p>
+              É isso que torna a questão interessante para mim. Algum progresso veio da descoberta de uma nova representação. Grande parte do trabalho restante envolveu testar diferentes arranjos de código-fonte em um compilador familiar. Quanto disso requer ampla capacidade de raciocínio? Quanto um modelo poderia aprender trabalhando repetidamente com esse compilador e código?
+            </p>
+          </section>
+          <section class="article-section" id="specialization">
+            <h2>Por que um modelo especializado de IA pode funcionar bem?</h2>
+            <p>
+              Touhou nos dá uma razão concreta para esperar que essa experiência ajude. Grande parte do código do jogo vem do mesmo autor, ZUN, portanto, hábitos recorrentes são uma suposição inicial razoável. Os repositórios apoiam isso com exemplos úteis: loops relacionados e arranjos auxiliares forneceram hipóteses em todos os jogos.
+            </p>
+            <p>
+              Esses padrões de origem tornam-se mais específicos quando incluímos o compilador. Sob uma determinada versão e conjunto de opções, pequenas alterações na fonte podem produzir diferenças repetíveis no código de máquina. Algumas dessas diferenças são surpreendentemente obscuras.
+            </p>
+            <p>
+              Em TH095, por exemplo, <strong
+                >até mesmo o nome de uma variável local pode afetar o local onde VC7.1 a armazenou</strong
+              >. Mover sua declaração não resolveu o layout de armazenamento. No entanto, uma função anterior revelou um padrão de nomenclatura que afetou a escolha do compilador. Isso sugeriu uma hipótese mais promissora para <a
+                href="https://github.com/N0zoM1z0/th095/commit/26bb64bdb093a13f73abd0ee8ae7ce199ee4658f"
+                >reconstruir <code>Supervisor::LoadDat</code></a
+              >.
+            </p>
+            <p>
+              A reutilização desse padrão para a variável de tamanho de arquivo produziu o layout necessário sem adicionar armazenamento. A função completa então correspondeu.
+            </p>
+            <p>
+              Este é um detalhe muito específico que um modelo de IA de uso geral pode não saber quando encontra o problema pela primeira vez. Um modelo especializado para este compilador poderia ver muitos desses casos e aprender quais variações do código-fonte valem a pena testar primeiro.
+            </p>
+            <p>
+              A oportunidade é especialmente clara em problemas de correspondência final onde já entendemos o comportamento. Estamos então perguntando qual arranjo comum de código-fonte este compilador transforma nas instruções observadas. A especialização poderia ajudar o modelo a propor essas formas de forma mais eficiente, enquanto o alvo ainda determina quais hipóteses sobreviverão.
+            </p>
+            <p>
+              Padrões úteis devem manter seu contexto. TH08 usa uma versão Visual C++ anterior a TH095 e TH09. TH04 usa um compilador diferente da era DOS. Sua <a
+                href="https://github.com/N0zoM1z0/th04/commit/6dce0a79d5b931f0e2a08475b90e0c33d2321b98"
+                >reconstrução do código do jogador</a
+              > precisava de diferentes hipóteses sobre os padrões do código-fonte e como o código compilado era vinculado a um executável. Ter o mesmo autor nos dá uma expectativa inicial, mas cada alvo nos diz se se aplica. Um modelo especializado precisaria distinguir esses contextos.
+            </p>
+          </section>
+          <section class="article-section" id="repository-knowledge">
+            <h2>Onde essa experiência deve ser armazenada?</h2>
+            <p>
+              Antes de decidir ensinar esses padrões por meio do treinamento de modelos, eu examinaria o conhecimento que já mantemos no repositório. No <a href="../touhou-reconstruction/">ensaio anterior</a>, escrevi sobre isso se tornar a memória de trabalho do projeto. Essa memória inclui lições de compilador, juntamente com a fonte e os experimentos fracassados ​​que os tornaram úteis.
+            </p>
+            <p>
+              Ao recuperar esse registro, um agente pode começar com um resultado conhecido e inspecionar como o alcançamos. Também pode evitar alternativas que já falharam no mesmo contexto. O ponto inicial melhora sem alterar os parâmetros treinados do modelo.
+            </p>
+            <p>
+              Ao reconstruir a função de TH09 para criar inimigos, uma <a
+                href="https://github.com/N0zoM1z0/th09/commit/1eb843383941d00065622a9e353146c4bb96979e"
+                >sessão GPT-6-Luna-max</a
+              > tirou uma hipótese do código-fonte TH08 relacionado. Esse código anterior sugeria como organizar o loop e lidar com falhas dentro dele. As próprias evidências de TH09 forneceram detalhes específicos do jogo. As reconstruções da fonte confirmaram que a função completa correspondia.
+            </p>
+            <p>
+              <strong
+                >"O modelo não sabia daquela peculiaridade do compilador" e "o modelo não pôde usá-lo" são problemas diferentes.</strong
+              > A recuperação pode resolver o primeiro, mas transformar esse fato em um candidato útil ainda dá trabalho. E se o código-fonte candidato falhar, o modelo deverá decidir o que o resultado significa para sua próxima tentativa. Conhecer o padrão relevante é apenas o começo desse processo.
+            </p>
+            <p>
+              Por esse motivo, eu incluiria um modelo menor de IA de uso geral com boa recuperação em qualquer comparação. Fornecer a mesma biblioteca de experiência nos ajudaria a identificar o que o treinamento agrega: melhor geração de candidatos, melhores decisões após feedback ou ambos.
+            </p>
+          </section>
+          <section class="article-section" id="learning-search">
+            <h2>Aprendendo o próximo experimento útil</h2>
+            <p>
+              Essas decisões após feedback são o que eu mais gostaria de estudar. Na reconstrução agente, o modelo propõe uma explicação e a testa em relação ao programa. Mesmo quando o código-fonte candidato falha, o resultado pode restringir as possibilidades restantes e sugerir um próximo experimento mais útil.
+            </p>
+            <p>
+              Considere novamente o exemplo dos resultados temporários. Sua fonte final mostra o arranjo que funcionou, mas o caminho para essa fonte contém mais informações. Cada um dos experimentos a seguir ajudou a identificar o que ainda precisava ser mudado.
+            </p>
+            <div class="evidence-table-wrap">
+              <table
+                class="evidence-table"
+                aria-label="Experimentos de reconstrução selecionados"
+              >
+                <thead>
+                  <tr>
+                    <th scope="col">Experimentar</th>
+                    <th scope="col">O que seu resultado nos ensinou</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Tente uma maneira diferente de copiar os resultados</td>
+                    <td>
+                      O código de cópia muda, mas a função ainda é diferente.
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Use os valores retornados diretamente</td>
+                    <td>
+                      A cópia segue o padrão original, mas o armazenamento temporário ainda é diferente.
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Mantenha todas as variáveis temporárias válidas ao mesmo tempo</td>
+                    <td>
+                      Eles obtêm armazenamento separado, mas ainda se sobrepõe a um valor usado posteriormente para verificações de colisão.
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Mantenha o valor de verificação de colisão separado</td>
+                    <td>Uma recompilação limpa da fonte confirma a correspondência completa.</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <p class="caption">
+              Experimentos selecionados da reconstrução da função de ataque acima, agrupados pelo que nos ensinaram.
+            </p>
+            <p>
+              Um registro de treinamento que mantenha essa sequência pode ensinar mais do que apenas a fonte final. Ele conecta cada mudança proposta a um resultado observado e à próxima decisão. Manter variações ineficazes também é importante: elas informam a um agente posterior quais hipóteses já foram testadas naquele contexto.
+            </p>
+            <p>
+              <strong
+                >Eu gostaria que o modelo aprendesse como usar o feedback.</strong
+              > Um resultado neutro é um motivo para reconsiderar a variação; uma incompatibilidade alterada pode apontar para outra causa. Quando as edições locais deixarem de ser informativas, o agente deverá ser capaz de revisitar a representação da fonte ou inspecionar as evidências novamente.
+            </p>
+            <p>
+              Aprender a fazer essas escolhas requer autonomia. Às vezes, o próximo passo útil é inspecionar outro chamador em vez de compilar outra edição. Uma sequência rígida de reescritas necessárias eliminaria essa escolha, juntamente com parte do comportamento que queremos que o modelo aprenda.
+            </p>
+          </section>
+          <section class="article-section" id="re-and-rl">
+            <h2>Por que a engenharia reversa é interessante para aprendizagem por reforço</h2>
+            <p>
+              Uma reconstrução com escopo definido oferece um ambiente prático para estudar essas escolhas. Com as versões do alvo e do compilador fixadas, muitos experimentos de código-fonte dão feedback rápido e repetível. O agente pode compilar um candidato, examinar as diferenças e escolher o próximo passo.
+            </p>
+            <p>
+              A aprendizagem por reforço poderia treinar esse processo de tomada de decisão por meio do feedback que recebe. Um candidato aceito por meio de uma verificação definida nos dá um resultado concreto, enquanto a sequência de tentativas nos permite observar quanto trabalho foi necessário para alcançá-lo.
+            </p>
+            <p>
+              Já existem pesquisas apoiando essa direção. <a href="https://aclanthology.org/2024.emnlp-main.203/"
+                >LLM4Decompile</a
+              > estuda modelos especializados para descompilação. <a href="https://arxiv.org/html/2606.16162v1">AutoDecompiler</a> treina o refinamento em várias rodadas usando feedback do compilador e de execução. Seus estudos se concentram na recuperação funcional. Para este trabalho, eu os usaria como ponto de partida para a tarefa relacionada de encontrar uma fonte que corresponda à saída de um compilador histórico.
+            </p>
+            <p>
+              Porém, para alcançar uma tarefa tão bem definida, talvez precisemos primeiro estabelecer quais recursos uma função possui ou criar uma nova forma de observar o comportamento do programa durante a execução. Em TH08, por exemplo, uma <a
+                href="https://github.com/N0zoM1z0/th08/commit/af9cb1d3e839b15a78b47ac1701506083cc82847"
+                >diferença de colisão levou de volta à forma como o programa original lidava com cálculos de ponto flutuante</a
+              >. Antes que o agente pudesse testar uma correção útil, ele precisava decidir o que medir.
+            </p>
+            <p>
+              Isto sugere outro papel para um modelo amplamente capaz: em primeiro lugar, ajudar a tornar o problema verificável. Uma vez que essa verificação exista, podemos investigar até onde uma política de pesquisa aprendida pode chegar com ela.
+            </p>
+          </section>
+          <section class="article-section" id="oracle">
+            <h2>Quando o verificador está errado</h2>
+            <p>
+              Quando usamos uma verificação no treinamento, sua cobertura passa a fazer parte do ambiente de aprendizagem. Chamo essa referência ou verificador de oracle. Mesmo uma resposta repetível precisa ser entendida pelos aspectos que ela realmente verifica.
+            </p>
+            <p>
+              TH08 mostrou o quanto pode se esconder fora dessa cobertura. Algumas funções reconstruídas passaram em suas comparações exatas com constantes flutuantes erradas. O comparador ajustou os endereços realocados antes de verificar as instruções, mas verificou os valores por trás desses endereços somente quando eles foram explicitamente registrados para verificação. Outras referências literais poderiam passar sem que seus valores fossem examinados.
+            </p>
+            <p>
+              Para resolver essa lacuna, uma <a
+                href="https://github.com/N0zoM1z0/th08/commit/a393f400786e4cc6cbb1000af0dad3276da12c78"
+                >auditoria mais ampla</a
+              > encontrou constantes incorretas em funções que já haviam passado na verificação. Em um cálculo, o código-fonte reconstruído adicionou <code>1.0f</code>, enquanto o original adicionou <code>32.0f</code>.
+            </p>
+            <p>
+              <strong
+                >Um modelo recompensado pela verificação antiga poderia aprender a produzir uma reconstrução incorreta.</strong
+              > Não treinamos um modelo RL usando esse verificador. A falha que observamos estava na própria verificação. Mas se usássemos isso como recompensa, o mesmo ponto cego passaria a fazer parte do ambiente de aprendizagem.
+            </p>
+            <p>
+              Um teste funcional pode ter um ponto cego semelhante. <a href="https://arxiv.org/html/2609.05370v1"
+                >Pesquisas usando difusão diferencial em descompiladores LLM</a
+              > encontraram diferenças comportamentais fora dos testes fornecidos. Portanto, precisamos entender um teste aprovado em termos dos casos que ele exerce. Da mesma forma, uma correspondência de instrução deve ser entendida em termos dos bytes e dos dados que ela verifica.
+            </p>
+            <p>
+              Antes de usar qualquer tipo de verificação como recompensa, eu testaria com resultados deliberadamente incorretos. Eu também manteria a aceitação final separada do código-fonte que o agente de IA pode editar. O modelo deve passar na verificação reconstruindo o programa corretamente. Caso contrário, simplesmente copiar uma matriz de bytes do destino poderia enganar um sistema de pontuação ingênuo sem recuperar o código-fonte útil.
+            </p>
+            <p>
+              <strong
+                >Aprimorar o aluno e melhorar seu verificador pertencem ao mesmo problema de pesquisa.</strong
+              > À medida que o aluno melhora na otimização do feedback que lhe damos, compreender esse feedback também se torna mais importante.
+            </p>
+          </section>
+          <section class="article-section" id="comparison">
+            <h2>Uma comparação que vale a pena fazer</h2>
+            <p>
+              Com essas verificações implementadas, eu iniciaria a comparação em uma família de tarefas fixa VC7.1. Primeiro, eu estabeleceria linhas de base para um modelo forte de IA de uso geral e um modelo menor. Adicionar conhecimento do repositório ao modelo menor mostraria quais mudanças na recuperação. A partir daí, a especialização supervisionada e uma versão treinada em RL nos permitiriam examinar o que o treinamento acrescenta.
+            </p>
+            <p>
+              Para tornar essas comparações informativas, cada modelo receberia as mesmas evidências e ferramentas alvo. Para comparações específicas de treinamento, eu também manteria o modelo base e o conhecimento disponível fixos. Testes repetidos ajudariam a distinguir uma estratégia de busca confiável de uma solução candidata que tivesse sucesso por acaso.
+            </p>
+            <p>
+              Eu separaria então duas condições iniciais: reconstruir uma função a partir de suas instruções e fechar as últimas diferenças na fonte mantida. Um modelo de IA especializado pode ser excelente na segunda tarefa, enquanto um modelo de IA de uso geral faz grande parte do trabalho necessário para alcançá-la. Medi-los separadamente revelaria essa divisão de trabalho.
+            </p>
+            <p>
+              Ambas as tarefas precisam de exemplos de teste excluídos do treinamento e recuperação. Jogos Touhou relacionados compartilham o código do mecanismo. Excluir um jogo do treinamento ainda poderia deixar funções quase idênticas no conjunto de treinamento. Em vez disso, eu excluiria grupos inteiros de código-fonte relacionado e manteria suas respostas verificadas fora dos dados de treinamento e da biblioteca de recuperação.
+            </p>
+            <p>
+              Para estes exemplos, o resultado seria correspondências completas e verificadas de forma independente. Orçamentos iguais para propostas de candidatos ou tentativas de compilação ajudariam a comparar a qualidade da pesquisa. Medir o tempo e o custo totais, incluindo a compilação, mostraria se essa qualidade produz um fluxo de trabalho eficiente. Os custos de formação devem ser medidos separadamente.
+            </p>
+            <p>
+              Ambas as medidas são importantes. Uma proposta barata pode levar a um fluxo de trabalho caro se causar mais compilações que não fornecem informações úteis. Por outro lado, um modelo mais lento pode ser mais econômico se encontrar uma experiência útil mais cedo. A comparação deve incluir esses custos.
+            </p>
+            <p>
+              A contagem dos resultados aceitos também mantém o progresso intermediário em perspectiva. Um TH09 <a
+                href="https://github.com/N0zoM1z0/th09/commit/ab72fd77728293fc0beacfc656ca701b0e266016"
+                >candidato para salvar repetição</a
+              > parecia promissor porque a função compilada tinha o tamanho esperado, mas uma comparação completa ainda encontrou diferenças substanciais. Mudanças na forma como o compilador organiza as instruções também podem fazer o candidato parecer mais próximo do alvo, sem resolver o problema subjacente. Esses diagnósticos podem orientar o próximo experimento, mas eu validaria qualquer recompensa por “chegar mais perto” em relação à verificação de aceitação total.
+            </p>
+            <p>
+              Eu estaria interessado no padrão desses resultados. Se um modelo de IA especializado funciona bem em uma família de compiladores familiar, essa vantagem sobreviverá a uma mudança no conjunto de ferramentas? E uma vez que ambos os modelos de IA tenham uma boa recuperação, quanto o treinamento ainda acrescenta? As respostas nos ajudariam a decidir onde cada tipo de modelo é mais útil.
+            </p>
+          </section>
+          <section class="article-section" id="future-agent">
+            <h2>Que tipo de agente de IA isso sugere?</h2>
+            <p>
+              Se os modelos acabarem por ajudar em diferentes fases, um acordo útil poderá ser um agente amplo com acesso a um modelo de IA especializado. Depois que uma tarefa se torna uma pesquisa familiar do compilador, ela pode solicitar candidatos ao modelo de IA especializado. Se os resultados deixarem de fazer sentido, o agente mais amplo poderá retornar à evidência alvo ou investigar a própria medição.
+            </p>
+            <p>
+              Nesse arranjo, a especialização torna-se uma ferramenta que o agente pode escolher à medida que a investigação se desenvolve. O agente mantém a liberdade de mudar a direção que tornou possíveis os avanços anteriores.
+            </p>
+            <p>
+              Isto decorre naturalmente da mudança industrial que descrevi no ensaio anterior. Ser capaz de realizar muito mais experimentos muda a forma como organizamos o trabalho. Também nos dá uma razão para perguntar quais decisões necessitam de um julgamento amplo e quais melhoram através da experiência repetida com uma determinada arte.
+            </p>
+            <p>
+              Por enquanto, o modelo geral mais forte conquistou seu lugar no meu trabalho ao resolver problemas que eu havia deixado em aberto. Esses sucessos me fazem querer estudar o processo: quanto dependia da amplitude do modelo e quanto poderia ser feito por um modelo treinado especificamente para esse tipo de reconstrução?
+            </p>
+            <p>
+              <strong
+                >Os repositórios nos fornecem uma maneira de testar a pergunta.</strong
+              > Gostaria de usar esse registro para construir a comparação e ver o que aprendemos.
+            </p>
+          </section>
+          <section class="article-section" id="sources">
+            <details class="native-details">
+              <summary>Evidências e atribuição de modelo</summary>
+              <p>
+                As <a
+                  href="https://github.com/morluto/rea/blob/main/website/evidence/reverse-engineering-models.md"
+                  >notas detalhadas de evidências</a
+                > incluem as comparações registradas e o contexto dos experimentos.
+              </p>
+              <p>
+                Os exemplos descrevem comparações históricas em nível de função registradas nos commits vinculados. As verificações de tempo de execução de todo o jogo são marcos separados. Os registros de origem e correspondentes foram revisados em 13 de outubro de 2026.
+              </p>
+              <p>
+                O rótulo TH09 <code>gpt-dots</code> significa GPT-6-Astra. O modelo associado a <code>gpt-web</code> mudou ao longo do tempo, de modo que o rótulo por si só não consegue identificar o modelo usado em uma execução específica. Nomes de modelos explícitos nos outros commits citados fornecem a atribuição registrada. Esses históricos não incluem medições consistentes de custo ou esforço para cada execução.
+              </p>
+              <ul>
+                <li>
+                  <strong>TH09 tempos de vida do objeto temporário:</strong> a <a
+                    href="https://github.com/N0zoM1z0/th09/commit/de63c0f9121963f3a6b1ab5471c4878625fd3425"
+                    >revisão de contexto anterior</a
+                  > e a <a
+                    href="https://github.com/N0zoM1z0/th09/commit/52929ed7c299f1a5f29cc13964e22510145fd616"
+                    >reconstrução completa verificada por uma recompilação limpa da origem</a
+                  >.
+                </li>
+                <li>
+                  <strong>TH09 Front retorno de chamada:</strong> <a
+                    href="https://github.com/N0zoM1z0/th09/commit/f8d12d72aaf02212ee1b585a8f3f86d7ed000269"
+                    >regiões de diagnóstico que não correspondem</a
+                  >, <a
+                    href="https://github.com/N0zoM1z0/th09/commit/da33a646221198ceb7f3df2b96e2ca0e9b2f705f"
+                    >novo gráfico de fluxo de controle de Astra</a
+                  > e sua <a
+                    href="https://github.com/N0zoM1z0/th09/commit/5f825b28a862f8e1a6d4aea2f78a42f04c09a1c0"
+                    >verificação de recompilação aceita</a
+                  >.
+                </li>
+                <li>
+                  <strong>Conhecimento do compilador:</strong> <a
+                    href="https://github.com/N0zoM1z0/th095/commit/26bb64bdb093a13f73abd0ee8ae7ce199ee4658f"
+                    >TH095 reutilização do comportamento do bloco de identificadores</a
+                  >, <a
+                    href="https://github.com/N0zoM1z0/th04/commit/6dce0a79d5b931f0e2a08475b90e0c33d2321b98"
+                    >TH04 código-fonte do jogador e ordem do vinculador</a
+                  > e <a
+                    href="https://github.com/N0zoM1z0/th09/commit/1eb843383941d00065622a9e353146c4bb96979e"
+                    >reconstrução completa de Luna da função de criação de inimigo de TH09</a
+                  >.
+                </li>
+                <li>
+                  <strong>Verificações e diagnósticos:</strong> <a
+                    href="https://github.com/N0zoM1z0/th08/commit/a393f400786e4cc6cbb1000af0dad3276da12c78"
+                    >TH08 auditoria de constante de ponto flutuante</a
+                  >, <a
+                    href="https://github.com/N0zoM1z0/th08/commit/af9cb1d3e839b15a78b47ac1701506083cc82847"
+                    >TH08 investigação numérica</a
+                  > e <a
+                    href="https://github.com/N0zoM1z0/th09/commit/ab72fd77728293fc0beacfc656ca701b0e266016"
+                    >TH09 reconstrução para salvar replay</a
+                  >.
+                </li>
+              </ul>
+              <p>
+                As comparações propostas de modelos especializados e treinamento RL são experimentos futuros. As histórias do projeto os motivam. Nenhum modelo especializado treinado foi avaliado para este ensaio.
+              </p>
+            </details>
+          </section>
+        </article>
+      </div>
+    </main>
+    <!-- website:footer:start -->
+    <!-- prettier-ignore -->
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <p>REA · Reverse Engineer Anything</p>
+        <div class="footer-links">
+          <a href="../../faq/">FAQ</a
+          ><a href="../../contributors/">Colaboradores</a
+          ><a href="https://github.com/morluto/rea">Código-fonte</a
+          ><a href="https://github.com/morluto/rea/blob/main/LICENSE">Licença MIT</a
+          ><a href="https://discord.gg/GkcryMnJDM">Participe da comunidade</a
+          ><a href="https://x.com/reatools">Siga no X</a>
+        </div>
+      </div>
+    </footer>
+    <p class="sr-only" id="copy-status" role="status" aria-live="polite"></p>
+    <a class="back-to-top" href="#top" aria-label="Voltar ao topo">
+      <span aria-hidden="true">↑</span> Top
+    </a>
+    <!-- website:footer:end -->
+  </body>
+</html>

@@ -1,0 +1,621 @@
+<!doctype html>
+<html lang="tr" dir="ltr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Tersine mühendisliğin daha büyük bir modele ihtiyacı var mı? | REA</title>
+    <meta
+      name="description"
+      content="Touhou yeniden yapılandırma bana genel modeller, uzman modeller ve derleyici geri bildirimlerinden daha iyi hipotezler önermeyi öğrenme hakkında neler öğretti?"
+    />
+    <!-- website:sharing:start -->
+    <!-- prettier-ignore -->
+    <link rel="canonical" href="https://rea.tools/tr/blog/reverse-engineering-models/" />
+    <!-- website:languages:start -->
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="en" href="https://rea.tools/blog/reverse-engineering-models/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="zh-CN" href="https://rea.tools/zh-CN/blog/reverse-engineering-models/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="zh-TW" href="https://rea.tools/zh-TW/blog/reverse-engineering-models/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="ja" href="https://rea.tools/ja/blog/reverse-engineering-models/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="ko" href="https://rea.tools/ko/blog/reverse-engineering-models/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="tr" href="https://rea.tools/tr/blog/reverse-engineering-models/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="ru" href="https://rea.tools/ru/blog/reverse-engineering-models/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="vi" href="https://rea.tools/vi/blog/reverse-engineering-models/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="th" href="https://rea.tools/th/blog/reverse-engineering-models/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="de" href="https://rea.tools/de/blog/reverse-engineering-models/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="es" href="https://rea.tools/es/blog/reverse-engineering-models/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="fr" href="https://rea.tools/fr/blog/reverse-engineering-models/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="uk" href="https://rea.tools/uk/blog/reverse-engineering-models/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="pl" href="https://rea.tools/pl/blog/reverse-engineering-models/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="pt-BR" href="https://rea.tools/pt-BR/blog/reverse-engineering-models/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="ar" href="https://rea.tools/ar/blog/reverse-engineering-models/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="fa" href="https://rea.tools/fa/blog/reverse-engineering-models/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="id" href="https://rea.tools/id/blog/reverse-engineering-models/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="it" href="https://rea.tools/it/blog/reverse-engineering-models/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="el" href="https://rea.tools/el/blog/reverse-engineering-models/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="x-default" href="https://rea.tools/blog/reverse-engineering-models/" />
+<!-- website:languages:end -->
+    <!-- prettier-ignore -->
+    <meta property="og:type" content="website" />
+    <!-- prettier-ignore -->
+    <meta property="og:site_name" content="REA" />
+    <!-- prettier-ignore -->
+    <meta property="og:title" content="Tersine mühendisliğin daha büyük bir modele ihtiyacı var mı? | REA" />
+    <!-- prettier-ignore -->
+    <meta property="og:description" content="Touhou yeniden yapılandırma bana genel modeller, uzman modeller ve derleyici geri bildirimlerinden daha iyi hipotezler önermeyi öğrenme hakkında neler öğretti?" />
+    <!-- prettier-ignore -->
+    <meta property="og:url" content="https://rea.tools/tr/blog/reverse-engineering-models/" />
+    <!-- prettier-ignore -->
+    <meta property="og:image" content="https://rea.tools/assets/social-card.png" />
+    <!-- prettier-ignore -->
+    <meta property="og:image:type" content="image/png" />
+    <!-- prettier-ignore -->
+    <meta property="og:image:width" content="1200" />
+    <!-- prettier-ignore -->
+    <meta property="og:image:height" content="630" />
+    <!-- prettier-ignore -->
+    <meta
+      property="og:image:alt"
+      content="REA - Yazılımın nasıl çalıştığını öğrenin. Kodlama ajanınızla tersine mühendislik yapın."
+    />
+    <!-- prettier-ignore -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <!-- prettier-ignore -->
+    <meta name="twitter:title" content="Tersine mühendisliğin daha büyük bir modele ihtiyacı var mı? | REA" />
+    <!-- prettier-ignore -->
+    <meta name="twitter:description" content="Touhou yeniden yapılandırma bana genel modeller, uzman modeller ve derleyici geri bildirimlerinden daha iyi hipotezler önermeyi öğrenme hakkında neler öğretti?" />
+    <!-- prettier-ignore -->
+    <meta name="twitter:image" content="https://rea.tools/assets/social-card.png" />
+    <!-- prettier-ignore -->
+    <meta
+      name="twitter:image:alt"
+      content="REA - Yazılımın nasıl çalıştığını öğrenin. Kodlama ajanınızla tersine mühendislik yapın."
+    />
+    <!-- website:sharing:end -->
+    <!-- website:theme:start -->
+    <meta name="theme-color" content="#ffffff" />
+    <!-- Apply the saved theme before styles load, to avoid a flash on navigation. -->
+    <script src="../../../assets/theme.js"></script>
+    <!-- website:theme:end -->
+    <link rel="icon" href="../../../assets/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="../../../assets/styles.css" />
+    <script src="../../../assets/main.js" defer></script>
+  <script id="website-messages" type="application/json">{"Copied": "Kopyalandı", "Code copied to clipboard.": "Kod panoya kopyalandı.", "Selected": "Seçili", "Code selected. Use your keyboard to copy it.": "Kod seçildi. Kopyalamak için klavyenizi kullanın.", "REA on GitHub ({count})": "REA üzerinde GitHub ({count})", "Switch to light mode": "Açık temaya geç", "Switch to dark mode": "Koyu temaya geç"}</script>
+  </head>
+  <body id="top">
+    <a class="skip-link" href="#main">İçeriğe geç</a>
+    <!-- website:header:start -->
+    <!-- prettier-ignore -->
+    <header class="site-header">
+      <div class="container header-inner">
+        <a class="brand" href="../../" aria-label="REA ana sayfası"
+          ><span class="brand-name">REA</span
+          ><span class="brand-caption" data-i18n-skip>Reverse Engineer Anything</span></a
+        >
+        <nav class="navigation" aria-label="Ana menü">
+          <a href="../../../get-started/" class="nav-start">Başlangıç</a>
+          <a href="../../showcase/">Örnekler</a>
+          <a href="../" aria-current="page">Blog</a>
+          <a href="../../guides/">Rehberler</a>
+        </nav>
+        <div class="header-social">
+          <details class="language-picker" data-i18n-skip><summary><span aria-hidden="true">文 / A</span> <span>Türkçe</span></summary><nav aria-label="Türkçe"><a href="../../../blog/reverse-engineering-models/" lang="en" dir="ltr" data-language="en">English</a><a href="../../../zh-CN/blog/reverse-engineering-models/" lang="zh-CN" dir="ltr" data-language="zh-CN">简体中文</a><a href="../../../zh-TW/blog/reverse-engineering-models/" lang="zh-TW" dir="ltr" data-language="zh-TW">繁體中文</a><a href="../../../ja/blog/reverse-engineering-models/" lang="ja" dir="ltr" data-language="ja">日本語</a><a href="../../../ko/blog/reverse-engineering-models/" lang="ko" dir="ltr" data-language="ko">한국어</a><a href="../../../tr/blog/reverse-engineering-models/" lang="tr" dir="ltr" data-language="tr" aria-current="true">Türkçe</a><a href="../../../ru/blog/reverse-engineering-models/" lang="ru" dir="ltr" data-language="ru">Русский</a><a href="../../../vi/blog/reverse-engineering-models/" lang="vi" dir="ltr" data-language="vi">Tiếng Việt</a><a href="../../../th/blog/reverse-engineering-models/" lang="th" dir="ltr" data-language="th">ไทย</a><a href="../../../de/blog/reverse-engineering-models/" lang="de" dir="ltr" data-language="de">Deutsch</a><a href="../../../es/blog/reverse-engineering-models/" lang="es" dir="ltr" data-language="es">Español</a><a href="../../../fr/blog/reverse-engineering-models/" lang="fr" dir="ltr" data-language="fr">Français</a><a href="../../../uk/blog/reverse-engineering-models/" lang="uk" dir="ltr" data-language="uk">Українська</a><a href="../../../pl/blog/reverse-engineering-models/" lang="pl" dir="ltr" data-language="pl">Polski</a><a href="../../../pt-BR/blog/reverse-engineering-models/" lang="pt-BR" dir="ltr" data-language="pt-BR">Português (Brasil)</a><a href="../../../ar/blog/reverse-engineering-models/" lang="ar" dir="rtl" data-language="ar">العربية</a><a href="../../../fa/blog/reverse-engineering-models/" lang="fa" dir="rtl" data-language="fa">فارسی</a><a href="../../../id/blog/reverse-engineering-models/" lang="id" dir="ltr" data-language="id">Bahasa Indonesia</a><a href="../../../it/blog/reverse-engineering-models/" lang="it" dir="ltr" data-language="it">Italiano</a><a href="../../../el/blog/reverse-engineering-models/" lang="el" dir="ltr" data-language="el">Ελληνικά</a><a href="../../../ml/blog/reverse-engineering-models/" lang="ml" dir="ltr" data-language="ml">മലയാളം · English</a><a href="../../../ur-Latn/blog/reverse-engineering-models/" lang="ur-Latn" dir="ltr" data-language="ur-Latn">Roman Urdu · English</a><a href="../../../ro/blog/reverse-engineering-models/" lang="ro" dir="ltr" data-language="ro">Română · English</a></nav></details>
+          <button class="theme-toggle" type="button" data-theme-toggle hidden>
+            <svg class="theme-moon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+              <path d="M20.9 13a9 9 0 0 1-9.9-9.9A9 9 0 1 0 20.9 13Z" />
+            </svg>
+            <svg class="theme-sun" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true" focusable="false">
+              <circle cx="12" cy="12" r="4" />
+              <path d="M12 2v2m0 16v2M2 12h2m16 0h2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42" />
+            </svg>
+          </button>
+          <a
+            class="nav-github"
+            href="https://github.com/morluto/rea"
+            aria-label="GitHub’da REA"
+            title="GitHub’da REA"
+          >
+            <svg
+              width="22"
+              height="22"
+              viewBox="0 0 16 16"
+              aria-hidden="true"
+              focusable="false"
+            >
+              <path
+                fill="currentColor"
+                d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82a7.65 7.65 0 0 1 2-.27c.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z"
+              />
+            </svg>
+            <span class="nav-github-count" hidden aria-hidden="true"></span>
+          </a>
+          <a
+            class="nav-discord"
+            href="https://discord.gg/GkcryMnJDM"
+            aria-label="REA Discord topluluğuna katıl"
+            title="REA Discord topluluğuna katıl"
+          >
+            <svg
+              width="22"
+              height="22"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+              focusable="false"
+            >
+              <path
+                fill="currentColor"
+                d="M20.317 4.3698a19.7913 19.7913 0 0 0-4.8851-1.5152.0741.0741 0 0 0-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 0 0-.0785-.037 19.7363 19.7363 0 0 0-4.8852 1.515.0699.0699 0 0 0-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 0 0 .0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 0 0 .0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 0 0-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 0 1-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 0 1 .0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 0 1 .0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 0 1-.0066.1276 12.2986 12.2986 0 0 1-1.873.8914.0766.0766 0 0 0-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 0 0 .0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 0 0 .0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 0 0-.0312-.0286ZM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189Zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189Z"
+              />
+            </svg>
+          </a>
+          <a
+            class="nav-x"
+            href="https://x.com/reatools"
+            aria-label="REA’yı X’te takip et"
+            title="REA’yı X’te takip et"
+          >
+            <svg
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+              focusable="false"
+            >
+              <path
+                fill="currentColor"
+                d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z"
+              />
+            </svg>
+          </a>
+        </div>
+      </div>
+    </header>
+    <!-- website:header:end -->
+    <main id="main" class="container">
+      <div class="page-heading">
+        <p class="breadcrumb">
+          <a href="../../">Ana Sayfa</a> / <a href="../">Blog</a> / Modeller ve tersine mühendislik
+        </p>
+        <p class="eyebrow">Deneme</p>
+        <h1>Tersine mühendisliğin daha büyük bir modele ihtiyacı var mı?</h1>
+        <p class="page-meta">Yazan N0zoM1z0 · 13 Ekim 2026</p>
+        <div class="blog-takeaway">
+          <p class="eyebrow">Önemli noktalar</p>
+          <ul>
+            <li>
+              <strong
+                >Model yeteneği, bir yapay zeka aracısının hangi hipotezleri önerebileceğini etkiler.</strong
+              > Daha sonraki oturumlarda, daha önceki çalışmaların çözümsüz bıraktığı sorunlar çözüldü.
+            </li>
+            <li>
+              <strong
+                >Tanıdık bir derleyici, özel bir modelin öğrenilmesi için somut modeller sunar.</strong
+              > Bazı tam makine kodu eşleşmeleri, belirli, yeniden kullanılabilir kaynak kodu modellerine bağlıdır.
+            </li>
+            <li>
+              <strong>Adil bir karşılaştırmaya veri deposu bilgisini dahil edin.</strong> İyi bilgi erişimine sahip daha küçük bir model, ilerleme kaydetmek için zaten yeterli bilgiye sahip olabilir.
+            </li>
+            <li>
+              <strong
+                >Modeli, bir sonraki faydalı deneyi seçecek şekilde eğitin ve doğrulama denetleyicisini test edin.</strong
+              > Geri bildirim, yalnızca denetleyicinin doğru şeyleri doğruladığı ölçüde faydalıdır.
+            </li>
+            <li>
+              <strong
+                >Doğrulanmış yeniden yapılandırma sonuçlarını zaman ve maliyetle birlikte değerlendirin.</strong
+              > Yapay zeka aracısı iş akışının tamamı için ölçmek istediğim şey bu.
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="article-layout">
+        <nav class="contents" aria-label="Bu sayfada">
+          <p>Bu makalede</p>
+          <ul>
+            <li><a href="#model-capability">Daha güçlü modeller neyi değiştirdi?</a></li>
+            <li><a href="#specialization">Neden uzmanlaşalım?</a></li>
+            <li><a href="#repository-knowledge">Bu deneyim nerede saklanmalı?</a></li>
+            <li><a href="#learning-search">Bir sonraki faydalı deneyi öğrenmek</a></li>
+            <li><a href="#re-and-rl">Tersine mühendislik ve takviyeli öğrenme</a></li>
+            <li><a href="#oracle">Doğrulama denetleyicisi yanlış olduğunda</a></li>
+            <li><a href="#comparison">Çalıştırılmaya değer bir karşılaştırma</a></li>
+            <li><a href="#future-agent">Bu ne tür bir yapay zeka ajanını akla getiriyor?</a></li>
+          </ul>
+        </nav>
+        <article
+          class="article"
+          aria-label="Modeller ve tersine mühendislik makalesi"
+        >
+          <section class="article-section" id="model-capability">
+            <h2>Daha güçlü modeller neyi değiştirdi?</h2>
+            <p>
+              Ağustos 2026'dan bu yana, bir aracının bir programa erişim ve onun çalışmasını kontrol etmenin bir yolu ile ne kadar tersine mühendislik gerçekleştirebileceğini araştırıyorum. Deneyimlerimin çoğu, özellikle Touhou olmak üzere oyunların yeniden yapılandırılmasından geliyor. Modelleri değiştirdiğimde, depolar her oturumda kurtarılanların kaydını tuttu.
+            </p>
+            <p>
+              Bu çalışmanın büyük bir kısmı tam olarak yeniden yapılanmayı amaçlamaktadır: Bakımı yapılan kaynağı, sabit versiyonlara sahip tarihsel bir araç zinciri altında derliyoruz ve hedef işlevi yeniden üretip üretmediğini kontrol ediyoruz. Önceki çalışmaların durduğu yerde daha sonraki bir model başarılı olduğunda, kaynak değişiklikleri bu ilerlemeyi neyin mümkün kıldığını gösterir.
+            </p>
+            <h3>Geçici değişkenler örtüşen yaşam sürelerine ihtiyaç duyuyordu</h3>
+            <p>
+              TH09 saldırı fonksiyonunun mantığının büyük bir kısmı zaten yeniden oluşturulmuştu, ancak derleyici hâlâ geçici sonuçları orijinalinden farklı şekilde saklıyordu. Geriye kalan sorun, bu sonuçların ne kadar süreyle canlı kalması gerektiği ve depolarının ne zaman yeniden kullanılabileceğiydi.
+            </p>
+            <p>
+              Bir <a
+                href="https://github.com/N0zoM1z0/th09/commit/de63c0f9121963f3a6b1ab5471c4878625fd3425"
+                >GPT-6-Sol oturum kaydı</a
+              >, birkaç sıradan kaynak kodu düzenlemesini test ettikten sonra bu uyumsuzluğu bildirdi. <a
+                href="https://github.com/N0zoM1z0/th09/commit/52929ed7c299f1a5f29cc13964e22510145fd616"
+                >GPT-6.1-Sol sorunu tekrar incelediğinde</a
+              >, bu geçici değişkenlerin yaşam süreleri hakkında yararlı bir hipotez öne sürdü.
+            </p>
+            <p>
+              İşlev geçici sonuçlar üretti ve bunları animasyon konumlarına kopyaladı. C++'da geçici bir sonuç, onu kullanan ifade bitene kadar canlı kalır. Gerçek işlemleri tek bir ifadede gruplandırmak bu sonuçları bir arada canlı tuttu, böylece derleyici artık aynı depolamayı hepsi için yeniden kullanamıyordu.
+            </p>
+            <p>
+              Sonuçlardan biri, daha sonra çarpışma kontrolleri için kullanılan bir değerle depolamayı hâlâ paylaşıyordu. Bu değere kendi ömrünü vermek, kalan örtüşmeyi çözdü. Birkaç hedefli denemeden sonra, <strong
+                >kaynaktan yapılan temiz bir yeniden derleme, tam işlevin eşleştiğini doğruladı</strong
+              >.
+            </p>
+            <p>
+              Keşif ve testlerin birbirini nasıl desteklediğiyle ilgileniyorum. Geçici nesne yaşam süreleri hakkındaki hipotez, yapay zeka ajanına yeni bir yön verdi. Derleyici geri bildirimi, bu hipotezi eşleşen bir kaynak kodu düzenlemesine dönüştürmeye yardımcı oldu.
+            </p>
+            <h3>Farklı bir kontrol akışı grafiği</h3>
+            <p>
+              İkinci bir TH09 işlevi, bu yeni yönün neden önemli olabileceğini gösterir. Buradaki engel, birden fazla şubenin nihai çalışmalarını paylaşmasıydı. <a
+                href="https://github.com/N0zoM1z0/th09/commit/f8d12d72aaf02212ee1b585a8f3f86d7ed000269"
+                >GPT-6.1-Sol'nin önceki çalışması</a
+              > işlevin bazı kısımlarını eşleştirdi ancak dallar yine de orijinalinden farklı bir şekilde birleşti.
+            </p>
+            <p>
+              <a
+                href="https://github.com/N0zoM1z0/th09/commit/da33a646221198ceb7f3df2b96e2ca0e9b2f705f"
+                >GPT-6-Astra çevredeki kontrol akışı grafiğini değiştirdi</a
+              >. Ana yollar artık paylaşılan bir son güncellemeye ve geri dönüşe yol açıyordu. Bu kaynak yapısında derleyici, dalları orijinaldekiyle aynı şekilde birleştirdi. İşlevin tamamı eşleşti ve <a
+                href="https://github.com/N0zoM1z0/th09/commit/5f825b28a862f8e1a6d4aea2f78a42f04c09a1c0"
+                >ayrı bir yeniden oluşturma kontrolü bunu doğruladı</a
+              >.
+            </p>
+            <p>
+              <strong
+                >Temsili değiştirmek daha verimli bir arama alanı açtı.</strong
+              > Her iki durum da bana genel model yeteneğini ciddiye almam için bir neden veriyor: Bir temsilci, çevredeki işi ifade etmenin daha iyi bir yolunu bulmadan önce yerel varyasyonları uzun süre denemeye devam edebilir.
+            </p>
+            <p>
+              Sonraki oturumlar önceki kaynak kodu ve kaydedilmiş başarısız denemeleri de devraldı. Bu birikim avantajlarının bir parçasıydı. Geçmiş, keşifleri ve doğrulamalarını incelememizi sağlar; kontrollü bir karşılaştırma ise modelin etkisini devraldığı deneyimin etkisinden ayırmaya yardımcı olur.
+            </p>
+            <p>
+              Soruyu benim için ilginç kılan da bu. Yeni bir temsil bulma konusunda bir miktar ilerleme sağlandı. Geriye kalan çalışmaların çoğu, farklı kaynak kodu düzenlemelerinin tanıdık bir derleyiciye karşı test edilmesini içeriyordu. Bunun ne kadarı geniş muhakeme yeteneği gerektiriyor? Bir model, o derleyici ve kodla tekrar tekrar çalışarak ne kadar öğrenebilir?
+            </p>
+          </section>
+          <section class="article-section" id="specialization">
+            <h2>Özel bir yapay zeka modeli neden başarılı olabilir?</h2>
+            <p>
+              Touhou bize bu deneyimin yardımcı olmasını beklememiz için somut bir neden veriyor. Oyun kodunun büyük bir kısmı aynı yazardan (ZUN) geliyor, dolayısıyla yinelenen alışkanlıklar makul bir başlangıç ​​varsayımıdır. Depolar bunu yararlı örneklerle desteklemektedir: İlgili döngüler ve yardımcı düzenlemeler, oyunlar arasında hipotezler sağlamıştır.
+            </p>
+            <p>
+              Derleyiciyi dahil ettiğimizde bu kaynak kalıpları daha spesifik hale gelir. Belirli bir sürüm ve seçenekler kümesi altında, kaynaktaki küçük değişiklikler makine kodunda tekrarlanabilir farklılıklara neden olabilir. Bu farklılıkların bazıları şaşırtıcı derecede belirsizdir.
+            </p>
+            <p>
+              Örneğin TH095'de, <strong
+                >yerel bir değişkenin adı bile VC7.1'nin onu nerede sakladığını etkileyebilir</strong
+              >. Bildiriminin taşınması depolama düzenini çözmedi. Ancak daha önceki bir arka plan işlevi, derleyicinin seçimini etkileyen bir adlandırma modelini ortaya çıkarmıştı. Bu, <a
+                href="https://github.com/N0zoM1z0/th095/commit/26bb64bdb093a13f73abd0ee8ae7ce199ee4658f"
+                >yeniden inşa etmek<code>Supervisor::LoadDat</code></a
+              > için daha umut verici bir hipotez önerdi.
+            </p>
+            <p>
+              Dosya boyutu değişkeni için bu kalıbın yeniden kullanılması, depolama alanı eklemeden gerekli düzeni oluşturdu. Daha sonra tam işlev eşleşti.
+            </p>
+            <p>
+              Bu, genel amaçlı bir yapay zeka modelinin sorunla ilk karşılaştığında bilemeyeceği çok özel bir ayrıntıdır. Bu derleyici için uzmanlaşmış bir model, bu tür birçok durumu görebilir ve hangi kaynak kodu varyasyonlarının ilk önce test edilmeye değer olduğunu öğrenebilir.
+            </p>
+            <p>
+              Davranışı zaten anladığımız son eşleştirme problemlerinde bu fırsat özellikle açıktır. Daha sonra bu derleyicinin hangi sıradan kaynak kodu düzenlemesini gözlemlenen talimatlara dönüştürdüğünü soruyoruz. Uzmanlaşma, modelin bu formları daha verimli bir şekilde önermesine yardımcı olurken, hedef hâlâ hangi hipotezlerin hayatta kalacağını belirliyor.
+            </p>
+            <p>
+              Yararlı kalıplar bağlamlarını korumalıdır. TH08, TH095 ve TH09’dan daha eski bir Visual C++ sürümü kullanır. TH04 ise DOS dönemine ait başka bir derleyici kullanır. <a
+                href="https://github.com/N0zoM1z0/th04/commit/6dce0a79d5b931f0e2a08475b90e0c33d2321b98"
+                >Oyuncu kodunun yeniden yapılandırılması</a
+              >, kaynak kalıpları ve kodun çalıştırılabilir dosyaya nasıl bağlandığı hakkında farklı hipotezler gerektirdi. Aynı yazar bize bir başlangıç varsayımı verir; bunun geçerli olup olmadığını her hedefte kontrol ederiz. Uzman model bu bağlamları ayırt etmeyi öğrenmelidir.
+            </p>
+          </section>
+          <section class="article-section" id="repository-knowledge">
+            <h2>Bu deneyim nerede saklanmalı?</h2>
+            <p>
+              Bu kalıpları model eğitimi yoluyla öğretmeye karar vermeden önce, halihazırda depoda tuttuğumuz bilgilere bakardım. <a href="../touhou-reconstruction/">Önceki makalemde</a> bunun projenin çalışma belleği haline geldiğini yazmıştım. Bu hafıza, derleyici derslerini, kaynağı ve onları faydalı kılan başarısız deneyleri içerir.
+            </p>
+            <p>
+              Bir aracı, bu kaydı alarak bilinen bir sonuçla başlayabilir ve bu sonuca nasıl ulaştığımızı inceleyebilir. Aynı bağlamda halihazırda başarısız olan alternatiflerden de kaçınılabilir. Başlangıç ​​noktası, modelin eğitilmiş parametrelerini değiştirmeden iyileşir.
+            </p>
+            <p>
+              TH09'nin düşman yaratma işlevi yeniden yapılandırılırken, bir <a
+                href="https://github.com/N0zoM1z0/th09/commit/1eb843383941d00065622a9e353146c4bb96979e"
+                >GPT-6-Luna-max oturumu</a
+              > ilgili TH08 kaynak kodundan bir hipotez aldı. Önceki kod, döngünün nasıl organize edileceğini ve içindeki arızaların nasıl ele alınacağını öneriyordu. TH09'in kendi kanıtları oyuna özgü ayrıntıları sağladı. Kaynaktan yapılan yeniden derlemeler, işlevin tamamının eşleştiğini doğruladı.
+            </p>
+            <p>
+              <strong
+                >"Model, derleyici tuhaflığını bilmiyordu" ve "model bunu kullanamadı" farklı sorunlardır.</strong
+              > Geri getirme ilk sorunu çözebilir, ancak bu gerçeği yararlı bir adaya dönüştürmek yine de çalışma gerektirir. Aday kaynak kodu başarısız olursa modelin bir sonraki denemesinde sonucun ne anlama geldiğine karar vermesi gerekir. İlgili modeli bilmek bu sürecin yalnızca başlangıcıdır.
+            </p>
+            <p>
+              Bu nedenle, herhangi bir karşılaştırmaya, iyi geri çağırma özelliğine sahip, daha küçük, genel amaçlı bir yapay zeka modelini dahil ederim. Aynı deneyim kitaplığını ona vermek, eğitimin ne gibi katkılar sağladığını belirlememize yardımcı olacaktır: daha iyi aday oluşturma, geri bildirim sonrasında daha iyi kararlar veya her ikisi.
+            </p>
+          </section>
+          <section class="article-section" id="learning-search">
+            <h2>Bir sonraki faydalı deneyi öğrenmek</h2>
+            <p>
+              Geri bildirim sonrasında verilen kararlar, üzerinde çalışmayı en çok istediğim şeylerdir. Failsel yeniden yapılanmada model bir açıklama önerir ve bunu programa karşı test eder. Aday kaynak kodu başarısız olsa bile sonuç, kalan olasılıkları daraltabilir ve bir sonraki deneyin daha yararlı olmasını önerebilir.
+            </p>
+            <p>
+              Geçici sonuçlar örneğini tekrar düşünün. Son kaynağı işe yarayan düzenlemeyi gösteriyor ancak bu kaynağa giden yol daha fazla bilgi içeriyor. Aşağıdaki deneylerin her biri, hâlâ neyin değişmesi gerektiğinin belirlenmesine yardımcı oldu.
+            </p>
+            <div class="evidence-table-wrap">
+              <table
+                class="evidence-table"
+                aria-label="Seçilmiş yeniden yapılanma deneyleri"
+              >
+                <thead>
+                  <tr>
+                    <th scope="col">Deney</th>
+                    <th scope="col">Sonucunun bize öğrettikleri</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Sonuçları kopyalamanın farklı bir yolunu deneyin</td>
+                    <td>
+                      Kopya kodu değişir ancak işlev hâlâ farklıdır.
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Döndürülen değerleri doğrudan kullanın</td>
+                    <td>
+                      Kopyalama orijinal düzeni takip eder ancak geçici depolama yine de farklıdır.
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Tüm geçici değişkenleri aynı anda geçerli tutun</td>
+                    <td>
+                      Ayrı bir depolamaya sahipler, ancak bir tanesi daha sonra çarpışma kontrolleri için kullanılan bir değerle örtüşüyor.
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Çarpışma kontrolü değerini ayrı tutun</td>
+                    <td>Kaynaktan alınan temiz bir yeniden derleme, eşleşmenin tamamını doğrular.</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <p class="caption">
+              Yukarıdaki saldırı fonksiyonunun yeniden yapılandırılmasından bize öğrettiklerine göre gruplandırılmış seçilmiş deneyler.
+            </p>
+            <p>
+              Bu sırayı tutan bir eğitim kaydı, tek başına nihai kaynaktan daha fazlasını öğretebilir. Önerilen her değişikliği gözlemlenen bir sonuca ve bir sonraki karara bağlar. Etkisiz varyasyonları korumak da önemlidir: Daha sonraki bir temsilciye, o bağlamda hangi hipotezlerin zaten test edildiğini söylerler.
+            </p>
+            <p>
+              <strong
+                >Modelin geri bildirimi nasıl kullanacağını öğrenmesini isterim.</strong
+              > Nötr bir sonuç, varyasyonun yeniden değerlendirilmesi için bir nedendir; değişen bir uyumsuzluk başka bir nedene işaret edebilir. Yerel düzenlemeler bilgilendirici olmayı bıraktığında, aracının kaynak temsilini yeniden gözden geçirebilmesi veya kanıtları yeniden inceleyebilmesi gerekir.
+            </p>
+            <p>
+              Bu seçimleri yapmayı öğrenmek özerklik gerektirir. Bazen bir sonraki yararlı adım, başka bir düzenleme derlemek yerine başka bir çağıranı incelemektir. Gerekli yeniden yazma işlemlerinin katı bir dizisi, modelin öğrenmesini istediğimiz davranışın bir kısmıyla birlikte bu seçimi de ortadan kaldıracaktır.
+            </p>
+          </section>
+          <section class="article-section" id="re-and-rl">
+            <h2>Takviyeli öğrenme için tersine mühendislik neden ilgi çekicidir?</h2>
+            <p>
+              Sınırlı yeniden yapılandırma bize bu seçimleri incelemek için pratik bir ortam sağlar. Hedef ve derleyici sürümleri sabitlendikten sonra birçok kaynak denemesi hızlı, tekrarlanabilir geri bildirim üretir. Temsilci bir adayı derleyebilir, uyumsuzluğu inceleyebilir ve bu gözlemi bir sonraki adımını seçmek için kullanabilir.
+            </p>
+            <p>
+              Takviyeli öğrenme, aldığı geri bildirim yoluyla karar verme sürecini eğitebilir. Belirli bir kontrolle kabul edilen bir aday bize somut bir sonuç verirken, denemelerin sırası bu sonuca ulaşmak için ne kadar çaba harcandığını gözlemlememize olanak tanır.
+            </p>
+            <p>
+              Bu yönü destekleyen araştırmalar zaten var. <a href="https://aclanthology.org/2024.emnlp-main.203/"
+                >LLM4Decompile</a
+              > kaynak koda dönüştürme için uzmanlaşmış modelleri inceliyor. <a href="https://arxiv.org/html/2606.16162v1">AutoDecompiler</a>, derleyici ve yürütme geri bildirimini kullanarak çok turlu iyileştirmeyi eğitir. Çalışmaları fonksiyonel iyileşmeye odaklanıyor. Bu çalışma için bunları, tarihsel bir derleyicinin çıktısıyla eşleşen kaynağı bulma görevi için bir başlangıç ​​noktası olarak kullanacağım.
+            </p>
+            <p>
+              Böylesine iyi tanımlanmış bir göreve ulaşmak için öncelikle bir fonksiyonun hangi kaynaklara sahip olduğunu belirlememiz veya programın çalışırkenki davranışını gözlemlemek için yeni bir yöntem tasarlamamız gerekebilir. Örneğin TH08'de, bir <a
+                href="https://github.com/N0zoM1z0/th08/commit/af9cb1d3e839b15a78b47ac1701506083cc82847"
+                >çarpışma farkı, orijinal programın kayan nokta hesaplamalarını</a
+              > nasıl işlediğini ortaya çıkardı. Aracının yararlı bir düzeltmeyi test edebilmesi için önce neyi ölçeceğini bulması gerekiyordu.
+            </p>
+            <p>
+              Bu, geniş kapsamlı bir model için başka bir rol öneriyor: ilk etapta sorunun kontrol edilebilir olmasına yardımcı olmak. Bu kontrol bir kez mevcut olduğunda, öğrenilmiş bir arama politikasının bununla ne kadar ileri gidebileceğini araştırabiliriz.
+            </p>
+          </section>
+          <section class="article-section" id="oracle">
+            <h2>Doğrulama denetleyicisi yanlış olduğunda</h2>
+            <p>
+              Bir kontrolü eğitimde kullandığımızda, kapsamı da öğrenme ortamının bir parçası olur. Böyle bir referansa veya doğrulayıcıya oracle diyorum. Tekrarlanabilir bir yanıt bile gerçekte neyi doğruladığına göre anlaşılmalıdır.
+            </p>
+            <p>
+              TH08 bu kapsamın dışında ne kadar şeyin saklanabileceğini gösterdi. Yeniden oluşturulan bazı işlevler, tam karşılaştırmalarını yanlış kayan sabitlerle geçti. Karşılaştırıcı, talimatları kontrol etmeden önce yeniden konumlandırılan adresleri ayarladı, ancak bu adreslerin arkasındaki değerleri yalnızca doğrulama için açıkça kaydedildiklerinde kontrol etti. Diğer gerçek referanslar, değerleri incelenmeden geçebilir.
+            </p>
+            <p>
+              Bu boşluğu gidermek için, <a
+                href="https://github.com/N0zoM1z0/th08/commit/a393f400786e4cc6cbb1000af0dad3276da12c78"
+                >daha geniş bir denetim</a
+              >, doğrulamayı zaten geçmiş işlevlerde hatalı sabitler buldu. Bir hesaplamada, yeniden oluşturulan kaynak kodu <code>1.0f</code>'yi eklerken, orijinali <code>32.0f</code>'ü ekledi.
+            </p>
+            <p>
+              <strong
+                >Eski doğrulama denetimiyle ödüllendirilen bir model, hatalı bir yeniden yapılandırma üretmeyi öğrenebilir.</strong
+              > Bu denetleyiciyi kullanarak bir RL modelini eğitmedik. Gözlemlediğimiz başarısızlık kontrolün kendisindeydi. Ancak bunu bir ödül olarak kullanırsak aynı kör nokta öğrenme ortamının bir parçası haline gelecektir.
+            </p>
+            <p>
+              Fonksiyonel bir testin de benzer bir kör noktası olabilir. <a href="https://arxiv.org/html/2609.05370v1"
+                >LLM kod çözücüler üzerinde diferansiyel bulanıklaştırmayı kullanan araştırma</a
+              >, sağlanan testlerin dışında davranışsal farklılıklar buldu. Bu nedenle geçme testini, uyguladığı durumlar açısından anlamamız gerekir. Benzer şekilde, bir talimat eşleşmesinin, doğruladığı baytlar ve veriler açısından anlaşılması gerekir.
+            </p>
+            <p>
+              Her iki doğrulama kontrolünü de ödül olarak kullanmadan önce, bunu kasıtlı olarak yanlış sonuçlarla test ederim. Ayrıca nihai kabulü, yapay zeka aracısının düzenleyebileceği kaynak kodundan ayrı tutacağım. Model, programı doğru bir şekilde yeniden oluşturarak doğrulamayı geçmelidir. Aksi takdirde, hedeften bir bayt dizisinin basitçe kopyalanması, yararlı kaynak kodunu kurtarmadan saf bir puanlama sistemini kandırabilir.
+            </p>
+            <p>
+              <strong
+                >Öğreneni geliştirmek ve doğrulama denetleyicisini geliştirmek aynı araştırma probleminin bir parçasıdır.</strong
+              > Öğrenci, ona verdiğimiz geri bildirimi optimize etme konusunda daha iyi hale geldikçe, geri bildirimin anlaşılması da daha önemli hale gelir.
+            </p>
+          </section>
+          <section class="article-section" id="comparison">
+            <h2>Çalıştırılmaya değer bir karşılaştırma</h2>
+            <p>
+              Bu kontroller uygulandığında, karşılaştırmaya sabit bir VC7.1 görev ailesi üzerinde başlayacağım. İlk olarak, güçlü bir genel amaçlı yapay zeka modeli ve daha küçük bir model için temeller oluşturacaktım. Daha küçük modele depo bilgisinin eklenmesi, geri almanın ne gibi değişikliklere yol açtığını gösterecektir. Buradan itibaren, denetimli uzmanlık ve RL ile eğitilmiş bir sürüm, eğitimin neleri eklediğini incelememize olanak tanır.
+            </p>
+            <p>
+              Bu karşılaştırmaları bilgilendirici kılmak için her model aynı hedef kanıtları ve araçları alacaktır. Eğitime özel karşılaştırmalar için temel modeli ve mevcut bilgiyi de sabit tutardım. Tekrarlanan denemeler, güvenilir bir arama stratejisini şans eseri başarılı olan aday bir çözümden ayırmaya yardımcı olacaktır.
+            </p>
+            <p>
+              Daha sonra iki başlangıç koşulunu ayıracağım: bir fonksiyonu talimatlarından yeniden oluşturmak ve korunan kaynaktaki son birkaç farklılığı kapatmak. Özel bir yapay zeka modeli ikinci görevde mükemmel olabilirken, genel amaçlı bir yapay zeka modeli, ona ulaşmak için gereken işin çoğunu yapar. Bunları ayrı ayrı ölçmek o iş bölümünü ortaya çıkaracaktır.
+            </p>
+            <p>
+              Her iki görevin de eğitim ve erişim dışında bırakılan test örneklerine ihtiyacı vardır. İlgili Touhou oyunları motor kodunu paylaşır. Bir oyunu eğitimden hariç tutmak, eğitim setinde neredeyse aynı işlevlerin kalmasına neden olabilir. Bunun yerine, ilgili kaynak kodu gruplarının tamamını hariç tutar ve doğrulanmış yanıtlarını hem eğitim verilerinin hem de erişim kütüphanesinin dışında tutardım.
+            </p>
+            <p>
+              Bu örnekler için sonuç, eksiksiz, bağımsız olarak doğrulanmış eşleşmeler olacaktır. Aday teklifleri veya derleme girişimleri için eşit bütçeler, arama kalitesinin karşılaştırılmasına yardımcı olacaktır. Derleme de dahil olmak üzere toplam süre ve maliyetin ölçülmesi, bu kalitenin verimli bir iş akışı üretip üretmediğini gösterecektir. Eğitim maliyetleri ayrı olarak ölçülmelidir.
+            </p>
+            <p>
+              Her iki ölçüm de önemlidir. Ucuz bir teklif, hiçbir yararlı bilgi sağlamayan daha fazla derlemeye neden olursa pahalı bir iş akışına yol açabilir. Tersine, daha yavaş bir model, yararlı bir deneyi daha erken bulursa daha ekonomik olabilir. Karşılaştırma bu maliyetleri içermelidir.
+            </p>
+            <p>
+              Kabul edilen sonuçların sayılması aynı zamanda ara ilerlemeyi de perspektif içinde tutar. Bir TH09 <a
+                href="https://github.com/N0zoM1z0/th09/commit/ab72fd77728293fc0beacfc656ca701b0e266016"
+                >tekrar oynatma-kaydetme adayı</a
+              >, derlenmiş işlevin beklenen boyuta sahip olması nedeniyle umut verici görünüyordu, ancak tam bir karşılaştırma yine de önemli farklılıklar buldu. Derleyicinin talimatları düzenleme biçimindeki değişiklikler, altta yatan sorunu çözmeden adayın daha yakından bakmasını da sağlayabilir. Bu tür teşhisler bir sonraki deneye rehberlik edebilir, ancak "yaklaşmanın" herhangi bir ödülünü tam kabul kontrolüne göre doğrularım.
+            </p>
+            <p>
+              Bu sonuçlardaki model ilgimi çeker. Özel bir yapay zeka modeli tanıdık bir derleyici ailesinde başarılı olursa, bu avantaj bir takım zinciri değişikliğinden sonra da ayakta kalabilir mi? Her iki yapay zeka modeli de iyi bir erişime sahip olduğunda, eğitimin hâlâ ne kadar katkısı olur? Cevaplar, her model türünün en yararlı olduğu yerin neresi olduğuna karar vermemize yardımcı olacaktır.
+            </p>
+          </section>
+          <section class="article-section" id="future-agent">
+            <h2>Bu ne tür bir yapay zeka ajanını akla getiriyor?</h2>
+            <p>
+              Modellerin farklı aşamalarda yardımcı olduğu ortaya çıkarsa, özel bir yapay zeka modeline erişimi olan geniş bir temsilci yararlı bir düzenleme olabilir. Bir görev tanıdık bir derleyici araması haline geldiğinde, adaylar için özel yapay zeka modelini isteyebilir. Sonuçların artık bir anlamı kalmazsa, daha geniş kapsamlı temsilci hedef kanıtlara geri dönebilir veya ölçümün kendisini araştırabilir.
+            </p>
+            <p>
+              Bu düzenlemede uzmanlaşma, soruşturma geliştikçe temsilcinin seçebileceği bir araç haline gelir. Temsilci, daha önceki atılımları mümkün kılan yön değiştirme özgürlüğünü elinde tutar.
+            </p>
+            <p>
+              Bu, doğal olarak önceki makalede anlattığım endüstriyel değişimin sonucudur. Daha fazla deney yürütebilmek, işi organize etme şeklimizi değiştirir. Aynı zamanda bize, hangi kararların geniş muhakeme gerektirdiğini ve hangilerinin belirli bir zanaatta tekrarlanan deneyimlerle geliştirildiğini sormamız için bir neden de verir.
+            </p>
+            <p>
+              Şimdilik en güçlü genel model, daha önce çözemediğim sorunları çözerek iş akışımda yerini kazandı. Bu başarılar süreci daha yakından incelemek istememe yol açıyor: Ne kadarı modelin geniş yeteneklerine bağlıydı? Ne kadarı bu yeniden yapılandırma türüne özel olarak eğitilmiş bir model tarafından yapılabilirdi?
+            </p>
+            <p>
+              <strong
+                >Depolar bize soruyu test etmemiz için bir yol sağlıyor.</strong
+              > Bu kaydı karşılaştırmayı oluşturmak ve ne öğrendiğimizi görmek için kullanmak istiyorum.
+            </p>
+          </section>
+          <section class="article-section" id="sources">
+            <details class="native-details">
+              <summary>Kanıt ve model ilişkilendirme</summary>
+              <p>
+                <a
+                  href="https://github.com/morluto/rea/blob/main/website/evidence/reverse-engineering-models.md"
+                  >Ayrıntılı kanıt notları</a
+                >, kaydedilen karşılaştırmaları ve deneylerin bağlamını içerir.
+              </p>
+              <p>
+                Örnekler, bağlantılı taahhütlerde kaydedilen geçmiş işlev düzeyi karşılaştırmalarını açıklamaktadır. Tüm oyun çalışma zamanı kontrolleri ayrı kilometre taşlarıdır. Kaynak ve eşleşen kayıtlar 13 Ekim 2026'da incelendi.
+              </p>
+              <p>
+                TH09 etiketi <code>gpt-dots</code>, GPT-6-Astra anlamına gelir. <code>gpt-web</code> ile ilişkilendirilen model zaman içinde değiştiği için etiket tek başına belirli bir çalıştırmada kullanılan modeli tanımlayamaz. Belirtilen diğer taahhütlerdeki açık model adları, kaydedilen atıfları sağlar. Bu geçmişler, her çalıştırma için tutarlı maliyet veya çaba ölçümlerini içermez.
+              </p>
+              <ul>
+                <li>
+                  <strong>TH09 geçici nesne yaşam süreleri:</strong> <a
+                    href="https://github.com/N0zoM1z0/th09/commit/de63c0f9121963f3a6b1ab5471c4878625fd3425"
+                    >önceki bağlam incelemesi</a
+                  > ve <a
+                    href="https://github.com/N0zoM1z0/th09/commit/52929ed7c299f1a5f29cc13964e22510145fd616"
+                    >kaynaktan temiz bir yeniden derlemeyle doğrulanan tam yeniden yapılandırma</a
+                  >.
+                </li>
+                <li>
+                  <strong>TH09 Front geri arama:</strong> <a
+                    href="https://github.com/N0zoM1z0/th09/commit/f8d12d72aaf02212ee1b585a8f3f86d7ed000269"
+                    >eşleşmeyen tanılama bölgeleri</a
+                  >, <a
+                    href="https://github.com/N0zoM1z0/th09/commit/da33a646221198ceb7f3df2b96e2ca0e9b2f705f"
+                    >Astra'nin yeni kontrol akışı grafiği</a
+                  > ve onun <a
+                    href="https://github.com/N0zoM1z0/th09/commit/5f825b28a862f8e1a6d4aea2f78a42f04c09a1c0"
+                    >kabul edilen yeniden derleme kontrolü</a
+                  >.
+                </li>
+                <li>
+                  <strong>Derleyici bilgisi:</strong> <a
+                    href="https://github.com/N0zoM1z0/th095/commit/26bb64bdb093a13f73abd0ee8ae7ce199ee4658f"
+                    >TH095 tanımlayıcı grubu davranışının yeniden kullanımı</a
+                  >, <a
+                    href="https://github.com/N0zoM1z0/th04/commit/6dce0a79d5b931f0e2a08475b90e0c33d2321b98"
+                    >TH04 oyuncu kaynak kodu ve bağlayıcı sırası</a
+                  > ve <a
+                    href="https://github.com/N0zoM1z0/th09/commit/1eb843383941d00065622a9e353146c4bb96979e"
+                    >Luna'nin TH09'nin düşman oluşturma işlevini tamamen yeniden yapılandırması</a
+                  >.
+                </li>
+                <li>
+                  <strong>Kontroller ve teşhisler:</strong> <a
+                    href="https://github.com/N0zoM1z0/th08/commit/a393f400786e4cc6cbb1000af0dad3276da12c78"
+                    >TH08 kayan nokta sabiti denetimi</a
+                  >, <a
+                    href="https://github.com/N0zoM1z0/th08/commit/af9cb1d3e839b15a78b47ac1701506083cc82847"
+                    >TH08 sayısal inceleme</a
+                  > ve <a
+                    href="https://github.com/N0zoM1z0/th09/commit/ab72fd77728293fc0beacfc656ca701b0e266016"
+                    >TH09 yeniden oynatmayı kaydeden yeniden yapılandırma</a
+                  >.
+                </li>
+              </ul>
+              <p>
+                Özel modellerin ve RL eğitiminin önerilen karşılaştırmaları gelecekteki deneylerdir. Proje geçmişleri onları motive ediyor. Bu makale için hiçbir eğitimli özel model değerlendirilmemiştir.
+              </p>
+            </details>
+          </section>
+        </article>
+      </div>
+    </main>
+    <!-- website:footer:start -->
+    <!-- prettier-ignore -->
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <p>REA · Reverse Engineer Anything</p>
+        <div class="footer-links">
+          <a href="../../faq/">FAQ</a
+          ><a href="../../contributors/">Katkıda bulunanlar</a
+          ><a href="https://github.com/morluto/rea">Kaynak kod</a
+          ><a href="https://github.com/morluto/rea/blob/main/LICENSE">MIT lisansı</a
+          ><a href="https://discord.gg/GkcryMnJDM">Topluluğa katıl</a
+          ><a href="https://x.com/reatools">X’te takip et</a>
+        </div>
+      </div>
+    </footer>
+    <p class="sr-only" id="copy-status" role="status" aria-live="polite"></p>
+    <a class="back-to-top" href="#top" aria-label="Başa dön">
+      <span aria-hidden="true">↑</span> Üst
+    </a>
+    <!-- website:footer:end -->
+  </body>
+</html>

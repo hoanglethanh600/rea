@@ -1,0 +1,734 @@
+<!doctype html>
+<html lang="tr" dir="ltr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>TH04 Tersine Mühendislik: DOS Mermi Modelleri - REA</title>
+    <meta
+      name="description"
+      content="TH04’ün orijinal 16 bit DOS kodunu REA ile inceleyin. Bir mermi halkasının nasıl aralıklı ve oyuncuya yönelik olduğunu görmek için assembly ve kurtarılan C++ kodunu takip edin."
+    />
+    <!-- website:sharing:start -->
+    <!-- prettier-ignore -->
+    <link rel="canonical" href="https://rea.tools/tr/showcase/th04/" />
+    <!-- website:languages:start -->
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="en" href="https://rea.tools/showcase/th04/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="zh-CN" href="https://rea.tools/zh-CN/showcase/th04/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="zh-TW" href="https://rea.tools/zh-TW/showcase/th04/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="ja" href="https://rea.tools/ja/showcase/th04/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="ko" href="https://rea.tools/ko/showcase/th04/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="tr" href="https://rea.tools/tr/showcase/th04/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="ru" href="https://rea.tools/ru/showcase/th04/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="vi" href="https://rea.tools/vi/showcase/th04/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="th" href="https://rea.tools/th/showcase/th04/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="de" href="https://rea.tools/de/showcase/th04/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="es" href="https://rea.tools/es/showcase/th04/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="fr" href="https://rea.tools/fr/showcase/th04/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="uk" href="https://rea.tools/uk/showcase/th04/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="pl" href="https://rea.tools/pl/showcase/th04/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="pt-BR" href="https://rea.tools/pt-BR/showcase/th04/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="ar" href="https://rea.tools/ar/showcase/th04/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="fa" href="https://rea.tools/fa/showcase/th04/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="id" href="https://rea.tools/id/showcase/th04/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="it" href="https://rea.tools/it/showcase/th04/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="el" href="https://rea.tools/el/showcase/th04/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="x-default" href="https://rea.tools/showcase/th04/" />
+<!-- website:languages:end -->
+    <!-- prettier-ignore -->
+    <meta property="og:type" content="website" />
+    <!-- prettier-ignore -->
+    <meta property="og:site_name" content="REA" />
+    <!-- prettier-ignore -->
+    <meta property="og:title" content="TH04 Tersine Mühendislik: DOS Mermi Modelleri - REA" />
+    <!-- prettier-ignore -->
+    <meta property="og:description" content="TH04’ün orijinal 16 bit DOS kodunu REA ile inceleyin. Bir mermi halkasının nasıl aralıklı ve oyuncuya yönelik olduğunu görmek için assembly ve kurtarılan C++ kodunu takip edin." />
+    <!-- prettier-ignore -->
+    <meta property="og:url" content="https://rea.tools/tr/showcase/th04/" />
+    <!-- prettier-ignore -->
+    <meta property="og:image" content="https://rea.tools/assets/social-card.png" />
+    <!-- prettier-ignore -->
+    <meta property="og:image:type" content="image/png" />
+    <!-- prettier-ignore -->
+    <meta property="og:image:width" content="1200" />
+    <!-- prettier-ignore -->
+    <meta property="og:image:height" content="630" />
+    <!-- prettier-ignore -->
+    <meta
+      property="og:image:alt"
+      content="REA - Yazılımın nasıl çalıştığını öğrenin. Kodlama ajanınızla tersine mühendislik yapın."
+    />
+    <!-- prettier-ignore -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <!-- prettier-ignore -->
+    <meta name="twitter:title" content="TH04 Tersine Mühendislik: DOS Mermi Modelleri - REA" />
+    <!-- prettier-ignore -->
+    <meta name="twitter:description" content="TH04’ün orijinal 16 bit DOS kodunu REA ile inceleyin. Bir mermi halkasının nasıl aralıklı ve oyuncuya yönelik olduğunu görmek için assembly ve kurtarılan C++ kodunu takip edin." />
+    <!-- prettier-ignore -->
+    <meta name="twitter:image" content="https://rea.tools/assets/social-card.png" />
+    <!-- prettier-ignore -->
+    <meta
+      name="twitter:image:alt"
+      content="REA - Yazılımın nasıl çalıştığını öğrenin. Kodlama ajanınızla tersine mühendislik yapın."
+    />
+    <!-- website:sharing:end -->
+    <!-- website:theme:start -->
+    <meta name="theme-color" content="#ffffff" />
+    <!-- Apply the saved theme before styles load, to avoid a flash on navigation. -->
+    <script src="../../../assets/theme.js"></script>
+    <!-- website:theme:end -->
+    <link rel="icon" href="../../../assets/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="../../../assets/styles.css" />
+    <script src="../../../assets/main.js" defer></script>
+  <script id="website-messages" type="application/json">{"Copied": "Kopyalandı", "Code copied to clipboard.": "Kod panoya kopyalandı.", "Selected": "Seçili", "Code selected. Use your keyboard to copy it.": "Kod seçildi. Kopyalamak için klavyenizi kullanın.", "REA on GitHub ({count})": "REA üzerinde GitHub ({count})", "Switch to light mode": "Açık temaya geç", "Switch to dark mode": "Koyu temaya geç"}</script>
+  </head>
+  <body id="top">
+    <a class="skip-link" href="#main">İçeriğe geç</a>
+    <!-- website:header:start -->
+    <!-- prettier-ignore -->
+    <header class="site-header">
+      <div class="container header-inner">
+        <a class="brand" href="../../" aria-label="REA ana sayfası"
+          ><span class="brand-name">REA</span
+          ><span class="brand-caption" data-i18n-skip>Reverse Engineer Anything</span></a
+        >
+        <nav class="navigation" aria-label="Ana menü">
+          <a href="../../../get-started/" class="nav-start">Başlangıç</a>
+          <a href="../" aria-current="page">Örnekler</a>
+          <a href="../../blog/">Blog</a>
+          <a href="../../guides/">Rehberler</a>
+        </nav>
+        <div class="header-social">
+          <details class="language-picker" data-i18n-skip><summary><span aria-hidden="true">文 / A</span> <span>Türkçe</span></summary><nav aria-label="Türkçe"><a href="../../../showcase/th04/" lang="en" dir="ltr" data-language="en">English</a><a href="../../../zh-CN/showcase/th04/" lang="zh-CN" dir="ltr" data-language="zh-CN">简体中文</a><a href="../../../zh-TW/showcase/th04/" lang="zh-TW" dir="ltr" data-language="zh-TW">繁體中文</a><a href="../../../ja/showcase/th04/" lang="ja" dir="ltr" data-language="ja">日本語</a><a href="../../../ko/showcase/th04/" lang="ko" dir="ltr" data-language="ko">한국어</a><a href="../../../tr/showcase/th04/" lang="tr" dir="ltr" data-language="tr" aria-current="true">Türkçe</a><a href="../../../ru/showcase/th04/" lang="ru" dir="ltr" data-language="ru">Русский</a><a href="../../../vi/showcase/th04/" lang="vi" dir="ltr" data-language="vi">Tiếng Việt</a><a href="../../../th/showcase/th04/" lang="th" dir="ltr" data-language="th">ไทย</a><a href="../../../de/showcase/th04/" lang="de" dir="ltr" data-language="de">Deutsch</a><a href="../../../es/showcase/th04/" lang="es" dir="ltr" data-language="es">Español</a><a href="../../../fr/showcase/th04/" lang="fr" dir="ltr" data-language="fr">Français</a><a href="../../../uk/showcase/th04/" lang="uk" dir="ltr" data-language="uk">Українська</a><a href="../../../pl/showcase/th04/" lang="pl" dir="ltr" data-language="pl">Polski</a><a href="../../../pt-BR/showcase/th04/" lang="pt-BR" dir="ltr" data-language="pt-BR">Português (Brasil)</a><a href="../../../ar/showcase/th04/" lang="ar" dir="rtl" data-language="ar">العربية</a><a href="../../../fa/showcase/th04/" lang="fa" dir="rtl" data-language="fa">فارسی</a><a href="../../../id/showcase/th04/" lang="id" dir="ltr" data-language="id">Bahasa Indonesia</a><a href="../../../it/showcase/th04/" lang="it" dir="ltr" data-language="it">Italiano</a><a href="../../../el/showcase/th04/" lang="el" dir="ltr" data-language="el">Ελληνικά</a><a href="../../../ml/showcase/th04/" lang="ml" dir="ltr" data-language="ml">മലയാളം · English</a><a href="../../../ur-Latn/showcase/th04/" lang="ur-Latn" dir="ltr" data-language="ur-Latn">Roman Urdu · English</a><a href="../../../ro/showcase/th04/" lang="ro" dir="ltr" data-language="ro">Română · English</a></nav></details>
+          <button class="theme-toggle" type="button" data-theme-toggle hidden>
+            <svg class="theme-moon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+              <path d="M20.9 13a9 9 0 0 1-9.9-9.9A9 9 0 1 0 20.9 13Z" />
+            </svg>
+            <svg class="theme-sun" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true" focusable="false">
+              <circle cx="12" cy="12" r="4" />
+              <path d="M12 2v2m0 16v2M2 12h2m16 0h2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42" />
+            </svg>
+          </button>
+          <a
+            class="nav-github"
+            href="https://github.com/morluto/rea"
+            aria-label="GitHub’da REA"
+            title="GitHub’da REA"
+          >
+            <svg
+              width="22"
+              height="22"
+              viewBox="0 0 16 16"
+              aria-hidden="true"
+              focusable="false"
+            >
+              <path
+                fill="currentColor"
+                d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82a7.65 7.65 0 0 1 2-.27c.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z"
+              />
+            </svg>
+            <span class="nav-github-count" hidden aria-hidden="true"></span>
+          </a>
+          <a
+            class="nav-discord"
+            href="https://discord.gg/GkcryMnJDM"
+            aria-label="REA Discord topluluğuna katıl"
+            title="REA Discord topluluğuna katıl"
+          >
+            <svg
+              width="22"
+              height="22"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+              focusable="false"
+            >
+              <path
+                fill="currentColor"
+                d="M20.317 4.3698a19.7913 19.7913 0 0 0-4.8851-1.5152.0741.0741 0 0 0-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 0 0-.0785-.037 19.7363 19.7363 0 0 0-4.8852 1.515.0699.0699 0 0 0-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 0 0 .0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 0 0 .0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 0 0-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 0 1-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 0 1 .0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 0 1 .0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 0 1-.0066.1276 12.2986 12.2986 0 0 1-1.873.8914.0766.0766 0 0 0-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 0 0 .0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 0 0 .0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 0 0-.0312-.0286ZM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189Zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189Z"
+              />
+            </svg>
+          </a>
+          <a
+            class="nav-x"
+            href="https://x.com/reatools"
+            aria-label="REA’yı X’te takip et"
+            title="REA’yı X’te takip et"
+          >
+            <svg
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+              focusable="false"
+            >
+              <path
+                fill="currentColor"
+                d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z"
+              />
+            </svg>
+          </a>
+        </div>
+      </div>
+    </header>
+    <!-- website:header:end -->
+    <main id="main" class="container">
+      <div class="page-heading">
+        <p class="breadcrumb">
+          <a href="../../">Anasayfa</a> / <a href="../">Vitrinler</a> / TH04
+        </p>
+        <p class="eyebrow">Örnek olay incelemesi * Touhou 4: Lotus Ülkesi Hikayesi</p>
+        <h1>TH04’ün yeniden yapılandırılması<br />kurşun izleri.</h1>
+        <p class="lede">
+          Bir mermi halkası kısa bir açı hesaplamasıyla başlar. Orijinal DOS işlevini incelemek için REA kullanın, ardından talimatlarını okunabilir C++ olarak izleyin.
+        </p>
+        <p class="page-meta">PC-98 · 16 bit DOS · C++ ve assembly</p>
+        <a class="text-link" href="https://github.com/N0zoM1z0/th04"
+          >TH04 rekonstrüksiyonunu görüntüleyin</a
+        >
+      </div>
+
+      <figure class="workflow-figure th04-overview">
+        <p class="figure-title">Orijinal talimatlardan kontrol edilen kaynağa</p>
+        <ol class="flow-steps th04-flow">
+          <li>
+            <span class="flow-label">01 * Orijinal oyun</span
+            ><strong class="flow-node"> ANA.PC-98 yürütülebilir dosyasını</strong
+            ><span class="flow-note"
+              > ve mermi açısı yardımcısını çalıştırın.</span
+            >
+          </li>
+          <li>
+            <span class="flow-label">02 * REA ile kontrol</span
+            ><strong class="flow-node"> edin Talimatlar + referanslar</strong
+            ><span class="flow-note"
+              > Yüklenen DOS kodunu doğrulayın ve yürütülebilir dosyadan açı hesaplamasını okuyun.</span
+            >
+          </li>
+          <li>
+            <span class="flow-label">03 * C++ Boşluğunu okuyun</span
+            ><strong class="flow-node"> → nişan al → döndür</strong
+            ><span class="flow-note"
+              > Her işlemi sürdürülen yeniden yapılandırmaya bağlayın.</span
+            >
+          </li>
+          <li>
+            <span class="flow-label">04 * Kaynağı kontrol</span
+            ><strong class="flow-node"> edin Kaydedilen 2.139 eşleşen bayt</strong
+            ><span class="flow-note"
+              > derleyici kontrolleri, bu yardımcıyı içeren madde işareti oluşturma kodunu kapsar.</span
+            >
+          </li>
+        </ol>
+        <figcaption>
+          REA, orijinal kodu ve analiz kanıtını döndürür. TH04 projesi, bakımı yapılan kaynak ve derleyici denetimlerini sağlar.
+        </figcaption>
+      </figure>
+
+      <div class="article-layout">
+        <nav class="contents" aria-label="Bu sayfada">
+          <p>Bu vaka çalışmasında</p>
+          <ul>
+            <li><a href="#ring">Kurşun halkası</a></li>
+            <li><a href="#rea">REA ne döndürür</a></li>
+            <li><a href="#source">C++’a derleme</a></li>
+            <li><a href="#checking">Kaynağı kontrol etme</a></li>
+            <li><a href="#project">Projenin tamamı</a></li>
+          </ul>
+        </nav>
+        <article class="article" aria-label="TH04 mermi deseni vaka çalışması">
+          <section class="article-section" id="ring">
+            <h2>Bir yüzük oyuncuya nasıl nişan alır</h2>
+            <p>
+              Elly'nin saldırısı, ilk sayısı 16 olan bir hedeflenen halka istiyor. Bir yardımcı, her merminin yönünü hesaplar. Aynı halka sabit bir yöne bakabilir veya oyuncuya doğru dönebilir.
+            </p>
+            <div class="agent-terminal">
+              <div class="terminal-header">
+                <span class="terminal-title"
+                  ><span class="terminal-dots" aria-hidden="true"
+                    ><i></i><i></i><i></i></span
+                  >Kodlama aracınız</span
+                >
+                <button
+                  class="copy-button"
+                  type="button"
+                  data-copy="th04-prompt"
+                  aria-label="TH04 örnek istemini kopyala"
+                >
+                  Kopyala
+                </button>
+              </div>
+              <p class="terminal-prompt">
+                <span class="prompt-symbol" aria-hidden="true">›</span
+                ><span id="th04-prompt"
+                  >TH04’ün bir mermi halkasını nasıl oluşturduğunu ve onu oyuncuya nasıl hedeflediğini bulmak için REA kullanın. Hesaplamayı açıklayın ve kodu gösterin.</span
+                ><span class="terminal-cursor" aria-hidden="true"></span>
+              </p>
+            </div>
+            <p class="caption">
+              Özgün yürütülebilir dosya ve yeniden yapılandırma ödemesinin yerel olarak kullanılabildiği örnek bir komut istemi.
+            </p>
+            <p>
+              TH04, 256 açı biriminde saat yönünde tam bir dönüş depolar. 16 mermi için her dizin 16 birim ekler: <code>0, 16, 32, …, 240</code>. Oyuncunun yönünü eklemek, bu pozisyonları birlikte döndürür.
+            </p>
+            <figure class="explanatory-figure th04-ring-figure">
+              <div
+                class="figure-viewport"
+                tabindex="0"
+                role="region"
+                aria-label="TH04 sabit ve hedeflenmiş mermi halkaları; daha küçük ekranlarda yatay olarak kaydırın"
+              >
+                <img
+                  src="../../../assets/localized/tr/figures/th04-bullet-ring.svg"
+                  width="1000"
+                  height="520"
+                  alt="16 Mermi halkasının iki diyagramı. Sabit halka sıfır açıyla başlar. 40&#x27;lık bir oyuncu yönü eklemek her yönü aynı miktarda döndürür; Vurgulanan ilk mermi oyuncuya işaret eder. Her ikisi de 16 açı birimi veya 22,5 derecelik bir aralık tutar."
+                  decoding="async"
+                />
+              </div>
+              <figcaption>
+                Sayı 16, oyuncu yönü 40 ve şablon dönüşü 0 için kurtarılan açı matematiğinin bir örneği. <a href="../../../assets/localized/tr/figures/th04-bullet-ring.svg"
+                  >Açık şekil</a
+                >
+              </figcaption>
+            </figure>
+            <h3 class="small-heading">
+              Kurtarılan kaynaktaki ateşleme şablonu
+            </h3>
+            <div class="code-block">
+              <div class="code-header">
+                <span>Elly'nin halka saldırısı * kaynak alıntı</span
+                ><button
+                  class="copy-button"
+                  type="button"
+                  data-copy="th04-template"
+                  aria-label="TH04 ateşleme şablonunu kopyala"
+                >
+                  Kopyala
+                </button>
+              </div>
+              <pre><code id="th04-template">bullet_template.angle = 0;
+bullet_template.group = BG_RING_AIMED;
+bullet_template.count = 16;
+bullet_template_tune();</code></pre>
+            </div>
+            <p class="caption">
+              Bu çizgiler, zorluk ve performans ayarından önce deseni seçer. <a
+                href="https://github.com/N0zoM1z0/th04/blob/0d72e9801a5c14c10384efcbb6734ceccb74ee63/src/main/boss/elly_phase_ring16.cpp#L26"
+                >Saldırının kaynağını okuyun</a
+              >.
+            </p>
+          </section>
+
+          <section class="article-section" id="rea">
+            <h2>REA ne döndürür</h2>
+            <p>
+              Her merminin hızını ve açısını ayarlayan işlev olan bullet_velocity_and_angle_set<code>bullet_velocity_and_angle_set()</code>  REA talimatlarını, sözde kodunu ve referanslarını döndürür. Bu sonucun üç kısmı modeli açıklıyor.
+            </p>
+            <ol class="rea-queries">
+              <li>
+                <h4>Kodunu okumadan önce DOS görüntüsünü kontrol edin</h4>
+                <div class="rea-query-pair">
+                  <div class="code-block">
+                    <div class="code-header"><span>Ajan → REA</span></div>
+                    <pre><code>open_binary
+{"path": "MAIN.EXE"}
+
+inspect_native_load_image
+{}</code></pre>
+                  </div>
+                  <div class="code-block">
+                    <div class="code-header">
+                      <span>REA → aracı * seçilen alanlar</span>
+                    </div>
+                    <pre><code>status: "verified"
+format: "dos-mz"
+load_segment: 4096
+header_bytes: 6144
+module_bytes: 150114</code></pre>
+                  </div>
+                </div>
+                <p>
+                  Kontrol, yüklenen kodu ve yer değiştirme kayıtlarını sağlanan yürütülebilir dosyaya bağlar. Yukarıdaki yol görüntüleme için kısaltılmıştır.
+                </p>
+              </li>
+              <li>
+                <h4>Yüzüğün çarpımını ve bölünmesini okuyun</h4>
+                <div class="rea-query-pair">
+                  <div class="code-block">
+                    <div class="code-header">
+                      <span>Ajan → REA * <code>analyze_function</code></span>
+                    </div>
+                    <pre><code>{"procedure": "0x2cfc8"}</code></pre>
+                  </div>
+                  <div class="code-block">
+                    <div class="code-header">
+                      <span>REA → ajan * talimat alıntısı</span>
+                    </div>
+                    <pre><code>0x2d0eb: MOV AX, SI
+0x2d0ed: SHL AX, 0x8
+0x2d0f0: MOV DL, byte ptr [0x53af]
+0x2d0f9: IDIV BX</code></pre>
+                  </div>
+                </div>
+                <p>
+                  <code>SI</code> mermi dizinini tutar. Kaydırma 256 ile çarpar, ardından bölme <code>DS:53AF</code>. Bullet_template alanı tutulan kaynak <code>bullet_template.count</code>. Tam sıra aşağıda görünür.
+                </p>
+              </li>
+              <li>
+                <h4>Desenin oyuncuya doğru nereye döndüğünü bulun</h4>
+                <div class="rea-query-pair">
+                  <div class="code-block">
+                    <div class="code-header">
+                      <span>Aynı işlev sonucu * amaç alıntısı</span>
+                    </div>
+                    <pre><code>0x2d190: SUB AX, word ptr [0x53a6]
+0x2d198: SUB AX, word ptr [0x53a4]
+0x2d19d: CALLF 0x1000:1da8
+0x2d1a2: ADD word ptr [BP + -0x2], AX</code></pre>
+                  </div>
+                  <div class="code-block">
+                    <div class="code-header">
+                      <span>İlgili tutulan C++</span>
+                    </div>
+                    <pre><code>group_angle_offset += iatan2(
+  player_pos.cur.y - bullet_template.origin.y,
+  player_pos.cur.x - bullet_template.origin.x
+);</code></pre>
+                  </div>
+                </div>
+                <p>
+                  Talimat işlenenleri iki koordinat farklılığı ve bir yön yardımcısı ortaya çıkarır. Dönüş değeri göreceli halka açısına eklenir. Kaynak adları bu adresleri okunabilir hale getirir; REA, aracının arkalarındaki orijinal işlemleri kontrol etmesini sağlar.
+                </p>
+              </li>
+            </ol>
+          </section>
+
+          <section class="article-section" id="source">
+            <h2>Assembly’den okunabilir C++’a</h2>
+            <p>
+              Orijinal talimatları açı hesaplamasıyla eşleştirmek için bir adım seçin. Bu özet, hedeflenen halka yolunu izler; Tam kaynak ayrıca yayılımları, yığınları ve rastgele kalıpları da işler.
+            </p>
+            <div class="step-comparison" data-step-comparison>
+              <div
+                class="step-selector"
+                role="group"
+                aria-label="TH04 hedefli halka hesaplamasını takip edin"
+              >
+                <button
+                  type="button"
+                  data-select-step="1"
+                  aria-pressed="true"
+                  aria-controls="ring-assembly ring-source ring-step-detail"
+                >
+                  <span>01</span> Dizin
+                </button>
+                <button
+                  type="button"
+                  data-select-step="2"
+                  aria-pressed="false"
+                  aria-controls="ring-assembly ring-source ring-step-detail"
+                >
+                  <span>02</span> Boşluk
+                </button>
+                <button
+                  type="button"
+                  data-select-step="3"
+                  aria-pressed="false"
+                  aria-controls="ring-assembly ring-source ring-step-detail"
+                >
+                  <span>03</span> Amaç
+                </button>
+                <button
+                  type="button"
+                  data-select-step="4"
+                  aria-pressed="false"
+                  aria-controls="ring-assembly ring-source ring-step-detail"
+                >
+                  <span>04</span> Döndür
+                </button>
+                <button
+                  type="button"
+                  data-select-step="5"
+                  aria-pressed="false"
+                  aria-controls="ring-assembly ring-source ring-step-detail"
+                >
+                  <span>05</span> Mağaza
+                </button>
+              </div>
+              <div class="code-comparison">
+                <div class="code-block">
+                  <div class="code-header">
+                    <span>REA * orijinal 16 bit talimatlar</span
+                    ><button
+                      class="copy-button"
+                      type="button"
+                      data-copy="ring-assembly"
+                      aria-label="TH04 derleme alıntısını kopyalayın"
+                    >
+                      Kopyala
+                    </button>
+                  </div>
+                  <pre><code id="ring-assembly"><span class="code-step is-active" data-step="1">0x2cfcf: MOV SI, word ptr [BP + 0x4]
+0x2d0eb: MOV AX, SI</span>
+<span class="code-step" data-step="2">0x2d0ed: SHL AX, 0x8
+0x2d0f0: MOV DL, byte ptr [0x53af]
+0x2d0f4: MOV DH, 0x0
+0x2d0f6: PUSH DX
+0x2d0f7: CWD
+0x2d0f8: POP BX
+0x2d0f9: IDIV BX
+0x2d0fb: MOV word ptr [BP + -0x2], AX</span>
+<span class="code-step" data-step="3">0x2d18d: MOV AX, [0x4650]
+0x2d190: SUB AX, word ptr [0x53a6]
+0x2d194: PUSH AX
+0x2d195: MOV AX, [0x464e]
+0x2d198: SUB AX, word ptr [0x53a4]
+0x2d19c: PUSH AX
+0x2d19d: CALLF 0x1000:1da8
+0x2d1a2: ADD word ptr [BP + -0x2], AX</span>
+<span class="code-step" data-step="4">0x2d1b9: MOV AL, byte ptr [BP + -0x2]
+0x2d1bc: ADD AL, byte ptr [0x53ad]</span>
+<span class="code-step" data-step="5">0x2d1c0: MOV [0xbcc8], AL</span></code></pre>
+                </div>
+                <div class="code-block">
+                  <div class="code-header">
+                    <span>Okunabilir C++ * hedeflenmiş halka özeti</span
+                    ><button
+                      class="copy-button"
+                      type="button"
+                      data-copy="ring-source"
+                      aria-label="Okunabilir hedefli halka hesaplamasını kopyala"
+                    >
+                      Kopyala
+                    </button>
+                  </div>
+                  <pre><code id="ring-source">unsigned char aimed_ring_angle(
+    <span class="is-active" data-step="1">int index</span>, int count,
+    int player_direction,
+    unsigned char rotation)
+{
+<span class="code-step is-active" data-step="1">    int angle = index;</span>
+<span class="code-step" data-step="2">    angle = (angle * 256) / count;</span>
+<span class="code-step" data-step="3">    angle += player_direction;</span>
+<span class="code-step" data-step="4">    angle += rotation;</span>
+<span class="code-step" data-step="5">    return (unsigned char)angle;</span>
+}</code></pre>
+                </div>
+              </div>
+              <div
+                class="step-detail"
+                id="ring-step-detail"
+                aria-live="polite"
+                aria-atomic="true"
+              >
+                <p data-step-note="1">
+                  <strong>01 * Madde işareti dizinini okuyun.</strong> Yığın bağımsız değişkeni <code>SI</code> yüklenir. 16 Maddelik bir halkada, bu üye dizini 0'dan 15'e kadar çalışır.
+                </p>
+                <p data-step-note="2" hidden>
+                  <strong>02 * Yönleri tam bir dönüş etrafında boşluk bırakın.</strong> <code>SHL AX,8</code> 256 ile çarpar. Sayım bir kelimeye sıfır genişletilir, ardından <code>IDIV</code> ürünü bu sayıma böler. 16 Sayısı için her indeks 16 açı birimi ilerletir.
+                </p>
+                <p data-step-note="3" hidden>
+                  <strong>03 * Oyuncu yönünü ekleyin.</strong> İki çıkarma, oyuncu eksi orijinli koordinatları oluşturur. Yön yardımcısı <code>AX</code> içinde bir açı döndürür; Onu eklemek tüm halkayı oyuncuya doğru döndürür.
+                </p>
+                <p data-step-note="4" hidden>
+                  <strong>04 * Desenin dönüşünü ekleyin.</strong> <code>ADD AL,[0x53ad]</code> şablon açısını ekler. Elly'nin ilk şablonu onu sıfıra ayarlar; diğer desenler aynı yardımcıyı bir dönüşle kullanabilir.
+                </p>
+                <p data-step-note="5" hidden>
+                  <strong>05 * Son açıyı bir baytta tutun.</strong> Saklama işlemi, oluşma açısı alanına <code>AL</code> yazar. Değerler, tıpkı imzasız bayt dökümünün yaptığı gibi 255'ten sonra sarılır. Çevreleyen kaynak da bu açıyı ve hızı hıza dönüştürür.
+                </p>
+              </div>
+            </div>
+            <p class="caption">
+              Assembly, hedeflenen halka dalını, amaç hesaplamasını ve son depoyu seçer. Yukarıdaki C++ okunabilir bir özettir. Aşağıdaki derleyici denetimleri, bağlantılı projedeki tutulan kaynak için geçerlidir.
+            </p>
+            <details class="evidence-details">
+              <summary>Tutulan halkayı okuyun ve kaynağı hedefleyin</summary>
+              <div class="code-block">
+                <div class="code-header">
+                  <span>Halka makro * TH04 şubesi, alıntı</span>
+                </div>
+                <pre><code>angle_offset = (i * BULLET_ANGLE_FULL_TURN) / count;
+if (i &gt;= (count - 1)) {
+    group_complete = true;
+}
+goto aim_or_no_aim;</code></pre>
+              </div>
+              <div class="code-block">
+                <div class="code-header">
+                  <span>Açı ve hız * kaynak alıntı</span>
+                </div>
+                <pre><code>aim:
+    group_angle_offset += iatan2(
+        (player_pos.cur.y - bullet_template.origin.y),
+        (player_pos.cur.x - bullet_template.origin.x)
+    );
+
+no_aim:
+    vector2_near(
+        bullet_template.velocity,
+        (group_angle_offset + bullet_template.angle),
+        speed
+    );
+    bullet_spawn_angle = (group_angle_offset + bullet_template.angle);</code></pre>
+              </div>
+              <p class="caption">
+                <a
+                  href="https://github.com/N0zoM1z0/th04/blob/0d72e9801a5c14c10384efcbb6734ceccb74ee63/src/main/bullet/add_impl.hpp#L4"
+                  >Halka makro</a
+                > * <a
+                  href="https://github.com/N0zoM1z0/th04/blob/0d72e9801a5c14c10384efcbb6734ceccb74ee63/src/main/bullet/add.cpp#L422"
+                  >Amaç ve hız kaynağı</a
+                > * <a
+                  href="https://github.com/N0zoM1z0/th04/blob/0d72e9801a5c14c10384efcbb6734ceccb74ee63/src/main/bullet/types.hpp#L6"
+                  >Açı gösterimi</a
+                >
+              </p>
+            </details>
+          </section>
+
+          <section class="article-section" id="checking">
+            <h2>Tutulan kaynağı kontrol etme</h2>
+            <p>
+              TH04 projesinin kaydedilen kontrolleri, sabitlenmiş Turbo C++ 4.0J araç zinciri ile bu yardımcı da dahil olmak üzere madde işareti oluşturma kodunu derler.
+            </p>
+            <div class="verification">
+              <div>
+                <h3>2.139 eşleşen bayt</h3>
+                <p>
+                  Derlenmiş madde işareti oluşturma kodu, özgün yürütülebilir dosyanın 2.139 baytlık bir bölümüyle eşleşir.
+                </p>
+              </div>
+              <div>
+                <h3>İki temiz yapı</h3>
+                <p>
+                  İki ayrı yapı aynı eşleşen baytları üretir. Kaydedilen giriş karmaları, burada gösterilen korunan kaynakla eşleşir.
+                </p>
+              </div>
+            </div>
+            <p class="caption">
+              3 Ekim 2026'da kaydedildi. <a
+                href="https://github.com/N0zoM1z0/th04/blob/0d72e9801a5c14c10384efcbb6734ceccb74ee63/docs/reconstruction/product/TH04_SEMANTIC_BULLET_GENERATION_V1236.md#validation"
+                >Derleyici denetimlerini okuyun</a
+              >.
+            </p>
+            <details class="evidence-details">
+              <summary>Hedef kimlik ve analiz kapsamı</summary>
+              <div class="evidence-table-wrap">
+                <table class="evidence-table">
+                  <tbody>
+                    <tr>
+                      <th scope="row">Orijinal hedef</th>
+                      <td><code>MAIN.EXE</code>, 156,258 bayt, DOS MZ</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Yardımcı giriş</th>
+                      <td><code>0x2cfc8</code>rea'nınREA yüklenen görüntüsünde 0x2cfc8</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Orijinal dosya ofseti</th>
+                      <td>
+                        <code>0x1e7c8</code> döndürülen <code>address_to_file_offset</code>
+                      </td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Kayıtlı kod denetimi</th>
+                      <td>REA 4.1.0 * 7 Ekim 2026</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <p>
+                Derleyici denetimleri, bu yardımcı da dahil olmak üzere tüm madde işareti ekleme kodu bölümünü kapsar. Ayrıca MAP katkısını ve örtüşen yer değiştirmeyi karşılaştırırlar.
+              </p>
+              <p>
+                REA, <code>0x1000</code> yük segmentinde statik DOS yük görüntüsünü doğruladı. Adresleri bu analiz görüntüsünü tanımlar. İşlev sonucu, 517 baytlık bir aralıkta iki aralıkta 503 gövde baytı bildirir; Yukarıdaki seçilen talimatlar, bildirilen aralıklarda bulunur.
+              </p>
+              <p>
+                Kaynak adları ve derleyici denetimleri TH04 denetim noktası 0d72e980'den <code>0d72e980</code>. Daha önceki yeniden yapılanma gözlemleri, projenin kendi analiz komut dosyalarını kullandı; Bu sayfa, aynı orijinal hedefin yeni bir REA incelemesini ekler. Sağlanan oyunun kimliği, bağımsız bozulmamış döküm kaynağı hâlâ açıkken, depo bildirimi tarafından sabitlenir.
+              </p>
+              <p>
+                Şekil açı hesaplamasını göstermektedir. Tam oyun kontrolleri, zamanlama ve PC-98 donanım davranışı, yeniden yapılandırma projesinde ayrı çalışma zamanı denetimlerine sahiptir.
+              </p>
+            </details>
+          </section>
+
+          <section class="article-section" id="project">
+            <h2>Tam TH04 rekonstrüksiyonu</h2>
+            <p>
+              Proje, oyunun dört DOS ürününü bakımı yapılan C++ ve assembly’den oluşturuyor. Madde işareti oluşturmanın ötesinde, kaynak aşamaları, boss’ları, oluşturma, girdi, menüleri, sonları ve puan işlemeyi kapsar.
+            </p>
+            <p>
+              <a class="text-link" href="https://github.com/N0zoM1z0/th04"
+                >TH04 deposunu keşfedin</a
+              >
+            </p>
+            <ul class="reading-list">
+              <li>
+                <a
+                  href="https://github.com/N0zoM1z0/th04/blob/0d72e9801a5c14c10384efcbb6734ceccb74ee63/src/main/bullet/add.cpp#L292"
+                  >Mermi oluşturma kaynağı</a
+                ><span
+                  > Tam yardımcı, diğer desen türleri ve şablon ayarı.</span
+                >
+              </li>
+              <li>
+                <a
+                  href="https://github.com/N0zoM1z0/th04/blob/0d72e9801a5c14c10384efcbb6734ceccb74ee63/docs/DOS_BUILD.md"
+                  >DOS derleme ve çalıştırma kılavuzu</a
+                ><span
+                  > Kaynağı oluşturun ve projenin PC-98 öykünücüsü iş akışında test edin.</span
+                >
+              </li>
+              <li>
+                <a
+                  href="https://github.com/N0zoM1z0/th04/blob/0d72e9801a5c14c10384efcbb6734ceccb74ee63/docs/RE_HANDOFF.md"
+                  >Geçerli proje durumu</a
+                ><span> DOS doğrulaması ve ayrı yerel x64 portu.</span>
+              </li>
+            </ul>
+          </section>
+        </article>
+      </div>
+    </main>
+    <!-- website:footer:start -->
+    <!-- prettier-ignore -->
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <p>REA · Reverse Engineer Anything</p>
+        <div class="footer-links">
+          <a href="../../faq/">FAQ</a
+          ><a href="../../contributors/">Katkıda bulunanlar</a
+          ><a href="https://github.com/morluto/rea">Kaynak kod</a
+          ><a href="https://github.com/morluto/rea/blob/main/LICENSE">MIT lisansı</a
+          ><a href="https://discord.gg/GkcryMnJDM">Topluluğa katıl</a
+          ><a href="https://x.com/reatools">X’te takip et</a>
+        </div>
+      </div>
+    </footer>
+    <p class="sr-only" id="copy-status" role="status" aria-live="polite"></p>
+    <a class="back-to-top" href="#top" aria-label="Başa dön">
+      <span aria-hidden="true">↑</span> Üst
+    </a>
+    <!-- website:footer:end -->
+  </body>
+</html>

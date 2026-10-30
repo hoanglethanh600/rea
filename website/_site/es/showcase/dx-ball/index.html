@@ -1,0 +1,721 @@
+<!doctype html>
+<html lang="es" dir="ltr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>DX-Ball Ingeniería inversa: Panorámica de sonido-REA</title>
+    <meta
+      name="description"
+      content="Siga una reconstrucción DX-Ball desde el análisis binario hasta REA hasta C mantenido, pruebas originales-x86 y bytes de funciones compiladas coincidentes."
+    />
+    <!-- website:sharing:start -->
+    <!-- prettier-ignore -->
+    <link rel="canonical" href="https://rea.tools/es/showcase/dx-ball/" />
+    <!-- website:languages:start -->
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="en" href="https://rea.tools/showcase/dx-ball/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="zh-CN" href="https://rea.tools/zh-CN/showcase/dx-ball/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="zh-TW" href="https://rea.tools/zh-TW/showcase/dx-ball/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="ja" href="https://rea.tools/ja/showcase/dx-ball/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="ko" href="https://rea.tools/ko/showcase/dx-ball/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="tr" href="https://rea.tools/tr/showcase/dx-ball/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="ru" href="https://rea.tools/ru/showcase/dx-ball/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="vi" href="https://rea.tools/vi/showcase/dx-ball/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="th" href="https://rea.tools/th/showcase/dx-ball/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="de" href="https://rea.tools/de/showcase/dx-ball/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="es" href="https://rea.tools/es/showcase/dx-ball/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="fr" href="https://rea.tools/fr/showcase/dx-ball/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="uk" href="https://rea.tools/uk/showcase/dx-ball/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="pl" href="https://rea.tools/pl/showcase/dx-ball/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="pt-BR" href="https://rea.tools/pt-BR/showcase/dx-ball/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="ar" href="https://rea.tools/ar/showcase/dx-ball/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="fa" href="https://rea.tools/fa/showcase/dx-ball/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="id" href="https://rea.tools/id/showcase/dx-ball/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="it" href="https://rea.tools/it/showcase/dx-ball/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="el" href="https://rea.tools/el/showcase/dx-ball/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="x-default" href="https://rea.tools/showcase/dx-ball/" />
+<!-- website:languages:end -->
+    <!-- prettier-ignore -->
+    <meta property="og:type" content="website" />
+    <!-- prettier-ignore -->
+    <meta property="og:site_name" content="REA" />
+    <!-- prettier-ignore -->
+    <meta property="og:title" content="DX-Ball Ingeniería inversa: Panorámica de sonido-REA" />
+    <!-- prettier-ignore -->
+    <meta property="og:description" content="Siga una reconstrucción DX-Ball desde el análisis binario hasta REA hasta C mantenido, pruebas originales-x86 y bytes de funciones compiladas coincidentes." />
+    <!-- prettier-ignore -->
+    <meta property="og:url" content="https://rea.tools/es/showcase/dx-ball/" />
+    <!-- prettier-ignore -->
+    <meta property="og:image" content="https://rea.tools/assets/social-card.png" />
+    <!-- prettier-ignore -->
+    <meta property="og:image:type" content="image/png" />
+    <!-- prettier-ignore -->
+    <meta property="og:image:width" content="1200" />
+    <!-- prettier-ignore -->
+    <meta property="og:image:height" content="630" />
+    <!-- prettier-ignore -->
+    <meta
+      property="og:image:alt"
+      content="REA: Descubra cómo funciona el software. Ingeniería inversa con su agente de codificación."
+    />
+    <!-- prettier-ignore -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <!-- prettier-ignore -->
+    <meta name="twitter:title" content="DX-Ball Ingeniería inversa: Panorámica de sonido-REA" />
+    <!-- prettier-ignore -->
+    <meta name="twitter:description" content="Siga una reconstrucción DX-Ball desde el análisis binario hasta REA hasta C mantenido, pruebas originales-x86 y bytes de funciones compiladas coincidentes." />
+    <!-- prettier-ignore -->
+    <meta name="twitter:image" content="https://rea.tools/assets/social-card.png" />
+    <!-- prettier-ignore -->
+    <meta
+      name="twitter:image:alt"
+      content="REA: Descubra cómo funciona el software. Ingeniería inversa con su agente de codificación."
+    />
+    <!-- website:sharing:end -->
+    <!-- website:theme:start -->
+    <meta name="theme-color" content="#ffffff" />
+    <!-- Apply the saved theme before styles load, to avoid a flash on navigation. -->
+    <script src="../../../assets/theme.js"></script>
+    <!-- website:theme:end -->
+    <link rel="icon" href="../../../assets/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="../../../assets/styles.css" />
+    <script src="../../../assets/main.js" defer></script>
+  <script id="website-messages" type="application/json">{"Copied": "Copiado", "Code copied to clipboard.": "Código copiado al portapapeles.", "Selected": "Seleccionados", "Code selected. Use your keyboard to copy it.": "Código seleccionado. Usa el teclado para copiarlo.", "REA on GitHub ({count})": "REA en GitHub ({count})", "Switch to light mode": "Cambiar al modo claro", "Switch to dark mode": "Cambiar al modo oscuro"}</script>
+  </head>
+  <body id="top">
+    <a class="skip-link" href="#main">Saltar al contenido</a>
+    <!-- website:header:start -->
+    <!-- prettier-ignore -->
+    <header class="site-header">
+      <div class="container header-inner">
+        <a class="brand" href="../../" aria-label="Inicio de REA"
+          ><span class="brand-name">REA</span
+          ><span class="brand-caption" data-i18n-skip>Reverse Engineer Anything</span></a
+        >
+        <nav class="navigation" aria-label="Navegación principal">
+          <a href="../../../get-started/" class="nav-start">Primeros pasos</a>
+          <a href="../" aria-current="page">Casos prácticos</a>
+          <a href="../../blog/">Blog</a>
+          <a href="../../guides/">Guías</a>
+        </nav>
+        <div class="header-social">
+          <details class="language-picker" data-i18n-skip><summary><span aria-hidden="true">文 / A</span> <span>Español</span></summary><nav aria-label="Español"><a href="../../../showcase/dx-ball/" lang="en" dir="ltr" data-language="en">English</a><a href="../../../zh-CN/showcase/dx-ball/" lang="zh-CN" dir="ltr" data-language="zh-CN">简体中文</a><a href="../../../zh-TW/showcase/dx-ball/" lang="zh-TW" dir="ltr" data-language="zh-TW">繁體中文</a><a href="../../../ja/showcase/dx-ball/" lang="ja" dir="ltr" data-language="ja">日本語</a><a href="../../../ko/showcase/dx-ball/" lang="ko" dir="ltr" data-language="ko">한국어</a><a href="../../../tr/showcase/dx-ball/" lang="tr" dir="ltr" data-language="tr">Türkçe</a><a href="../../../ru/showcase/dx-ball/" lang="ru" dir="ltr" data-language="ru">Русский</a><a href="../../../vi/showcase/dx-ball/" lang="vi" dir="ltr" data-language="vi">Tiếng Việt</a><a href="../../../th/showcase/dx-ball/" lang="th" dir="ltr" data-language="th">ไทย</a><a href="../../../de/showcase/dx-ball/" lang="de" dir="ltr" data-language="de">Deutsch</a><a href="../../../es/showcase/dx-ball/" lang="es" dir="ltr" data-language="es" aria-current="true">Español</a><a href="../../../fr/showcase/dx-ball/" lang="fr" dir="ltr" data-language="fr">Français</a><a href="../../../uk/showcase/dx-ball/" lang="uk" dir="ltr" data-language="uk">Українська</a><a href="../../../pl/showcase/dx-ball/" lang="pl" dir="ltr" data-language="pl">Polski</a><a href="../../../pt-BR/showcase/dx-ball/" lang="pt-BR" dir="ltr" data-language="pt-BR">Português (Brasil)</a><a href="../../../ar/showcase/dx-ball/" lang="ar" dir="rtl" data-language="ar">العربية</a><a href="../../../fa/showcase/dx-ball/" lang="fa" dir="rtl" data-language="fa">فارسی</a><a href="../../../id/showcase/dx-ball/" lang="id" dir="ltr" data-language="id">Bahasa Indonesia</a><a href="../../../it/showcase/dx-ball/" lang="it" dir="ltr" data-language="it">Italiano</a><a href="../../../el/showcase/dx-ball/" lang="el" dir="ltr" data-language="el">Ελληνικά</a><a href="../../../ml/showcase/dx-ball/" lang="ml" dir="ltr" data-language="ml">മലയാളം · English</a><a href="../../../ur-Latn/showcase/dx-ball/" lang="ur-Latn" dir="ltr" data-language="ur-Latn">Roman Urdu · English</a><a href="../../../ro/showcase/dx-ball/" lang="ro" dir="ltr" data-language="ro">Română · English</a></nav></details>
+          <button class="theme-toggle" type="button" data-theme-toggle hidden>
+            <svg class="theme-moon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+              <path d="M20.9 13a9 9 0 0 1-9.9-9.9A9 9 0 1 0 20.9 13Z" />
+            </svg>
+            <svg class="theme-sun" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true" focusable="false">
+              <circle cx="12" cy="12" r="4" />
+              <path d="M12 2v2m0 16v2M2 12h2m16 0h2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42" />
+            </svg>
+          </button>
+          <a
+            class="nav-github"
+            href="https://github.com/morluto/rea"
+            aria-label="REA en GitHub"
+            title="REA en GitHub"
+          >
+            <svg
+              width="22"
+              height="22"
+              viewBox="0 0 16 16"
+              aria-hidden="true"
+              focusable="false"
+            >
+              <path
+                fill="currentColor"
+                d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82a7.65 7.65 0 0 1 2-.27c.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z"
+              />
+            </svg>
+            <span class="nav-github-count" hidden aria-hidden="true"></span>
+          </a>
+          <a
+            class="nav-discord"
+            href="https://discord.gg/GkcryMnJDM"
+            aria-label="Únete a REA en Discord"
+            title="Únete a REA en Discord"
+          >
+            <svg
+              width="22"
+              height="22"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+              focusable="false"
+            >
+              <path
+                fill="currentColor"
+                d="M20.317 4.3698a19.7913 19.7913 0 0 0-4.8851-1.5152.0741.0741 0 0 0-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 0 0-.0785-.037 19.7363 19.7363 0 0 0-4.8852 1.515.0699.0699 0 0 0-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 0 0 .0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 0 0 .0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 0 0-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 0 1-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 0 1 .0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 0 1 .0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 0 1-.0066.1276 12.2986 12.2986 0 0 1-1.873.8914.0766.0766 0 0 0-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 0 0 .0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 0 0 .0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 0 0-.0312-.0286ZM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189Zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189Z"
+              />
+            </svg>
+          </a>
+          <a
+            class="nav-x"
+            href="https://x.com/reatools"
+            aria-label="Sigue a REA en X"
+            title="Sigue a REA en X"
+          >
+            <svg
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+              focusable="false"
+            >
+              <path
+                fill="currentColor"
+                d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z"
+              />
+            </svg>
+          </a>
+        </div>
+      </div>
+    </header>
+    <!-- website:header:end -->
+    <main id="main" class="container">
+      <div class="page-heading">
+        <p class="breadcrumb">
+          <a href="../../">Inicio</a> / <a href="../">Vitrinas</a> / DX-Ball
+        </p>
+        <p class="eyebrow">Estudio de caso * DX-Ball 1.07</p>
+        <h1>Reconstruyendo DX-Ball <br />desde su ejecutable.</h1>
+        <p class="lede">
+          El objetivo es una versión C mantenible del juego Windows de 1996.  REA ayuda al agente a inspeccionar el original, una función a la vez.
+        </p>
+        <p class="page-meta">Windows i386 * C * REA</p>
+      </div>
+      <figure class="explanatory-figure case-figure">
+        <div
+          class="figure-viewport"
+          tabindex="0"
+          role="region"
+          aria-label="DX-Ball investigación panorámica de sonido; desplácese horizontalmente en pantallas más pequeñas"
+        >
+          <img
+            src="../../../assets/localized/es/figures/dx-ball-sound-pan-investigation.svg"
+            width="1774"
+            height="887"
+            alt="DXBALL.La función EXE 0x00406400 se inspecciona con REA . Una persona que llama al golpe de ladrillo suministra 20 más 30 veces tile_x. Las instrucciones cargan x, multiplican por 1.5625, restan 500.0, aplican pan_scale y devuelven un número entero. El C mantenido se verifica de forma independiente con el x86 original en 3205 casos y mediante la reproducción del compilador VC4.0 que coincide con 63 bytes."
+            decoding="async"
+          />
+        </div>
+        <figcaption>
+          Una función, desde ejecutable hasta comprobada C. REA proporciona las instrucciones, las personas que llaman y las lecturas de datos; el proyecto de reconstrucción implementa y prueba el resultado. <a href="../../../assets/localized/es/figures/dx-ball-sound-pan-investigation.svg"
+            >Figura abierta</a
+          >
+        </figcaption>
+      </figure>
+      <div class="article-layout">
+        <nav class="contents" aria-label="En esta página">
+          <p>En este estudio de caso</p>
+          <ul>
+            <li><a href="#progress">El proyecto</a></li>
+            <li><a href="#sound-pan">Bandeja de sonido</a></li>
+            <li><a href="#checking">Comprobando el resultado</a></li>
+            <li><a href="#continue">Continuar el trabajo</a></li>
+          </ul>
+        </nav>
+        <article class="article" aria-label="Estudio de caso de reconstrucción DX-Ball">
+          <section class="article-section" id="progress">
+            <dl class="stats">
+              <div>
+                <dt>55</dt>
+                <dd>funciones C mantenidas</dd>
+              </div>
+              <div>
+                <dt>45,380</dt>
+                <dd>comparaciones con el código original</dd>
+              </div>
+              <div>
+                <dt>33</dt>
+                <dd>funciones con bytes compilados coincidentes</dd>
+              </div>
+            </dl>
+            <p class="caption">
+              Punto de control del proyecto: 7 de octubre de 2026. <a
+                href="https://github.com/N0zoM1z0/dx-ball/blob/a55dca27ec0a07018c1b2c95ae2be027f7d8c3c4/docs/PROGRESS.md"
+                >Libro de progreso</a
+              > · <a
+                href="https://github.com/N0zoM1z0/dx-ball/blob/a55dca27ec0a07018c1b2c95ae2be027f7d8c3c4/docs/ORACLES.md"
+                >Cobertura de la prueba</a
+              >
+            </p>
+            <h2>El proyecto hasta ahora</h2>
+            <p>
+              El código recuperado cubre el manejo de tableros y recursos, golpes de ladrillos, animaciones, partículas y producción de bonificaciones. Las compilaciones actuales proporcionan utilidades de inspección y una biblioteca de análisis. El trabajo en el juego jugable continúa con la física de la pelota y la paleta, el manejo del encendido y la integración Windows.
+            </p>
+          </section>
+
+          <section class="article-section" id="sound-pan">
+            <h2>Encontrar el cálculo de la posición del sonido izquierda/derecha</h2>
+            <p>
+              Cuando se golpea un ladrillo, su posición horizontal pasa al código de sonido. La investigación necesaria para recuperar cómo esa coordenada de pantalla se convierte en un valor de panorámica izquierda/derecha.
+            </p>
+            <div class="agent-terminal">
+              <div class="terminal-header">
+                <span class="terminal-title"
+                  ><span class="terminal-dots" aria-hidden="true"
+                    ><i></i><i></i><i></i></span
+                  >Su agente de codificación</span
+                ><button
+                  class="copy-button"
+                  type="button"
+                  data-copy="dxball-prompt"
+                  aria-label="Copie el mensaje de ejemplo"
+                >
+                  Copiar
+                </button>
+              </div>
+              <p class="terminal-prompt">
+                <span class="prompt-symbol" aria-hidden="true">›</span
+                ><span id="dxball-prompt"
+                  >Use REA para averiguar cómo DX-Ball calcula el posicionamiento del sonido estéreo. Explique el cálculo y muestre el código.</span
+                ><span class="terminal-cursor" aria-hidden="true"></span>
+              </p>
+            </div>
+            <p class="caption">
+              Un mensaje de ejemplo para su agente de codificación, con el ejecutable local disponible. La investigación a continuación muestra las consultas REA y la evidencia detrás de la respuesta.
+            </p>
+            <p>
+              El agente usó REA para inspeccionar la función, seguir a la persona que llamó y leer las constantes del ejecutable. Esos resultados proporcionaron la entrada y la aritmética necesarias para escribir la función C a continuación.
+            </p>
+            <p>
+              El resultado de la primera función para <code>0x406400</code> declaración de pseudocódigo incluida <code>FUN_00406400(void)</code> y llamando <code>__ftol()</code>. Su vista de instrucciones mostraba una entrada de pila y operaciones de coma flotante. Esa discrepancia le dio al agente una razón concreta para seguir investigando.
+            </p>
+            <details class="evidence-details">
+              <summary>La primera vista del descompilador</summary>
+              <div class="code-block">
+                <div class="code-header">
+                  <span>REA resultado * extracto de pseudocódigo</span>
+                </div>
+                <pre><code>longlong FUN_00406400(void)
+{
+  longlong lVar1;
+
+  lVar1 = __ftol();
+  return lVar1;
+}</code></pre>
+              </div>
+              <p>
+                La salida muestra una llamada de conversión. Al leer las instrucciones a continuación, se revela la entrada y el cálculo que alimenta esa llamada.
+              </p>
+            </details>
+
+            <h3 class="small-heading">Tres preguntas respondidas a través de REA</h3>
+            <ol class="rea-queries">
+              <li>
+                <h4>Recuperar la entrada faltante</h4>
+                <div class="rea-query-pair">
+                  <div class="code-block">
+                    <div class="code-header">
+                      <span>Agente → REA  · <code>analyze_function</code></span>
+                    </div>
+                    <pre><code>{"procedure": "0x406400"}</code></pre>
+                  </div>
+                  <div class="code-block">
+                    <div class="code-header">
+                      <span>REA → extracto de instrucciones del agente ·</span>
+                    </div>
+                    <pre><code>0x406409: MOV EAX, dword ptr [EBP + 0x8]
+0x40640c: MOV dword ptr [EBP + -0xc], EAX
+0x40640f: FILD dword ptr [EBP + -0xc]</code></pre>
+                  </div>
+                </div>
+                <p>
+                  El resultado de la función incluye instrucciones junto con el pseudocódigo y las personas que llaman. Aquí, <code>[EBP+8]</code> expone la entrada entera que falta en la vista del descompilador.
+                </p>
+              </li>
+              <li>
+                <h4>Siga a la persona que llama para comprender la entrada</h4>
+                <div class="rea-query-pair">
+                  <div class="code-block">
+                    <div class="code-header">
+                      <span>Agente → REA  · <code>analyze_function</code></span>
+                    </div>
+                    <pre><code>{"procedure": "0x411f40"}</code></pre>
+                  </div>
+                  <div class="code-block">
+                    <div class="code-header">
+                      <span>REA → extracto del agente * llamante</span>
+                    </div>
+                    <pre><code>0x411f5b: ADD EAX, 0x14
+0x411f5e: PUSH EAX
+0x411f5f: CALL 0x00406400</code></pre>
+                  </div>
+                </div>
+                <p>
+                  REA identificó a esta persona que llamó en el primer resultado. Su escala de instrucciones anteriores <code>tile_x</code> por 30; sumando 20 da la coordenada de la pantalla del ladrillo, <code>20 + 30 × tile_x</code>.
+                </p>
+              </li>
+              <li>
+                <h4>Leer los valores detrás de las direcciones de memoria</h4>
+                <div class="rea-query-pair">
+                  <div class="code-block">
+                    <div class="code-header">
+                      <span
+                        >Agente → REA * dos <code>read_bytes</code> solicitudes</span
+                      >
+                    </div>
+                    <pre><code>{"address": "0x420068", "length": 16}
+{"address": "0x4210a0", "length": 8}</code></pre>
+                  </div>
+                  <div class="code-block">
+                    <div class="code-header">
+                      <span>Resultados de bytes REA * decodificados como dobles</span>
+                    </div>
+                    <pre><code>000000000000f93f → 1.5625
+0000000000407f40 → 500.0
+000000000000f03f → 1.0</code></pre>
+                  </div>
+                </div>
+                <p>
+                  Los bytes devueltos establecen las dos constantes aritméticas y la escala panorámica inicial. El agente ahora tiene los valores necesarios para la expresión C.
+                </p>
+              </li>
+            </ol>
+
+            <h3 class="small-heading">De los hallazgos de REA a C</h3>
+            <p>
+              Siga los cinco pasos a continuación. Cada selección resalta las instrucciones originales y las líneas C que informaron.
+            </p>
+            <div class="step-comparison" data-step-comparison>
+              <div
+                class="step-selector"
+                role="group"
+                aria-label="Siga el cálculo de la posición del sonido izquierda/derecha"
+              >
+                <button
+                  type="button"
+                  data-select-step="1"
+                  aria-pressed="true"
+                  aria-controls="pan-assembly pan-source pan-step-detail"
+                >
+                  <span>01</span> Entrada
+                </button>
+                <button
+                  type="button"
+                  data-select-step="2"
+                  aria-pressed="false"
+                  aria-controls="pan-assembly pan-source pan-step-detail"
+                >
+                  <span>02</span> Multiplicar
+                </button>
+                <button
+                  type="button"
+                  data-select-step="3"
+                  aria-pressed="false"
+                  aria-controls="pan-assembly pan-source pan-step-detail"
+                >
+                  <span>03</span> Restar
+                </button>
+                <button
+                  type="button"
+                  data-select-step="4"
+                  aria-pressed="false"
+                  aria-controls="pan-assembly pan-source pan-step-detail"
+                >
+                  <span>04</span> Escala
+                </button>
+                <button
+                  type="button"
+                  data-select-step="5"
+                  aria-pressed="false"
+                  aria-controls="pan-assembly pan-source pan-step-detail"
+                >
+                  <span>05</span> Regreso
+                </button>
+              </div>
+              <div class="code-comparison">
+                <div class="code-block">
+                  <div class="code-header">
+                    <span>Original x86 · extracto</span
+                    ><button
+                      class="copy-button"
+                      type="button"
+                      data-copy="pan-assembly"
+                      aria-label="Copiar extracto original de la asamblea"
+                    >
+                      Copiar
+                    </button>
+                  </div>
+                  <pre><code id="pan-assembly"><span class="code-step is-active" data-step="1">0x406409: MOV EAX, dword ptr [EBP + 0x8]
+0x40640c: MOV dword ptr [EBP + -0xc], EAX
+0x40640f: FILD dword ptr [EBP + -0xc]</span>
+<span class="code-step" data-step="2">0x406415: FMUL double ptr [0x00420068]</span>
+<span class="code-step" data-step="3">0x40641e: FSUB double ptr [0x00420070]</span>
+<span class="code-step" data-step="4">0x406427: FMUL double ptr [0x004210a0]</span>
+<span class="code-step" data-step="5">0x406430: CALL 0x0041678c
+0x40643e: RET</span></code></pre>
+                </div>
+                <div class="code-block">
+                  <div class="code-header">
+                    <span>Reconstruido C</span
+                    ><button
+                      class="copy-button"
+                      type="button"
+                      data-copy="pan-source"
+                      aria-label="Copiar función de panorámica de sonido"
+                    >
+                      Copiar
+                    </button>
+                  </div>
+                  <pre><code id="pan-source">DxBallInt dxball_screen_pan(<span class="is-active" data-step="1">DxBallInt x</span>)
+{
+    double pan;
+<span class="code-step is-active" data-step="1">    pan = (double)x;</span>
+<span class="code-step" data-step="2">    pan = pan * 1.5625;</span>
+<span class="code-step" data-step="3">    pan = pan - 500.0;</span>
+<span class="code-step" data-step="4">    pan = pan * dxball_pan_scale;</span>
+<span class="code-step" data-step="5">    return (DxBallInt)pan;</span>
+}</code></pre>
+                </div>
+              </div>
+              <div
+                class="step-detail"
+                id="pan-step-detail"
+                aria-live="polite"
+                aria-atomic="true"
+              >
+                <p data-step-note="1">
+                  <strong>01 * Lea la entrada.</strong> La vista de instrucciones en el resultado de la función REA dice <code>[EBP+8]</code> y usos <code>FILD</code> para cargar el entero. Seguir a su llamador a través de REA establece el significado de la coordenada de pantalla del parámetro C <code>x</code>.
+                </p>
+                <p data-step-note="2" hidden>
+                  <strong>02 * Multiplica por 1.5625.</strong> <code>FMUL</code> lee el doble en <code>0x420068</code>. Los bytes devueltos por REA <code>read_bytes</code> decodificar a <code>1.5625</code>; la C usa la misma constante.
+                </p>
+                <p data-step-note="3" hidden>
+                  <strong>03 * Resta 500.0.</strong> <code>FSUB</code> lee el doble en <code>0x420070</code>.  El resultado de bytes de REA se decodifica en <code>500.0</code>, cambiando el centro del cálculo a coordenadas de pantalla <code>320</code>.
+                </p>
+                <p data-step-note="4" hidden>
+                  <strong>04 * Aplique la báscula almacenada.</strong> El segundo <code>FMUL</code> lecturas <code>0x4210a0</code>. Ese global se llama <code>dxball_pan_scale</code> en la fuente mantenida.  La lectura del segundo byte de REA establece su valor inicial de <code>1.0</code>.
+                </p>
+                <p data-step-note="5" hidden>
+                  <strong>05 * Devuelve un número entero.</strong> La llamada al <code>0x406430</code> alcances <code>__ftol</code>, identificado en los resultados de llamadas de REA. La C arroja el resultado a <code>DxBallInt</code>; original-las comparaciones x86 verifican el valor devuelto.
+                </p>
+              </div>
+            </div>
+            <p class="caption">
+              El extracto de la asamblea selecciona las instrucciones de entrada, aritmética y retorno. La lista completa a continuación también incluye las tiendas intermedias y la configuración y limpieza de funciones.
+            </p>
+            <details class="evidence-details">
+              <summary>Montaje completo y pruebas de apoyo</summary>
+              <div class="code-block">
+                <div class="code-header">
+                  <span>REA resultado * 0x406400-0x40643e</span
+                  ><button
+                    class="copy-button"
+                    type="button"
+                    data-copy="pan-assembly-full"
+                    aria-label="Copie el ensamblaje completo de la bandeja de sonido"
+                  >
+                    Copiar
+                  </button>
+                </div>
+                <pre><code id="pan-assembly-full">0x406400: PUSH EBP
+0x406401: MOV EBP, ESP
+0x406403: SUB ESP, 0xc
+0x406406: PUSH EBX
+0x406407: PUSH ESI
+0x406408: PUSH EDI
+0x406409: MOV EAX, dword ptr [EBP + 0x8]
+0x40640c: MOV dword ptr [EBP + -0xc], EAX
+0x40640f: FILD dword ptr [EBP + -0xc]
+0x406412: FST double ptr [EBP + -0x8]
+0x406415: FMUL double ptr [0x00420068]
+0x40641b: FST double ptr [EBP + -0x8]
+0x40641e: FSUB double ptr [0x00420070]
+0x406424: FST double ptr [EBP + -0x8]
+0x406427: FMUL double ptr [0x004210a0]
+0x40642d: FST double ptr [EBP + -0x8]
+0x406430: CALL 0x0041678c
+0x406435: JMP 0x0040643a
+0x40643a: POP EDI
+0x40643b: POP ESI
+0x40643c: POP EBX
+0x40643d: LEAVE
+0x40643e: RET</code></pre>
+              </div>
+              <h3>Lo que suministra la persona que llama</h3>
+              <p>
+                La función de golpe de ladrillo en <code>0x411f40</code> escala su coordenada de mosaico en 30, agrega 20 y luego la empuja antes de la llamada:
+              </p>
+              <div class="code-block">
+                <pre><code>0x411f50: MOV EAX, dword ptr [EBP + 0x8]
+0x411f53: ADD EAX, EAX
+0x411f55: LEA EAX, [EAX + EAX*0x2]
+0x411f58: LEA EAX, [EAX + EAX*0x4]
+0x411f5b: ADD EAX, 0x14
+0x411f5e: PUSH EAX
+0x411f5f: CALL 0x00406400
+0x411f64: ADD ESP, 0x4</code></pre>
+              </div>
+              <h3>Lo que establecen las lecturas de los datos</h3>
+              <div class="evidence-table-wrap">
+                <table class="evidence-table">
+                  <caption>
+                    Lecturas de bytes REA, decodificadas como dobles little-endian
+                  </caption>
+                  <thead>
+                    <tr>
+                      <th scope="col">Dirección</th>
+                      <th scope="col">Valor</th>
+                      <th scope="col">Utilizado para</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td><code>0x420068</code></td>
+                      <td><code>1.5625</code></td>
+                      <td>Primera multiplicación</td>
+                    </tr>
+                    <tr>
+                      <td><code>0x420070</code></td>
+                      <td><code>500.0</code></td>
+                      <td>Resta</td>
+                    </tr>
+                    <tr>
+                      <td><code>0x4210a0</code></td>
+                      <td><code>1.0</code> inicialmente</td>
+                      <td>Escala de pan almacenada</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <p class="caption">
+                Grabado con REA 4.1.0 para el objetivo DX-Ball 1.07 fijado con hash. Las notas de investigación vinculadas conservan las identificaciones de las pruebas.
+              </p>
+            </details>
+            <p class="caption">
+              <a
+                href="https://github.com/N0zoM1z0/dx-ball/blob/a55dca27ec0a07018c1b2c95ae2be027f7d8c3c4/src/gameplay.c#L41"
+                >Fuente mantenida</a
+              > · <a
+                href="https://github.com/N0zoM1z0/dx-ball/blob/a55dca27ec0a07018c1b2c95ae2be027f7d8c3c4/docs/GAMEPLAY_OWNER.md"
+                >Notas de investigación y referencias de evidencia</a
+              >
+            </p>
+          </section>
+
+          <section class="article-section" id="checking">
+            <h2>Comprobando la función recuperada</h2>
+            <p>
+              La función recuperada pasa dos comprobaciones: sus valores de retorno coinciden con el original y sus bytes compilados coinciden con el ejecutable.
+            </p>
+            <div class="verification">
+              <div>
+                <h3>3.205 casos de conducta</h3>
+                <p>
+                  Las pruebas ejecutan la función x86 original y comparan su valor de retorno con la C mantenida. Cubren cada posición entera de 0 a 640 en cinco escalas panorámicas: 0, 0.5, 1, 20 y -1.
+                </p>
+              </div>
+              <div>
+                <h3>63 bytes coincidentes</h3>
+                <p>
+                  La función C se compila con la cadena de herramientas VC4.0 anclada. La repetición del compilador coincide con la función completa después de aplicar las reubicaciones revisadas y verificar las constantes a las que se hace referencia.
+                </p>
+              </div>
+            </div>
+            <p class="small-heading">
+              En una escala de 1, el cálculo recuperado devuelve -500 en el borde izquierdo, 0 en el centro y 500 en el borde derecho. La siguiente parte del trabajo de audio es integrar ese valor con el backend de sonido del juego.
+            </p>
+            <p>
+              <a
+                href="https://github.com/N0zoM1z0/dx-ball/blob/a55dca27ec0a07018c1b2c95ae2be027f7d8c3c4/docs/BUILD_MATCHING.md"
+                >Lea los detalles de la repetición del compilador</a
+              >
+            </p>
+          </section>
+
+          <section class="article-section" id="continue">
+            <h2>Continuar la investigación</h2>
+            <p>
+              El mismo enfoque se está utilizando para las actualizaciones de partículas, las colas de explosión y la generación de bonificaciones: inspeccione las funciones relevantes, recupere su estado y dependencias, luego compare la implementación con la original.
+            </p>
+            <p>
+              Para inspeccionar la función de panorámica de sonido usted mismo, siga las instrucciones de configuración del proyecto DX-Ball y proporcione su objetivo original correspondiente. Entonces corre:
+            </p>
+            <div class="code-block">
+              <div class="code-header">
+                <span>En la caja de DX-Ball</span
+                ><button
+                  class="copy-button"
+                  type="button"
+                  data-copy="pan-command"
+                  aria-label="Copie el comando de análisis DX-Ball"
+                >
+                  Copiar
+                </button>
+              </div>
+              <pre><code id="pan-command">scripts/rea function original/DXBALL.EXE 0x00406400 \
+  --snapshot .analysis/rea/dxball.snapshot.json --json</code></pre>
+            </div>
+            <ul class="reading-list">
+              <li>
+                <a href="https://github.com/N0zoM1z0/dx-ball"
+                  > Repositorio DX-Ball</a
+                ><span>Fuente actual, progreso y configuración local.</span>
+              </li>
+              <li>
+                <a href="../../../guides/native/"> Flujo de trabajo de análisis REA</a
+                ><span
+                  >Siga el cálculo, luego use el mismo enfoque con su propio binario.</span
+                >
+              </li>
+              <li>
+                <a
+                  href="https://github.com/N0zoM1z0/dx-ball/blob/a55dca27ec0a07018c1b2c95ae2be027f7d8c3c4/docs/ENTITIES_OWNER.md"
+                  >Partículas y producción de bonos</a
+                ><span
+                  >Una investigación más amplia sobre el estado, las colas y las escrituras de píxeles.</span
+                >
+              </li>
+            </ul>
+            <div class="actions">
+              <a class="button" href="../../../get-started/"
+                >Comience con su propio objetivo</a
+              >
+            </div>
+          </section>
+        </article>
+      </div>
+    </main>
+    <!-- website:footer:start -->
+    <!-- prettier-ignore -->
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <p>REA · Reverse Engineer Anything</p>
+        <div class="footer-links">
+          <a href="../../faq/">FAQ</a
+          ><a href="../../contributors/">Colaboradores</a
+          ><a href="https://github.com/morluto/rea">Código fuente</a
+          ><a href="https://github.com/morluto/rea/blob/main/LICENSE">Licencia MIT</a
+          ><a href="https://discord.gg/GkcryMnJDM">Únete a la comunidad</a
+          ><a href="https://x.com/reatools">Síguenos en X</a>
+        </div>
+      </div>
+    </footer>
+    <p class="sr-only" id="copy-status" role="status" aria-live="polite"></p>
+    <a class="back-to-top" href="#top" aria-label="Volver arriba">
+      <span aria-hidden="true">↑</span> Arriba
+    </a>
+    <!-- website:footer:end -->
+  </body>
+</html>

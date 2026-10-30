@@ -1,0 +1,570 @@
+<!doctype html>
+<html lang="el" dir="ltr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Αντίστροφη μηχανική του Notion Electron: Πρόχειρο — REA</title>
+    <meta
+      name="description"
+      content="Ακολουθήστε το API προχείρου του Notion μέσω της προφόρτωσης, των περιβλημάτων IPC και της κύριας διεργασίας του Electron, με σύντομα αποσπάσματα κώδικα και μια ματιά στη μορφή εμπλουτισμένου προχείρου του."
+    />
+    <!-- website:sharing:start -->
+    <!-- prettier-ignore -->
+    <link rel="canonical" href="https://rea.tools/el/showcase/notion/" />
+    <!-- website:languages:start -->
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="en" href="https://rea.tools/showcase/notion/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="zh-CN" href="https://rea.tools/zh-CN/showcase/notion/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="zh-TW" href="https://rea.tools/zh-TW/showcase/notion/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="ja" href="https://rea.tools/ja/showcase/notion/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="ko" href="https://rea.tools/ko/showcase/notion/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="tr" href="https://rea.tools/tr/showcase/notion/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="ru" href="https://rea.tools/ru/showcase/notion/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="vi" href="https://rea.tools/vi/showcase/notion/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="th" href="https://rea.tools/th/showcase/notion/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="de" href="https://rea.tools/de/showcase/notion/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="es" href="https://rea.tools/es/showcase/notion/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="fr" href="https://rea.tools/fr/showcase/notion/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="uk" href="https://rea.tools/uk/showcase/notion/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="pl" href="https://rea.tools/pl/showcase/notion/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="pt-BR" href="https://rea.tools/pt-BR/showcase/notion/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="ar" href="https://rea.tools/ar/showcase/notion/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="fa" href="https://rea.tools/fa/showcase/notion/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="id" href="https://rea.tools/id/showcase/notion/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="it" href="https://rea.tools/it/showcase/notion/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="el" href="https://rea.tools/el/showcase/notion/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="x-default" href="https://rea.tools/showcase/notion/" />
+<!-- website:languages:end -->
+    <!-- prettier-ignore -->
+    <meta property="og:type" content="website" />
+    <!-- prettier-ignore -->
+    <meta property="og:site_name" content="REA" />
+    <!-- prettier-ignore -->
+    <meta property="og:title" content="Αντίστροφη μηχανική του Notion Electron: Πρόχειρο — REA" />
+    <!-- prettier-ignore -->
+    <meta property="og:description" content="Ακολουθήστε το API προχείρου του Notion μέσω της προφόρτωσης, των περιβλημάτων IPC και της κύριας διεργασίας του Electron, με σύντομα αποσπάσματα κώδικα και μια ματιά στη μορφή εμπλουτισμένου προχείρου του." />
+    <!-- prettier-ignore -->
+    <meta property="og:url" content="https://rea.tools/el/showcase/notion/" />
+    <!-- prettier-ignore -->
+    <meta property="og:image" content="https://rea.tools/assets/social-card.png" />
+    <!-- prettier-ignore -->
+    <meta property="og:image:type" content="image/png" />
+    <!-- prettier-ignore -->
+    <meta property="og:image:width" content="1200" />
+    <!-- prettier-ignore -->
+    <meta property="og:image:height" content="630" />
+    <!-- prettier-ignore -->
+    <meta
+      property="og:image:alt"
+      content="REA: Μάθετε πώς λειτουργεί το λογισμικό. Αντίστροφη μηχανική με τον βοηθό προγραμματισμού σας."
+    />
+    <!-- prettier-ignore -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <!-- prettier-ignore -->
+    <meta name="twitter:title" content="Αντίστροφη μηχανική του Notion Electron: Πρόχειρο — REA" />
+    <!-- prettier-ignore -->
+    <meta name="twitter:description" content="Ακολουθήστε το API προχείρου του Notion μέσω της προφόρτωσης, των περιβλημάτων IPC και της κύριας διεργασίας του Electron, με σύντομα αποσπάσματα κώδικα και μια ματιά στη μορφή εμπλουτισμένου προχείρου του." />
+    <!-- prettier-ignore -->
+    <meta name="twitter:image" content="https://rea.tools/assets/social-card.png" />
+    <!-- prettier-ignore -->
+    <meta
+      name="twitter:image:alt"
+      content="REA: Μάθετε πώς λειτουργεί το λογισμικό. Αντίστροφη μηχανική με τον βοηθό προγραμματισμού σας."
+    />
+    <!-- website:sharing:end -->
+    <!-- website:theme:start -->
+    <meta name="theme-color" content="#ffffff" />
+    <!-- Apply the saved theme before styles load, to avoid a flash on navigation. -->
+    <script src="../../../assets/theme.js"></script>
+    <!-- website:theme:end -->
+    <link rel="icon" href="../../../assets/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="../../../assets/styles.css" />
+    <script src="../../../assets/main.js" defer></script>
+  <script id="website-messages" type="application/json">{"Copied": "Αντιγράφηκε", "Code copied to clipboard.": "Ο κώδικας αντιγράφηκε στο πρόχειρο.", "Selected": "Επιλέχθηκε", "Code selected. Use your keyboard to copy it.": "Ο κώδικας επιλέχθηκε. Χρησιμοποιήστε το πληκτρολόγιό σας για να τον αντιγράψετε.", "REA on GitHub ({count})": "REA στο GitHub ({count})", "Switch to light mode": "Μετάβαση σε φωτεινή λειτουργία", "Switch to dark mode": "Μετάβαση σε σκοτεινή λειτουργία"}</script>
+  </head>
+  <body id="top">
+    <a class="skip-link" href="#main">Μετάβαση στο περιεχόμενο</a>
+    <!-- website:header:start -->
+    <!-- prettier-ignore -->
+    <header class="site-header">
+      <div class="container header-inner">
+        <a class="brand" href="../../" aria-label="Αρχική σελίδα του REA"
+          ><span class="brand-name">REA</span
+          ><span class="brand-caption" data-i18n-skip>Reverse Engineer Anything</span></a
+        >
+        <nav class="navigation" aria-label="Κύρια πλοήγηση">
+          <a href="../../../get-started/" class="nav-start">Ξεκινήστε</a>
+          <a href="../" aria-current="page">Μελέτες</a>
+          <a href="../../blog/">Ιστολόγιο</a>
+          <a href="../../guides/">Οδηγοί</a>
+        </nav>
+        <div class="header-social">
+          <details class="language-picker" data-i18n-skip><summary><span aria-hidden="true">文 / A</span> <span>Ελληνικά</span></summary><nav aria-label="Ελληνικά"><a href="../../../showcase/notion/" lang="en" dir="ltr" data-language="en">English</a><a href="../../../zh-CN/showcase/notion/" lang="zh-CN" dir="ltr" data-language="zh-CN">简体中文</a><a href="../../../zh-TW/showcase/notion/" lang="zh-TW" dir="ltr" data-language="zh-TW">繁體中文</a><a href="../../../ja/showcase/notion/" lang="ja" dir="ltr" data-language="ja">日本語</a><a href="../../../ko/showcase/notion/" lang="ko" dir="ltr" data-language="ko">한국어</a><a href="../../../tr/showcase/notion/" lang="tr" dir="ltr" data-language="tr">Türkçe</a><a href="../../../ru/showcase/notion/" lang="ru" dir="ltr" data-language="ru">Русский</a><a href="../../../vi/showcase/notion/" lang="vi" dir="ltr" data-language="vi">Tiếng Việt</a><a href="../../../th/showcase/notion/" lang="th" dir="ltr" data-language="th">ไทย</a><a href="../../../de/showcase/notion/" lang="de" dir="ltr" data-language="de">Deutsch</a><a href="../../../es/showcase/notion/" lang="es" dir="ltr" data-language="es">Español</a><a href="../../../fr/showcase/notion/" lang="fr" dir="ltr" data-language="fr">Français</a><a href="../../../uk/showcase/notion/" lang="uk" dir="ltr" data-language="uk">Українська</a><a href="../../../pl/showcase/notion/" lang="pl" dir="ltr" data-language="pl">Polski</a><a href="../../../pt-BR/showcase/notion/" lang="pt-BR" dir="ltr" data-language="pt-BR">Português (Brasil)</a><a href="../../../ar/showcase/notion/" lang="ar" dir="rtl" data-language="ar">العربية</a><a href="../../../fa/showcase/notion/" lang="fa" dir="rtl" data-language="fa">فارسی</a><a href="../../../id/showcase/notion/" lang="id" dir="ltr" data-language="id">Bahasa Indonesia</a><a href="../../../it/showcase/notion/" lang="it" dir="ltr" data-language="it">Italiano</a><a href="../../../el/showcase/notion/" lang="el" dir="ltr" data-language="el" aria-current="true">Ελληνικά</a><a href="../../../ml/showcase/notion/" lang="ml" dir="ltr" data-language="ml">മലയാളം · English</a><a href="../../../ur-Latn/showcase/notion/" lang="ur-Latn" dir="ltr" data-language="ur-Latn">Roman Urdu · English</a><a href="../../../ro/showcase/notion/" lang="ro" dir="ltr" data-language="ro">Română · English</a></nav></details>
+          <button class="theme-toggle" type="button" data-theme-toggle hidden>
+            <svg class="theme-moon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+              <path d="M20.9 13a9 9 0 0 1-9.9-9.9A9 9 0 1 0 20.9 13Z" />
+            </svg>
+            <svg class="theme-sun" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true" focusable="false">
+              <circle cx="12" cy="12" r="4" />
+              <path d="M12 2v2m0 16v2M2 12h2m16 0h2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42" />
+            </svg>
+          </button>
+          <a
+            class="nav-github"
+            href="https://github.com/morluto/rea"
+            aria-label="Το REA στο GitHub"
+            title="Το REA στο GitHub"
+          >
+            <svg
+              width="22"
+              height="22"
+              viewBox="0 0 16 16"
+              aria-hidden="true"
+              focusable="false"
+            >
+              <path
+                fill="currentColor"
+                d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82a7.65 7.65 0 0 1 2-.27c.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z"
+              />
+            </svg>
+            <span class="nav-github-count" hidden aria-hidden="true"></span>
+          </a>
+          <a
+            class="nav-discord"
+            href="https://discord.gg/GkcryMnJDM"
+            aria-label="Μπείτε στην κοινότητα του REA στο Discord"
+            title="Μπείτε στην κοινότητα του REA στο Discord"
+          >
+            <svg
+              width="22"
+              height="22"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+              focusable="false"
+            >
+              <path
+                fill="currentColor"
+                d="M20.317 4.3698a19.7913 19.7913 0 0 0-4.8851-1.5152.0741.0741 0 0 0-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 0 0-.0785-.037 19.7363 19.7363 0 0 0-4.8852 1.515.0699.0699 0 0 0-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 0 0 .0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 0 0 .0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 0 0-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 0 1-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 0 1 .0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 0 1 .0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 0 1-.0066.1276 12.2986 12.2986 0 0 1-1.873.8914.0766.0766 0 0 0-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 0 0 .0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 0 0 .0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 0 0-.0312-.0286ZM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189Zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189Z"
+              />
+            </svg>
+          </a>
+          <a
+            class="nav-x"
+            href="https://x.com/reatools"
+            aria-label="Ακολουθήστε το REA στο X"
+            title="Ακολουθήστε το REA στο X"
+          >
+            <svg
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+              focusable="false"
+            >
+              <path
+                fill="currentColor"
+                d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z"
+              />
+            </svg>
+          </a>
+        </div>
+      </div>
+    </header>
+    <!-- website:header:end -->
+    <main id="main" class="container">
+      <div class="page-heading">
+        <p class="breadcrumb">
+          <a href="../../">Αρχική</a> / <a href="../">Μελέτες</a> / Notion
+        </p>
+        <p class="eyebrow">Μελέτη · Electron</p>
+        <h1>Πώς το Notion αντιγράφει<br />κείμενο και HTML.</h1>
+        <p class="lede">
+          Ακολουθήστε μια κλήση στο πρόχειρο από το API σελίδας του Notion, μέσω της προφόρτωσης και της κύριας διεργασίας, μέχρι τη λειτουργία εγγραφής στο πρόχειρο του Electron.
+        </p>
+        <p class="page-meta">Notion Desktop 7.6.1 · JavaScript · REA</p>
+      </div>
+
+      <figure class="workflow-figure">
+        <p class="figure-title">Η γέφυρα μέσα στο πακέτο της εφαρμογής υπολογιστή του Notion</p>
+        <ol class="flow-steps notion-bridge-flow">
+          <li>
+            <span class="flow-label">01 · API που εκτίθεται στη σελίδα</span> <span class="flow-node"><code>clipboard.write(data)</code></span> <span class="flow-note"
+              >Η προφόρτωση εκθέτει μια μέθοδο που μπορεί να κληθεί.</span
+            >
+          </li>
+          <li>
+            <span class="flow-label">02 · Περίβλημα προφόρτωσης</span> <span class="flow-node"><code>ipcRenderer.invoke</code></span> <span class="flow-note"
+              >Το περίβλημα στέλνει το κανάλι και τα ορίσματα.</span
+            >
+          </li>
+          <li>
+            <span class="flow-label">03 · Χειριστής κύριας διεργασίας</span> <span class="flow-node"><code>ipcMain.handle</code></span> <span class="flow-note"
+              >Ο παραλήπτης ελέγχει ποια σελίδα το έστειλε.</span
+            >
+          </li>
+          <li>
+            <span class="flow-label">04 · Πρόχειρο συστήματος</span> <span class="flow-node"><code>clipboard.write(data)</code></span> <span class="flow-note"
+              >Το Electron γράφει το παρεχόμενο κείμενο και HTML.</span
+            >
+          </li>
+        </ol>
+        <p class="flow-result">
+          Ένα κανάλι ενώνει τις δύο πλευρές: <code class="notion-channel">notion:clipboard:write</code>
+        </p>
+        <figcaption>
+          Ο συσκευασμένος κώδικας χρησιμοποιεί το ίδιο κανάλι στην προφόρτωση και την κύρια διεργασία. Η εξέταση των περιβλημάτων αποκαλύπτει τις κλήσεις Electron πίσω από αυτά τα ονόματα.
+        </figcaption>
+      </figure>
+
+      <div class="article-layout">
+        <nav class="contents" aria-label="Σε αυτή τη σελίδα">
+          <p>Σε αυτή τη μελέτη</p>
+          <ul>
+            <li><a href="#clipboard">Ακολουθήστε τη γέφυρα του προχείρου</a></li>
+            <li><a href="#rich-clipboard">Διατήρηση της δομής ενός μπλοκ</a></li>
+            <li><a href="#continue">Περισσότερα παραδείγματα και πηγές</a></li>
+          </ul>
+        </nav>
+        <article class="article" aria-label="Μελέτη του Notion Electron">
+          <section class="article-section" id="clipboard">
+            <h2>Πού καταλήγει η λειτουργία αντιγραφής;</h2>
+            <p>
+              Η σελίδα βλέπει μια μέθοδο που ονομάζεται <code>clipboard.write</code>. Η υλοποίησή της στην προφόρτωση είναι ένα περίβλημα. Το χρήσιμο ερώτημα είναι τι στέλνει αυτό το περίβλημα και ποιος κώδικας το λαμβάνει.
+            </p>
+            <div class="agent-terminal">
+              <div class="terminal-header">
+                <span class="terminal-title"
+                  ><span class="terminal-dots" aria-hidden="true"
+                    ><i></i><i></i><i></i></span
+                  >Ο βοηθός προγραμματισμού σας</span
+                ><button
+                  class="copy-button"
+                  type="button"
+                  data-copy="notion-prompt"
+                  aria-label="Αντιγραφή προτροπής ανάλυσης Notion"
+                >
+                  Αντιγραφή
+                </button>
+              </div>
+              <p class="terminal-prompt">
+                <span class="prompt-symbol" aria-hidden="true">›</span
+                ><span id="notion-prompt"
+                  >Χρησιμοποιήστε το REA για να ακολουθήσετε πώς το Notion αντιγράφει κείμενο και HTML στο πρόχειρο του συστήματος. Δείξτε τον κώδικα σε κάθε βήμα.</span
+                ><span class="terminal-cursor" aria-hidden="true"></span>
+              </p>
+            </div>
+            <p class="caption">
+              Παράδειγμα προτροπής με το τοπικό πακέτο εφαρμογής του Notion διαθέσιμο στον βοηθό προγραμματισμού σας.
+            </p>
+
+            <h3 class="small-heading">Το REA βρίσκει από πού να ξεκινήσετε την ανάγνωση</h3>
+            <p>
+              Η ανάλυση της προφόρτωσης καρτέλας με το REA εντοπίζει το API που εκτίθεται στη σελίδα και την κλήση που στέλνει ένα αίτημα IPC. Και τα δύο ευρήματα συνοδεύονται από περιοχές πηγαίου κώδικα στο ελαχιστοποιημένο πακέτο:
+            </p>
+            <figure class="workflow-figure">
+              <p class="figure-title">Ευρήματα REA → δύο σημεία για άνοιγμα</p>
+              <div class="rea-query-pair">
+                <div class="code-block">
+                  <div class="code-header"><span>Εκτεθειμένο API σελίδας</span></div>
+                  <pre><code>api_key: "__electronApi"
+api_status: "dynamic"
+source: preload.js:1:22764–22828</code></pre>
+                </div>
+                <div class="code-block">
+                  <div class="code-header"><span>Κλήση IPC της διεργασίας απόδοσης</span></div>
+                  <pre><code>operation: "invoke"
+channel_expression: "e"
+source: preload.js:1:6486–6522</code></pre>
+                </div>
+              </div>
+              <figcaption>
+                Επιλεγμένα πεδία από νέο αποτέλεσμα <code>analyze_javascript_application</code> στην προφόρτωση καρτέλας του Notion, καταγεγραμμένο με REA 4.1.0. Οι θέσεις χρησιμοποιούν τη γραμμή του αρχικού πακέτου και τη στήλη με αρίθμηση από το μηδέν.
+              </figcaption>
+            </figure>
+            <p>
+              Ο βοηθός ανοίγει αυτές τις θέσεις, βρίσκει το μέλος του προχείρου στο συγκροτημένο API και διαβάζει την <code>invokerInMain</code>. Το σημείο κλήσης της παρέχει το <code class="notion-channel">notion:clipboard:write</code>. Αυτό το όνομα δίνει στον βοηθό κάτι συγκεκριμένο να αναζητήσει στο κύριο πακέτο. Τα τέσσερα παρακάτω αποσπάσματα δείχνουν τη διαδρομή που συνδέει.
+            </p>
+
+            <h3 class="small-heading">Τέσσερα σύντομα τμήματα κώδικα</h3>
+            <p class="caption">
+              Απλοποιημένα από τη συσκευασμένη JavaScript, με ευανάγνωστα ονόματα μεταβλητών. Τα άσχετα μέλη παραλείπονται.
+            </p>
+            <ol class="rea-queries">
+              <li>
+                <h4>Ξεκινήστε από το API που εκτίθεται στη σελίδα</h4>
+                <div class="code-block">
+                  <div class="code-header">
+                    <span
+                      >tab_browser_view/<span translate="no">preload.js</span> · μέλος API</span
+                    ><button
+                      class="copy-button"
+                      type="button"
+                      data-copy="notion-preload-source"
+                      aria-label="Αντιγραφή αποσπάσματος προφόρτωσης Notion"
+                    >
+                      Αντιγραφή
+                    </button>
+                  </div>
+                  <pre><code id="notion-preload-source">const clipboardApi = {
+  write: invokerInMain(<span class="notion-channel">"notion:clipboard:write"</span>)
+};
+
+// Included in the API exposed through contextBridge:
+// window.__electronApi.clipboard</code></pre>
+                </div>
+                <p>
+                  Αυτό το μέλος παρέχει το όνομα του καναλιού. Η υλοποίηση της <code>invokerInMain</code> μας δείχνει πώς το αίτημα φεύγει από τη διεργασία της σελίδας.
+                </p>
+              </li>
+              <li>
+                <h4>Εξετάστε το περίβλημα της προφόρτωσης</h4>
+                <div class="code-block">
+                  <div class="code-header">
+                    <span
+                      >tab_browser_view/<span translate="no">preload.js</span> · βοηθητική συνάρτηση IPC</span
+                    ><button
+                      class="copy-button"
+                      type="button"
+                      data-copy="notion-invoke-source"
+                      aria-label="Αντιγραφή αποσπάσματος περιβλήματος κλήσης Notion"
+                    >
+                      Αντιγραφή
+                    </button>
+                  </div>
+                  <pre><code id="notion-invoke-source">function invokerInMain(channel) {
+  return (...args) =&gt; invokeInMainAndReturnResult(channel, ...args);
+}
+
+function invokeInMainAndReturnResult(channel, ...args) {
+  return ipcRenderer.invoke(channel, ...args);
+}</code></pre>
+                </div>
+                <p>
+                  Η επιστρεφόμενη συνάρτηση προωθεί τα ορίσματα μέσω του IPC αιτήματος και απόκρισης του Electron. Μπορούμε πλέον να αναζητήσουμε το <code class="notion-channel">notion:clipboard:write</code> στην πλευρά της κύριας διεργασίας.
+                </p>
+              </li>
+              <li>
+                <h4>Ελέγξτε πώς καταχωρίζεται ο παραλήπτης</h4>
+                <div class="code-block">
+                  <div class="code-header">
+                    <span
+                      >main/<span translate="no">index.js</span> · βοηθητική συνάρτηση χειριστή</span
+                    ><button
+                      class="copy-button"
+                      type="button"
+                      data-copy="notion-handler-source"
+                      aria-label="Αντιγραφή αποσπάσματος περιβλήματος χειριστή Notion"
+                    >
+                      Αντιγραφή
+                    </button>
+                  </div>
+                  <pre><code id="notion-handler-source">const handleRequestFromRenderer = {
+  addListener(channel, handler) {
+    ipcMain.handle(channel, handler);
+  }
+};</code></pre>
+                </div>
+                <p>
+                  Η κύρια διεργασία χρησιμοποιεί άλλο ένα περίβλημα. Η μέθοδός του <code>addListener</code> καταχωρίζει έναν παραλήπτη <code>ipcMain.handle</code> για αυτό το κανάλι.
+                </p>
+              </li>
+              <li>
+                <h4>Βρείτε την εγγραφή και τον έλεγχο αποστολέα της</h4>
+                <div class="code-block">
+                  <div class="code-header">
+                    <span
+                      >main/<span translate="no">index.js</span> · παραλήπτης προχείρου</span
+                    ><button
+                      class="copy-button"
+                      type="button"
+                      data-copy="notion-write-source"
+                      aria-label="Αντιγραφή αποσπάσματος παραλήπτη προχείρου Notion"
+                    >
+                      Αντιγραφή
+                    </button>
+                  </div>
+                  <pre><code id="notion-write-source">handleRequestFromRenderer.addListener(
+  <span class="notion-channel">"notion:clipboard:write"</span>,
+  (event, data) =&gt;
+    isNotionWebContents(event.sender)
+      ? clipboard.write(data)
+      : undefined
+);</code></pre>
+                </div>
+                <p>
+                  Αυτός είναι ο προορισμός. Αφού ελέγξει τον αποστολέα, ο χειριστής περνά τα παρεχόμενα δεδομένα στο API προχείρου του Electron. Το κανάλι και τα δύο περιβλήματα που εξετάστηκαν συνδέουν την εκτεθειμένη μέθοδο με αυτή την κλήση.
+                </p>
+              </li>
+            </ol>
+          </section>
+
+          <section class="article-section" id="rich-clipboard">
+            <h2>Πώς ένα αντιγραμμένο μπλοκ διατηρεί τη δομή του;</h2>
+            <p>
+              Ο επεξεργαστής ιστού του Notion στέλνει κείμενο και HTML μέσω της <code>electronApi.clipboard.write</code>. Κρατά τα δεδομένα του μπλοκ τοπικά και τοποθετεί ένα αναγνωριστικό στο αντιγραμμένο HTML για να τα συνδέσει.
+            </p>
+            <figure class="workflow-figure">
+              <p class="figure-title">Το HTML συνδέεται με αποθηκευμένα δεδομένα μπλοκ</p>
+              <div class="notion-clipboard-grid">
+                <div class="code-block">
+                  <div class="code-header">
+                    <span>Αποστέλλεται στο πρόχειρο του συστήματος</span>
+                  </div>
+                  <pre><code>text: "Project notes"
+html: "&lt;p&gt;Project notes&lt;/p&gt;"
+    + "&lt;!-- notionvc: <span class="notion-channel">&lt;copy-id&gt;</span> --&gt;"</code></pre>
+                </div>
+                <div class="code-block">
+                  <div class="code-header">
+                    <span>Αποθηκεύεται τοπικά από το Notion</span>
+                  </div>
+                  <pre><code>id: <span class="notion-channel">&lt;copy-id&gt;</span>
+mimeTypes:
+  text/_notion-blocks-v3-production
+    → structured block data</code></pre>
+                </div>
+              </div>
+              <ol
+                class="notion-mini-flow"
+                aria-label="Επαναφορά δεδομένων εμπλουτισμένου προχείρου κατά την επικόλληση"
+              >
+                <li>Διαβάστε το αναγνωριστικό του HTML</li>
+                <li>Βρείτε το ίδιο τοπικό αναγνωριστικό</li>
+                <li>Επαναφέρετε τα δεδομένα μπλοκ του Notion</li>
+              </ol>
+              <figcaption>
+                Ενδεικτικό κείμενο και αναγνωριστικό. Η καταγεγραμμένη δοκιμή μονάδας επαναφέρει τα δεδομένα του μπλοκ όταν τα αναγνωριστικά συμφωνούν· μια παλιά εγγραφή επιστρέφει μόνο κείμενο και HTML.
+              </figcaption>
+            </figure>
+            <p>
+              Κατά την επικόλληση, το Notion αναζητά το αναγνωριστικό του HTML και το συγκρίνει με το αποθηκευμένο αντίγραφο. Τα ίδια αναγνωριστικά επαναφέρουν τα δεδομένα του μπλοκ.
+            </p>
+            <p class="caption">
+              Μορφή προχείρου καταγεγραμμένη από πόρους ιστού που αποθηκεύτηκαν στην προσωρινή μνήμη στις 13 Ιουλίου 2026.
+            </p>
+          </section>
+
+          <section class="article-section" id="continue">
+            <h2>Περισσότερα παραδείγματα και πηγές</h2>
+            <details class="evidence-details" id="markdown">
+              <summary>Άλλο παράδειγμα: πίνακες Markdown</summary>
+              <p>
+                Το Notion αναλύει το Markdown σε δεδομένα μπλοκ. Αυτό το παράδειγμα δείχνει πώς ένας πίνακας γίνεται γραμμές κεφαλίδων και δεδομένων.
+              </p>
+              <figure class="workflow-figure">
+                <p class="figure-title">
+                  Ένας πίνακας μέσα από τον αναλυτή Markdown του Notion
+                </p>
+                <div class="notion-table-example">
+                  <div class="code-block">
+                    <div class="code-header"><span>Είσοδος Markdown</span></div>
+                    <pre><code>| A | B |
+| - | - |
+| 1 | 2 |</code></pre>
+                  </div>
+                  <div class="code-block">
+                    <div class="code-header">
+                      <span>Δομημένη έξοδος αναλυτή · απόσπασμα</span>
+                    </div>
+                    <pre><code>table · headerRow: true
+  table_row
+    cells: ["A"], ["B"]
+  table_row
+    cells: ["1"], ["2"]</code></pre>
+                  </div>
+                </div>
+                <figcaption>
+                  Καταγεγραμμένη έξοδος από εξαγόμενο αναλυτή Markdown. Ο πίνακας γίνεται γραμμές και κελιά.
+                </figcaption>
+              </figure>
+            </details>
+            <details class="evidence-details">
+              <summary>Μια άλλη διαδρομή: η σύνδεση SQLite εκτός δικτύου</summary>
+              <p>
+                Η διεργασία απόδοσης του Notion ζητά την <code>getSqliteMeta</code> μέσω IPC. Η κύρια διεργασία δημιουργεί ένα κανάλι μηνυμάτων και δίνει το ένα άκρο στη διεργασία απόδοσης και το άλλο σε μια βοηθητική διεργασία SQLite. Οι επόμενες παρτίδες εντολών και τα αποτελέσματα μεταφέρονται μέσω αυτού του άκρου.
+              </p>
+              <p>
+                Η παρακολούθηση αυτής της παράδοσης εξηγεί πού εκτελείται η εργασία της βάσης δεδομένων και γιατί η ιχνηλάτηση μόνο του αρχικού αιτήματος IPC χάνει τη μεταγενέστερη επικοινωνία.
+              </p>
+            </details>
+            <details class="evidence-details">
+              <summary>Πηγές και τρόπος ανάγνωσης των αποσπασμάτων</summary>
+              <p>
+                Η γέφυρα του προχείρου προέρχεται από το <code>app.asar</code> του Notion Desktop 7.6.1: την προφόρτωση καρτέλας και το <code>main/index.js</code>. Τα αποσπάσματα αναπτύσσουν τα ελαχιστοποιημένα ονόματα μεταβλητών και παραλείπουν άσχετο κώδικα· η βοηθητική συνάρτηση ελέγχου αποστολέα εμφανίζεται με την υποκείμενη κλήση της <code>isNotionWebContents</code>.
+              </p>
+              <p>
+                Τα παραδείγματα εικονικού προχείρου και Markdown προέρχονται από πόρους ιστού που αποθηκεύτηκαν στην προσωρινή μνήμη στις 13 Ιουλίου 2026, συμπεριλαμβανομένων των μονάδων <code>747001</code>, <code>58169</code>, <code>736810</code> και <code>422457</code>. Αυτοί οι πόροι έχουν τη δική τους έκδοση. Οι αποθηκευμένοι διερευνητικοί έλεγχοι εκτέλεσαν εξαγόμενες μονάδες και μικρά προγράμματα δοκιμής· οι έξοδοί τους περιγράφουν αυτούς τους ελέγχους και όχι μια καταγεγραμμένη συνεδρία του γραφικού περιβάλλοντος της εφαρμογής υπολογιστή.
+              </p>
+              <p>
+                Το αποτέλεσμα REA που εμφανίζεται εδώ είναι μια εστιασμένη ανάλυση της αποθηκευμένης προφόρτωσης καρτέλας, καταγεγραμμένη με το δημοσιευμένο πακέτο REA 4.1.0. Εντοπίζει το API και τη λειτουργία κλήσης. Το μέλος του προχείρου και ο αντίστοιχος παραλήπτης συνδέονται διαβάζοντας τις υλοποιήσεις των περιβλημάτων τους στο πακέτο.
+              </p>
+              <p>
+                Το παράδειγμα Markdown χρησιμοποιεί τη μονάδα αναλυτή <code>422457</code>. Οι αποθηκευμένες δοκιμές μονάδας δείχνουν ότι τόσο τα φίλτρα σελίδας όσο και τα φίλτρα συνομιλίας διατηρούν αυτόν τον πίνακα. Οι αναλυτές επικόλλησης/εισαγωγής, δομημένου Markdown και AI/συνομιλίας έχουν ξεχωριστά σημεία εισόδου και ενδιάμεσες μορφές.
+              </p>
+            </details>
+            <ul class="reading-list">
+              <li>
+                <a href="../../../guides/javascript/"
+                  >Οδηγός εφαρμογών JavaScript</a
+                ><span
+                  >Ακολουθήστε τη λειτουργία εξαγωγής μιας μικρής εφαρμογής Electron.</span
+                >
+              </li>
+              <li>
+                <a href="../dx-ball/">Ανακατασκευή του DX-Ball</a
+                ><span
+                  >Ακολουθήστε εντολές κώδικα μηχανής μέχρι μια ελεγμένη συνάρτηση C.</span
+                >
+              </li>
+            </ul>
+            <div class="actions">
+              <a class="button" href="../../../get-started/"
+                >Αναλύστε τη δική σας εφαρμογή</a
+              >
+            </div>
+          </section>
+        </article>
+      </div>
+    </main>
+    <!-- website:footer:start -->
+    <!-- prettier-ignore -->
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <p>REA · Reverse Engineer Anything</p>
+        <div class="footer-links">
+          <a href="../../faq/">FAQ</a
+          ><a href="../../contributors/">Συνεισφέροντες</a
+          ><a href="https://github.com/morluto/rea">Πηγαίος κώδικας</a
+          ><a href="https://github.com/morluto/rea/blob/main/LICENSE">Άδεια MIT</a
+          ><a href="https://discord.gg/GkcryMnJDM">Ελάτε στην κοινότητα</a
+          ><a href="https://x.com/reatools">Ακολουθήστε μας στο X</a>
+        </div>
+      </div>
+    </footer>
+    <p class="sr-only" id="copy-status" role="status" aria-live="polite"></p>
+    <a class="back-to-top" href="#top" aria-label="Επιστροφή στην κορυφή">
+      <span aria-hidden="true">↑</span> Κορυφή
+    </a>
+    <!-- website:footer:end -->
+  </body>
+</html>

@@ -1,0 +1,621 @@
+<!doctype html>
+<html lang="zh-CN" dir="ltr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>逆向工程需要更大的模型吗？ | REA</title>
+    <meta
+      name="description"
+      content="东方重建让我如何思考通用模型、专用模型，以及怎样从编译器反馈中学会提出更好的假设。"
+    />
+    <!-- website:sharing:start -->
+    <!-- prettier-ignore -->
+    <link rel="canonical" href="https://rea.tools/zh-CN/blog/reverse-engineering-models/" />
+    <!-- website:languages:start -->
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="en" href="https://rea.tools/blog/reverse-engineering-models/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="zh-CN" href="https://rea.tools/zh-CN/blog/reverse-engineering-models/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="zh-TW" href="https://rea.tools/zh-TW/blog/reverse-engineering-models/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="ja" href="https://rea.tools/ja/blog/reverse-engineering-models/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="ko" href="https://rea.tools/ko/blog/reverse-engineering-models/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="tr" href="https://rea.tools/tr/blog/reverse-engineering-models/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="ru" href="https://rea.tools/ru/blog/reverse-engineering-models/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="vi" href="https://rea.tools/vi/blog/reverse-engineering-models/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="th" href="https://rea.tools/th/blog/reverse-engineering-models/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="de" href="https://rea.tools/de/blog/reverse-engineering-models/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="es" href="https://rea.tools/es/blog/reverse-engineering-models/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="fr" href="https://rea.tools/fr/blog/reverse-engineering-models/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="uk" href="https://rea.tools/uk/blog/reverse-engineering-models/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="pl" href="https://rea.tools/pl/blog/reverse-engineering-models/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="pt-BR" href="https://rea.tools/pt-BR/blog/reverse-engineering-models/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="ar" href="https://rea.tools/ar/blog/reverse-engineering-models/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="fa" href="https://rea.tools/fa/blog/reverse-engineering-models/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="id" href="https://rea.tools/id/blog/reverse-engineering-models/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="it" href="https://rea.tools/it/blog/reverse-engineering-models/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="el" href="https://rea.tools/el/blog/reverse-engineering-models/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="x-default" href="https://rea.tools/blog/reverse-engineering-models/" />
+<!-- website:languages:end -->
+    <!-- prettier-ignore -->
+    <meta property="og:type" content="website" />
+    <!-- prettier-ignore -->
+    <meta property="og:site_name" content="REA" />
+    <!-- prettier-ignore -->
+    <meta property="og:title" content="逆向工程需要更大的模型吗？ | REA" />
+    <!-- prettier-ignore -->
+    <meta property="og:description" content="东方重建让我如何思考通用模型、专用模型，以及怎样从编译器反馈中学会提出更好的假设。" />
+    <!-- prettier-ignore -->
+    <meta property="og:url" content="https://rea.tools/zh-CN/blog/reverse-engineering-models/" />
+    <!-- prettier-ignore -->
+    <meta property="og:image" content="https://rea.tools/assets/social-card.png" />
+    <!-- prettier-ignore -->
+    <meta property="og:image:type" content="image/png" />
+    <!-- prettier-ignore -->
+    <meta property="og:image:width" content="1200" />
+    <!-- prettier-ignore -->
+    <meta property="og:image:height" content="630" />
+    <!-- prettier-ignore -->
+    <meta
+      property="og:image:alt"
+      content="REA: 了解软件如何工作。和你的编程助手一起做逆向工程。"
+    />
+    <!-- prettier-ignore -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <!-- prettier-ignore -->
+    <meta name="twitter:title" content="逆向工程需要更大的模型吗？ | REA" />
+    <!-- prettier-ignore -->
+    <meta name="twitter:description" content="东方重建让我如何思考通用模型、专用模型，以及怎样从编译器反馈中学会提出更好的假设。" />
+    <!-- prettier-ignore -->
+    <meta name="twitter:image" content="https://rea.tools/assets/social-card.png" />
+    <!-- prettier-ignore -->
+    <meta
+      name="twitter:image:alt"
+      content="REA: 了解软件如何工作。和你的编程助手一起做逆向工程。"
+    />
+    <!-- website:sharing:end -->
+    <!-- website:theme:start -->
+    <meta name="theme-color" content="#ffffff" />
+    <!-- Apply the saved theme before styles load, to avoid a flash on navigation. -->
+    <script src="../../../assets/theme.js"></script>
+    <!-- website:theme:end -->
+    <link rel="icon" href="../../../assets/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="../../../assets/styles.css" />
+    <script src="../../../assets/main.js" defer></script>
+  <script id="website-messages" type="application/json">{"Copied": "已复制", "Code copied to clipboard.": "代码已复制到剪贴板。", "Selected": "已选中", "Code selected. Use your keyboard to copy it.": "代码已选中，请用键盘快捷键复制。", "REA on GitHub ({count})": "REA 在 GitHub 上（{count}）", "Switch to light mode": "切换到浅色模式", "Switch to dark mode": "切换到深色模式"}</script>
+  </head>
+  <body id="top">
+    <a class="skip-link" href="#main">跳转到内容</a>
+    <!-- website:header:start -->
+    <!-- prettier-ignore -->
+    <header class="site-header">
+      <div class="container header-inner">
+        <a class="brand" href="../../" aria-label="REA 首页"
+          ><span class="brand-name">REA</span
+          ><span class="brand-caption" data-i18n-skip>Reverse Engineer Anything</span></a
+        >
+        <nav class="navigation" aria-label="主导航">
+          <a href="../../../get-started/" class="nav-start">开始使用</a>
+          <a href="../../showcase/">案例展示</a>
+          <a href="../" aria-current="page">博客</a>
+          <a href="../../guides/">指南</a>
+        </nav>
+        <div class="header-social">
+          <details class="language-picker" data-i18n-skip><summary><span aria-hidden="true">文 / A</span> <span>简体中文</span></summary><nav aria-label="简体中文"><a href="../../../blog/reverse-engineering-models/" lang="en" dir="ltr" data-language="en">English</a><a href="../../../zh-CN/blog/reverse-engineering-models/" lang="zh-CN" dir="ltr" data-language="zh-CN" aria-current="true">简体中文</a><a href="../../../zh-TW/blog/reverse-engineering-models/" lang="zh-TW" dir="ltr" data-language="zh-TW">繁體中文</a><a href="../../../ja/blog/reverse-engineering-models/" lang="ja" dir="ltr" data-language="ja">日本語</a><a href="../../../ko/blog/reverse-engineering-models/" lang="ko" dir="ltr" data-language="ko">한국어</a><a href="../../../tr/blog/reverse-engineering-models/" lang="tr" dir="ltr" data-language="tr">Türkçe</a><a href="../../../ru/blog/reverse-engineering-models/" lang="ru" dir="ltr" data-language="ru">Русский</a><a href="../../../vi/blog/reverse-engineering-models/" lang="vi" dir="ltr" data-language="vi">Tiếng Việt</a><a href="../../../th/blog/reverse-engineering-models/" lang="th" dir="ltr" data-language="th">ไทย</a><a href="../../../de/blog/reverse-engineering-models/" lang="de" dir="ltr" data-language="de">Deutsch</a><a href="../../../es/blog/reverse-engineering-models/" lang="es" dir="ltr" data-language="es">Español</a><a href="../../../fr/blog/reverse-engineering-models/" lang="fr" dir="ltr" data-language="fr">Français</a><a href="../../../uk/blog/reverse-engineering-models/" lang="uk" dir="ltr" data-language="uk">Українська</a><a href="../../../pl/blog/reverse-engineering-models/" lang="pl" dir="ltr" data-language="pl">Polski</a><a href="../../../pt-BR/blog/reverse-engineering-models/" lang="pt-BR" dir="ltr" data-language="pt-BR">Português (Brasil)</a><a href="../../../ar/blog/reverse-engineering-models/" lang="ar" dir="rtl" data-language="ar">العربية</a><a href="../../../fa/blog/reverse-engineering-models/" lang="fa" dir="rtl" data-language="fa">فارسی</a><a href="../../../id/blog/reverse-engineering-models/" lang="id" dir="ltr" data-language="id">Bahasa Indonesia</a><a href="../../../it/blog/reverse-engineering-models/" lang="it" dir="ltr" data-language="it">Italiano</a><a href="../../../el/blog/reverse-engineering-models/" lang="el" dir="ltr" data-language="el">Ελληνικά</a><a href="../../../ml/blog/reverse-engineering-models/" lang="ml" dir="ltr" data-language="ml">മലയാളം · English</a><a href="../../../ur-Latn/blog/reverse-engineering-models/" lang="ur-Latn" dir="ltr" data-language="ur-Latn">Roman Urdu · English</a><a href="../../../ro/blog/reverse-engineering-models/" lang="ro" dir="ltr" data-language="ro">Română · English</a></nav></details>
+          <button class="theme-toggle" type="button" data-theme-toggle hidden>
+            <svg class="theme-moon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+              <path d="M20.9 13a9 9 0 0 1-9.9-9.9A9 9 0 1 0 20.9 13Z" />
+            </svg>
+            <svg class="theme-sun" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true" focusable="false">
+              <circle cx="12" cy="12" r="4" />
+              <path d="M12 2v2m0 16v2M2 12h2m16 0h2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42" />
+            </svg>
+          </button>
+          <a
+            class="nav-github"
+            href="https://github.com/morluto/rea"
+            aria-label="在 GitHub 查看 REA"
+            title="在 GitHub 查看 REA"
+          >
+            <svg
+              width="22"
+              height="22"
+              viewBox="0 0 16 16"
+              aria-hidden="true"
+              focusable="false"
+            >
+              <path
+                fill="currentColor"
+                d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82a7.65 7.65 0 0 1 2-.27c.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z"
+              />
+            </svg>
+            <span class="nav-github-count" hidden aria-hidden="true"></span>
+          </a>
+          <a
+            class="nav-discord"
+            href="https://discord.gg/GkcryMnJDM"
+            aria-label="加入 REA 的 Discord 社区"
+            title="加入 REA 的 Discord 社区"
+          >
+            <svg
+              width="22"
+              height="22"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+              focusable="false"
+            >
+              <path
+                fill="currentColor"
+                d="M20.317 4.3698a19.7913 19.7913 0 0 0-4.8851-1.5152.0741.0741 0 0 0-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 0 0-.0785-.037 19.7363 19.7363 0 0 0-4.8852 1.515.0699.0699 0 0 0-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 0 0 .0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 0 0 .0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 0 0-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 0 1-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 0 1 .0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 0 1 .0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 0 1-.0066.1276 12.2986 12.2986 0 0 1-1.873.8914.0766.0766 0 0 0-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 0 0 .0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 0 0 .0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 0 0-.0312-.0286ZM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189Zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189Z"
+              />
+            </svg>
+          </a>
+          <a
+            class="nav-x"
+            href="https://x.com/reatools"
+            aria-label="在 X 上关注 REA"
+            title="在 X 上关注 REA"
+          >
+            <svg
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+              focusable="false"
+            >
+              <path
+                fill="currentColor"
+                d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z"
+              />
+            </svg>
+          </a>
+        </div>
+      </div>
+    </header>
+    <!-- website:header:end -->
+    <main id="main" class="container">
+      <div class="page-heading">
+        <p class="breadcrumb">
+          <a href="../../">首页</a> / <a href="../">博客</a> / 模型与逆向工程
+        </p>
+        <p class="eyebrow">随笔</p>
+        <h1>逆向工程需要更大的模型吗？</h1>
+        <p class="page-meta">作者 N0zoM1z0 · 2026 年 10 月 13 日</p>
+        <div class="blog-takeaway">
+          <p class="eyebrow">要点</p>
+          <ul>
+            <li>
+              <strong
+                >模型能力会影响编程助手能提出哪些假设。</strong
+              > 后来的会话解决了此前工作未能解决的问题。
+            </li>
+            <li>
+              <strong
+                >熟悉的编译器为专用模型提供了具体的学习对象。</strong
+              > 有些精确匹配依赖细小但可以复用的源码模式。
+            </li>
+            <li>
+              <strong>也要给代码仓库里的知识一个公平的对照。</strong> 较小的模型配上良好的检索，可能已经掌握足够的知识推进工作。
+            </li>
+            <li>
+              <strong
+                >训练模型选择下一个有价值的实验，同时检验它使用的校验基准。</strong
+              > 反馈是否有用，取决于校验基准究竟检查了什么。
+            </li>
+            <li>
+              <strong
+                >结合时间和成本，评估通过验证的重建成果。</strong
+              > 这是我希望从整个编程助手工作流中获得的结果。
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="article-layout">
+        <nav class="contents" aria-label="在本页">
+          <p>在本文中</p>
+          <ul>
+            <li><a href="#model-capability">更强的模型改变了什么</a></li>
+            <li><a href="#specialization">为什么考虑专用模型？</a></li>
+            <li><a href="#repository-knowledge">这些经验应该存在哪里？</a></li>
+            <li><a href="#learning-search">学习选择下一个有价值的实验</a></li>
+            <li><a href="#re-and-rl">逆向工程与强化学习</a></li>
+            <li><a href="#oracle">当校验基准出错时</a></li>
+            <li><a href="#comparison">值得做的对照实验</a></li>
+            <li><a href="#future-agent">这意味着怎样的编程助手？</a></li>
+          </ul>
+        </nav>
+        <article
+          class="article"
+          aria-label="模型与逆向工程随笔"
+        >
+          <section class="article-section" id="model-capability">
+            <h2>更强的模型改变了什么</h2>
+            <p>
+              从 2026 年 8 月开始，我一直在探索：如果给编程助手访问程序的能力，以及验证自身工作的手段，它能独立完成多少逆向工作？我的经验主要来自游戏重建，尤其是东方系列。随着我更换模型，代码仓库记录了每次工作还原出的内容。
+            </p>
+            <p>
+              这些工作很大一部分追求精确重建：用固定版本的历史工具链编译我们维护的源码，检查它能否复现目标函数。当后来的模型解决了早期工作卡住的问题，我们可以从源码变化中看出，是什么促成了这次进展。
+            </p>
+            <h3>临时值必须同时存活</h3>
+            <p>
+              TH09 中一个攻击函数的大部分逻辑已经还原，但编译器对临时结果的存储安排仍然与原版不同。剩下的问题在于：这些结果的生命周期应该多长，编译器何时可以复用它们的存储空间？
+            </p>
+            <p>
+              <a
+                href="https://github.com/N0zoM1z0/th09/commit/de63c0f9121963f3a6b1ab5471c4878625fd3425"
+                >GPT-6-Sol 的一次工作记录</a
+              >表明，尝试几种常见的源码写法后，差异仍未消除。后来，<a
+                href="https://github.com/N0zoM1z0/th09/commit/52929ed7c299f1a5f29cc13964e22510145fd616"
+                >GPT-6.1-Sol 重新研究这个问题</a
+              >，提出了一个有价值的假设：关键可能在于这些临时值的生命周期。
+            </p>
+            <p>
+              这个函数会产生临时结果，再把它们复制到动画的位置数据中。在 C++ 中，临时结果会一直存在，直到使用它的表达式执行完毕。把实际操作放进同一个表达式，就能让这些结果同时存活，编译器也就不能为它们全部复用同一块存储空间。
+            </p>
+            <p>
+              其中一个结果仍然与稍后用于碰撞检查的值共享存储。给那个值单独的生命周期后，最后一处重叠也消失了。经过几次有针对性的实验，<strong
+                >一次干净的重新构建确认，整个函数都已匹配</strong
+              >。
+            </p>
+            <p>
+              我感兴趣的是，发现与验证如何共同推进工作。生命周期的假设给编程助手指明了新方向；编译器的反馈又帮助它逐步调整源码，直到找到匹配的写法。
+            </p>
+            <h3>换一种控制流结构</h3>
+            <p>
+              TH09 的另一个函数说明了，新方向为什么重要。这次的难点是多个分支如何共享末尾的操作。<a
+                href="https://github.com/N0zoM1z0/th09/commit/f8d12d72aaf02212ee1b585a8f3f86d7ed000269"
+                >GPT-6.1-Sol 之前的工作</a
+              >已经让函数的一些部分匹配，但分支汇合的方式仍与原版不同。
+            </p>
+            <p>
+              <a
+                href="https://github.com/N0zoM1z0/th09/commit/da33a646221198ceb7f3df2b96e2ca0e9b2f705f"
+                >GPT-6-Astra 改写了外围的控制流图</a
+              >，让主要路径汇入共同的最终更新与返回。在这种源码结构下，编译器合并分支的方式与原版一致。整个函数实现了匹配，<a
+                href="https://github.com/N0zoM1z0/th09/commit/5f825b28a862f8e1a6d4aea2f78a42f04c09a1c0"
+                >另一次独立的重新构建也确认了这一结果</a
+              >。
+            </p>
+            <p>
+              <strong
+                >换一种表达方式，打开了更有价值的搜索空间。</strong
+              > 这两个例子让我认真看待通用模型的能力：编程助手可能花很长时间尝试局部变化，才找到一种更好的整体写法。
+            </p>
+            <p>
+              不过，后来的工作也继承了之前的源码和失败记录。这些积累本身就是优势的一部分。历史记录让我们可以检查发现及其验证过程；要区分模型能力和继承经验各自带来的帮助，还需要对照实验。
+            </p>
+            <p>
+              这正是我觉得有趣的地方。有些进展来自新的表达方式，剩下的大量工作则是在熟悉的编译器上试验不同写法。其中有多少需要广泛的推理能力？又有多少可以通过反复接触这个编译器和这些代码来学会？
+            </p>
+          </section>
+          <section class="article-section" id="specialization">
+            <h2>为什么专用模型可能做得很好？</h2>
+            <p>
+              东方系列给了我们一个具体的理由，去期待经验积累能发挥作用。大量游戏代码出自同一个作者 ZUN，因此，把反复出现的编程习惯作为初始假设是合理的。代码仓库也提供了实际例子：相似的循环和辅助函数组织方式，曾为其他游戏的重建提供假设。
+            </p>
+            <p>
+              把编译器也考虑进去，这些源码模式就更加具体了。在固定版本和选项下，源码的小变化可能稳定地产生不同的机器码。其中一些规律藏得很深。
+            </p>
+            <p>
+              以 TH095 为例，<strong
+                >连局部变量的名字，都可能改变 VC7.1 为它安排的存储位置</strong
+              >。只移动声明并不能解决布局问题，但先前重建的一个背景函数揭示了会影响编译器选择的命名模式。这为<a
+                href="https://github.com/N0zoM1z0/th095/commit/26bb64bdb093a13f73abd0ee8ae7ce199ee4658f"
+                >重建 <code>Supervisor::LoadDat</code></a
+              >提供了更有希望的假设。
+            </p>
+            <p>
+              把这个模式用于表示文件大小的变量，不增加额外存储就得到了所需布局。随后，整个函数实现了匹配。
+            </p>
+            <p>
+              这类细节非常具体，通用模型第一次接触时未必知道。而针对这个编译器训练的专用模型，可以接触许多类似案例，学会哪些源码变化值得优先尝试。
+            </p>
+            <p>
+              当我们已经理解函数行为，只剩最后的匹配差异时，这个机会尤其明显。此时的问题是：这个编译器会把哪一种普通写法编译成眼前的指令？专用训练可能让模型更高效地提出这些写法，而最终由目标程序决定哪些假设成立。
+            </p>
+            <p>
+              但这些模式必须保留适用的上下文。TH08 使用的 Visual C++ 版本早于 TH095 和 TH09。TH04 用的是另一种 DOS 时代的编译器，其<a
+                href="https://github.com/N0zoM1z0/th04/commit/6dce0a79d5b931f0e2a08475b90e0c33d2321b98"
+                >玩家逻辑重建</a
+              >需要不同的假设，既涉及源码写法，也涉及编译后的代码如何链接成可执行文件。同一作者为我们提供了先验，具体目标则告诉我们它是否适用。区分这些情况，也是专用模型需要学会的事。
+            </p>
+          </section>
+          <section class="article-section" id="repository-knowledge">
+            <h2>这些经验应该存在哪里？</h2>
+            <p>
+              在决定通过训练让模型学会这些模式之前，我会先看看代码仓库里已有的知识。在<a href="../touhou-reconstruction/">上一篇文章</a>中，我写过：仓库正在成为项目的工作记忆。这里保存着对编译器的认识，也保存着相关源码和失败实验，让这些经验有据可查。
+            </p>
+            <p>
+              检索这些记录后，编程助手可以从已知结果出发，看看我们是如何得到它的，也可以避开在相同条件下已经失败的方案。模型的参数没有改变，工作的起点却提高了。
+            </p>
+            <p>
+              重建 TH09 的敌人生成函数时，<a
+                href="https://github.com/N0zoM1z0/th09/commit/1eb843383941d00065622a9e353146c4bb96979e"
+                >GPT-6-Luna-max 的一次工作</a
+              >从 TH08 对应的源码中找到了假设。之前的写法提示了循环该如何组织，以及内部失败该如何处理。TH09 自身的证据补上了游戏特有的细节，干净的重新构建确认了整个函数的匹配。
+            </p>
+            <p>
+              <strong
+                >“模型不知道这个编译器特性”和“模型不会利用它”，是两个不同的问题。</strong
+              > 检索可能解决前者，但把知识变成有价值的候选源码，仍然需要能力。如果候选方案失败了，模型还得判断这次结果对下一次尝试意味着什么。知道相关模式，只是这个过程的起点。
+            </p>
+            <p>
+              所以，在任何对照实验中，我都会加入一个具备良好检索能力的小型通用模型。给它相同的经验库，才能看清训练究竟增加了什么：更好的候选方案、更好的反馈后决策，还是两者都有？
+            </p>
+          </section>
+          <section class="article-section" id="learning-search">
+            <h2>学习选择下一个有价值的实验</h2>
+            <p>
+              反馈之后如何决策，是我最想研究的部分。在编程助手驱动的重建中，模型提出解释，再用程序来验证。即使候选方案失败了，结果也可能缩小剩余的可能性，提示下一步更值得尝试什么。
+            </p>
+            <p>
+              再看前面的临时结果例子。最终源码展示了成功的写法，但得到它的过程包含更多信息。下面的每次实验，都帮助我们确定了还有什么需要改变。
+            </p>
+            <div class="evidence-table-wrap">
+              <table
+                class="evidence-table"
+                aria-label="重建实验选例"
+              >
+                <thead>
+                  <tr>
+                    <th scope="col">实验</th>
+                    <th scope="col">结果告诉了我们什么</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>尝试另一种复制结果的方式</td>
+                    <td>
+                      复制代码改变了，但函数仍有差异。
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>直接使用返回值</td>
+                    <td>
+                      复制方式与原版一致，但临时存储布局仍有差异。
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>让临时结果同时保持有效</td>
+                    <td>
+                      它们得到了各自的存储空间，但其中一个仍与稍后用于碰撞检查的值重叠。
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>让碰撞检查的值拥有独立存储</td>
+                    <td>一次干净的重建确认了完全匹配。</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <p class="caption">
+              上面攻击函数重建中精选的几个实验，按它们带给我们的启发分类。
+            </p>
+            <p>
+              保存这个过程的训练记录，比单独保存最终源码能教会模型更多东西。它把每个改动、观察到的结果和下一步决策联系起来。无效的尝试也值得保留：后来的编程助手可以据此知道，在这个上下文中，哪些假设已经检验过。
+            </p>
+            <p>
+              <strong
+                >我希望模型学会如何利用反馈。</strong
+              > 结果没有变化，可能意味着该重新考虑这个改动；差异发生变化，则可能指向另一个原因。当局部修改不再提供有效信息时，编程助手应该可以重新考虑源码的整体表达，或者回头检查证据。
+            </p>
+            <p>
+              学会这些选择，需要自主性。有时，更有价值的下一步是检查另一个调用者，而不是再修改一次源码并编译。如果强制按照固定顺序改写，就会剥夺这种选择，也失去一部分我们希望模型学会的行为。
+            </p>
+          </section>
+          <section class="article-section" id="re-and-rl">
+            <h2>为什么逆向工程值得用来探索强化学习</h2>
+            <p>
+              范围明确的重建任务，为研究这些选择提供了一个实际环境。目标和编译器版本固定之后，许多源码实验都能快速给出可重复的反馈。编程助手可以编译候选源码、检查差异，再根据观察选择下一步。
+            </p>
+            <p>
+              强化学习可以利用这些反馈，训练模型的决策过程。候选源码通过明确定义的检查，就给出了一个具体成果；而尝试的过程，让我们可以看到实现它花了多少功夫。
+            </p>
+            <p>
+              已有研究支持这个方向。<a href="https://aclanthology.org/2024.emnlp-main.203/"
+                >LLM4Decompile</a
+              >研究专门用于反编译的模型。<a href="https://arxiv.org/html/2606.16162v1">AutoDecompiler</a>利用编译和执行反馈，训练多轮改进能力。这些研究关注的是功能还原。对于我们的工作，我会以它们为起点，研究一个相关任务：找到能复现历史编译器输出的源码。
+            </p>
+            <p>
+              不过，要得到这样一个定义明确的任务，有时得先确定函数负责哪些资源，或者设计新的方法观察程序运行时的行为。在 TH08 中，<a
+                href="https://github.com/N0zoM1z0/th08/commit/af9cb1d3e839b15a78b47ac1701506083cc82847"
+                >一次碰撞差异最终追溯到原版处理浮点计算的方式</a
+              >。编程助手必须先弄清楚该测量什么，才能验证有价值的修正。
+            </p>
+            <p>
+              这提示了能力全面的模型的另一个作用：先把问题变得可验证。验证手段建立起来后，我们才可以研究，学出来的搜索策略能走多远。
+            </p>
+          </section>
+          <section class="article-section" id="oracle">
+            <h2>当校验基准出错时</h2>
+            <p>
+              一旦用某项检查来训练模型，它的覆盖范围就会成为学习环境的一部分。我把这种参考标准或校验基准称为 oracle。即使它能给出可重复的答案，我们也必须知道，这个答案覆盖了什么。
+            </p>
+            <p>
+              TH08 展示了检查范围之外可能藏着多少问题。一些重建函数使用了错误的浮点常量，却仍然通过了精确比较。比较器会先调整重定位地址，再检查指令；但只有明确登记过的常量，才会进一步检查地址指向的值。其他常量引用，即使值没被检查，也可能通过。
+            </p>
+            <p>
+              为了补上这个漏洞，<a
+                href="https://github.com/N0zoM1z0/th08/commit/a393f400786e4cc6cbb1000af0dad3276da12c78"
+                >一次更全面的审计</a
+              >在已经通过检查的函数中找到了错误常量。有一个计算中，重建源码加的是 <code>1.0f</code>，而原版加的是 <code>32.0f</code>。
+            </p>
+            <p>
+              <strong
+                >如果用旧检查的结果作为奖励，模型可能学会生成错误的重建源码。</strong
+              > 我们没有用这个校验基准训练 RL 模型；实际观察到的是检查本身的漏洞。但如果把它用作奖励，同一个盲点也会进入学习环境。
+            </p>
+            <p>
+              功能测试也可能存在类似盲点。<a href="https://arxiv.org/html/2609.05370v1"
+                >针对 LLM 反编译器的差分模糊测试研究</a
+              >发现，在已有测试之外，程序行为仍可能不同。因此，理解“测试通过”时，必须看它实际覆盖了哪些情况；理解“指令匹配”时，也必须看它检查了哪些字节和数据。
+            </p>
+            <p>
+              在把任何一种检查用作奖励之前，我都会用刻意构造的错误来测试它。我还会把最终验收机制放在候选源码可修改的范围之外，让模型通过正确重建来满足检查。否则，直接复制目标程序的字节数组，也可能骗过简单的评分，却没有还原出有用的源码。
+            </p>
+            <p>
+              <strong
+                >改进模型和改进它的校验基准，属于同一个研究问题。</strong
+              > 模型越擅长优化我们给它的反馈，我们就越需要理解反馈本身。
+            </p>
+          </section>
+          <section class="article-section" id="comparison">
+            <h2>值得做的对照实验</h2>
+            <p>
+              具备这些检查之后，我会从一组固定的 VC7.1 任务开始比较。先为强通用模型和小型通用模型建立基线，再给小模型加入仓库知识，观察检索带来的变化。接着比较监督训练的专用模型，以及在此基础上进行 RL 训练的版本，看看训练增加了什么。
+            </p>
+            <p>
+              为了让比较有意义，每个模型都应获得相同的目标证据和工具。专门比较训练效果时，还要固定基础模型和可用知识。重复实验有助于区分可靠的搜索策略与偶然成功的候选方案。
+            </p>
+            <p>
+              我还会区分两种起点：从指令开始重建函数，以及在已有源码中消除最后几处差异。专用模型可能很擅长后者，而通用模型承担了到达这个阶段的大部分工作。分别评估，才能看清这种分工。
+            </p>
+            <p>
+              两类任务都需要真正未见过的测试案例。东方系列的相关游戏会共享引擎代码，只留出某个游戏，仍可能让几乎相同的函数进入训练集。我会改为按相关源码家族留出测试集，并把它们通过验证的答案同时排除在训练数据和检索库之外。
+            </p>
+            <p>
+              在这些案例上，要统计的是完整、独立验证过的匹配成果。给每个模型相同的候选数量或编译次数预算，可以比较搜索质量。记录总耗时和总成本，包括编译，才能知道这种质量是否转化成了高效的工作流。训练成本也要单独计算。
+            </p>
+            <p>
+              两种角度都重要。一个便宜的提议，如果导致大量无效编译，整个工作流仍可能很贵。反过来，较慢的模型如果更早找到有价值的实验，也可能更划算。对照实验应当反映这些成本。
+            </p>
+            <p>
+              只统计通过验收的结果，也能帮助我们合理看待中间进展。TH09 的一个<a
+                href="https://github.com/N0zoM1z0/th09/commit/ab72fd77728293fc0beacfc656ca701b0e266016"
+                >录像保存候选方案</a
+              >看起来很有希望，因为编译后函数的大小符合预期，但完整比较仍发现大量差异。编译器改变指令排列，也可能让候选源码看起来更接近，却没有解决根本问题。这些诊断可以指导下一步，但若要奖励“变得更接近”，我会先对照完整验收检查，确认这种奖励有效。
+            </p>
+            <p>
+              我想看这些结果呈现出什么规律。如果专用模型在熟悉的编译器上表现很好，换了工具链后，这种优势还在吗？当双方都拥有良好的检索能力时，训练还能增加多少价值？这些答案能帮助我们决定，每类模型最适合用在哪里。
+            </p>
+          </section>
+          <section class="article-section" id="future-agent">
+            <h2>这意味着怎样的编程助手？</h2>
+            <p>
+              如果不同模型在不同阶段各有所长，一种有价值的安排可能是：让能力全面的编程助手可以调用专用模型。当任务变成一种熟悉的编译器搜索时，它可以请专用模型提出候选方案。如果结果开始说不通，通用编程助手可以回头检查目标证据，或者调查测量本身。
+            </p>
+            <p>
+              在这样的安排中，专用模型成为编程助手可以随着调查推进自行选择的工具。编程助手仍保留改变方向的自由，正是这种自由让前面那些突破成为可能。
+            </p>
+            <p>
+              这自然延续了上一篇文章中谈到的工业化转变。能够开展更多实验，会改变我们组织工作的方式，也让我们有理由追问：哪些决策需要全面的判断，哪些可以通过反复积累某项具体技艺来改善？
+            </p>
+            <p>
+              目前，最强的通用模型解决了我过去没能解决的问题，因此在我的工作流中占据了一席之地。正是这些成功，让我想更仔细地研究过程：有多少依赖模型能力的广度？又有多少可以交给专门学习这类重建的模型？
+            </p>
+            <p>
+              <strong
+                >这些代码仓库让我们有机会验证这个问题。</strong
+              > 我想利用这些记录建立对照实验，看看我们能学到什么。
+            </p>
+          </section>
+          <section class="article-section" id="sources">
+            <details class="native-details">
+              <summary>证据与模型归属</summary>
+              <p>
+                <a
+                  href="https://github.com/morluto/rea/blob/main/website/evidence/reverse-engineering-models.md"
+                  >详细证据记录</a
+                >包含历史比较结果与实验背景。
+              </p>
+              <p>
+                这些例子来自链接提交中记录的历史函数级比较。整款游戏的运行时检查属于另一个里程碑。相关源码与匹配记录核查于 2026 年 10 月 13 日。
+              </p>
+              <p>
+                TH09 中的标签 <code>gpt-dots</code> 对应 GPT-6-Astra。<code>gpt-web</code> 会随当时使用的模型变化，因此仅凭这个标签无法确定某次运行的具体模型。其他引用提交中的明确模型名，提供了对应的归属记录；这些历史记录并没有统一的单次运行成本或投入统计。
+              </p>
+              <ul>
+                <li>
+                  <strong>TH09 临时值生命周期：</strong><a
+                    href="https://github.com/N0zoM1z0/th09/commit/de63c0f9121963f3a6b1ab5471c4878625fd3425"
+                    >早期上下文检查</a
+                  >与<a
+                    href="https://github.com/N0zoM1z0/th09/commit/52929ed7c299f1a5f29cc13964e22510145fd616"
+                    >完整的干净重建</a
+                  >。
+                </li>
+                <li>
+                  <strong>TH09 Front 回调：</strong><a
+                    href="https://github.com/N0zoM1z0/th09/commit/f8d12d72aaf02212ee1b585a8f3f86d7ed000269"
+                    >未匹配的诊断区域</a
+                  >、<a
+                    href="https://github.com/N0zoM1z0/th09/commit/da33a646221198ceb7f3df2b96e2ca0e9b2f705f"
+                    >Astra 提出的新控制流图</a
+                  >与<a
+                    href="https://github.com/N0zoM1z0/th09/commit/5f825b28a862f8e1a6d4aea2f78a42f04c09a1c0"
+                    >通过验收的重新编译检查</a
+                  >。
+                </li>
+                <li>
+                  <strong>编译器知识：</strong><a
+                    href="https://github.com/N0zoM1z0/th095/commit/26bb64bdb093a13f73abd0ee8ae7ce199ee4658f"
+                    >TH095 标识符分桶规律的复用</a
+                  >、<a
+                    href="https://github.com/N0zoM1z0/th04/commit/6dce0a79d5b931f0e2a08475b90e0c33d2321b98"
+                    >TH04 玩家源码与链接顺序</a
+                  >、<a
+                    href="https://github.com/N0zoM1z0/th09/commit/1eb843383941d00065622a9e353146c4bb96979e"
+                    >Luna 完成的 TH09 敌人生成函数匹配</a
+                  >。
+                </li>
+                <li>
+                  <strong>检查与诊断：</strong><a
+                    href="https://github.com/N0zoM1z0/th08/commit/a393f400786e4cc6cbb1000af0dad3276da12c78"
+                    >TH08 浮点常量审计</a
+                  >、<a
+                    href="https://github.com/N0zoM1z0/th08/commit/af9cb1d3e839b15a78b47ac1701506083cc82847"
+                    >TH08 数值问题调查</a
+                  >、<a
+                    href="https://github.com/N0zoM1z0/th09/commit/ab72fd77728293fc0beacfc656ca701b0e266016"
+                    >TH09 录像保存重建</a
+                  >。
+                </li>
+              </ul>
+              <p>
+                文中提出的专用模型与 RL 对照，属于未来实验。项目历史为这些想法提供了依据；本文尚未评估经过训练的专用模型。
+              </p>
+            </details>
+          </section>
+        </article>
+      </div>
+    </main>
+    <!-- website:footer:start -->
+    <!-- prettier-ignore -->
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <p>REA · Reverse Engineer Anything</p>
+        <div class="footer-links">
+          <a href="../../faq/">FAQ</a
+          ><a href="../../contributors/">贡献者</a
+          ><a href="https://github.com/morluto/rea">源代码</a
+          ><a href="https://github.com/morluto/rea/blob/main/LICENSE">MIT 许可证</a
+          ><a href="https://discord.gg/GkcryMnJDM">加入社区</a
+          ><a href="https://x.com/reatools">在 X 上关注我们</a>
+        </div>
+      </div>
+    </footer>
+    <p class="sr-only" id="copy-status" role="status" aria-live="polite"></p>
+    <a class="back-to-top" href="#top" aria-label="回到顶部">
+      <span aria-hidden="true">↑</span> 顶部
+    </a>
+    <!-- website:footer:end -->
+  </body>
+</html>

@@ -1,0 +1,477 @@
+<!doctype html>
+<html lang="fr" dir="ltr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Analyse du navigateur et du réseau-REA</title>
+    <meta
+      name="description"
+      content="Observez une exportation de notes avec REA : sélectionnez une page de navigateur, capturez un clic, inspectez la demande et suivez le script d&#x27;exportation."
+    />
+    <!-- website:sharing:start -->
+    <!-- prettier-ignore -->
+    <link rel="canonical" href="https://rea.tools/fr/guides/browser/" />
+    <!-- website:languages:start -->
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="en" href="https://rea.tools/guides/browser/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="zh-CN" href="https://rea.tools/zh-CN/guides/browser/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="zh-TW" href="https://rea.tools/zh-TW/guides/browser/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="ja" href="https://rea.tools/ja/guides/browser/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="ko" href="https://rea.tools/ko/guides/browser/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="tr" href="https://rea.tools/tr/guides/browser/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="ru" href="https://rea.tools/ru/guides/browser/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="vi" href="https://rea.tools/vi/guides/browser/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="th" href="https://rea.tools/th/guides/browser/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="de" href="https://rea.tools/de/guides/browser/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="es" href="https://rea.tools/es/guides/browser/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="fr" href="https://rea.tools/fr/guides/browser/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="uk" href="https://rea.tools/uk/guides/browser/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="pl" href="https://rea.tools/pl/guides/browser/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="pt-BR" href="https://rea.tools/pt-BR/guides/browser/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="ar" href="https://rea.tools/ar/guides/browser/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="fa" href="https://rea.tools/fa/guides/browser/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="id" href="https://rea.tools/id/guides/browser/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="it" href="https://rea.tools/it/guides/browser/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="el" href="https://rea.tools/el/guides/browser/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="x-default" href="https://rea.tools/guides/browser/" />
+<!-- website:languages:end -->
+    <!-- prettier-ignore -->
+    <meta property="og:type" content="website" />
+    <!-- prettier-ignore -->
+    <meta property="og:site_name" content="REA" />
+    <!-- prettier-ignore -->
+    <meta property="og:title" content="Analyse du navigateur et du réseau-REA" />
+    <!-- prettier-ignore -->
+    <meta property="og:description" content="Observez une exportation de notes avec REA : sélectionnez une page de navigateur, capturez un clic, inspectez la demande et suivez le script d&#x27;exportation." />
+    <!-- prettier-ignore -->
+    <meta property="og:url" content="https://rea.tools/fr/guides/browser/" />
+    <!-- prettier-ignore -->
+    <meta property="og:image" content="https://rea.tools/assets/social-card.png" />
+    <!-- prettier-ignore -->
+    <meta property="og:image:type" content="image/png" />
+    <!-- prettier-ignore -->
+    <meta property="og:image:width" content="1200" />
+    <!-- prettier-ignore -->
+    <meta property="og:image:height" content="630" />
+    <!-- prettier-ignore -->
+    <meta
+      property="og:image:alt"
+      content="REA-Découvrez comment fonctionne le logiciel. Ingénierie inverse avec votre agent de codage."
+    />
+    <!-- prettier-ignore -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <!-- prettier-ignore -->
+    <meta name="twitter:title" content="Analyse du navigateur et du réseau-REA" />
+    <!-- prettier-ignore -->
+    <meta name="twitter:description" content="Observez une exportation de notes avec REA : sélectionnez une page de navigateur, capturez un clic, inspectez la demande et suivez le script d&#x27;exportation." />
+    <!-- prettier-ignore -->
+    <meta name="twitter:image" content="https://rea.tools/assets/social-card.png" />
+    <!-- prettier-ignore -->
+    <meta
+      name="twitter:image:alt"
+      content="REA-Découvrez comment fonctionne le logiciel. Ingénierie inverse avec votre agent de codage."
+    />
+    <!-- website:sharing:end -->
+    <!-- website:theme:start -->
+    <meta name="theme-color" content="#ffffff" />
+    <!-- Apply the saved theme before styles load, to avoid a flash on navigation. -->
+    <script src="../../../assets/theme.js"></script>
+    <!-- website:theme:end -->
+    <link rel="icon" href="../../../assets/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="../../../assets/styles.css" />
+    <script src="../../../assets/main.js" defer></script>
+  <script id="website-messages" type="application/json">{"Copied": "Copié", "Code copied to clipboard.": "Code copié dans le presse-papiers.", "Selected": "Sélectionné", "Code selected. Use your keyboard to copy it.": "Code sélectionné. Utilisez votre clavier pour le copier.", "REA on GitHub ({count})": "Pour REA sur GitHub ({count})", "Switch to light mode": "Passer au mode clair", "Switch to dark mode": "Passer au mode sombre"}</script>
+  </head>
+  <body id="top">
+    <a class="skip-link" href="#main">Aller au contenu</a>
+    <!-- website:header:start -->
+    <!-- prettier-ignore -->
+    <header class="site-header">
+      <div class="container header-inner">
+        <a class="brand" href="../../" aria-label="Accueil REA"
+          ><span class="brand-name">REA</span
+          ><span class="brand-caption" data-i18n-skip>Reverse Engineer Anything</span></a
+        >
+        <nav class="navigation" aria-label="Navigation principale">
+          <a href="../../../get-started/" class="nav-start">Démarrer</a>
+          <a href="../../showcase/">Études de cas</a>
+          <a href="../../blog/">Blog</a>
+          <a href="../" aria-current="page">Guides</a>
+        </nav>
+        <div class="header-social">
+          <details class="language-picker" data-i18n-skip><summary><span aria-hidden="true">文 / A</span> <span>Français</span></summary><nav aria-label="Français"><a href="../../../guides/browser/" lang="en" dir="ltr" data-language="en">English</a><a href="../../../zh-CN/guides/browser/" lang="zh-CN" dir="ltr" data-language="zh-CN">简体中文</a><a href="../../../zh-TW/guides/browser/" lang="zh-TW" dir="ltr" data-language="zh-TW">繁體中文</a><a href="../../../ja/guides/browser/" lang="ja" dir="ltr" data-language="ja">日本語</a><a href="../../../ko/guides/browser/" lang="ko" dir="ltr" data-language="ko">한국어</a><a href="../../../tr/guides/browser/" lang="tr" dir="ltr" data-language="tr">Türkçe</a><a href="../../../ru/guides/browser/" lang="ru" dir="ltr" data-language="ru">Русский</a><a href="../../../vi/guides/browser/" lang="vi" dir="ltr" data-language="vi">Tiếng Việt</a><a href="../../../th/guides/browser/" lang="th" dir="ltr" data-language="th">ไทย</a><a href="../../../de/guides/browser/" lang="de" dir="ltr" data-language="de">Deutsch</a><a href="../../../es/guides/browser/" lang="es" dir="ltr" data-language="es">Español</a><a href="../../../fr/guides/browser/" lang="fr" dir="ltr" data-language="fr" aria-current="true">Français</a><a href="../../../uk/guides/browser/" lang="uk" dir="ltr" data-language="uk">Українська</a><a href="../../../pl/guides/browser/" lang="pl" dir="ltr" data-language="pl">Polski</a><a href="../../../pt-BR/guides/browser/" lang="pt-BR" dir="ltr" data-language="pt-BR">Português (Brasil)</a><a href="../../../ar/guides/browser/" lang="ar" dir="rtl" data-language="ar">العربية</a><a href="../../../fa/guides/browser/" lang="fa" dir="rtl" data-language="fa">فارسی</a><a href="../../../id/guides/browser/" lang="id" dir="ltr" data-language="id">Bahasa Indonesia</a><a href="../../../it/guides/browser/" lang="it" dir="ltr" data-language="it">Italiano</a><a href="../../../el/guides/browser/" lang="el" dir="ltr" data-language="el">Ελληνικά</a><a href="../../../ml/guides/browser/" lang="ml" dir="ltr" data-language="ml">മലയാളം · English</a><a href="../../../ur-Latn/guides/browser/" lang="ur-Latn" dir="ltr" data-language="ur-Latn">Roman Urdu · English</a><a href="../../../ro/guides/browser/" lang="ro" dir="ltr" data-language="ro">Română · English</a></nav></details>
+          <button class="theme-toggle" type="button" data-theme-toggle hidden>
+            <svg class="theme-moon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+              <path d="M20.9 13a9 9 0 0 1-9.9-9.9A9 9 0 1 0 20.9 13Z" />
+            </svg>
+            <svg class="theme-sun" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true" focusable="false">
+              <circle cx="12" cy="12" r="4" />
+              <path d="M12 2v2m0 16v2M2 12h2m16 0h2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42" />
+            </svg>
+          </button>
+          <a
+            class="nav-github"
+            href="https://github.com/morluto/rea"
+            aria-label="REA sur GitHub"
+            title="REA sur GitHub"
+          >
+            <svg
+              width="22"
+              height="22"
+              viewBox="0 0 16 16"
+              aria-hidden="true"
+              focusable="false"
+            >
+              <path
+                fill="currentColor"
+                d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82a7.65 7.65 0 0 1 2-.27c.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z"
+              />
+            </svg>
+            <span class="nav-github-count" hidden aria-hidden="true"></span>
+          </a>
+          <a
+            class="nav-discord"
+            href="https://discord.gg/GkcryMnJDM"
+            aria-label="Rejoindre REA sur Discord"
+            title="Rejoindre REA sur Discord"
+          >
+            <svg
+              width="22"
+              height="22"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+              focusable="false"
+            >
+              <path
+                fill="currentColor"
+                d="M20.317 4.3698a19.7913 19.7913 0 0 0-4.8851-1.5152.0741.0741 0 0 0-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 0 0-.0785-.037 19.7363 19.7363 0 0 0-4.8852 1.515.0699.0699 0 0 0-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 0 0 .0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 0 0 .0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 0 0-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 0 1-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 0 1 .0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 0 1 .0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 0 1-.0066.1276 12.2986 12.2986 0 0 1-1.873.8914.0766.0766 0 0 0-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 0 0 .0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 0 0 .0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 0 0-.0312-.0286ZM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189Zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189Z"
+              />
+            </svg>
+          </a>
+          <a
+            class="nav-x"
+            href="https://x.com/reatools"
+            aria-label="Suivre REA sur X"
+            title="Suivre REA sur X"
+          >
+            <svg
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+              focusable="false"
+            >
+              <path
+                fill="currentColor"
+                d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z"
+              />
+            </svg>
+          </a>
+        </div>
+      </div>
+    </header>
+    <!-- website:header:end -->
+    <main id="main" class="container">
+      <div class="page-heading">
+        <p class="breadcrumb">
+          <a href="../../">Accueil</a> / <a href="../">Guides Touristiques</a> / Observation du navigateur
+        </p>
+        <h1>Voyez ce qui se passe<br />lorsque vous cliquez.</h1>
+        <p class="lede">
+          Utilisez une petite application de navigateur pour connecter une action, sa demande réseau et le JavaScript qui génère un téléchargement.
+        </p>
+      </div>
+      <div class="article-layout">
+        <nav class="contents" aria-label="Sur cette page">
+          <p>Dans ce guide</p>
+          <ul>
+            <li><a href="#example">L'exemple</a></li>
+            <li><a href="#prepare">Ouvrez le navigateur</a></li>
+            <li><a href="#ask">Demandez à votre agent</a></li>
+            <li><a href="#capture">Capture à partir de CLI</a></li>
+            <li><a href="#result">Lire la requête et le script</a></li>
+          </ul>
+        </nav>
+        <article class="article" aria-label="Observation du navigateur">
+          <section class="article-section" id="example">
+            <h2>Que se passe-t-il lorsque vous cliquez sur Exporter?</h2>
+            <p>
+              Les <a href="../../../examples/notes-web/">Exemple de navigateur de notes</a> a une <strong>Exporter des notes</strong> bouton. Cliquer dessus se charge <code>notes.json</code>, formate les deux notes en CSV et lance un téléchargement.
+            </p>
+            <figure class="workflow-figure">
+              <p class="figure-title">Du clic au téléchargement CSV</p>
+              <ol class="flow-steps">
+                <li>
+                  <span class="flow-label">01 * Vous</span
+                  ><span class="flow-node">Cliquez sur Exporter les notes</span
+                  ><span class="flow-note"
+                    >Effectuez l'action dans votre navigateur pendant que la capture est en cours d'exécution.</span
+                  >
+                </li>
+                <li>
+                  <span class="flow-label">02 · REA</span
+                  ><span class="flow-node">Enregistrer la demande</span
+                  ><span class="flow-note"
+                    >Capturez l'URL de la demande, l'état de la réponse et la structure JSON de la page sélectionnée.</span
+                  >
+                </li>
+                <li>
+                  <span class="flow-label">03 · Votre agent</span
+                  ><span class="flow-node">Lire le code d'exportation</span
+                  ><span class="flow-note"
+                    >Connectez la requête observée à <code>fetch("./notes.json")</code> dans <code>export.js</code>.</span
+                  >
+                </li>
+              </ol>
+              <p class="flow-result">
+                <code>GET notes.json → 200 → notes[] → CSV</code>
+              </p>
+              <figcaption>
+                Démarrez la capture avant de cliquer sur Exporter les notes.
+              </figcaption>
+            </figure>
+          </section>
+          <section class="article-section" id="prepare">
+            <h2>Ouvrez Chrome avec le débogage à distance</h2>
+            <p>
+              Ouvrez l'exemple hosted Notes avec un profil de navigateur distinct et un port de débogage local. Sur le modèle Linux :
+            </p>
+            <div class="code-block">
+              <div class="code-header">
+                <span>Démarrez l'exemple de navigateur</span
+                ><button
+                  class="copy-button"
+                  type="button"
+                  data-copy="browser-start"
+                  aria-label="Copier démarrez l&#x27;exemple de navigateur"
+                >
+                  Copier
+                </button>
+              </div>
+              <pre><code id="browser-start">google-chrome \
+  --remote-debugging-port=9222 \
+  --user-data-dir=/tmp/rea-notes-browser \
+  https://rea.tools/examples/notes-web/</code></pre>
+            </div>
+            <p>
+              Utilisez le chemin d'accès exécutable de votre navigateur installé sur macOS ou Windows . Vous pouvez remplacer l'URL de la page par une autre page que vous souhaitez inspecter.
+            </p>
+            <p>
+              REA se connecte à ce navigateur existant. Vous gardez le contrôle de la page, effectuez l'action et fermez le navigateur lorsque vous avez terminé.
+            </p>
+          </section>
+          <section class="article-section" id="ask">
+            <h2>Demandez à votre agent de regarder une action</h2>
+            <div class="agent-terminal">
+              <div class="terminal-header">
+                <span class="terminal-title"
+                  ><span class="terminal-dots" aria-hidden="true"
+                    ><i></i><i></i><i></i></span
+                  >Votre agent de codage</span
+                ><button
+                  class="copy-button"
+                  type="button"
+                  data-copy="browser-prompt"
+                  aria-label="Copier l&#x27;exemple d&#x27;invite"
+                >
+                  Copier
+                </button>
+              </div>
+              <p class="terminal-prompt">
+                <span class="prompt-symbol" aria-hidden="true">›</span
+                ><span id="browser-prompt"
+                  >Utilisez REA pour inspecter cette page pendant que je clique sur Exporter les notes. Quelle demande fait-il et comment le CSV est-il construit?</span
+                ><span class="terminal-cursor" aria-hidden="true"></span>
+              </p>
+            </div>
+            <p class="caption">
+              Exemple d'invite. Donnez à votre agent le point de terminaison de débogage, <code>http://127.0.0.1:9222</code>, et l'URL de la page. Laissez-le démarrer la capture avant de cliquer.
+            </p>
+            <p>
+              Votre agent découvre la cible de la page, démarre une fenêtre d'observation et lit les preuves résultantes. Il peut ensuite inspecter le script derrière l'exportation.
+            </p>
+          </section>
+          <section class="article-section" id="capture">
+            <h2>Ou capture depuis le terminal</h2>
+            <p>Trouver l'ID cible de la page:</p>
+            <div class="code-block">
+              <div class="code-header">
+                <span>Trouver la page</span
+                ><button
+                  class="copy-button"
+                  type="button"
+                  data-copy="browser-targets"
+                  aria-label="Copier trouver la page"
+                >
+                  Copier
+                </button>
+              </div>
+              <pre><code id="browser-targets">npx -y rea-agents@latest list-browser-targets \
+  http://127.0.0.1:9222 --json</code></pre>
+            </div>
+            <p>
+              Choisissez la cible avec l'URL de l'exemple de Notes. Remplacer <code>TARGET_ID</code> ci-dessous avec son identifiant, puis exécutez:
+            </p>
+            <div class="code-block">
+              <div class="code-header">
+                <span>Capturez les dix prochaines secondes</span
+                ><button
+                  class="copy-button"
+                  type="button"
+                  data-copy="browser-capture"
+                  aria-label="Copie capture les dix prochaines secondes"
+                >
+                  Copier
+                </button>
+              </div>
+              <pre><code id="browser-capture">npx -y rea-agents@latest inspect-web-page \
+  http://127.0.0.1:9222 TARGET_ID \
+  --observation-ms 10000 \
+  --include-accessibility-text \
+  --include-json-body-shapes --json</code></pre>
+            </div>
+            <p>
+              Laissez la commande se connecter pendant quelques secondes, puis cliquez sur <strong>Exporter des notes</strong> dans ce navigateur. Le résultat arrive après la fin de la fenêtre d'observation.
+            </p>
+            <p>
+              Le résultat capturé inclut la page sélectionnée, l'activité réseau au cours de cette fenêtre et la forme de la réponse JSON. Les demandes antérieures sont en dehors de cette capture.
+            </p>
+          </section>
+          <section class="article-section" id="result">
+            <h2>Lire la requête et exporter le script</h2>
+            <div class="evidence-table-wrap">
+              <table class="evidence-table">
+                <caption>
+                  Enregistré avec REA 4.1.0 sur l'exemple des notes locales
+                </caption>
+                <thead>
+                  <tr>
+                    <th>Fait capturé</th>
+                    <th>Valeur</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Demande</td>
+                    <td><code>GET /examples/notes-web/notes.json</code></td>
+                  </tr>
+                  <tr>
+                    <td>Réponse</td>
+                    <td><code>200 · application/json</code></td>
+                  </tr>
+                  <tr>
+                    <td>Initiateur de la demande</td>
+                    <td><code>export.js</code> * scénario</td>
+                  </tr>
+                  <tr>
+                    <td>Structure de la réponse</td>
+                    <td>
+                      <code>notes[]</code> avec <code>id</code> et <code>title</code> champs
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="code-block">
+              <div class="code-header">
+                <span>Lire les scripts chargés</span
+                ><button
+                  class="copy-button"
+                  type="button"
+                  data-copy="browser-scripts"
+                  aria-label="Copier lire les scripts chargés"
+                >
+                  Copier
+                </button>
+              </div>
+              <pre><code id="browser-scripts">npx -y rea-agents@latest inspect-web-page \
+  http://127.0.0.1:9222 TARGET_ID \
+  --include-script-sources --json</code></pre>
+            </div>
+            <p>
+              La demande identifie la source de données et les enregistrements REA <code>export.js</code> comme son initiateur. Lisez la source du script capturé pour voir comment les données sont utilisées:
+            </p>
+            <div class="code-block">
+              <div class="code-header">
+                <span
+                  ><span translate="no">export.js</span> * exemple d'extrait de source</span
+                >
+              </div>
+              <pre><code>const response = await fetch(&quot;./notes.json&quot;);
+const { notes } = await response.json();
+// Format each note as a CSV row.
+const url = URL.createObjectURL(new Blob([csv], { type: &quot;text/csv&quot; }));
+link.href = url;
+link.download = &quot;notes.csv&quot;;
+link.click();</code></pre>
+            </div>
+            <p>
+              Le téléchargement est construit dans la page à l'aide de la réponse JSON. L'étape de formatage CSV provient du script; la capture réseau établit que ce clic demandé <code>notes.json</code>.
+            </p>
+            <p>
+              <a href="../../../examples/notes-web/">Ouvrez l'exemple</a> · <a href="../../../examples/notes-web/export.js" download
+                >Télécharger <span translate="no">export.js</span></a
+              > · <a href="../../../examples/notes-web/notes.json" download
+                >Télécharger <span translate="no">notes.json</span></a
+              >
+            </p>
+            <blockquote class="prompt">
+              <p>
+                Trouvez le script qui demande <code>notes.json</code>. Comment échappe-t-il les titres contenant des virgules ou des guillemets?
+              </p>
+            </blockquote>
+            <p>
+              Pour une application JavaScript ou Electron installée, continuez avec le <a href="../../../guides/javascript/">flux de travail de l'application</a> pour suivre les limites des fichiers et des processus.
+            </p>
+            <p>
+              Pour examiner les corps des requêtes et réponses HTTP, utilisez <a
+                href="https://github.com/morluto/rea/blob/main/docs/web-network-captures.md"
+                >Fiddler Everywhere : captures SAZ, MCP et compétences publiques</a
+              >. Exportez en SAZ ou HAR 1.2 pour obtenir des Evidence de capture dans REA hors ligne, ou connectez le serveur MCP d’Everywhere pour inspecter le trafic capturé avec votre agent.
+            </p>
+          </section>
+        </article>
+      </div>
+    </main>
+    <!-- website:footer:start -->
+    <!-- prettier-ignore -->
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <p>REA · Reverse Engineer Anything</p>
+        <div class="footer-links">
+          <a href="../../faq/">FAQ</a
+          ><a href="../../contributors/">Contributeurs</a
+          ><a href="https://github.com/morluto/rea">Code source</a
+          ><a href="https://github.com/morluto/rea/blob/main/LICENSE">Licence MIT</a
+          ><a href="https://discord.gg/GkcryMnJDM">Rejoindre la communauté</a
+          ><a href="https://x.com/reatools">Nous suivre sur X</a>
+        </div>
+      </div>
+    </footer>
+    <p class="sr-only" id="copy-status" role="status" aria-live="polite"></p>
+    <a class="back-to-top" href="#top" aria-label="Haut de page">
+      <span aria-hidden="true">↑</span> Haut
+    </a>
+    <!-- website:footer:end -->
+  </body>
+</html>

@@ -1,0 +1,621 @@
+<!doctype html>
+<html lang="vi" dir="ltr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Kỹ thuật đảo ngược có cần một mô hình lớn hơn không? | REA</title>
+    <meta
+      name="description"
+      content="Việc tái xây dựng Touhou đã dạy tôi điều gì về các mô hình chung, mô hình chuyên biệt và việc học cách đề xuất các giả thuyết tốt hơn từ phản hồi của trình biên dịch."
+    />
+    <!-- website:sharing:start -->
+    <!-- prettier-ignore -->
+    <link rel="canonical" href="https://rea.tools/vi/blog/reverse-engineering-models/" />
+    <!-- website:languages:start -->
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="en" href="https://rea.tools/blog/reverse-engineering-models/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="zh-CN" href="https://rea.tools/zh-CN/blog/reverse-engineering-models/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="zh-TW" href="https://rea.tools/zh-TW/blog/reverse-engineering-models/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="ja" href="https://rea.tools/ja/blog/reverse-engineering-models/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="ko" href="https://rea.tools/ko/blog/reverse-engineering-models/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="tr" href="https://rea.tools/tr/blog/reverse-engineering-models/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="ru" href="https://rea.tools/ru/blog/reverse-engineering-models/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="vi" href="https://rea.tools/vi/blog/reverse-engineering-models/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="th" href="https://rea.tools/th/blog/reverse-engineering-models/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="de" href="https://rea.tools/de/blog/reverse-engineering-models/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="es" href="https://rea.tools/es/blog/reverse-engineering-models/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="fr" href="https://rea.tools/fr/blog/reverse-engineering-models/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="uk" href="https://rea.tools/uk/blog/reverse-engineering-models/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="pl" href="https://rea.tools/pl/blog/reverse-engineering-models/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="pt-BR" href="https://rea.tools/pt-BR/blog/reverse-engineering-models/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="ar" href="https://rea.tools/ar/blog/reverse-engineering-models/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="fa" href="https://rea.tools/fa/blog/reverse-engineering-models/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="id" href="https://rea.tools/id/blog/reverse-engineering-models/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="it" href="https://rea.tools/it/blog/reverse-engineering-models/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="el" href="https://rea.tools/el/blog/reverse-engineering-models/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="x-default" href="https://rea.tools/blog/reverse-engineering-models/" />
+<!-- website:languages:end -->
+    <!-- prettier-ignore -->
+    <meta property="og:type" content="website" />
+    <!-- prettier-ignore -->
+    <meta property="og:site_name" content="REA" />
+    <!-- prettier-ignore -->
+    <meta property="og:title" content="Kỹ thuật đảo ngược có cần một mô hình lớn hơn không? | REA" />
+    <!-- prettier-ignore -->
+    <meta property="og:description" content="Việc tái xây dựng Touhou đã dạy tôi điều gì về các mô hình chung, mô hình chuyên biệt và việc học cách đề xuất các giả thuyết tốt hơn từ phản hồi của trình biên dịch." />
+    <!-- prettier-ignore -->
+    <meta property="og:url" content="https://rea.tools/vi/blog/reverse-engineering-models/" />
+    <!-- prettier-ignore -->
+    <meta property="og:image" content="https://rea.tools/assets/social-card.png" />
+    <!-- prettier-ignore -->
+    <meta property="og:image:type" content="image/png" />
+    <!-- prettier-ignore -->
+    <meta property="og:image:width" content="1200" />
+    <!-- prettier-ignore -->
+    <meta property="og:image:height" content="630" />
+    <!-- prettier-ignore -->
+    <meta
+      property="og:image:alt"
+      content="REA-Tìm hiểu cách thức hoạt động của phần mềm. Kỹ thuật đảo ngược với agent mã hóa của bạn."
+    />
+    <!-- prettier-ignore -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <!-- prettier-ignore -->
+    <meta name="twitter:title" content="Kỹ thuật đảo ngược có cần một mô hình lớn hơn không? | REA" />
+    <!-- prettier-ignore -->
+    <meta name="twitter:description" content="Việc tái xây dựng Touhou đã dạy tôi điều gì về các mô hình chung, mô hình chuyên biệt và việc học cách đề xuất các giả thuyết tốt hơn từ phản hồi của trình biên dịch." />
+    <!-- prettier-ignore -->
+    <meta name="twitter:image" content="https://rea.tools/assets/social-card.png" />
+    <!-- prettier-ignore -->
+    <meta
+      name="twitter:image:alt"
+      content="REA-Tìm hiểu cách thức hoạt động của phần mềm. Kỹ thuật đảo ngược với agent mã hóa của bạn."
+    />
+    <!-- website:sharing:end -->
+    <!-- website:theme:start -->
+    <meta name="theme-color" content="#ffffff" />
+    <!-- Apply the saved theme before styles load, to avoid a flash on navigation. -->
+    <script src="../../../assets/theme.js"></script>
+    <!-- website:theme:end -->
+    <link rel="icon" href="../../../assets/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="../../../assets/styles.css" />
+    <script src="../../../assets/main.js" defer></script>
+  <script id="website-messages" type="application/json">{"Copied": "Sao chép", "Code copied to clipboard.": "Mã sao chép vào clipboard.", "Selected": "Đã chọn", "Code selected. Use your keyboard to copy it.": "Mã được chọn. Sử dụng bàn phím của bạn để sao chép nó.", "REA on GitHub ({count})": "REA TRÊN GitHub ({count})", "Switch to light mode": "Chuyển sang giao diện sáng", "Switch to dark mode": "Chuyển sang giao diện tối"}</script>
+  </head>
+  <body id="top">
+    <a class="skip-link" href="#main">Bỏ qua nội dung</a>
+    <!-- website:header:start -->
+    <!-- prettier-ignore -->
+    <header class="site-header">
+      <div class="container header-inner">
+        <a class="brand" href="../../" aria-label="Trang chủ REA"
+          ><span class="brand-name">REA</span
+          ><span class="brand-caption" data-i18n-skip>Reverse Engineer Anything</span></a
+        >
+        <nav class="navigation" aria-label="Điều hướng chính">
+          <a href="../../../get-started/" class="nav-start">Bắt đầu</a>
+          <a href="../../showcase/">Ví dụ thực tế</a>
+          <a href="../" aria-current="page">Blog</a>
+          <a href="../../guides/">Hướng dẫn</a>
+        </nav>
+        <div class="header-social">
+          <details class="language-picker" data-i18n-skip><summary><span aria-hidden="true">文 / A</span> <span>Tiếng Việt</span></summary><nav aria-label="Tiếng Việt"><a href="../../../blog/reverse-engineering-models/" lang="en" dir="ltr" data-language="en">English</a><a href="../../../zh-CN/blog/reverse-engineering-models/" lang="zh-CN" dir="ltr" data-language="zh-CN">简体中文</a><a href="../../../zh-TW/blog/reverse-engineering-models/" lang="zh-TW" dir="ltr" data-language="zh-TW">繁體中文</a><a href="../../../ja/blog/reverse-engineering-models/" lang="ja" dir="ltr" data-language="ja">日本語</a><a href="../../../ko/blog/reverse-engineering-models/" lang="ko" dir="ltr" data-language="ko">한국어</a><a href="../../../tr/blog/reverse-engineering-models/" lang="tr" dir="ltr" data-language="tr">Türkçe</a><a href="../../../ru/blog/reverse-engineering-models/" lang="ru" dir="ltr" data-language="ru">Русский</a><a href="../../../vi/blog/reverse-engineering-models/" lang="vi" dir="ltr" data-language="vi" aria-current="true">Tiếng Việt</a><a href="../../../th/blog/reverse-engineering-models/" lang="th" dir="ltr" data-language="th">ไทย</a><a href="../../../de/blog/reverse-engineering-models/" lang="de" dir="ltr" data-language="de">Deutsch</a><a href="../../../es/blog/reverse-engineering-models/" lang="es" dir="ltr" data-language="es">Español</a><a href="../../../fr/blog/reverse-engineering-models/" lang="fr" dir="ltr" data-language="fr">Français</a><a href="../../../uk/blog/reverse-engineering-models/" lang="uk" dir="ltr" data-language="uk">Українська</a><a href="../../../pl/blog/reverse-engineering-models/" lang="pl" dir="ltr" data-language="pl">Polski</a><a href="../../../pt-BR/blog/reverse-engineering-models/" lang="pt-BR" dir="ltr" data-language="pt-BR">Português (Brasil)</a><a href="../../../ar/blog/reverse-engineering-models/" lang="ar" dir="rtl" data-language="ar">العربية</a><a href="../../../fa/blog/reverse-engineering-models/" lang="fa" dir="rtl" data-language="fa">فارسی</a><a href="../../../id/blog/reverse-engineering-models/" lang="id" dir="ltr" data-language="id">Bahasa Indonesia</a><a href="../../../it/blog/reverse-engineering-models/" lang="it" dir="ltr" data-language="it">Italiano</a><a href="../../../el/blog/reverse-engineering-models/" lang="el" dir="ltr" data-language="el">Ελληνικά</a><a href="../../../ml/blog/reverse-engineering-models/" lang="ml" dir="ltr" data-language="ml">മലയാളം · English</a><a href="../../../ur-Latn/blog/reverse-engineering-models/" lang="ur-Latn" dir="ltr" data-language="ur-Latn">Roman Urdu · English</a><a href="../../../ro/blog/reverse-engineering-models/" lang="ro" dir="ltr" data-language="ro">Română · English</a></nav></details>
+          <button class="theme-toggle" type="button" data-theme-toggle hidden>
+            <svg class="theme-moon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+              <path d="M20.9 13a9 9 0 0 1-9.9-9.9A9 9 0 1 0 20.9 13Z" />
+            </svg>
+            <svg class="theme-sun" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true" focusable="false">
+              <circle cx="12" cy="12" r="4" />
+              <path d="M12 2v2m0 16v2M2 12h2m16 0h2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42" />
+            </svg>
+          </button>
+          <a
+            class="nav-github"
+            href="https://github.com/morluto/rea"
+            aria-label="REA TRÊN GitHub"
+            title="REA TRÊN GitHub"
+          >
+            <svg
+              width="22"
+              height="22"
+              viewBox="0 0 16 16"
+              aria-hidden="true"
+              focusable="false"
+            >
+              <path
+                fill="currentColor"
+                d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82a7.65 7.65 0 0 1 2-.27c.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z"
+              />
+            </svg>
+            <span class="nav-github-count" hidden aria-hidden="true"></span>
+          </a>
+          <a
+            class="nav-discord"
+            href="https://discord.gg/GkcryMnJDM"
+            aria-label="Tham gia Discord của REA"
+            title="Tham gia Discord của REA"
+          >
+            <svg
+              width="22"
+              height="22"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+              focusable="false"
+            >
+              <path
+                fill="currentColor"
+                d="M20.317 4.3698a19.7913 19.7913 0 0 0-4.8851-1.5152.0741.0741 0 0 0-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 0 0-.0785-.037 19.7363 19.7363 0 0 0-4.8852 1.515.0699.0699 0 0 0-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 0 0 .0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 0 0 .0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 0 0-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 0 1-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 0 1 .0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 0 1 .0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 0 1-.0066.1276 12.2986 12.2986 0 0 1-1.873.8914.0766.0766 0 0 0-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 0 0 .0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 0 0 .0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 0 0-.0312-.0286ZM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189Zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189Z"
+              />
+            </svg>
+          </a>
+          <a
+            class="nav-x"
+            href="https://x.com/reatools"
+            aria-label="Theo DÕI REA Trên X"
+            title="Theo DÕI REA Trên X"
+          >
+            <svg
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+              focusable="false"
+            >
+              <path
+                fill="currentColor"
+                d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z"
+              />
+            </svg>
+          </a>
+        </div>
+      </div>
+    </header>
+    <!-- website:header:end -->
+    <main id="main" class="container">
+      <div class="page-heading">
+        <p class="breadcrumb">
+          <a href="../../">Home</a> / <a href="../">Blog</a> / Mô hình và kỹ thuật đảo ngược
+        </p>
+        <p class="eyebrow">Tiểu luận</p>
+        <h1>Kỹ thuật đảo ngược có cần một mô hình lớn hơn không?</h1>
+        <p class="page-meta">Bởi N0zoM1z0 · 13 tháng 10 năm 2026</p>
+        <div class="blog-takeaway">
+          <p class="eyebrow">Điểm chính</p>
+          <ul>
+            <li>
+              <strong
+                >Khả năng của mô hình ảnh hưởng đến những giả thuyết mà tác nhân AI có thể đề xuất.</strong
+              > Các phiên sau đã giải quyết các vấn đề mà công việc trước đó chưa được giải quyết.
+            </li>
+            <li>
+              <strong
+                >Một trình biên dịch quen thuộc cung cấp các mẫu cụ thể để một mô hình chuyên biệt học.</strong
+              > Một số kết quả khớp mã máy chính xác phụ thuộc vào các mẫu mã nguồn cụ thể, có thể tái sử dụng.
+            </li>
+            <li>
+              <strong>Bao gồm kiến thức kho lưu trữ trong một so sánh công bằng.</strong> Một mô hình nhỏ hơn với khả năng truy xuất kiến thức tốt có thể đã có đủ thông tin để đạt được tiến bộ.
+            </li>
+            <li>
+              <strong
+                >Huấn luyện mô hình để chọn thử nghiệm hữu ích tiếp theo và kiểm tra công cụ xác minh của nó.</strong
+              > Phản hồi chỉ hữu ích trong phạm vi công cụ xác minh những điều đúng.
+            </li>
+            <li>
+              <strong
+                >Đánh giá kết quả tái thiết đã được xác minh cùng với thời gian và chi phí.</strong
+              > Đó là những gì tôi muốn đo lường cho quy trình làm việc hoàn chỉnh của tác nhân AI.
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="article-layout">
+        <nav class="contents" aria-label="Trên trang này">
+          <p>Trong bài viết này</p>
+          <ul>
+            <li><a href="#model-capability">Mô hình mạnh hơn đã thay đổi điều gì?</a></li>
+            <li><a href="#specialization">Tại sao nên chuyên môn hóa?</a></li>
+            <li><a href="#repository-knowledge">Kinh nghiệm này nên được lưu trữ ở đâu?</a></li>
+            <li><a href="#learning-search">Học thí nghiệm hữu ích tiếp theo</a></li>
+            <li><a href="#re-and-rl">Học kỹ thuật đảo ngược và tăng cường</a></li>
+            <li><a href="#oracle">Khi công cụ xác minh sai</a></li>
+            <li><a href="#comparison">Một so sánh đáng chạy</a></li>
+            <li><a href="#future-agent">Điều này gợi ý loại tác nhân AI nào?</a></li>
+          </ul>
+        </nav>
+        <article
+          class="article"
+          aria-label="Mô hình và tiểu luận kỹ thuật đảo ngược"
+        >
+          <section class="article-section" id="model-capability">
+            <h2>Mô hình mạnh hơn đã thay đổi điều gì?</h2>
+            <p>
+              Kể từ tháng 8 năm 2026, tôi đã khám phá mức độ kỹ thuật đảo ngược mà một tác nhân có thể thực hiện khi có quyền truy cập vào một chương trình và cách kiểm tra công việc của nó. Phần lớn kinh nghiệm của tôi đến từ việc xây dựng lại trò chơi, đặc biệt là Touhou. Khi tôi thay đổi mô hình, các kho lưu trữ đã lưu giữ một bản ghi về những gì mỗi phiên đã khôi phục được.
+            </p>
+            <p>
+              Phần lớn công việc hướng tới tái dựng chính xác: biên dịch mã nguồn đang được duy trì bằng chuỗi công cụ lịch sử có phiên bản cố định, rồi kiểm tra xem nó có tái tạo hàm đích hay không. Khi mô hình sau giải quyết được điểm mà công việc trước bị mắc kẹt, thay đổi trong mã nguồn cho thấy điều gì đã giúp tiến triển.
+            </p>
+            <h3>Các biến tạm thời cần có thời gian tồn tại chồng chéo</h3>
+            <p>
+              Phần lớn logic của hàm tấn công TH09 đã được xây dựng lại, nhưng trình biên dịch vẫn lưu trữ các kết quả tạm thời khác với kết quả ban đầu. Vấn đề còn lại là những kết quả đó cần tồn tại trong bao lâu và khi nào bộ nhớ của chúng có thể được sử dụng lại.
+            </p>
+            <p>
+              Bản ghi phiên <a
+                href="https://github.com/N0zoM1z0/th09/commit/de63c0f9121963f3a6b1ab5471c4878625fd3425"
+                >GPT-6-Sol</a
+              > đã báo cáo sự không khớp này sau khi kiểm tra một số cách sắp xếp mã nguồn thông thường. Khi <a
+                href="https://github.com/N0zoM1z0/th09/commit/52929ed7c299f1a5f29cc13964e22510145fd616"
+                >GPT-6.1-Sol kiểm tra lại vấn đề</a
+              >, nó đã đề xuất một giả thuyết hữu ích về thời gian tồn tại của các biến tạm thời này.
+            </p>
+            <p>
+              Hàm này tạo ra các kết quả tạm thời và sao chép chúng vào các vị trí hoạt ảnh. Trong C++, kết quả tạm thời vẫn tồn tại cho đến khi biểu thức sử dụng nó kết thúc. Việc nhóm các hoạt động thực tế thành một biểu thức giúp giữ cho các kết quả đó tồn tại cùng nhau, do đó trình biên dịch không thể sử dụng lại cùng một bộ lưu trữ cho tất cả chúng nữa.
+            </p>
+            <p>
+              Một kết quả vẫn được chia sẻ bộ nhớ với giá trị được sử dụng sau này để kiểm tra xung đột. Việc đưa ra giá trị đó trong thời gian tồn tại của chính nó đã giải quyết được sự chồng chéo còn lại. Sau một số thử nghiệm có mục tiêu, <strong
+                >việc biên dịch lại rõ ràng từ nguồn đã xác nhận rằng hàm đầy đủ khớp với</strong
+              >.
+            </p>
+            <p>
+              Tôi quan tâm đến việc khám phá và thử nghiệm hỗ trợ lẫn nhau như thế nào. Giả thuyết về thời gian tồn tại của đối tượng tạm thời đã mang lại cho tác nhân AI một hướng đi mới. Phản hồi của trình biên dịch đã giúp nó tinh chỉnh giả thuyết đó thành một cách sắp xếp mã nguồn phù hợp.
+            </p>
+            <h3>Biểu đồ luồng điều khiển khác</h3>
+            <p>
+              Hàm TH09 thứ hai cho biết tại sao hướng đi mới đó lại quan trọng. Ở đây, trở ngại là làm thế nào một số chi nhánh chia sẻ công việc cuối cùng của họ. Công việc trước đó của <a
+                href="https://github.com/N0zoM1z0/th09/commit/f8d12d72aaf02212ee1b585a8f3f86d7ed000269"
+                >GPT-6.1-Sol</a
+              > có các phần của hàm khớp với nhau, nhưng các nhánh vẫn được nối với nhau khác với ban đầu.
+            </p>
+            <p>
+              <a
+                href="https://github.com/N0zoM1z0/th09/commit/da33a646221198ceb7f3df2b96e2ca0e9b2f705f"
+                >GPT-6-Astra đã thay đổi biểu đồ luồng điều khiển xung quanh</a
+              >. Các đường dẫn chính hiện đã dẫn đến bản cập nhật cuối cùng được chia sẻ và quay trở lại. Trong cấu trúc nguồn đó, trình biên dịch kết hợp các nhánh giống như bản gốc. Chức năng hoàn chỉnh đã khớp và một cuộc kiểm tra xây dựng lại riêng biệt <a
+                href="https://github.com/N0zoM1z0/th09/commit/5f825b28a862f8e1a6d4aea2f78a42f04c09a1c0"
+                > đã xác nhận điều đó</a
+              >.
+            </p>
+            <p>
+              <strong
+                >Việc thay đổi cách biểu diễn đã mở ra một không gian tìm kiếm hiệu quả hơn.</strong
+              > Cả hai trường hợp đều cho tôi lý do để xem xét nghiêm túc khả năng của mô hình chung: một tác nhân có thể tiếp tục thử các biến thể cục bộ trong một thời gian dài trước khi tìm ra cách tốt hơn để thể hiện công việc xung quanh.
+            </p>
+            <p>
+              Đồng thời, các phiên sau bắt đầu với nguồn trước đó và ghi lại lỗi. Công việc tích lũy đó là một phần lợi thế của họ. Lịch sử cho phép chúng ta kiểm tra những khám phá và kiểm tra chúng; một so sánh có kiểm soát sẽ giúp tách biệt tác động của mô hình khỏi trải nghiệm mà nó kế thừa.
+            </p>
+            <p>
+              Đây là điều làm cho câu hỏi trở nên thú vị đối với tôi. Một số tiến bộ đến từ việc tìm kiếm một đại diện mới. Phần lớn công việc còn lại liên quan đến việc kiểm tra các cách sắp xếp mã nguồn khác nhau dựa trên một trình biên dịch quen thuộc. Bao nhiêu trong số này đòi hỏi khả năng suy luận rộng? Một mô hình có thể học được bao nhiêu khi làm việc liên tục với trình biên dịch và mã đó?
+            </p>
+          </section>
+          <section class="article-section" id="specialization">
+            <h2>Tại sao một mô hình AI chuyên biệt có thể hoạt động tốt?</h2>
+            <p>
+              Touhou cho chúng ta lý do cụ thể để mong đợi trải nghiệm đó sẽ hữu ích. Phần lớn mã trò chơi đều đến từ cùng một tác giả, ZUN, vì vậy những thói quen lặp đi lặp lại là một giả định khởi đầu hợp lý. Các kho lưu trữ hỗ trợ điều đó bằng các ví dụ hữu ích: các vòng lặp liên quan và cách sắp xếp trợ giúp đã cung cấp các giả thuyết cho các trò chơi.
+            </p>
+            <p>
+              Các mẫu nguồn đó trở nên cụ thể hơn khi chúng tôi đưa trình biên dịch vào. Trong một phiên bản và tập hợp các tùy chọn cụ thể, những thay đổi nhỏ về nguồn có thể tạo ra những khác biệt lặp lại trong mã máy. Một số trong những khác biệt đó mơ hồ một cách đáng ngạc nhiên.
+            </p>
+            <p>
+              Ví dụ: trong TH095, <strong
+                >ngay cả tên biến cục bộ cũng có thể ảnh hưởng đến vị trí VC7.1 lưu trữ nó</strong
+              >. Việc di chuyển khai báo của nó không giải quyết được bố cục lưu trữ. Tuy nhiên, hàm nền trước đó đã tiết lộ kiểu đặt tên ảnh hưởng đến sự lựa chọn của trình biên dịch. Điều đó gợi ý một giả thuyết hứa hẹn hơn cho việc <a
+                href="https://github.com/N0zoM1z0/th095/commit/26bb64bdb093a13f73abd0ee8ae7ce199ee4658f"
+                >tái tạo <code>Supervisor::LoadDat</code></a
+              >.
+            </p>
+            <p>
+              Việc sử dụng lại mẫu đó cho biến kích thước tệp sẽ tạo ra bố cục cần thiết mà không cần thêm bộ nhớ. Các chức năng đầy đủ sau đó phù hợp.
+            </p>
+            <p>
+              Đây là một chi tiết rất cụ thể mà một mô hình AI đa năng có thể không biết khi lần đầu gặp sự cố. Một mô hình chuyên dụng cho trình biên dịch này có thể xem nhiều trường hợp như vậy và tìm hiểu xem biến thể mã nguồn nào đáng để thử nghiệm trước tiên.
+            </p>
+            <p>
+              Cơ hội đặc biệt rõ ràng trong các bài toán so khớp cuối cùng khi chúng ta đã hiểu rõ hành vi. Sau đó, chúng tôi sẽ hỏi trình biên dịch này sẽ chuyển sự sắp xếp mã nguồn thông thường nào thành các lệnh máy được quan sát. Sự chuyên môn hóa có thể giúp mô hình đề xuất các hình thức đó hiệu quả hơn, trong khi mục tiêu vẫn xác định giả thuyết nào tồn tại.
+            </p>
+            <p>
+              Các mẫu hữu ích phải đi kèm bối cảnh áp dụng. TH08 dùng phiên bản Visual C++ cũ hơn TH095 và TH09. TH04 dùng một trình biên dịch khác thuộc thời DOS. <a
+                href="https://github.com/N0zoM1z0/th04/commit/6dce0a79d5b931f0e2a08475b90e0c33d2321b98"
+                >Việc tái dựng mã điều khiển người chơi</a
+              > cần những giả thuyết khác về cách viết mã và cách liên kết thành tệp thực thi. Cùng tác giả là một giả định ban đầu; từng mục tiêu cho biết giả định đó có phù hợp không. Mô hình chuyên biệt cần học cách phân biệt các bối cảnh này.
+            </p>
+          </section>
+          <section class="article-section" id="repository-knowledge">
+            <h2>Kinh nghiệm này nên được lưu trữ ở đâu?</h2>
+            <p>
+              Trước khi quyết định dạy những mẫu đó thông qua đào tạo mô hình, tôi sẽ xem xét kiến thức mà chúng tôi đã lưu giữ trong kho. Trong <a href="../touhou-reconstruction/">bài luận trước</a>, tôi đã viết về việc nó trở thành bộ nhớ làm việc của dự án. Bộ nhớ đó bao gồm các bài học về trình biên dịch, cùng với nguồn và các thử nghiệm thất bại khiến chúng trở nên hữu ích.
+            </p>
+            <p>
+              Bằng cách truy xuất bản ghi đó, nhân viên hỗ trợ có thể bắt đầu với kết quả đã biết và kiểm tra cách chúng tôi đạt được kết quả đó. Nó cũng có thể tránh được những lựa chọn thay thế đã thất bại trong cùng bối cảnh. Điểm bắt đầu được cải thiện mà không thay đổi các tham số đã huấn luyện của mô hình.
+            </p>
+            <p>
+              Trong khi xây dựng lại chức năng tạo kẻ thù của TH09, phiên <a
+                href="https://github.com/N0zoM1z0/th09/commit/1eb843383941d00065622a9e353146c4bb96979e"
+                >GPT-6-Luna-max</a
+              > đã lấy một giả thuyết từ mã nguồn TH08 có liên quan. Mã trước đó đã đề xuất cách tổ chức vòng lặp và xử lý các lỗi bên trong nó. Bằng chứng riêng của TH09 đã cung cấp chi tiết cụ thể về trò chơi. Việc xây dựng lại từ nguồn đã xác nhận rằng toàn bộ hàm khớp với bản gốc.
+            </p>
+            <p>
+              <strong
+                >"Mô hình không biết lỗi của trình biên dịch" và "mô hình không thể sử dụng nó" là các vấn đề khác nhau.</strong
+              > Việc truy xuất có thể giải quyết được vấn đề đầu tiên, nhưng việc biến thực tế đó thành một mã ứng viên hữu ích vẫn cần nhiều công sức. Và nếu mã nguồn mã ứng viên không thành công, mô hình phải quyết định kết quả có ý nghĩa gì cho lần thử tiếp theo. Biết mẫu có liên quan chỉ là bước khởi đầu của quá trình đó.
+            </p>
+            <p>
+              Vì lý do đó, tôi sẽ đưa vào một mô hình AI có mục đích chung nhỏ hơn với khả năng truy xuất tốt trong mọi so sánh. Cung cấp cho nó cùng một thư viện kinh nghiệm sẽ giúp chúng tôi xác định nội dung đào tạo bổ sung: tạo ứng viên tốt hơn, đưa ra quyết định tốt hơn sau khi phản hồi hoặc cả hai.
+            </p>
+          </section>
+          <section class="article-section" id="learning-search">
+            <h2>Học thí nghiệm hữu ích tiếp theo</h2>
+            <p>
+              Những quyết định sau khi được phản hồi là điều tôi muốn nghiên cứu nhất. Trong tái cấu trúc tác nhân, mô hình đề xuất một lời giải thích và kiểm tra nó dựa trên chương trình. Ngay cả khi mã nguồn ứng viên không thành công, kết quả có thể thu hẹp các khả năng còn lại và đề xuất thử nghiệm tiếp theo hữu ích hơn.
+            </p>
+            <p>
+              Hãy xem xét lại ví dụ về kết quả tạm thời. Nguồn cuối cùng của nó cho thấy sự sắp xếp đã có hiệu quả nhưng đường dẫn đến nguồn đó chứa nhiều thông tin hơn. Mỗi thử nghiệm sau đây đã giúp xác định những gì vẫn cần thay đổi.
+            </p>
+            <div class="evidence-table-wrap">
+              <table
+                class="evidence-table"
+                aria-label="Các thí nghiệm tái thiết được chọn"
+              >
+                <thead>
+                  <tr>
+                    <th scope="col">Thử nghiệm</th>
+                    <th scope="col">Kết quả của nó đã dạy chúng ta điều gì</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Hãy thử một cách khác để sao chép kết quả</td>
+                    <td>
+                      Mã sao chép thay đổi nhưng chức năng vẫn khác.
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Sử dụng trực tiếp các giá trị được trả về</td>
+                    <td>
+                      Sao chép theo mẫu ban đầu, nhưng lưu trữ tạm thời vẫn khác.
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Giữ tất cả các biến tạm thời hợp lệ cùng một lúc</td>
+                    <td>
+                      Chúng có bộ lưu trữ riêng biệt, nhưng một bộ vẫn chồng lên một giá trị được sử dụng sau này để kiểm tra va chạm.
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Giữ riêng giá trị kiểm tra va chạm</td>
+                    <td>Việc biên dịch lại rõ ràng từ nguồn xác nhận sự trùng khớp hoàn chỉnh.</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <p class="caption">
+              Các thử nghiệm được chọn từ quá trình tái cấu trúc chức năng tấn công ở trên, được nhóm theo những gì chúng đã dạy chúng ta.
+            </p>
+            <p>
+              Một bản ghi huấn luyện lưu giữ trình tự này có thể dạy nhiều hơn chỉ riêng nguồn cuối cùng. Nó kết nối từng thay đổi được đề xuất với kết quả được quan sát và quyết định tiếp theo. Việc giữ lại các biến thể không hiệu quả cũng rất quan trọng: chúng cho tác nhân sau này biết những giả thuyết nào đã được kiểm tra trong bối cảnh đó.
+            </p>
+            <p>
+              <strong
+                >Tôi muốn mô hình học cách sử dụng phản hồi.</strong
+              > Kết quả trung lập là lý do để xem xét lại biến thể; sự không phù hợp đã thay đổi có thể chỉ ra một nguyên nhân khác. Khi các chỉnh sửa cục bộ không còn mang tính thông tin, nhân viên sẽ có thể xem lại phần trình bày nguồn hoặc kiểm tra lại bằng chứng.
+            </p>
+            <p>
+              Học cách đưa ra những lựa chọn đó đòi hỏi sự tự chủ. Đôi khi, bước tiếp theo hữu ích là kiểm tra người gọi khác thay vì biên dịch một bản chỉnh sửa khác. Một chuỗi các lần viết lại bắt buộc một cách cứng nhắc sẽ loại bỏ lựa chọn đó, cùng với một phần hành vi mà chúng ta muốn mô hình học.
+            </p>
+          </section>
+          <section class="article-section" id="re-and-rl">
+            <h2>Tại sao kỹ thuật đảo ngược lại thú vị cho việc học tăng cường</h2>
+            <p>
+              Tái dựng trong phạm vi xác định là môi trường thực tế để nghiên cứu các lựa chọn này. Khi phiên bản của mục tiêu và trình biên dịch được cố định, nhiều thử nghiệm mã nguồn cho phản hồi nhanh và có thể lặp lại. Tác nhân có thể biên dịch mã ứng viên, xem khác biệt rồi chọn bước tiếp theo.
+            </p>
+            <p>
+              Học tăng cường có thể rèn luyện quá trình ra quyết định đó thông qua phản hồi mà nó nhận được. Một mã ứng viên được chấp nhận bởi một cuộc kiểm tra xác định sẽ cho chúng ta một kết quả cụ thể, trong khi trình tự các lần thử cho phép chúng ta quan sát xem cần bao nhiêu công sức để đạt được kết quả đó.
+            </p>
+            <p>
+              Đã có nghiên cứu hỗ trợ hướng này. <a href="https://aclanthology.org/2024.emnlp-main.203/"
+                >LLM4Decompile</a
+              > nghiên cứu các mô hình chuyên dùng cho việc dịch ngược. <a href="https://arxiv.org/html/2606.16162v1">AutoDecompiler</a> đào tạo sàng lọc nhiều lượt bằng cách sử dụng phản hồi của trình biên dịch và thực thi. Nghiên cứu của họ tập trung vào phục hồi chức năng. Đối với công việc này, tôi sẽ sử dụng chúng làm điểm khởi đầu cho nhiệm vụ liên quan là tìm nguồn phù hợp với đầu ra của trình biên dịch lịch sử.
+            </p>
+            <p>
+              Tuy nhiên, để đạt được nhiệm vụ được xác định rõ ràng như vậy, trước tiên chúng ta có thể cần thiết lập tài nguyên nào mà hàm sở hữu hoặc nghĩ ra cách mới để quan sát hành vi của chương trình khi chạy. Ví dụ: trong TH08, sự khác biệt về va chạm <a
+                href="https://github.com/N0zoM1z0/th08/commit/af9cb1d3e839b15a78b47ac1701506083cc82847"
+                > dẫn đến cách chương trình ban đầu xử lý các phép tính dấu phẩy động</a
+              >. Trước khi tác nhân có thể kiểm tra một sự điều chỉnh hữu ích, nó phải tìm ra những gì cần đo lường.
+            </p>
+            <p>
+              Điều này gợi ý một vai trò khác của một mô hình có khả năng rộng rãi: giúp làm cho vấn đề có thể được kiểm tra ngay từ đầu. Khi kiểm tra đó tồn tại, chúng tôi có thể điều tra xem chính sách tìm kiếm đã học có thể đi được bao xa.
+            </p>
+          </section>
+          <section class="article-section" id="oracle">
+            <h2>Khi công cụ xác minh sai</h2>
+            <p>
+              Khi dùng một phép kiểm tra để huấn luyện, phạm vi kiểm tra cũng trở thành một phần của môi trường học. Tôi gọi chuẩn tham chiếu hoặc công cụ kiểm tra đó là oracle. Ngay cả câu trả lời lặp lại được cũng cần được hiểu theo những gì nó thực sự xác minh.
+            </p>
+            <p>
+              TH08 cho thấy vấn đề có thể ẩn ngoài phạm vi kiểm tra. Một số hàm tái dựng dùng hằng số dấu phẩy động sai nhưng vẫn vượt qua so sánh chính xác. Bộ so sánh điều chỉnh địa chỉ tái định vị trước khi kiểm tra lệnh máy, nhưng chỉ kiểm tra giá trị tại các địa chỉ đó nếu chúng đã được ghi nhận rõ ràng để xác minh. Những tham chiếu hằng số khác có thể vượt qua mà không được kiểm tra giá trị.
+            </p>
+            <p>
+              Để giải quyết khoảng trống này, <a
+                href="https://github.com/N0zoM1z0/th08/commit/a393f400786e4cc6cbb1000af0dad3276da12c78"
+                >kiểm tra rộng hơn</a
+              > đã tìm thấy các hằng số không chính xác trong các hàm đã vượt qua quá trình xác minh. Trong một phép tính, mã nguồn được xây dựng lại đã thêm <code>1.0f</code>, trong khi mã nguồn ban đầu được thêm <code>32.0f</code>.
+            </p>
+            <p>
+              <strong
+                >Mô hình được khen thưởng bằng kiểm tra xác minh cũ có thể học cách tạo ra bản dựng lại không chính xác.</strong
+              > Chúng tôi không đào tạo mô hình RL bằng trình kiểm tra đó. Sự thất bại mà chúng tôi quan sát thấy nằm ở chính việc kiểm tra. Nhưng nếu chúng ta sử dụng nó như một phần thưởng thì điểm mù đó sẽ trở thành một phần của môi trường học tập.
+            </p>
+            <p>
+              Một bài kiểm tra chức năng có thể có điểm mù tương tự. <a href="https://arxiv.org/html/2609.05370v1"
+                >Nghiên cứu sử dụng tính năng làm mờ vi phân trên bộ giải mã LLM</a
+              > đã tìm thấy những khác biệt về hành vi bên ngoài các thử nghiệm được cung cấp. Do đó, chúng ta cần hiểu một bài kiểm tra đạt theo các trường hợp mà nó thực hiện. Tương tự, một lệnh khớp phải được hiểu theo byte và dữ liệu mà nó xác minh.
+            </p>
+            <p>
+              Trước khi sử dụng một trong hai loại kiểm tra xác minh làm phần thưởng, tôi sẽ kiểm tra nó với kết quả cố tình sai. Tôi cũng sẽ tách biệt sự chấp nhận cuối cùng với mã nguồn mà tác nhân AI có thể chỉnh sửa. Mô hình phải vượt qua quá trình xác minh bằng cách xây dựng lại chương trình một cách chính xác. Mặt khác, chỉ cần sao chép một mảng byte từ mục tiêu có thể đánh lừa một hệ thống tính điểm ngây thơ mà không khôi phục được mã nguồn hữu ích.
+            </p>
+            <p>
+              <strong
+                >Cải thiện mô hình học và cải thiện công cụ xác minh là hai phần của cùng một vấn đề nghiên cứu.</strong
+              > Mô hình càng giỏi tối ưu phản hồi được cung cấp, chúng ta càng cần hiểu chính phản hồi đó.
+            </p>
+          </section>
+          <section class="article-section" id="comparison">
+            <h2>Một so sánh đáng chạy</h2>
+            <p>
+              Với những bước kiểm tra đó, tôi sẽ bắt đầu so sánh trên nhóm nhiệm vụ VC7.1 cố định. Đầu tiên, tôi sẽ thiết lập các đường cơ sở cho một mô hình AI có mục đích chung mạnh mẽ và một mô hình nhỏ hơn. Việc bổ sung kiến ​​thức về kho lưu trữ vào mô hình nhỏ hơn sẽ cho thấy những thay đổi trong quá trình truy xuất. Từ đó, chuyên môn hóa được giám sát và phiên bản được đào tạo RL sẽ cho phép chúng tôi kiểm tra nội dung đào tạo bổ sung.
+            </p>
+            <p>
+              Để làm cho những so sánh đó trở nên hữu ích, mỗi mô hình sẽ nhận được các bằng chứng và công cụ mục tiêu giống nhau. Đối với các so sánh dành riêng cho đào tạo, tôi cũng sẽ giữ nguyên mô hình cơ sở và kiến ​​thức có sẵn. Các thử nghiệm lặp đi lặp lại sẽ giúp phân biệt một chiến lược tìm kiếm đáng tin cậy với một giải pháp ứng viên tình cờ thành công.
+            </p>
+            <p>
+              Sau đó, tôi sẽ tách hai điều kiện bắt đầu: xây dựng lại một hàm từ các lệnh máy của nó và đóng một số khác biệt cuối cùng trong nguồn được duy trì. Một mô hình AI chuyên dụng có thể thực hiện xuất sắc nhiệm vụ thứ hai trong khi một mô hình AI có mục đích chung thực hiện phần lớn công việc cần thiết để đạt được nhiệm vụ đó. Việc đo lường chúng một cách riêng biệt sẽ tiết lộ sự phân chia công việc đó.
+            </p>
+            <p>
+              Cả hai nhiệm vụ đều cần loại trừ các mẫu thử nghiệm khỏi quá trình đào tạo và truy xuất. Trò chơi Touhou liên quan chia sẻ mã công cụ. Việc loại trừ một trò chơi khỏi quá trình huấn luyện vẫn có thể để lại các chức năng gần như giống hệt nhau trong tập huấn luyện. Thay vào đó, tôi sẽ loại trừ toàn bộ các nhóm mã nguồn có liên quan và loại bỏ các câu trả lời đã được xác minh của chúng khỏi cả dữ liệu huấn luyện và thư viện truy xuất.
+            </p>
+            <p>
+              Kết quả cần đo là các lần khớp hoàn chỉnh, được xác minh độc lập. Giới hạn số mã ứng viên hoặc số lần biên dịch bằng nhau giúp so sánh chất lượng tìm kiếm. Đo tổng thời gian và chi phí, kể cả biên dịch, cho biết chất lượng đó có tạo ra quy trình hiệu quả không. Chi phí huấn luyện cần tính riêng.
+            </p>
+            <p>
+              Cả hai phép đo đều quan trọng. Một đề xuất rẻ tiền có thể dẫn đến một quy trình làm việc tốn kém nếu nó tạo ra nhiều lần biên dịch không cung cấp thông tin hữu ích. Ngược lại, một mô hình chậm hơn có thể tiết kiệm hơn nếu nó tìm thấy một thử nghiệm hữu ích sớm hơn. Việc so sánh nên bao gồm những chi phí này.
+            </p>
+            <p>
+              Việc đếm các kết quả được chấp nhận cũng giúp duy trì tiến độ trung gian. Một TH09 <a
+                href="https://github.com/N0zoM1z0/th09/commit/ab72fd77728293fc0beacfc656ca701b0e266016"
+                >mã ứng viên lưu lại phát lại</a
+              > có vẻ đầy hứa hẹn vì hàm được biên dịch có kích thước như mong đợi nhưng so sánh đầy đủ vẫn tìm thấy những khác biệt đáng kể. Những thay đổi trong cách trình biên dịch sắp xếp các lệnh máy cũng có thể khiến mã ứng viên có vẻ gần hơn mà không giải quyết được vấn đề cơ bản. Chẩn đoán như vậy có thể hướng dẫn thử nghiệm tiếp theo, nhưng tôi sẽ xác thực bất kỳ phần thưởng nào cho việc "tiến gần hơn" so với kiểm tra chấp nhận hoàn toàn.
+            </p>
+            <p>
+              Tôi sẽ quan tâm đến mô hình trên các kết quả này. Nếu một mô hình AI chuyên dụng hoạt động tốt trong dòng trình biên dịch quen thuộc, liệu lợi thế đó có tồn tại được khi thay đổi chuỗi công cụ không? Và một khi cả hai mô hình AI đều có khả năng truy xuất tốt thì việc đào tạo vẫn bổ sung thêm bao nhiêu? Câu trả lời sẽ giúp chúng ta quyết định xem mỗi loại mô hình sẽ hữu ích nhất ở đâu.
+            </p>
+          </section>
+          <section class="article-section" id="future-agent">
+            <h2>Điều này gợi ý loại tác nhân AI nào?</h2>
+            <p>
+              Nếu các mô hình tỏ ra hữu ích ở các giai đoạn khác nhau, thì sự sắp xếp hữu ích có thể là một tác nhân rộng rãi có quyền truy cập vào một mô hình AI chuyên dụng. Khi một nhiệm vụ trở thành một công cụ tìm kiếm trình biên dịch quen thuộc, nó có thể yêu cầu mô hình AI chuyên biệt dành cho ứng viên. Nếu kết quả không còn có ý nghĩa nữa, tác nhân rộng hơn có thể quay lại bằng chứng mục tiêu hoặc tự điều tra phép đo.
+            </p>
+            <p>
+              Trong sự sắp xếp đó, sự chuyên môn hóa trở thành một công cụ mà đặc vụ có thể lựa chọn khi cuộc điều tra phát triển. Người đại diện có quyền tự do thay đổi hướng đi để có thể đạt được những đột phá trước đó.
+            </p>
+            <p>
+              Điều này diễn ra một cách tự nhiên từ sự chuyển dịch công nghiệp mà tôi đã mô tả trong bài viết trước. Việc có thể chạy nhiều thử nghiệm hơn sẽ thay đổi cách chúng ta tổ chức công việc. Nó cũng cho chúng ta lý do để hỏi những quyết định nào cần được đánh giá rộng rãi và quyết định nào được cải thiện thông qua kinh nghiệm lặp đi lặp lại với một nghề cụ thể.
+            </p>
+            <p>
+              Hiện tại, mô hình tổng quát mạnh nhất đã có chỗ đứng trong quy trình của tôi vì giải quyết được những vấn đề trước đó còn bỏ ngỏ. Những thành công này khiến tôi muốn xem kỹ quá trình: bao nhiêu phần phụ thuộc vào năng lực rộng của mô hình, và bao nhiêu phần có thể giao cho một mô hình được huấn luyện riêng cho kiểu tái dựng này?
+            </p>
+            <p>
+              <strong
+                >Các kho lưu trữ cung cấp cho chúng tôi một cách để kiểm tra câu hỏi.</strong
+              > Tôi muốn sử dụng hồ sơ đó để xây dựng sự so sánh và xem những gì chúng tôi học được.
+            </p>
+          </section>
+          <section class="article-section" id="sources">
+            <details class="native-details">
+              <summary>Bằng chứng và quy kết mô hình</summary>
+              <p>
+                <a
+                  href="https://github.com/morluto/rea/blob/main/website/evidence/reverse-engineering-models.md"
+                  >Ghi chú bằng chứng chi tiết</a
+                > bao gồm các kết quả so sánh và bối cảnh thử nghiệm.
+              </p>
+              <p>
+                Các ví dụ mô tả các so sánh cấp độ chức năng lịch sử được ghi lại trong các cam kết được liên kết. Kiểm tra thời gian chạy toàn bộ trò chơi là các cột mốc riêng biệt. Nguồn và hồ sơ trùng khớp đã được xem xét vào ngày 13 tháng 10 năm 2026.
+              </p>
+              <p>
+                Nhãn TH09 <code>gpt-dots</code> có nghĩa là GPT-6-Astra. Mô hình được liên kết với <code>gpt-web</code> đã thay đổi theo thời gian, do đó, riêng nhãn đó không thể xác định được mô hình được sử dụng trong một lần chạy cụ thể. Tên mô hình rõ ràng trong các cam kết được trích dẫn khác cung cấp thông tin ghi nhận. Những lịch sử này không bao gồm các phép đo nhất quán về chi phí hoặc nỗ lực cho mỗi lần chạy.
+              </p>
+              <ul>
+                <li>
+                  <strong>TH09 thời gian tồn tại của đối tượng tạm thời:</strong> <a
+                    href="https://github.com/N0zoM1z0/th09/commit/de63c0f9121963f3a6b1ab5471c4878625fd3425"
+                    >xem xét ngữ cảnh trước đó</a
+                  > và <a
+                    href="https://github.com/N0zoM1z0/th09/commit/52929ed7c299f1a5f29cc13964e22510145fd616"
+                    > việc xây dựng lại hoàn chỉnh được xác minh bằng cách biên dịch lại rõ ràng từ nguồn</a
+                  >.
+                </li>
+                <li>
+                  <strong>Callback Front của TH09:</strong> <a
+                    href="https://github.com/N0zoM1z0/th09/commit/f8d12d72aaf02212ee1b585a8f3f86d7ed000269"
+                    >các vùng chẩn đoán chưa khớp</a
+                  >, <a
+                    href="https://github.com/N0zoM1z0/th09/commit/da33a646221198ceb7f3df2b96e2ca0e9b2f705f"
+                    >đồ thị luồng điều khiển mới của Astra</a
+                  > và <a
+                    href="https://github.com/N0zoM1z0/th09/commit/5f825b28a862f8e1a6d4aea2f78a42f04c09a1c0"
+                    >phép kiểm tra biên dịch lại đã được chấp nhận</a
+                  >.
+                </li>
+                <li>
+                  <strong>Kiến thức về trình biên dịch:</strong> <a
+                    href="https://github.com/N0zoM1z0/th095/commit/26bb64bdb093a13f73abd0ee8ae7ce199ee4658f"
+                    >TH095 tái sử dụng hành vi của nhóm nhận dạng</a
+                  >, <a
+                    href="https://github.com/N0zoM1z0/th04/commit/6dce0a79d5b931f0e2a08475b90e0c33d2321b98"
+                    >TH04 mã nguồn người chơi và thứ tự trình liên kết</a
+                  > và <a
+                    href="https://github.com/N0zoM1z0/th09/commit/1eb843383941d00065622a9e353146c4bb96979e"
+                    >Luna tái thiết hoàn toàn chức năng tạo kẻ thù của TH09</a
+                  >.
+                </li>
+                <li>
+                  <strong>Kiểm tra và chẩn đoán:</strong> <a
+                    href="https://github.com/N0zoM1z0/th08/commit/a393f400786e4cc6cbb1000af0dad3276da12c78"
+                    >kiểm tra hằng số dấu phẩy động của TH08</a
+                  >, <a
+                    href="https://github.com/N0zoM1z0/th08/commit/af9cb1d3e839b15a78b47ac1701506083cc82847"
+                    >điều tra số học của TH08</a
+                  > và <a
+                    href="https://github.com/N0zoM1z0/th09/commit/ab72fd77728293fc0beacfc656ca701b0e266016"
+                    >tái dựng chức năng lưu replay của TH09</a
+                  >.
+                </li>
+              </ul>
+              <p>
+                Những so sánh được đề xuất giữa các mô hình chuyên dụng và chương trình đào tạo RL là những thử nghiệm trong tương lai. Lịch sử dự án thúc đẩy họ. Không có mô hình chuyên ngành được đào tạo nào được đánh giá cho bài tiểu luận này.
+              </p>
+            </details>
+          </section>
+        </article>
+      </div>
+    </main>
+    <!-- website:footer:start -->
+    <!-- prettier-ignore -->
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <p>REA · Reverse Engineer Anything</p>
+        <div class="footer-links">
+          <a href="../../faq/">FAQ</a
+          ><a href="../../contributors/">Người đóng góp</a
+          ><a href="https://github.com/morluto/rea">Mã nguồn</a
+          ><a href="https://github.com/morluto/rea/blob/main/LICENSE">Giấy phép MIT</a
+          ><a href="https://discord.gg/GkcryMnJDM">Tham gia cộng đồng</a
+          ><a href="https://x.com/reatools">Theo dõi trên X</a>
+        </div>
+      </div>
+    </footer>
+    <p class="sr-only" id="copy-status" role="status" aria-live="polite"></p>
+    <a class="back-to-top" href="#top" aria-label="Về đầu trang">
+      <span aria-hidden="true">↑</span> Hàng đầu
+    </a>
+    <!-- website:footer:end -->
+  </body>
+</html>

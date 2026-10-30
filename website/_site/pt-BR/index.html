@@ -1,0 +1,1222 @@
+<!doctype html>
+<html lang="pt-BR" dir="ltr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>REA-engenharia reversa para o seu agente de codificação</title>
+    <meta
+      name="description"
+      content="Engenharia reversa de aplicativos, binários e comportamento do navegador com seu agente de codificação. Siga guias claros e experimente exemplos interativos com REA ."
+    />
+    <!-- website:sharing:start -->
+    <!-- prettier-ignore -->
+    <link rel="canonical" href="https://rea.tools/pt-BR/" />
+    <!-- website:languages:start -->
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="en" href="https://rea.tools/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="zh-CN" href="https://rea.tools/zh-CN/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="zh-TW" href="https://rea.tools/zh-TW/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="ja" href="https://rea.tools/ja/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="ko" href="https://rea.tools/ko/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="tr" href="https://rea.tools/tr/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="ru" href="https://rea.tools/ru/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="vi" href="https://rea.tools/vi/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="th" href="https://rea.tools/th/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="de" href="https://rea.tools/de/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="es" href="https://rea.tools/es/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="fr" href="https://rea.tools/fr/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="uk" href="https://rea.tools/uk/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="pl" href="https://rea.tools/pl/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="pt-BR" href="https://rea.tools/pt-BR/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="ar" href="https://rea.tools/ar/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="fa" href="https://rea.tools/fa/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="id" href="https://rea.tools/id/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="it" href="https://rea.tools/it/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="el" href="https://rea.tools/el/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="x-default" href="https://rea.tools/" />
+<!-- website:languages:end -->
+    <!-- prettier-ignore -->
+    <meta property="og:type" content="website" />
+    <!-- prettier-ignore -->
+    <meta property="og:site_name" content="REA" />
+    <!-- prettier-ignore -->
+    <meta property="og:title" content="REA-engenharia reversa para o seu agente de codificação" />
+    <!-- prettier-ignore -->
+    <meta property="og:description" content="Engenharia reversa de aplicativos, binários e comportamento do navegador com seu agente de codificação. Siga guias claros e experimente exemplos interativos com REA ." />
+    <!-- prettier-ignore -->
+    <meta property="og:url" content="https://rea.tools/pt-BR/" />
+    <!-- prettier-ignore -->
+    <meta property="og:image" content="https://rea.tools/assets/social-card.png" />
+    <!-- prettier-ignore -->
+    <meta property="og:image:type" content="image/png" />
+    <!-- prettier-ignore -->
+    <meta property="og:image:width" content="1200" />
+    <!-- prettier-ignore -->
+    <meta property="og:image:height" content="630" />
+    <!-- prettier-ignore -->
+    <meta
+      property="og:image:alt"
+      content="REA-descubra como o software funciona. Engenharia reversa com seu agente de codificação."
+    />
+    <!-- prettier-ignore -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <!-- prettier-ignore -->
+    <meta name="twitter:title" content="REA-engenharia reversa para o seu agente de codificação" />
+    <!-- prettier-ignore -->
+    <meta name="twitter:description" content="Engenharia reversa de aplicativos, binários e comportamento do navegador com seu agente de codificação. Siga guias claros e experimente exemplos interativos com REA ." />
+    <!-- prettier-ignore -->
+    <meta name="twitter:image" content="https://rea.tools/assets/social-card.png" />
+    <!-- prettier-ignore -->
+    <meta
+      name="twitter:image:alt"
+      content="REA-descubra como o software funciona. Engenharia reversa com seu agente de codificação."
+    />
+    <!-- website:sharing:end -->
+    <!-- website:theme:start -->
+    <meta name="theme-color" content="#ffffff" />
+    <!-- Apply the saved theme before styles load, to avoid a flash on navigation. -->
+    <script src="../assets/theme.js"></script>
+    <!-- website:theme:end -->
+    <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="../assets/styles.css" />
+    <script src="../assets/main.js" defer></script>
+    <script type="module" src="../assets/home.js"></script>
+    <script type="module" src="../assets/dino-demo.js"></script>
+  <script id="website-messages" type="application/json">{"Distance {distance}": "Distância {distance}", "Hit a cactus. Try another speed.": "Bata em um cacto. Tente outra velocidade.", "Space or Jump ↑": "Espaço ou salto", "Play again": "Jogar novamente", "Play": "Jogar", "Press Play, then jump over the cactus.": "Pressione Play e, em seguida, salte sobre o cacto.", "Hit a cactus. Press Play again, or change the speed and restart.": "Bata em um cacto. Pressione Play novamente ou altere a velocidade e reinicie.", "Pause": "Pausa", "Running. Space or Jump clears a cactus.": "A correr. Espaço ou salto limpa um cacto.", "Paused. Press Play to continue.": "Parou. Prima Play para continuar.", "Fixed speed: {speed}. Space or Jump clears a cactus.": "Velocidade fixa: {speed}. Espaço ou salto limpa um cacto.", "Fixed speed: {speed}. Press Play to try it.": "Velocidade fixa: {speed}. Pressione Play para tentar.", "Recovered rule: start at 6, then increase toward 13.": "Regra recuperada: comece em 6, depois aumente para 13.", "Fixed speed: {speed}.": "Velocidade fixa: {speed}.", "Replayed the recovered rule. All four values match the controlled original-game check when rounded to three decimals.": "Repetiu a regra recuperada. Todos os quatro valores correspondem à verificação do jogo original controlada quando arredondados para três casas decimais.", "The replay differs from the recorded original-game values. Compare the speed rule and settings above.": "O replay difere dos valores registados no jogo original. Compare a regra de velocidade e as configurações acima.", "Press % to see what happens to 10.": "Prima % para ver o que acontece com 10.", "10% of 200 is 20. Press = to add it.": "10% de 200 é 20. Pressione = para adicioná-lo.", "For multiplication, 10 becomes 0.1. Press = to multiply.": "Para multiplicação, 10 torna-se 0,1. Pressione = para multiplicar.", "Copied": "Copiados", "Code copied to clipboard.": "Código copiado para a área de transferência.", "Selected": "Seleccionado", "Code selected. Use your keyboard to copy it.": "Código seleccionado. Use o teclado para copiá-lo.", "REA on GitHub ({count})": "REA em GitHub ({count})", "Switch to light mode": "Alternar para o modo claro", "Switch to dark mode": "Alternar para o modo escuro"}</script>
+  </head>
+  <body class="home-page" id="top">
+    <a class="skip-link" href="#main">Ir para o conteúdo</a>
+    <!-- website:header:start -->
+    <!-- prettier-ignore -->
+    <header class="site-header">
+      <div class="container header-inner">
+        <a class="brand" href="./" aria-label="Página inicial do REA"
+          ><span class="brand-name">REA</span
+          ><span class="brand-caption" data-i18n-skip>Reverse Engineer Anything</span></a
+        >
+        <nav class="navigation" aria-label="Navegação principal">
+          <a href="../get-started/" class="nav-start">Começar</a>
+          <a href="showcase/">Casos práticos</a>
+          <a href="blog/">Blog</a>
+          <a href="guides/">Guias</a>
+        </nav>
+        <div class="header-social">
+          <details class="language-picker" data-i18n-skip><summary><span aria-hidden="true">文 / A</span> <span>Português (Brasil)</span></summary><nav aria-label="Português (Brasil)"><a href="../" lang="en" dir="ltr" data-language="en">English</a><a href="../zh-CN/" lang="zh-CN" dir="ltr" data-language="zh-CN">简体中文</a><a href="../zh-TW/" lang="zh-TW" dir="ltr" data-language="zh-TW">繁體中文</a><a href="../ja/" lang="ja" dir="ltr" data-language="ja">日本語</a><a href="../ko/" lang="ko" dir="ltr" data-language="ko">한국어</a><a href="../tr/" lang="tr" dir="ltr" data-language="tr">Türkçe</a><a href="../ru/" lang="ru" dir="ltr" data-language="ru">Русский</a><a href="../vi/" lang="vi" dir="ltr" data-language="vi">Tiếng Việt</a><a href="../th/" lang="th" dir="ltr" data-language="th">ไทย</a><a href="../de/" lang="de" dir="ltr" data-language="de">Deutsch</a><a href="../es/" lang="es" dir="ltr" data-language="es">Español</a><a href="../fr/" lang="fr" dir="ltr" data-language="fr">Français</a><a href="../uk/" lang="uk" dir="ltr" data-language="uk">Українська</a><a href="../pl/" lang="pl" dir="ltr" data-language="pl">Polski</a><a href="../pt-BR/" lang="pt-BR" dir="ltr" data-language="pt-BR" aria-current="true">Português (Brasil)</a><a href="../ar/" lang="ar" dir="rtl" data-language="ar">العربية</a><a href="../fa/" lang="fa" dir="rtl" data-language="fa">فارسی</a><a href="../id/" lang="id" dir="ltr" data-language="id">Bahasa Indonesia</a><a href="../it/" lang="it" dir="ltr" data-language="it">Italiano</a><a href="../el/" lang="el" dir="ltr" data-language="el">Ελληνικά</a><a href="../ml/" lang="ml" dir="ltr" data-language="ml">മലയാളം · English</a><a href="../ur-Latn/" lang="ur-Latn" dir="ltr" data-language="ur-Latn">Roman Urdu · English</a><a href="../ro/" lang="ro" dir="ltr" data-language="ro">Română · English</a></nav></details>
+          <button class="theme-toggle" type="button" data-theme-toggle hidden>
+            <svg class="theme-moon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+              <path d="M20.9 13a9 9 0 0 1-9.9-9.9A9 9 0 1 0 20.9 13Z" />
+            </svg>
+            <svg class="theme-sun" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true" focusable="false">
+              <circle cx="12" cy="12" r="4" />
+              <path d="M12 2v2m0 16v2M2 12h2m16 0h2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42" />
+            </svg>
+          </button>
+          <a
+            class="nav-github"
+            href="https://github.com/morluto/rea"
+            aria-label="REA no GitHub"
+            title="REA no GitHub"
+          >
+            <svg
+              width="22"
+              height="22"
+              viewBox="0 0 16 16"
+              aria-hidden="true"
+              focusable="false"
+            >
+              <path
+                fill="currentColor"
+                d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82a7.65 7.65 0 0 1 2-.27c.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z"
+              />
+            </svg>
+            <span class="nav-github-count" hidden aria-hidden="true"></span>
+          </a>
+          <a
+            class="nav-discord"
+            href="https://discord.gg/GkcryMnJDM"
+            aria-label="Participe do Discord do REA"
+            title="Participe do Discord do REA"
+          >
+            <svg
+              width="22"
+              height="22"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+              focusable="false"
+            >
+              <path
+                fill="currentColor"
+                d="M20.317 4.3698a19.7913 19.7913 0 0 0-4.8851-1.5152.0741.0741 0 0 0-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 0 0-.0785-.037 19.7363 19.7363 0 0 0-4.8852 1.515.0699.0699 0 0 0-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 0 0 .0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 0 0 .0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 0 0-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 0 1-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 0 1 .0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 0 1 .0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 0 1-.0066.1276 12.2986 12.2986 0 0 1-1.873.8914.0766.0766 0 0 0-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 0 0 .0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 0 0 .0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 0 0-.0312-.0286ZM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189Zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189Z"
+              />
+            </svg>
+          </a>
+          <a
+            class="nav-x"
+            href="https://x.com/reatools"
+            aria-label="Siga o REA no X"
+            title="Siga o REA no X"
+          >
+            <svg
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+              focusable="false"
+            >
+              <path
+                fill="currentColor"
+                d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z"
+              />
+            </svg>
+          </a>
+        </div>
+      </div>
+    </header>
+    <!-- website:header:end -->
+    <main id="main">
+      <section class="container hero home-hero" id="setup">
+        <div class="home-start-grid">
+          <div>
+            <p class="eyebrow">Engenharia reversa, com seu agente de codificação</p>
+            <h1>Descubra como<br />o software funciona.</h1>
+            <p class="lede">
+              Pergunte ao seu agente de programação sobre um aplicativo, jogo ou site. O REA fornece ferramentas para examinar o código por trás da resposta.
+            </p>
+            <div class="actions">
+              <a class="button" href="../get-started/">Começar</a>
+              <a class="text-link" href="#dinosaur">Veja um exemplo ↓</a>
+            </div>
+          </div>
+          <div class="home-setup" id="install">
+            <div class="home-setup-agent">
+              <h2>Configurar REA</h2>
+              <p>Copie este prompt para seu agente de programação:</p>
+              <div class="agent-terminal">
+                <div class="terminal-header">
+                  <span class="terminal-title"
+                    ><span class="terminal-dots" aria-hidden="true"
+                      ><i></i><i></i><i></i></span
+                    >O seu agente de codificação</span
+                  >
+                  <button
+                    class="copy-button"
+                    type="button"
+                    data-copy="home-install-prompt"
+                    aria-label="Copiar o aviso de instalação do REA"
+                  >
+                    Copiar
+                  </button>
+                </div>
+                <p class="terminal-prompt">
+                  <span class="prompt-symbol" aria-hidden="true">›</span
+                  ><span id="home-install-prompt"
+                    >Instale o REA e conecte-o a este agente de programação usando <span translate="no">npx rea-agents@latest setup</span>. Mostre primeiro as alterações propostas e espere minha aprovação. Depois, verifique a instalação.</span
+                  ><span class="terminal-cursor" aria-hidden="true"></span>
+                </p>
+              </div>
+            </div>
+            <details class="home-setup-command" open>
+              <summary>Ou execute este comando no terminal:</summary>
+              <div class="code-block code-inline">
+                <code id="setup-command">npx rea-agents@latest setup</code>
+                <button
+                  class="copy-button"
+                  type="button"
+                  data-copy="setup-command"
+                  aria-label="Comando Copiar configuração"
+                >
+                  Copiar
+                </button>
+              </div>
+              <p class="caption">
+                Revise e aprove as alterações propostas. Depois, reinicie seu agente.
+              </p>
+            </details>
+            <details class="home-install-options" open>
+              <summary>Opções de configuração</summary>
+              <nav class="home-install-resources" aria-label="Opções de configuração">
+                <span>Configuração para sua plataforma:</span>
+                <a href="../get-started/#node-windows-help"
+                  ><span translate="no">Windows (PowerShell)</span></a
+                >
+                <a href="../get-started/#node-macos-help"
+                  ><span translate="no">macOS</span></a
+                >
+                <a href="../get-started/#node-linux-help"
+                  ><span translate="no">Linux</span></a
+                >
+              </nav>
+              <p class="home-other-install-options">
+                Outras opções de instalação: <a href="../get-started/#curl-installation"
+                  ><span translate="no">curl</span> →</a
+                >
+              </p>
+            </details>
+            <p class="home-expert-shortcut">
+              Primeira vez, ou ausente <span translate="no">Node.js</span> ou um agente de codificação? <a href="../get-started/">Siga o Guia de configuração passo-a-passo7</a>
+            </p>
+          </div>
+        </div>
+        <div class="home-reading-links">
+          <div>
+            <a class="text-link" href="#rl-environments"
+              >Criar ambientes de RL →</a
+            >
+            <p>Grave um aplicativo web para treinar e testar agentes.</p>
+          </div>
+          <div>
+            <a class="text-link" href="showcase/">Apresenta →</a>
+            <p>Investigações e demonstrações interativas.</p>
+          </div>
+          <div>
+            <a class="text-link" href="blog/">Blog →</a>
+            <p>Métodos e notas sobre reconstrução.</p>
+          </div>
+        </div>
+      </section>
+
+      <details class="home-page-nav" data-home-nav open>
+        <summary class="container">
+          <span>Nesta página</span>
+          <span
+            class="home-nav-current"
+            data-home-nav-current
+            aria-hidden="true"
+            >Configurar REA</span
+          >
+          <svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true">
+            <path d="m2 4 4 4 4-4" fill="none" stroke="currentColor" />
+          </svg>
+        </summary>
+        <nav class="home-nav-links" aria-label="Nesta página">
+          <div class="container">
+            <p class="home-nav-title">Nesta página</p>
+            <ul>
+              <li><a href="#setup" aria-current="location">Configurar REA </a></li>
+              <li><a href="#what-is-re">Como funciona</a></li>
+              <li><a href="#dinosaur">Jogo de dinossauros</a></li>
+              <li><a href="#calculator">Calculadora</a></li>
+              <li><a href="#showcases">Casos práticos</a></li>
+              <li><a href="#rl-environments">Ambientes de RL</a></li>
+              <li><a href="#try-rea">Experimente REA </a></li>
+              <li><a href="#analyze">Aprofunde-se</a></li>
+            </ul>
+          </div>
+        </nav>
+      </details>
+
+      <section class="section" id="what-is-re">
+        <div class="container">
+          <div class="section-heading">
+            <h2>Como funciona</h2>
+          </div>
+          <p class="lede">
+            Engenharia reversa é entender como um software funciona examinando o próprio programa. Com o REA, seu agente pode seguir o código, explicar uma função e ajudar você a recriá-la.
+          </p>
+          <ol class="home-workflow" id="how-rea-helps">
+            <li>
+              <h3>Pergunte sobre uma função</h3>
+              <p>Dê ao seu agente um programa ou página e uma pergunta.</p>
+            </li>
+            <li>
+              <h3>Examine o programa</h3>
+              <p>
+                O REA ajuda seu agente a ler o código e observar o que o programa faz durante a execução.
+              </p>
+            </li>
+            <li>
+              <h3>Entenda e experimente uma mudança</h3>
+              <p>
+                Seu agente usa as descobertas para explicar ou recriar a função.
+              </p>
+            </li>
+          </ol>
+          <details class="home-evidence-details" open>
+            <summary>Veja a investigação completa da Calculadora</summary>
+            <p class="comparison-question">
+              Por que <span translate="no">200 + 10%</span> resulta em 220 na Calculadora?
+            </p>
+            <figure class="home-role-comparison">
+              <div
+                class="manual-investigation step-comparison"
+                data-step-comparison
+              >
+                <h3 class="comparison-label">
+                  Siga as instruções passo a passo
+                </h3>
+                <div
+                  class="step-selector expert-step-selector"
+                  role="group"
+                  aria-label="Siga a análise manual da calculadora"
+                >
+                  <button
+                    type="button"
+                    data-select-step="1"
+                    aria-pressed="true"
+                    aria-controls="expert-assembly expert-reasoning"
+                  >
+                    <span>01</span> Descodificar ramificações
+                  </button>
+                  <button
+                    type="button"
+                    data-select-step="2"
+                    aria-pressed="false"
+                    aria-controls="expert-assembly expert-reasoning"
+                  >
+                    <span>02</span> Rastrear chamadas
+                  </button>
+                  <button
+                    type="button"
+                    data-select-step="3"
+                    aria-pressed="false"
+                    aria-controls="expert-assembly expert-reasoning"
+                  >
+                    <span>03</span> Recuperar a regra
+                  </button>
+                </div>
+                <div class="expert-analysis-grid">
+                  <details class="code-block expert-assembly" open>
+                    <summary class="code-header">
+                      <span>Original x64 · instruções seleccionadas</span> <span
+                        class="assembly-disclosure"
+                        aria-hidden="true"
+                      ></span>
+                    </summary>
+                    <pre><code id="expert-assembly"><span class="code-step is-active" data-step="1">0x180124945: MOV EAX, dword ptr [R13 + 0x18]
+0x180124949: CMP EAX, 0x5c
+0x18012494c: JZ 0x180124aba
+0x180124952: CMP EAX, 0x5b
+0x180124955: JZ 0x180124aba</span>
+<span class="code-step" data-step="2">0x18012495b: MOV EDX, 0x64
+0x180124960: LEA RCX, [RSP + 0x160]
+0x180124968: CALL 0x180122650
+0x18012496e: LEA RDX, [R13 + 0x160]
+0x180124975: LEA RCX, [RSP + 0x78]
+0x18012497a: CALL 0x180109720</span>
+0x18012497f: MOV RSI, RAX
+0x180124982: MOV qword ptr [RSP + 0x28], RAX
+<span class="code-step" data-step="2">0x180124987: LEA RDX, [RSP + 0x160]
+0x18012498f: MOV RCX, RAX
+0x180124992: CALL 0x180123190</span>
+<span class="assembly-omission">; … value-copy instructions omitted …</span>
+<span class="code-step" data-step="3">0x180124a14: MOV RDX, RDI
+0x180124a17: LEA RCX, [RSP + 0xf8]
+0x180124a1f: CALL 0x180109720
+0x180124a24: LEA R8, [RSP + 0x30]
+0x180124a29: MOV RDX, RAX
+0x180124a2c: LEA RCX, [RSP + 0xb8]
+0x180124a34: CALL 0x180123c10</span></code></pre>
+                  </details>
+                  <aside
+                    class="expert-reasoning"
+                    aria-label="Raciocínio ilustrativo de peritos"
+                  >
+                    <div
+                      id="expert-reasoning"
+                      aria-live="polite"
+                      aria-atomic="true"
+                    >
+                      <div class="expert-thought" data-step-note="1">
+                        <p class="thought-label">01 * que ramo?</p>
+                        <p>
+                          “<strong>0x5b? 0x5c?</strong> Dois saltos para o mesmo lugar. Que operadores são estes?”
+                        </p>
+                        <p class="expert-task">
+                          Procure os IDs do comando e, em seguida, rotule a ramificação.
+                        </p>
+                        <dl class="expert-facts">
+                          <div>
+                            <dt>0x5b</dt>
+                            <dd>Dividir ÷</dd>
+                          </div>
+                          <div>
+                            <dt>0x5c</dt>
+                            <dd>Multiplicar ×</dd>
+                          </div>
+                        </dl>
+                      </div>
+                      <div class="expert-thought" data-step-note="2">
+                        <p class="thought-label">02 · O que fazem as funções chamadas?</p>
+                        <p>
+                          "100 é claro. As chamadas são apenas endereços. <strong
+                            >Qual deles divide? Que valor entra?</strong
+                          >”
+                        </p>
+                        <p class="expert-task">
+                          Inspecione as funções auxiliares e rastreie os valores armazenados.
+                        </p>
+                        <dl class="expert-facts">
+                          <div>
+                            <dt>0x64</dt>
+                            <dd>100</dd>
+                          </div>
+                          <div>
+                            <dt>…123190</dt>
+                            <dd>Dividir</dd>
+                          </div>
+                        </dl>
+                      </div>
+                      <div class="expert-thought" data-step-note="3">
+                        <p class="thought-label">03 * Qual é a regra?</p>
+                        <p>
+                          "Este caminho multiplica-se pela outra entrada. Então <strong>10% significa 10% de 200</strong> depois de +.”
+                        </p>
+                        <p class="expert-task">
+                          Nomeie os operandos e verifique os dois caminhos do operador.
+                        </p>
+                        <div class="expert-rule">
+                          <span>200 × 10 / 100</span>
+                          <strong>20</strong>
+                        </div>
+                      </div>
+                    </div>
+                    <img
+                      class="expert-illustration"
+                      src="../assets/localized/pt-BR/figures/analyst-thinking.svg"
+                      alt=""
+                      width="160"
+                      height="120"
+                    />
+                    <p class="expert-caption">Raciocínio ilustrativo de peritos</p>
+                  </aside>
+                </div>
+                <p class="manual-work-summary">
+                  <strong
+                    >Descodifica as instruções, segue as chamadas de função e reconstrói o cálculo.</strong
+                  >
+                </p>
+              </div>
+              <div class="agent-investigation" id="ask-your-agent">
+                <p class="comparison-label">Faça a mesma pergunta ao seu agente</p>
+                <div class="agent-terminal home-analysis-terminal">
+                  <div class="terminal-header">
+                    <span class="terminal-title"
+                      ><span class="terminal-dots" aria-hidden="true"
+                        ><i></i><i></i><i></i></span
+                      >Exemplo de alerta * Calculadora</span
+                    >
+                    <button
+                      class="copy-button"
+                      type="button"
+                      data-copy="home-analysis-prompt"
+                      aria-label="Pergunta percentual da calculadora de cópia"
+                    >
+                      Copiar
+                    </button>
+                  </div>
+                  <p class="terminal-prompt">
+                    <span class="prompt-symbol" aria-hidden="true">›</span
+                    ><span id="home-analysis-prompt"
+                      >Utilizar REA para inspecionar Windows Calculadora. Por que <span translate="no">200 + 10%</span> dão 220?</span
+                    ><span class="terminal-cursor" aria-hidden="true"></span>
+                  </p>
+                  <div class="agent-reply">
+                    <p class="reply-label">
+                      Exemplo de resposta * com base nas conclusões
+                    </p>
+                    <p>
+                      Depois de+, o botão % leva <strong>uma percentagem do primeiro número.</strong>
+                    </p>
+                    <div class="agent-percent-rule">
+                      <code>10% of 200 = 20</code
+                      ><span aria-hidden="true">↓</span
+                      ><strong>200 + 20 = 220</strong>
+                    </div>
+                  </div>
+                </div>
+                <dl class="agent-evidence-roles">
+                  <div>
+                    <dt>O REA fornece</dt>
+                    <dd>
+                      Instruções do manipulador, código descompilado e chamadas.
+                    </dd>
+                  </div>
+                  <div>
+                    <dt>Seu agente explica</dt>
+                    <dd>
+                      Qual ramificação se aplica, o que calcula e como reconstruí-la.
+                    </dd>
+                  </div>
+                </dl>
+              </div>
+              <figcaption>
+                Conjunto selecionado da DLL da calculadora instalada. Os pensamentos e as respostas ilustram as conclusões. <a href="#calculator">Continue com o exemplo da calculadora</a>
+              </figcaption>
+            </figure>
+          </details>
+        </div>
+      </section>
+
+      <section class="section" id="dinosaur">
+        <div class="container">
+          <p class="home-examples-intro">
+            Vamos experimentar dois exemplos: mudar a velocidade de um jogo e recriar o botão % da Calculadora.
+          </p>
+          <div class="section-heading">
+            <p class="eyebrow">Exemplo 01 * jogo de dinossauros de Chrome</p>
+            <h2>Por que o dinossauro fica mais rápido?</h2>
+          </div>
+          <p class="lede">
+            O jogo fica mais rápido enquanto você corre. Para recriá-lo com um controle de velocidade, primeiro precisamos descobrir como a velocidade muda.
+          </p>
+          <div class="home-example-grid dino-example-grid">
+            <div class="home-case-story">
+              <h3>1. Pergunte sobre a velocidade</h3>
+              <div class="agent-terminal home-analysis-terminal">
+                <div class="terminal-header">
+                  <span class="terminal-title"
+                    ><span class="terminal-dots" aria-hidden="true"
+                      ><i></i><i></i><i></i></span
+                    >Pergunta de exemplo · Jogo do dinossauro</span
+                  >
+                  <button
+                    class="copy-button"
+                    type="button"
+                    data-copy="dino-analysis-prompt"
+                    aria-label="Copie o alerta da análise do dinossauro"
+                  >
+                    Copiar
+                  </button>
+                </div>
+                <p class="terminal-prompt">
+                  <span class="prompt-symbol" aria-hidden="true">›</span
+                  ><span id="dino-analysis-prompt"
+                    >Use REA para inspecionar este jogo de dinossauros. Por que fica mais rápido? Mostre a regra da velocidade, a seguir construa uma versão pequena com uma velocidade ajustável.</span
+                  ><span class="terminal-cursor" aria-hidden="true"></span>
+                </p>
+              </div>
+              <h3>2. Encontre a regra de velocidade</h3>
+              <p>
+                O REA permite ao agente ler o código do jogo em execução. A velocidade começa em 6 e aumenta um pouco a cada atualização enquanto estiver abaixo de 13.
+              </p>
+            </div>
+            <div class="home-case-result">
+              <h3>3. Jogue o resultado</h3>
+              <p>
+                Recriamos essa regra no minijogo abaixo e acrescentamos um controle de velocidade. Pressione Jogar e escolha sua velocidade.
+              </p>
+              <figure class="dino-demo" data-dino-demo>
+                <div class="dino-stage">
+                  <svg
+                    class="dino-fallback"
+                    viewBox="0 0 600 180"
+                    role="img"
+                    aria-label="A small dinosaur running toward a cactus. Recovered speed: starts at 6, increases by 0.001 per update while below 13."
+                  >
+                    <path
+                      d="M0 150H600 M55 113v-30h17V65h27v24H85v17H72v16H62v13h-7v-22m-5-8v-8h-8v-9h-6v22h19m14 15v15h8v-7h-4v-8 M420 150v-48h10v48m-10-15h-12v-22h7v15h5m10-4h12v-22h-7v15h-5"
+                      fill="currentColor"
+                    />
+                    <text
+                      x="300"
+                      y="65"
+                      text-anchor="middle"
+                      fill="currentColor"
+                      font-size="18"
+                    >
+                      6 → 10 → 13
+                    </text>
+                  </svg>
+                  <canvas
+                    width="600"
+                    height="180"
+                    tabindex="0"
+                    aria-label="Mini-jogo de dinossauros. Use o botão de salto ou pressione espaço enquanto o jogo está focado."
+                    hidden
+                  ></canvas>
+                </div>
+                <div class="dino-controls" hidden>
+                  <div class="dino-buttons">
+                    <button class="button" type="button" data-dino-start>
+                      Jogar
+                    </button>
+                    <button type="button" data-dino-jump>Pular ↑</button>
+                    <button type="button" data-dino-reset>Reiniciar</button>
+                  </div>
+                  <label class="dino-speed-label"
+                    >Velocidade <output data-dino-speed>6.0</output
+                    ><input
+                      type="range"
+                      min="2"
+                      max="18"
+                      step="0.1"
+                      value="6"
+                      data-dino-slider
+                  /></label>
+                  <label class="dino-auto-label"
+                    ><input type="checkbox" data-dino-auto checked /> Use a regra de aceleração recuperada</label
+                  >
+                </div>
+                <p class="dino-status" data-dino-status role="status">
+                  Regra Original: comece em 6, depois aumente para 13.
+                </p>
+                <figcaption>
+                  Mova o controle deslizante para definir sua própria velocidade. Espaço ou salto limpa um cacto.
+                </figcaption>
+                <noscript
+                  ><p class="caption">
+                    Ative JavaScript para jogar. Você ainda pode ler a regra e abrir o código-fonte abaixo.
+                  </p></noscript
+                >
+              </figure>
+              <a class="text-link" href="examples/dino-lab/"
+                >Abrir o laboratório de velocidade</a
+              >
+            </div>
+          </div>
+          <details class="home-evidence-details">
+            <summary>
+              Veja o script, verificações e como tentar a análise
+            </summary>
+            <p class="caption">
+              Alvo inspeccionado: <a href="https://wayou.github.io/t-rex-runner/"
+                >edição de navegador derivada do Chromium da wayou</a
+              >.
+            </p>
+            <div class="code-block">
+              <div class="code-header">
+                <span
+                  >REA * carregado <span translate="no">index.js</span> * linhas seleccionadas</span
+                >
+              </div>
+              <pre><code>if (this.currentSpeed &lt; this.config.MAX_SPEED) {
+  <span class="code-key">this.currentSpeed += this.config.ACCELERATION;</span>
+}</code></pre>
+            </div>
+            <p class="dino-rule">
+              Comece às 6. Adicionar 0.001 cada atualização sem colisão, enquanto a velocidade é inferior 13.
+            </p>
+            <figure class="workflow-figure dino-loop">
+              <p class="figure-title">O que cada parte faz</p>
+              <ol class="flow-steps">
+                <li>
+                  <span class="flow-label">01 * REA </span
+                  ><span class="flow-node">Leia o roteiro do jogo em execução</span
+                  ><span class="flow-note"
+                    >Devolva o seu código e definições reais ao agente.</span
+                  >
+                </li>
+                <li>
+                  <span class="flow-label">02 * o seu agente</span
+                  ><span class="flow-node">Reconstruir a regra, adicionar um controlo</span
+                  ><span class="flow-note"
+                    >Use a aceleração recuperada em um pequeno jogo com um controle deslizante de velocidade.</span
+                  >
+                </li>
+                <li>
+                  <span class="flow-label">03 * Você</span
+                  ><span class="flow-node">Alterar a velocidade e jogar</span
+                  ><span class="flow-note"
+                    >Experimente a aceleração original e escolha o seu próprio ritmo.</span
+                  >
+                </li>
+              </ol>
+            </figure>
+            <p>
+              O REA inspecionou a edição do navegador HTTP por meio de uma conexão de depuração local e retornou <code>index.js</code>, incluindo a sua fonte e digestão.
+            </p>
+            <div class="code-block">
+              <div class="code-header">
+                <span>Definições seleccionadas a partir do script inspeccionado</span>
+              </div>
+              <pre><code>ACCELERATION: 0.001,
+MAX_SPEED: 13,
+SPEED: 6</code></pre>
+            </div>
+            <p>
+              Chamamos a função de atualização do jogo original em uma verificação controlada do navegador, com obstáculos e programação automática desativados. Após 4.000 atualizações, a velocidade era de 10,0; após 10.000, era de 13,0, arredondado para um decimal.
+            </p>
+            <p>
+              O novo mini-jogo mantém essa regra de velocidade. Seu código de desenho, salto e colisão é uma pequena implementação de ensino. <a href="examples/dino-lab/">Abrir o laboratório</a> para ver o novo código e executar a mesma verificação de velocidade.
+            </p>
+            <p>
+              Para inspecionar o alvo você mesmo, siga o <a href="guides/browser/#prepare">etapas de conexão do navegador</a> utilização <a href="https://wayou.github.io/t-rex-runner/"
+                >a página do dinossauro</a
+              >. Forneça ao seu agente o URL da página e o ponto de extremidade de depuração local e, em seguida, copie o prompt acima.
+            </p>
+            <p class="caption">
+              <a
+                href="https://github.com/wayou/t-rex-runner/blob/5455bfa408ec6b707c7300ff194b7390733a766d/index.js#L565-L571"
+                >Código de velocidade inspeccionado</a
+              > · <a href="../assets/licenses/dinosaur.txt"
+                > Chromium autores * licença BSD</a
+              >
+            </p>
+          </details>
+        </div>
+      </section>
+
+      <section class="section" id="calculator">
+        <div class="container">
+          <div class="section-heading">
+            <p class="eyebrow">Exemplo 02 * Calculadora Windows</p>
+            <h2>Recrie o botão % da calculadora.</h2>
+          </div>
+          <p class="lede">
+            O botão % faz coisas diferentes depois de + e ×. Vamos encontrar as duas regras e experimentá-las em uma pequena calculadora.
+          </p>
+          <div class="home-example-grid">
+            <div class="home-case-story">
+              <h3>1. Pergunte sobre o botão %</h3>
+              <div class="agent-terminal">
+                <div class="terminal-header">
+                  <span class="terminal-title"
+                    ><span class="terminal-dots" aria-hidden="true"
+                      ><i></i><i></i><i></i></span
+                    >Pergunta de exemplo · Calculadora</span
+                  >
+                  <button
+                    class="copy-button"
+                    type="button"
+                    data-copy="calculator-analysis-prompt"
+                    aria-label="Cópia Calculadora análise prompt"
+                  >
+                    Copiar
+                  </button>
+                </div>
+                <p class="terminal-prompt">
+                  <span class="prompt-symbol" aria-hidden="true">›</span
+                  ><span id="calculator-analysis-prompt"
+                    >Use REA para inspecionar o botão % da calculadora Windows. Recupere as regras depois de + E7X, em seguida, construir uma pequena calculadora que usa ambos.</span
+                  ><span class="terminal-cursor" aria-hidden="true"></span>
+                </p>
+              </div>
+              <h3>2. Encontre as duas regras</h3>
+              <p>
+                O REA ajuda o agente a ler o código do botão %. Ele aplica duas regras diferentes:
+              </p>
+              <dl class="percent-rules">
+                <div>
+                  <dt>Com +</dt>
+                  <dd>
+                    <span>Pegue 10% do primeiro número.</span
+                    ><code>10% of 200 = 20 → 200 + 20 = 220</code>
+                  </dd>
+                </div>
+                <div>
+                  <dt>Com a ×</dt>
+                  <dd>
+                    <span>Transformar 10% em 0,1.</span><code>200 × 0.1 = 20</code>
+                  </dd>
+                </div>
+              </dl>
+            </div>
+            <div class="home-case-result">
+              <h3>3. Experimente o botão %</h3>
+              <p>
+                Recriamos as duas regras abaixo. Escolha + ou ×, pressione % e depois =.
+              </p>
+              <figure class="percent-figure" data-percent-demo>
+                <div
+                  class="percent-operation"
+                  role="group"
+                  aria-label="Escolha o cálculo"
+                  hidden
+                >
+                  <button
+                    type="button"
+                    data-percent-operation="add"
+                    aria-pressed="true"
+                  >
+                    <span translate="no">200 + 10%</span>
+                  </button>
+                  <button
+                    type="button"
+                    data-percent-operation="multiply"
+                    aria-pressed="false"
+                  >
+                    <span translate="no">200 × 10%</span>
+                  </button>
+                </div>
+                <div class="percent-display">
+                  <span class="percent-expression" data-percent-expression
+                    >200 +</span
+                  >
+                  <strong data-percent-display>20</strong>
+                </div>
+                <div class="percent-controls" hidden>
+                  <button
+                    type="button"
+                    class="percent-key"
+                    data-percent-key="percent"
+                  >
+                    %
+                  </button>
+                  <button
+                    type="button"
+                    class="percent-key"
+                    data-percent-key="equals"
+                    disabled
+                  >
+                    =
+                  </button>
+                  <button
+                    type="button"
+                    class="percent-reset"
+                    data-percent-key="reset"
+                  >
+                    Redefinir
+                  </button>
+                </div>
+                <p class="percent-status" data-percent-status role="status">
+                  10% de 200 = 20. Então 200 + 20 = 220.
+                </p>
+                <figcaption>
+                  Ilustração interactiva da regra das percentagens inspeccionadas.
+                </figcaption>
+              </figure>
+            </div>
+          </div>
+          <details class="home-evidence-details">
+            <summary>Veja o código real e como a resposta foi verificada</summary>
+            <p>
+              Para este exemplo, <code>previous = 200</code> e <code>current = 10</code>.
+            </p>
+            <div class="code-block">
+              <div class="code-header">
+                <span>Resumo legível do manipulador %</span>
+              </div>
+              <pre><code>if (operation == multiply || operation == divide) {
+  percent = current / 100;
+} else {
+  <span class="code-key">percent = current * previous / 100;</span>
+}</code></pre>
+            </div>
+            <figure class="workflow-figure calculator-trace">
+              <p class="figure-title">
+                Do aplicativo instalado para um botão % funcional
+              </p>
+              <ol class="flow-steps">
+                <li>
+                  <span class="flow-label"
+                    >01 · REA lê <span translate="no">calc.exe</span></span
+                  ><span class="flow-node">Ele lança o aplicativo Calculadora</span
+                  ><span class="flow-note"
+                    >O código abre <code>ms-calculator:</code>. Em seguida, o agente seleciona a biblioteca do aplicativo instalado.</span
+                  >
+                </li>
+                <li>
+                  <span class="flow-label">02 * REA lê a biblioteca</span
+                  ><span class="flow-node">Retorna o código do manipulador % </span
+                  ><span class="flow-note"
+                    >A função verifica o operador e utiliza a constante <code>100</code>.</span
+                  >
+                </li>
+                <li>
+                  <span class="flow-label">03 * o seu agente interpreta-o</span
+                  ><span class="flow-node">Explicar e reproduzir as regras</span
+                  ><span class="flow-note"
+                    >Verifique o ramo com a fonte da Microsoft e, em seguida, tente + e elimi acima.</span
+                  >
+                </li>
+              </ol>
+            </figure>
+
+            <div class="code-comparison">
+              <div class="code-block">
+                <div class="code-header">
+                  <span>REA * instruções originais selecionadas</span>
+                </div>
+                <pre><code>0x180124945: MOV EAX, dword ptr [R13 + 0x18]
+0x180124949: <span class="code-key">CMP EAX, 0x5c</span>
+0x18012494c: JZ 0x180124aba
+0x180124952: <span class="code-key">CMP EAX, 0x5b</span>
+0x180124955: JZ 0x180124aba
+0x18012495b: <span class="code-key">MOV EDX, 0x64</span></code></pre>
+              </div>
+              <div class="code-block">
+                <div class="code-header">
+                  <span>IDs do operador * fonte da Microsoft</span>
+                </div>
+                <pre><code>#define IDC_MUL 92      // 0x5c
+#define IDC_DIV 91      // 0x5b
+#define IDC_PERCENT 118 // 0x76
+
+0x64 = 100</code></pre>
+              </div>
+            </div>
+
+            <p class="caption">
+              Inspeccionado com REA 4.1.0: Calculadora Windows 11.2508.4.0, x64. O resumo legível utiliza nomes da fonte pública da Microsoft para explicar o ramo recuperado.
+            </p>
+            <p class="caption">
+              <a
+                href="https://github.com/microsoft/calculator/blob/d125246a4e19842ce1332e6c7839cf0e110027d8/src/CalcManager/CEngine/scifunc.cpp#L98-L111"
+                >Percentagem de execução</a
+              > · <a
+                href="https://github.com/microsoft/calculator/blob/d125246a4e19842ce1332e6c7839cf0e110027d8/src/CalculatorUnitTests/CalculatorManagerTest.cpp#L350-L370"
+                >Casos de teste da Microsoft</a
+              > · <a href="../guides/native/">Guia de configuração nativo</a>
+            </p>
+          </details>
+        </div>
+      </section>
+
+      <section class="section" id="showcases">
+        <div class="container">
+          <div class="home-showcase-heading">
+            <div>
+              <h2>REA estudos de caso.</h2>
+              <p class="lede">
+                Explore uma função de um aplicativo ou jogo publicado, com código e resultados verificados.
+              </p>
+            </div>
+            <a class="text-link" href="showcase/">Apresenta →</a>
+          </div>
+          <div class="home-case-grid">
+            <article class="home-case-card">
+              <p class="eyebrow">Android * análise APK</p>
+              <h3>Como um autenticador gera um código de login</h3>
+              <p>
+                Siga o código de acesso de seis dígitos do Aegis em seu APK publicado. Depois mova o relógio da demonstração para ver por que ele muda a cada 30 segundos.
+              </p>
+              <a class="text-link" href="../showcase/aegis/"
+                >Leia o estudo de caso do Android</a
+              >
+            </article>
+            <article class="home-case-card">
+              <p class="eyebrow">Electron * rastreio de características</p>
+              <h3>Como Notion copia texto e HTML</h3>
+              <p>
+                Siga o JavaScript empacotado do Notion até a área de transferência do sistema e veja como uma cópia preserva dados ricos dos blocos.
+              </p>
+              <a class="text-link" href="showcase/notion/"
+                >Leia o estudo de caso Notion</a
+              >
+            </article>
+            <article class="home-case-card">
+              <p class="eyebrow">Nativo * Reconstrução</p>
+              <h3>DX-Ball cálculo da posição sonora esquerda/direita</h3>
+              <p>
+                Recupere como a posição da bola se transforma em som à esquerda ou à direita em um jogo de Windows de 1996.
+              </p>
+              <a class="text-link" href="showcase/dx-ball/"
+                >Leia o estudo de caso DX-Ball</a
+              >
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section home-environments" id="rl-environments">
+        <div class="container home-environment-grid">
+          <div>
+            <div class="section-heading">
+              <h2>Criar ambientes de RL</h2>
+              <p class="lede">
+                Transforme uma sessão gravada de um aplicativo web em um ambiente executável para treinar e testar agentes de IA.
+              </p>
+            </div>
+            <p>
+              Seu agente registra as requisições do navegador e as respostas do aplicativo. O REA usa esses dados para criar um ambiente local onde os agentes podem praticar tarefas sem executar o aplicativo original.
+            </p>
+            <p>
+              Para permitir a exclusão de pastas, o registro precisa mostrar a pasta antes da exclusão e confirmar que ela não existe mais depois.
+            </p>
+            <p>
+              <a class="text-link" href="../guides/rl-environments/"
+                >Guia para criar um ambiente</a
+              > · <a href="https://x.com/reatools/status/2112574822584918075?s=20"
+                >Veja a demonstração no X</a
+              >
+            </p>
+          </div>
+          <div>
+            <p>Configure o REA no agente e substitua a URL e as tarefas de pastas do exemplo pelas suas:</p>
+            <div class="agent-terminal">
+              <div class="terminal-header">
+                <span class="terminal-title"
+                  ><span class="terminal-dots" aria-hidden="true"
+                    ><i></i><i></i><i></i></span
+                  >O seu agente de codificação</span
+                ><button
+                  class="copy-button"
+                  type="button"
+                  data-copy="home-environment-prompt"
+                  aria-label="Copiar o prompt"
+                >
+                  Copiar
+                </button>
+              </div>
+              <p class="terminal-prompt">
+                <span class="prompt-symbol" aria-hidden="true">›</span
+                ><span id="home-environment-prompt"
+                  >Use o REA para criar um ambiente de RL a partir do meu aplicativo web de teste em <code>http://127.0.0.1:3000</code>. Inclua listar, criar, renomear e excluir pastas. Pode criar e remover pastas de teste, mas não altere os dados existentes. Salve em uma pasta chamada <code>my-env</code>, verifique quais operações funcionam e diga como executar.</span
+                ><span class="terminal-cursor" aria-hidden="true"></span>
+              </p>
+            </div>
+            <p class="caption">
+              Prompt de exemplo. Substitua a URL e as tarefas de pastas pelas suas.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="try-rea">
+        <div class="container start-row">
+          <div>
+            <p class="eyebrow">Sua primeira investigação</p>
+            <h2>Tente REA em um pequeno aplicativo.</h2>
+            <p>
+              Baixe nosso exemplo de notas, Rastreie sua exportação CSV e verifique uma entrada alterada.
+            </p>
+          </div>
+          <a class="button" href="first-investigation/"
+            >Experimente o exemplo guiado</a
+          >
+        </div>
+      </section>
+
+      <section class="section" id="analyze">
+        <div class="container">
+          <div class="section-heading">
+            <h2>Escolha seu alvo.</h2>
+            <p>
+              Estes guias cobrem a configuração e uma primeira investigação para cada tipo de software.
+            </p>
+          </div>
+          <div class="workflows" id="analysis-guides">
+            <div>
+              <h3>Programas de código de máquina</h3>
+              <p>
+                Inspecione funções, strings, referências e relações de chamada de função em executáveis e bibliotecas.
+              </p>
+              <a href="../guides/native/">Análise do Guia de programas de código de máquina</a>
+            </div>
+            <div>
+              <h3>JavaScript &amp; Electron</h3>
+              <p>Acompanhe o código de um aplicativo de desktop escrito em JavaScript.</p>
+              <a href="../guides/javascript/">Fluxos de trabalho da aplicação</a>
+            </div>
+            <div>
+              <h3>Atividade do navegador e do tempo de execução</h3>
+              <p>
+                Capture a atividade selecionada do navegador ou do processo e compare os resultados entre as execuções.
+              </p>
+              <a href="guides/browser/">Guia de observação do navegador</a>
+            </div>
+          </div>
+          <details class="home-evidence-details" id="project-prompts">
+            <summary>Experimente um projeto maior</summary>
+            <div class="code-comparison home-project-prompts">
+              <div>
+                <div class="agent-terminal">
+                  <div class="terminal-header">
+                    <span class="terminal-title">
+                      <span class="terminal-dots" aria-hidden="true"
+                        ><i></i><i></i><i></i></span
+                      >Exemplo de pedido * Sítio Web
+                    </span>
+                    <button
+                      class="copy-button"
+                      type="button"
+                      data-copy="website-project-prompt"
+                      aria-label="Copiar pedido de Projecto do website"
+                    >
+                      Copiar
+                    </button>
+                  </div>
+                  <p class="terminal-prompt">
+                    <span class="prompt-symbol" aria-hidden="true">›</span
+                    ><span id="website-project-prompt"
+                      >Use REA para inspecionar <span translate="no">https://rea.tools/</span>. Clonar este site para mim.</span
+                    ><span class="terminal-cursor" aria-hidden="true"></span>
+                  </p>
+                </div>
+                <p class="caption">Sim, esta.</p>
+              </div>
+              <div>
+                <div class="agent-terminal">
+                  <div class="terminal-header">
+                    <span class="terminal-title">
+                      <span class="terminal-dots" aria-hidden="true"
+                        ><i></i><i></i><i></i></span
+                      >Exemplo de prompt * reconstrução do jogo
+                    </span>
+                    <button
+                      class="copy-button"
+                      type="button"
+                      data-copy="game-project-prompt"
+                      aria-label="Copiar o prompt de reconstrução do jogo"
+                    >
+                      Copiar
+                    </button>
+                  </div>
+                  <p class="terminal-prompt">
+                    <span class="prompt-symbol" aria-hidden="true">›</span
+                    ><span id="game-project-prompt"
+                      >Use REA para reconstruir este jogo a partir do seu executável. Recupere a lógica de jogo em C e teste-a contra o original.</span
+                    ><span class="terminal-cursor" aria-hidden="true"></span>
+                  </p>
+                </div>
+                <p class="caption">
+                  <a href="showcase/dx-ball/">Ver estudo de caso DX-Ball</a>
+                </p>
+              </div>
+            </div>
+          </details>
+        </div>
+      </section>
+      <section class="section" id="community">
+        <div class="container">
+          <div>
+            <h2>Alguma dúvida?</h2>
+            <div class="home-help-links">
+              <p>
+                <a href="faq/">Leia as perguntas frequentes</a> para obter ajuda com a configuração e esclarecer dúvidas comuns.
+              </p>
+              <p>
+                <a href="https://discord.gg/GkcryMnJDM">Entre no Discord</a> para receber ajuda e conversar sobre suas investigações.
+              </p>
+              <p>
+                Relate um erro ou solicite um recurso em <a href="https://github.com/morluto/rea/issues/new/choose"
+                  >GitHub Issues</a
+                >.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+    <!-- website:footer:start -->
+    <!-- prettier-ignore -->
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <p>REA · Reverse Engineer Anything</p>
+        <div class="footer-links">
+          <a href="faq/">FAQ</a
+          ><a href="contributors/">Colaboradores</a
+          ><a href="https://github.com/morluto/rea">Código-fonte</a
+          ><a href="https://github.com/morluto/rea/blob/main/LICENSE">Licença MIT</a
+          ><a href="https://discord.gg/GkcryMnJDM">Participe da comunidade</a
+          ><a href="https://x.com/reatools">Siga no X</a>
+        </div>
+      </div>
+    </footer>
+    <p class="sr-only" id="copy-status" role="status" aria-live="polite"></p>
+    <a class="back-to-top" href="#top" aria-label="Voltar ao topo">
+      <span aria-hidden="true">↑</span> Top
+    </a>
+    <!-- website:footer:end -->
+  </body>
+</html>

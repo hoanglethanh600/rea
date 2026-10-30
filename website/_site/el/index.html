@@ -1,0 +1,1222 @@
+<!doctype html>
+<html lang="el" dir="ltr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>REA: Αντίστροφη μηχανική για τον βοηθό προγραμματισμού σας</title>
+    <meta
+      name="description"
+      content="Εφαρμόστε αντίστροφη μηχανική σε εφαρμογές, δυαδικά αρχεία και συμπεριφορές προγραμμάτων περιήγησης με τον βοηθό προγραμματισμού σας. Ακολουθήστε σαφείς οδηγούς και δοκιμάστε διαδραστικά παραδείγματα με το REA."
+    />
+    <!-- website:sharing:start -->
+    <!-- prettier-ignore -->
+    <link rel="canonical" href="https://rea.tools/el/" />
+    <!-- website:languages:start -->
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="en" href="https://rea.tools/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="zh-CN" href="https://rea.tools/zh-CN/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="zh-TW" href="https://rea.tools/zh-TW/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="ja" href="https://rea.tools/ja/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="ko" href="https://rea.tools/ko/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="tr" href="https://rea.tools/tr/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="ru" href="https://rea.tools/ru/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="vi" href="https://rea.tools/vi/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="th" href="https://rea.tools/th/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="de" href="https://rea.tools/de/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="es" href="https://rea.tools/es/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="fr" href="https://rea.tools/fr/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="uk" href="https://rea.tools/uk/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="pl" href="https://rea.tools/pl/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="pt-BR" href="https://rea.tools/pt-BR/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="ar" href="https://rea.tools/ar/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="fa" href="https://rea.tools/fa/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="id" href="https://rea.tools/id/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="it" href="https://rea.tools/it/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="el" href="https://rea.tools/el/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="x-default" href="https://rea.tools/" />
+<!-- website:languages:end -->
+    <!-- prettier-ignore -->
+    <meta property="og:type" content="website" />
+    <!-- prettier-ignore -->
+    <meta property="og:site_name" content="REA" />
+    <!-- prettier-ignore -->
+    <meta property="og:title" content="REA: Αντίστροφη μηχανική για τον βοηθό προγραμματισμού σας" />
+    <!-- prettier-ignore -->
+    <meta property="og:description" content="Εφαρμόστε αντίστροφη μηχανική σε εφαρμογές, δυαδικά αρχεία και συμπεριφορές προγραμμάτων περιήγησης με τον βοηθό προγραμματισμού σας. Ακολουθήστε σαφείς οδηγούς και δοκιμάστε διαδραστικά παραδείγματα με το REA." />
+    <!-- prettier-ignore -->
+    <meta property="og:url" content="https://rea.tools/el/" />
+    <!-- prettier-ignore -->
+    <meta property="og:image" content="https://rea.tools/assets/social-card.png" />
+    <!-- prettier-ignore -->
+    <meta property="og:image:type" content="image/png" />
+    <!-- prettier-ignore -->
+    <meta property="og:image:width" content="1200" />
+    <!-- prettier-ignore -->
+    <meta property="og:image:height" content="630" />
+    <!-- prettier-ignore -->
+    <meta
+      property="og:image:alt"
+      content="REA: Μάθετε πώς λειτουργεί το λογισμικό. Αντίστροφη μηχανική με τον βοηθό προγραμματισμού σας."
+    />
+    <!-- prettier-ignore -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <!-- prettier-ignore -->
+    <meta name="twitter:title" content="REA: Αντίστροφη μηχανική για τον βοηθό προγραμματισμού σας" />
+    <!-- prettier-ignore -->
+    <meta name="twitter:description" content="Εφαρμόστε αντίστροφη μηχανική σε εφαρμογές, δυαδικά αρχεία και συμπεριφορές προγραμμάτων περιήγησης με τον βοηθό προγραμματισμού σας. Ακολουθήστε σαφείς οδηγούς και δοκιμάστε διαδραστικά παραδείγματα με το REA." />
+    <!-- prettier-ignore -->
+    <meta name="twitter:image" content="https://rea.tools/assets/social-card.png" />
+    <!-- prettier-ignore -->
+    <meta
+      name="twitter:image:alt"
+      content="REA: Μάθετε πώς λειτουργεί το λογισμικό. Αντίστροφη μηχανική με τον βοηθό προγραμματισμού σας."
+    />
+    <!-- website:sharing:end -->
+    <!-- website:theme:start -->
+    <meta name="theme-color" content="#ffffff" />
+    <!-- Apply the saved theme before styles load, to avoid a flash on navigation. -->
+    <script src="../assets/theme.js"></script>
+    <!-- website:theme:end -->
+    <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="../assets/styles.css" />
+    <script src="../assets/main.js" defer></script>
+    <script type="module" src="../assets/home.js"></script>
+    <script type="module" src="../assets/dino-demo.js"></script>
+  <script id="website-messages" type="application/json">{"Distance {distance}": "Απόσταση {distance}", "Hit a cactus. Try another speed.": "Σύγκρουση με κάκτο. Δοκιμάστε άλλη ταχύτητα.", "Space or Jump ↑": "Space ή Άλμα ↑", "Play again": "Νέο παιχνίδι", "Play": "Έναρξη", "Press Play, then jump over the cactus.": "Πατήστε Έναρξη και έπειτα περάστε τον κάκτο με άλμα.", "Hit a cactus. Press Play again, or change the speed and restart.": "Σύγκρουση με κάκτο. Πατήστε ξανά Έναρξη ή αλλάξτε την ταχύτητα και επανεκκινήστε.", "Pause": "Παύση", "Running. Space or Jump clears a cactus.": "Το παιχνίδι εκτελείται. Πατήστε Space ή Άλμα για να περάσετε έναν κάκτο.", "Paused. Press Play to continue.": "Παύση. Πατήστε Έναρξη για να συνεχίσετε.", "Fixed speed: {speed}. Space or Jump clears a cactus.": "Σταθερή ταχύτητα: {speed}. Πατήστε Space ή Άλμα για να περάσετε έναν κάκτο.", "Fixed speed: {speed}. Press Play to try it.": "Σταθερή ταχύτητα: {speed}. Πατήστε Έναρξη για να τη δοκιμάσετε.", "Recovered rule: start at 6, then increase toward 13.": "Ανακτημένος κανόνας: εκκίνηση από 6 και σταδιακή αύξηση προς το 13.", "Fixed speed: {speed}.": "Σταθερή ταχύτητα: {speed}.", "Replayed the recovered rule. All four values match the controlled original-game check when rounded to three decimals.": "Ο ανακτημένος κανόνας εκτελέστηκε ξανά. Και οι τέσσερις τιμές συμφωνούν με την ελεγχόμενη δοκιμή του αρχικού παιχνιδιού, όταν στρογγυλοποιούνται στα τρία δεκαδικά ψηφία.", "The replay differs from the recorded original-game values. Compare the speed rule and settings above.": "Η επανάληψη διαφέρει από τις καταγεγραμμένες τιμές του αρχικού παιχνιδιού. Συγκρίνετε τον κανόνα ταχύτητας και τις παραπάνω ρυθμίσεις.", "Press % to see what happens to 10.": "Πατήστε % για να δείτε τι συμβαίνει στο 10.", "10% of 200 is 20. Press = to add it.": "Το 10% του 200 είναι 20. Πατήστε = για να το προσθέσετε.", "For multiplication, 10 becomes 0.1. Press = to multiply.": "Στον πολλαπλασιασμό, το 10 γίνεται 0.1. Πατήστε = για να εκτελέσετε τον πολλαπλασιασμό.", "Copied": "Αντιγράφηκε", "Code copied to clipboard.": "Ο κώδικας αντιγράφηκε στο πρόχειρο.", "Selected": "Επιλέχθηκε", "Code selected. Use your keyboard to copy it.": "Ο κώδικας επιλέχθηκε. Χρησιμοποιήστε το πληκτρολόγιό σας για να τον αντιγράψετε.", "REA on GitHub ({count})": "REA στο GitHub ({count})", "Switch to light mode": "Μετάβαση σε φωτεινή λειτουργία", "Switch to dark mode": "Μετάβαση σε σκοτεινή λειτουργία"}</script>
+  </head>
+  <body class="home-page" id="top">
+    <a class="skip-link" href="#main">Μετάβαση στο περιεχόμενο</a>
+    <!-- website:header:start -->
+    <!-- prettier-ignore -->
+    <header class="site-header">
+      <div class="container header-inner">
+        <a class="brand" href="./" aria-label="Αρχική σελίδα του REA"
+          ><span class="brand-name">REA</span
+          ><span class="brand-caption" data-i18n-skip>Reverse Engineer Anything</span></a
+        >
+        <nav class="navigation" aria-label="Κύρια πλοήγηση">
+          <a href="../get-started/" class="nav-start">Ξεκινήστε</a>
+          <a href="showcase/">Μελέτες</a>
+          <a href="blog/">Ιστολόγιο</a>
+          <a href="guides/">Οδηγοί</a>
+        </nav>
+        <div class="header-social">
+          <details class="language-picker" data-i18n-skip><summary><span aria-hidden="true">文 / A</span> <span>Ελληνικά</span></summary><nav aria-label="Ελληνικά"><a href="../" lang="en" dir="ltr" data-language="en">English</a><a href="../zh-CN/" lang="zh-CN" dir="ltr" data-language="zh-CN">简体中文</a><a href="../zh-TW/" lang="zh-TW" dir="ltr" data-language="zh-TW">繁體中文</a><a href="../ja/" lang="ja" dir="ltr" data-language="ja">日本語</a><a href="../ko/" lang="ko" dir="ltr" data-language="ko">한국어</a><a href="../tr/" lang="tr" dir="ltr" data-language="tr">Türkçe</a><a href="../ru/" lang="ru" dir="ltr" data-language="ru">Русский</a><a href="../vi/" lang="vi" dir="ltr" data-language="vi">Tiếng Việt</a><a href="../th/" lang="th" dir="ltr" data-language="th">ไทย</a><a href="../de/" lang="de" dir="ltr" data-language="de">Deutsch</a><a href="../es/" lang="es" dir="ltr" data-language="es">Español</a><a href="../fr/" lang="fr" dir="ltr" data-language="fr">Français</a><a href="../uk/" lang="uk" dir="ltr" data-language="uk">Українська</a><a href="../pl/" lang="pl" dir="ltr" data-language="pl">Polski</a><a href="../pt-BR/" lang="pt-BR" dir="ltr" data-language="pt-BR">Português (Brasil)</a><a href="../ar/" lang="ar" dir="rtl" data-language="ar">العربية</a><a href="../fa/" lang="fa" dir="rtl" data-language="fa">فارسی</a><a href="../id/" lang="id" dir="ltr" data-language="id">Bahasa Indonesia</a><a href="../it/" lang="it" dir="ltr" data-language="it">Italiano</a><a href="../el/" lang="el" dir="ltr" data-language="el" aria-current="true">Ελληνικά</a><a href="../ml/" lang="ml" dir="ltr" data-language="ml">മലയാളം · English</a><a href="../ur-Latn/" lang="ur-Latn" dir="ltr" data-language="ur-Latn">Roman Urdu · English</a><a href="../ro/" lang="ro" dir="ltr" data-language="ro">Română · English</a></nav></details>
+          <button class="theme-toggle" type="button" data-theme-toggle hidden>
+            <svg class="theme-moon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+              <path d="M20.9 13a9 9 0 0 1-9.9-9.9A9 9 0 1 0 20.9 13Z" />
+            </svg>
+            <svg class="theme-sun" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true" focusable="false">
+              <circle cx="12" cy="12" r="4" />
+              <path d="M12 2v2m0 16v2M2 12h2m16 0h2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42" />
+            </svg>
+          </button>
+          <a
+            class="nav-github"
+            href="https://github.com/morluto/rea"
+            aria-label="Το REA στο GitHub"
+            title="Το REA στο GitHub"
+          >
+            <svg
+              width="22"
+              height="22"
+              viewBox="0 0 16 16"
+              aria-hidden="true"
+              focusable="false"
+            >
+              <path
+                fill="currentColor"
+                d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82a7.65 7.65 0 0 1 2-.27c.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z"
+              />
+            </svg>
+            <span class="nav-github-count" hidden aria-hidden="true"></span>
+          </a>
+          <a
+            class="nav-discord"
+            href="https://discord.gg/GkcryMnJDM"
+            aria-label="Μπείτε στην κοινότητα του REA στο Discord"
+            title="Μπείτε στην κοινότητα του REA στο Discord"
+          >
+            <svg
+              width="22"
+              height="22"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+              focusable="false"
+            >
+              <path
+                fill="currentColor"
+                d="M20.317 4.3698a19.7913 19.7913 0 0 0-4.8851-1.5152.0741.0741 0 0 0-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 0 0-.0785-.037 19.7363 19.7363 0 0 0-4.8852 1.515.0699.0699 0 0 0-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 0 0 .0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 0 0 .0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 0 0-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 0 1-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 0 1 .0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 0 1 .0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 0 1-.0066.1276 12.2986 12.2986 0 0 1-1.873.8914.0766.0766 0 0 0-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 0 0 .0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 0 0 .0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 0 0-.0312-.0286ZM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189Zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189Z"
+              />
+            </svg>
+          </a>
+          <a
+            class="nav-x"
+            href="https://x.com/reatools"
+            aria-label="Ακολουθήστε το REA στο X"
+            title="Ακολουθήστε το REA στο X"
+          >
+            <svg
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+              focusable="false"
+            >
+              <path
+                fill="currentColor"
+                d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z"
+              />
+            </svg>
+          </a>
+        </div>
+      </div>
+    </header>
+    <!-- website:header:end -->
+    <main id="main">
+      <section class="container hero home-hero" id="setup">
+        <div class="home-start-grid">
+          <div>
+            <p class="eyebrow">Αντίστροφη μηχανική, με τον βοηθό προγραμματισμού σας</p>
+            <h1>Μάθετε πώς<br />λειτουργεί το λογισμικό.</h1>
+            <p class="lede">
+              Ρωτήστε τον βοηθό προγραμματισμού σας για μια εφαρμογή, ένα παιχνίδι ή έναν ιστότοπο. Το REA τού δίνει τα εργαλεία για να εξετάσει τον κώδικα που εξηγεί την απάντηση.
+            </p>
+            <div class="actions">
+              <a class="button" href="../get-started/">Ξεκινήστε</a>
+              <a class="text-link" href="#dinosaur">Δείτε ένα παράδειγμα ↓</a>
+            </div>
+          </div>
+          <div class="home-setup" id="install">
+            <div class="home-setup-agent">
+              <h2>Ρύθμιση του REA</h2>
+              <p>Αντιγράψτε το παρακάτω στον βοηθό προγραμματισμού σας:</p>
+              <div class="agent-terminal">
+                <div class="terminal-header">
+                  <span class="terminal-title"
+                    ><span class="terminal-dots" aria-hidden="true"
+                      ><i></i><i></i><i></i></span
+                    >Ο βοηθός προγραμματισμού σας</span
+                  >
+                  <button
+                    class="copy-button"
+                    type="button"
+                    data-copy="home-install-prompt"
+                    aria-label="Αντιγραφή του prompt εγκατάστασης του REA"
+                  >
+                    Αντιγραφή
+                  </button>
+                </div>
+                <p class="terminal-prompt">
+                  <span class="prompt-symbol" aria-hidden="true">›</span
+                  ><span id="home-install-prompt"
+                    >Εγκατάστησε το REA και σύνδεσέ το με αυτόν τον βοηθό προγραμματισμού χρησιμοποιώντας την εντολή <span translate="no">npx rea-agents@latest setup</span>. Δείξε μου το σχέδιο ρύθμισης για έγκριση και, στη συνέχεια, επαλήθευσε την εγκατάσταση.</span
+                  ><span class="terminal-cursor" aria-hidden="true"></span>
+                </p>
+              </div>
+            </div>
+            <details class="home-setup-command" open>
+              <summary>Ή εκτελέστε την παρακάτω εντολή στο τερματικό σας:</summary>
+              <div class="code-block code-inline">
+                <code id="setup-command">npx rea-agents@latest setup</code>
+                <button
+                  class="copy-button"
+                  type="button"
+                  data-copy="setup-command"
+                  aria-label="Αντιγραφή της εντολής ρύθμισης"
+                >
+                  Αντιγραφή
+                </button>
+              </div>
+              <p class="caption">
+                Εγκρίνετε το σχέδιο ρύθμισης και, στη συνέχεια, επανεκκινήστε τον βοηθό σας.
+              </p>
+            </details>
+            <details class="home-install-options" open>
+              <summary>Επιλογές ρύθμισης</summary>
+              <nav class="home-install-resources" aria-label="Επιλογές ρύθμισης">
+                <span>Ρύθμιση για την πλατφόρμα σας:</span>
+                <a href="../get-started/#node-windows-help"
+                  ><span translate="no">Windows (PowerShell)</span></a
+                >
+                <a href="../get-started/#node-macos-help"
+                  ><span translate="no">macOS</span></a
+                >
+                <a href="../get-started/#node-linux-help"
+                  ><span translate="no">Linux</span></a
+                >
+              </nav>
+              <p class="home-other-install-options">
+                Άλλοι τρόποι εγκατάστασης: <a href="../get-started/#curl-installation"
+                  ><span translate="no">curl</span> →</a
+                >
+              </p>
+            </details>
+            <p class="home-expert-shortcut">
+              Είναι η πρώτη σας φορά ή σας λείπει το <span translate="no">Node.js</span> ή ένας βοηθός προγραμματισμού; <a href="../get-started/">Ακολουθήστε τον αναλυτικό οδηγό ρύθμισης →</a>
+            </p>
+          </div>
+        </div>
+        <div class="home-reading-links">
+          <div>
+            <a class="text-link" href="#rl-environments"
+              >Δημιουργία περιβαλλόντων RL →</a
+            >
+            <p>Καταγράψτε μια εφαρμογή ιστού για εκπαίδευση και δοκιμή πρακτόρων.</p>
+          </div>
+          <div>
+            <a class="text-link" href="showcase/">Μελέτες →</a>
+            <p>Διερευνήσεις και διαδραστικά παραδείγματα.</p>
+          </div>
+          <div>
+            <a class="text-link" href="blog/">Ιστολόγιο →</a>
+            <p>Μέθοδοι και σημειώσεις ανακατασκευής.</p>
+          </div>
+        </div>
+      </section>
+
+      <details class="home-page-nav" data-home-nav open>
+        <summary class="container">
+          <span>Σε αυτή τη σελίδα</span>
+          <span
+            class="home-nav-current"
+            data-home-nav-current
+            aria-hidden="true"
+            >Ρύθμιση του REA</span
+          >
+          <svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true">
+            <path d="m2 4 4 4 4-4" fill="none" stroke="currentColor" />
+          </svg>
+        </summary>
+        <nav class="home-nav-links" aria-label="Σε αυτή τη σελίδα">
+          <div class="container">
+            <p class="home-nav-title">Σε αυτή τη σελίδα</p>
+            <ul>
+              <li><a href="#setup" aria-current="location">Ρύθμιση του REA</a></li>
+              <li><a href="#what-is-re">Πώς λειτουργεί</a></li>
+              <li><a href="#dinosaur">Παιχνίδι με τον δεινόσαυρο</a></li>
+              <li><a href="#calculator">Calculator</a></li>
+              <li><a href="#showcases">Μελέτες</a></li>
+              <li><a href="#rl-environments">Περιβάλλοντα RL</a></li>
+              <li><a href="#try-rea">Δοκιμάστε το REA</a></li>
+              <li><a href="#analyze">Εμβαθύνετε</a></li>
+            </ul>
+          </div>
+        </nav>
+      </details>
+
+      <section class="section" id="what-is-re">
+        <div class="container">
+          <div class="section-heading">
+            <h2>Πώς λειτουργεί</h2>
+          </div>
+          <p class="lede">
+            Αντίστροφη μηχανική σημαίνει να μαθαίνετε πώς λειτουργεί το λογισμικό εξετάζοντας το ίδιο το πρόγραμμα. Με το REA, ο βοηθός σας μπορεί να ακολουθήσει τον κώδικα, να εξηγήσει μια λειτουργία και να σας βοηθήσει να την ανακατασκευάσετε.
+          </p>
+          <ol class="home-workflow" id="how-rea-helps">
+            <li>
+              <h3>Ρωτήστε για μία λειτουργία</h3>
+              <p>Δώστε στον βοηθό σας ένα πρόγραμμα ή μια σελίδα και μια ερώτηση.</p>
+            </li>
+            <li>
+              <h3>Εξετάστε το πρόγραμμα</h3>
+              <p>
+                Το REA βοηθά τον πράκτορά σας να διαβάσει τον κώδικα και να δει τι κάνει το πρόγραμμα κατά την εκτέλεσή του.
+              </p>
+            </li>
+            <li>
+              <h3>Εξηγήστε το και δοκιμάστε μια αλλαγή</h3>
+              <p>
+                Ο βοηθός σας χρησιμοποιεί τα ευρήματα για να εξηγήσει ή να ανακατασκευάσει τη λειτουργία.
+              </p>
+            </li>
+          </ol>
+          <details class="home-evidence-details" open>
+            <summary>Δείτε ολόκληρη τη διερεύνηση του Calculator</summary>
+            <p class="comparison-question">
+              Γιατί το Calculator δίνει 220 για το <span translate="no">200 + 10%</span>;
+            </p>
+            <figure class="home-role-comparison">
+              <div
+                class="manual-investigation step-comparison"
+                data-step-comparison
+              >
+                <h3 class="comparison-label">
+                  Ακολουθήστε τις εντολές βήμα προς βήμα
+                </h3>
+                <div
+                  class="step-selector expert-step-selector"
+                  role="group"
+                  aria-label="Παρακολούθηση της μη αυτόματης ανάλυσης του Calculator"
+                >
+                  <button
+                    type="button"
+                    data-select-step="1"
+                    aria-pressed="true"
+                    aria-controls="expert-assembly expert-reasoning"
+                  >
+                    <span>01</span> Αποκωδικοποίηση διακλαδώσεων
+                  </button>
+                  <button
+                    type="button"
+                    data-select-step="2"
+                    aria-pressed="false"
+                    aria-controls="expert-assembly expert-reasoning"
+                  >
+                    <span>02</span> Ιχνηλάτηση κλήσεων
+                  </button>
+                  <button
+                    type="button"
+                    data-select-step="3"
+                    aria-pressed="false"
+                    aria-controls="expert-assembly expert-reasoning"
+                  >
+                    <span>03</span> Ανάκτηση του κανόνα
+                  </button>
+                </div>
+                <div class="expert-analysis-grid">
+                  <details class="code-block expert-assembly" open>
+                    <summary class="code-header">
+                      <span>Αρχικός κώδικας x64 · επιλεγμένες εντολές</span> <span
+                        class="assembly-disclosure"
+                        aria-hidden="true"
+                      ></span>
+                    </summary>
+                    <pre><code id="expert-assembly"><span class="code-step is-active" data-step="1">0x180124945: MOV EAX, dword ptr [R13 + 0x18]
+0x180124949: CMP EAX, 0x5c
+0x18012494c: JZ 0x180124aba
+0x180124952: CMP EAX, 0x5b
+0x180124955: JZ 0x180124aba</span>
+<span class="code-step" data-step="2">0x18012495b: MOV EDX, 0x64
+0x180124960: LEA RCX, [RSP + 0x160]
+0x180124968: CALL 0x180122650
+0x18012496e: LEA RDX, [R13 + 0x160]
+0x180124975: LEA RCX, [RSP + 0x78]
+0x18012497a: CALL 0x180109720</span>
+0x18012497f: MOV RSI, RAX
+0x180124982: MOV qword ptr [RSP + 0x28], RAX
+<span class="code-step" data-step="2">0x180124987: LEA RDX, [RSP + 0x160]
+0x18012498f: MOV RCX, RAX
+0x180124992: CALL 0x180123190</span>
+<span class="assembly-omission">; … value-copy instructions omitted …</span>
+<span class="code-step" data-step="3">0x180124a14: MOV RDX, RDI
+0x180124a17: LEA RCX, [RSP + 0xf8]
+0x180124a1f: CALL 0x180109720
+0x180124a24: LEA R8, [RSP + 0x30]
+0x180124a29: MOV RDX, RAX
+0x180124a2c: LEA RCX, [RSP + 0xb8]
+0x180124a34: CALL 0x180123c10</span></code></pre>
+                  </details>
+                  <aside
+                    class="expert-reasoning"
+                    aria-label="Ενδεικτικός συλλογισμός αναλυτή"
+                  >
+                    <div
+                      id="expert-reasoning"
+                      aria-live="polite"
+                      aria-atomic="true"
+                    >
+                      <div class="expert-thought" data-step-note="1">
+                        <p class="thought-label">01 · Ποια διακλάδωση;</p>
+                        <p>
+                          «<strong>0x5b; 0x5c;</strong> Δύο άλματα στο ίδιο σημείο. Σε ποιους τελεστές αντιστοιχούν;»
+                        </p>
+                        <p class="expert-task">
+                          Βρείτε τα αναγνωριστικά εντολών και προσδιορίστε τη διακλάδωση.
+                        </p>
+                        <dl class="expert-facts">
+                          <div>
+                            <dt>0x5b</dt>
+                            <dd>Διαίρεση ÷</dd>
+                          </div>
+                          <div>
+                            <dt>0x5c</dt>
+                            <dd>Πολλαπλασιασμός ×</dd>
+                          </div>
+                        </dl>
+                      </div>
+                      <div class="expert-thought" data-step-note="2">
+                        <p class="thought-label">02 · Τι κάνουν οι κλήσεις;</p>
+                        <p>
+                          «Το 100 είναι σαφές. Οι κλήσεις είναι απλώς διευθύνσεις. <strong
+                            >Ποια εκτελεί τη διαίρεση; Ποια τιμή δέχεται;</strong
+                          >»
+                        </p>
+                        <p class="expert-task">
+                          Εξετάστε τις βοηθητικές συναρτήσεις και ιχνηλατήστε τις αποθηκευμένες τιμές.
+                        </p>
+                        <dl class="expert-facts">
+                          <div>
+                            <dt>0x64</dt>
+                            <dd>100</dd>
+                          </div>
+                          <div>
+                            <dt>…123190</dt>
+                            <dd>Διαίρεση</dd>
+                          </div>
+                        </dl>
+                      </div>
+                      <div class="expert-thought" data-step-note="3">
+                        <p class="thought-label">03 · Ποιος είναι ο κανόνας;</p>
+                        <p>
+                          «Αυτή η διαδρομή πολλαπλασιάζει με την άλλη είσοδο. Άρα, μετά το +, <strong>το 10% σημαίνει 10% του 200</strong>.»
+                        </p>
+                        <p class="expert-task">
+                          Προσδιορίστε τους τελεστέους και ελέγξτε και τις δύο διαδρομές τελεστών.
+                        </p>
+                        <div class="expert-rule">
+                          <span>200 × 10 / 100</span>
+                          <strong>20</strong>
+                        </div>
+                      </div>
+                    </div>
+                    <img
+                      class="expert-illustration"
+                      src="../assets/localized/el/figures/analyst-thinking.svg"
+                      alt=""
+                      width="160"
+                      height="120"
+                    />
+                    <p class="expert-caption">Ενδεικτικός συλλογισμός αναλυτή</p>
+                  </aside>
+                </div>
+                <p class="manual-work-summary">
+                  <strong
+                    >Αποκωδικοποιείτε τις εντολές, ακολουθείτε τις κλήσεις και ανακατασκευάζετε τον υπολογισμό.</strong
+                  >
+                </p>
+              </div>
+              <div class="agent-investigation" id="ask-your-agent">
+                <p class="comparison-label">Κάντε την ίδια ερώτηση στον βοηθό σας</p>
+                <div class="agent-terminal home-analysis-terminal">
+                  <div class="terminal-header">
+                    <span class="terminal-title"
+                      ><span class="terminal-dots" aria-hidden="true"
+                        ><i></i><i></i><i></i></span
+                      >Παράδειγμα prompt · Calculator</span
+                    >
+                    <button
+                      class="copy-button"
+                      type="button"
+                      data-copy="home-analysis-prompt"
+                      aria-label="Αντιγραφή της ερώτησης για το ποσοστό στο Calculator"
+                    >
+                      Αντιγραφή
+                    </button>
+                  </div>
+                  <p class="terminal-prompt">
+                    <span class="prompt-symbol" aria-hidden="true">›</span
+                    ><span id="home-analysis-prompt"
+                      >Χρησιμοποίησε το REA για να εξετάσεις το Windows Calculator. Γιατί το <span translate="no">200 + 10%</span> δίνει 220;</span
+                    ><span class="terminal-cursor" aria-hidden="true"></span>
+                  </p>
+                  <div class="agent-reply">
+                    <p class="reply-label">
+                      Παράδειγμα απάντησης · βάσει των ευρημάτων
+                    </p>
+                    <p>
+                      Μετά το +, το κουμπί % υπολογίζει <strong>ένα ποσοστό του πρώτου αριθμού.</strong>
+                    </p>
+                    <div class="agent-percent-rule">
+                      <code>10% of 200 = 20</code
+                      ><span aria-hidden="true">↓</span
+                      ><strong>200 + 20 = 220</strong>
+                    </div>
+                  </div>
+                </div>
+                <dl class="agent-evidence-roles">
+                  <div>
+                    <dt>Το REA παρέχει</dt>
+                    <dd>
+                      Τις εντολές του χειριστή, τον απομεταγλωττισμένο κώδικα και τις κλήσεις.
+                    </dd>
+                  </div>
+                  <div>
+                    <dt>Ο βοηθός σας εξηγεί</dt>
+                    <dd>
+                      Ποια διακλάδωση εφαρμόζεται, τι υπολογίζει και πώς μπορεί να ανακατασκευαστεί.
+                    </dd>
+                  </div>
+                </dl>
+              </div>
+              <figcaption>
+                Επιλεγμένος κώδικας assembly από το εγκατεστημένο DLL του Calculator. Οι σκέψεις και η απάντηση παρουσιάζουν τα ευρήματα. <a href="#calculator">Συνεχίστε με το παράδειγμα του Calculator ↓</a>
+              </figcaption>
+            </figure>
+          </details>
+        </div>
+      </section>
+
+      <section class="section" id="dinosaur">
+        <div class="container">
+          <p class="home-examples-intro">
+            Ας δοκιμάσουμε δύο παραδείγματα: αλλάζουμε την ταχύτητα ενός παιχνιδιού και έπειτα ανακατασκευάζουμε το κουμπί % του Calculator.
+          </p>
+          <div class="section-heading">
+            <p class="eyebrow">Παράδειγμα 01 · Το παιχνίδι με τον δεινόσαυρο του Chrome</p>
+            <h2>Γιατί επιταχύνει ο δεινόσαυρος;</h2>
+          </div>
+          <p class="lede">
+            Το παιχνίδι επιταχύνει όσο τρέχετε. Για να το ανακατασκευάσουμε με ρυθμιστικό ταχύτητας, πρέπει πρώτα να βρούμε πώς αλλάζει η ταχύτητα.
+          </p>
+          <div class="home-example-grid dino-example-grid">
+            <div class="home-case-story">
+              <h3>1. Ρωτήστε για την ταχύτητα</h3>
+              <div class="agent-terminal home-analysis-terminal">
+                <div class="terminal-header">
+                  <span class="terminal-title"
+                    ><span class="terminal-dots" aria-hidden="true"
+                      ><i></i><i></i><i></i></span
+                    >Παράδειγμα ερώτησης · Παιχνίδι με τον δεινόσαυρο</span
+                  >
+                  <button
+                    class="copy-button"
+                    type="button"
+                    data-copy="dino-analysis-prompt"
+                    aria-label="Αντιγραφή του prompt ανάλυσης του δεινοσαύρου"
+                  >
+                    Αντιγραφή
+                  </button>
+                </div>
+                <p class="terminal-prompt">
+                  <span class="prompt-symbol" aria-hidden="true">›</span
+                  ><span id="dino-analysis-prompt"
+                    >Χρησιμοποίησε το REA για να εξετάσεις αυτό το παιχνίδι με τον δεινόσαυρο. Γιατί επιταχύνει; Δείξε τον κανόνα ταχύτητας και έπειτα κατασκεύασε μια μικρή έκδοση με ρυθμιζόμενη ταχύτητα.</span
+                  ><span class="terminal-cursor" aria-hidden="true"></span>
+                </p>
+              </div>
+              <h3>2. Βρείτε τον κανόνα ταχύτητας</h3>
+              <p>
+                Το REA επιτρέπει στον βοηθό να διαβάσει τον κώδικα του παιχνιδιού που εκτελείται. Η ταχύτητα ξεκινά από το 6 και αυξάνεται λίγο σε κάθε ενημέρωση όσο παραμένει κάτω από το 13.
+              </p>
+            </div>
+            <div class="home-case-result">
+              <h3>3. Παίξτε το αποτέλεσμα</h3>
+              <p>
+                Ανακατασκευάσαμε αυτόν τον κανόνα στο παρακάτω μικρό παιχνίδι και προσθέσαμε ρυθμιστικό ταχύτητας. Πατήστε Έναρξη και έπειτα επιλέξτε τη δική σας ταχύτητα.
+              </p>
+              <figure class="dino-demo" data-dino-demo>
+                <div class="dino-stage">
+                  <svg
+                    class="dino-fallback"
+                    viewBox="0 0 600 180"
+                    role="img"
+                    aria-label="A small dinosaur running toward a cactus. Recovered speed: starts at 6, increases by 0.001 per update while below 13."
+                  >
+                    <path
+                      d="M0 150H600 M55 113v-30h17V65h27v24H85v17H72v16H62v13h-7v-22m-5-8v-8h-8v-9h-6v22h19m14 15v15h8v-7h-4v-8 M420 150v-48h10v48m-10-15h-12v-22h7v15h5m10-4h12v-22h-7v15h-5"
+                      fill="currentColor"
+                    />
+                    <text
+                      x="300"
+                      y="65"
+                      text-anchor="middle"
+                      fill="currentColor"
+                      font-size="18"
+                    >
+                      6 → 10 → 13
+                    </text>
+                  </svg>
+                  <canvas
+                    width="600"
+                    height="180"
+                    tabindex="0"
+                    aria-label="Μίνι παιχνίδι με δεινόσαυρο. Χρησιμοποιήστε το κουμπί Άλμα ή πατήστε Space όσο το παιχνίδι έχει την εστίαση."
+                    hidden
+                  ></canvas>
+                </div>
+                <div class="dino-controls" hidden>
+                  <div class="dino-buttons">
+                    <button class="button" type="button" data-dino-start>
+                      Έναρξη
+                    </button>
+                    <button type="button" data-dino-jump>Άλμα ↑</button>
+                    <button type="button" data-dino-reset>Επανεκκίνηση</button>
+                  </div>
+                  <label class="dino-speed-label"
+                    >Ταχύτητα <output data-dino-speed>6.0</output
+                    ><input
+                      type="range"
+                      min="2"
+                      max="18"
+                      step="0.1"
+                      value="6"
+                      data-dino-slider
+                  /></label>
+                  <label class="dino-auto-label"
+                    ><input type="checkbox" data-dino-auto checked /> Χρήση του ανακτημένου κανόνα επιτάχυνσης</label
+                  >
+                </div>
+                <p class="dino-status" data-dino-status role="status">
+                  Αρχικός κανόνας: εκκίνηση από 6 και σταδιακή αύξηση προς το 13.
+                </p>
+                <figcaption>
+                  Μετακινήστε το ρυθμιστικό για να ορίσετε τη δική σας ταχύτητα. Πατήστε Space ή Άλμα για να περάσετε έναν κάκτο.
+                </figcaption>
+                <noscript
+                  ><p class="caption">
+                    Ενεργοποιήστε τη JavaScript για να παίξετε. Μπορείτε πάντως να διαβάσετε τον κανόνα και να ανοίξετε τον παρακάτω πηγαίο κώδικα.
+                  </p></noscript
+                >
+              </figure>
+              <a class="text-link" href="examples/dino-lab/"
+                >Ανοίξτε το εργαστήριο ταχύτητας →</a
+              >
+            </div>
+          </div>
+          <details class="home-evidence-details">
+            <summary>
+              Δείτε το script, τους ελέγχους και τον τρόπο εκτέλεσης της ανάλυσης
+            </summary>
+            <p class="caption">
+              Στόχος που εξετάστηκε: <a href="https://wayou.github.io/t-rex-runner/"
+                >η έκδοση του wayou για προγράμματα περιήγησης, η οποία προέρχεται από το Chromium</a
+              >.
+            </p>
+            <div class="code-block">
+              <div class="code-header">
+                <span
+                  >REA · φόρτωσε το <span translate="no">index.js</span> · επιλεγμένες γραμμές</span
+                >
+              </div>
+              <pre><code>if (this.currentSpeed &lt; this.config.MAX_SPEED) {
+  <span class="code-key">this.currentSpeed += this.config.ACCELERATION;</span>
+}</code></pre>
+            </div>
+            <p class="dino-rule">
+              Ξεκινήστε από το 6. Προσθέστε 0.001 σε κάθε ενημέρωση χωρίς σύγκρουση, όσο η ταχύτητα παραμένει κάτω από το 13.
+            </p>
+            <figure class="workflow-figure dino-loop">
+              <p class="figure-title">Τι κάνει κάθε μέρος</p>
+              <ol class="flow-steps">
+                <li>
+                  <span class="flow-label">01 · REA</span
+                  ><span class="flow-node">Διαβάζει το script του παιχνιδιού που εκτελείται</span
+                  ><span class="flow-note"
+                    >Επιστρέφει στον βοηθό τον πραγματικό κώδικα και τις ρυθμίσεις του.</span
+                  >
+                </li>
+                <li>
+                  <span class="flow-label">02 · Ο βοηθός σας</span
+                  ><span class="flow-node">Ανακατασκευάζει τον κανόνα και προσθέτει ένα στοιχείο ελέγχου</span
+                  ><span class="flow-note"
+                    >Χρησιμοποιεί την ανακτημένη επιτάχυνση σε ένα μικρό παιχνίδι με ρυθμιστικό ταχύτητας.</span
+                  >
+                </li>
+                <li>
+                  <span class="flow-label">03 · Εσείς</span
+                  ><span class="flow-node">Αλλάζετε την ταχύτητα και παίζετε</span
+                  ><span class="flow-note"
+                    >Δοκιμάστε την αρχική επιτάχυνση και έπειτα επιλέξτε τον δικό σας ρυθμό.</span
+                  >
+                </li>
+              </ol>
+            </figure>
+            <p>
+              Το REA εξέτασε την έκδοση HTTP για πρόγραμμα περιήγησης μέσω τοπικής σύνδεσης αποσφαλμάτωσης και επέστρεψε το φορτωμένο <code>index.js</code>, μαζί με τον πηγαίο κώδικα και το ψηφιακό αποτύπωμά του.
+            </p>
+            <div class="code-block">
+              <div class="code-header">
+                <span>Επιλεγμένες ρυθμίσεις από το script που εξετάστηκε</span>
+              </div>
+              <pre><code>ACCELERATION: 0.001,
+MAX_SPEED: 13,
+SPEED: 6</code></pre>
+            </div>
+            <p>
+              Καλέσαμε τη συνάρτηση ενημέρωσης του αρχικού παιχνιδιού σε ελεγχόμενη δοκιμή προγράμματος περιήγησης, με απενεργοποιημένα τα εμπόδια και τον αυτόματο προγραμματισμό. Μετά από 4.000 ενημερώσεις, η ταχύτητα ήταν 10.0· μετά από 10.000, ήταν 13.0, με στρογγυλοποίηση στο πρώτο δεκαδικό ψηφίο.
+            </p>
+            <p>
+              Το νέο μίνι παιχνίδι διατηρεί αυτόν τον κανόνα ταχύτητας. Ο κώδικας σχεδίασης, άλματος και σύγκρουσης αποτελεί μια μικρή εκπαιδευτική υλοποίηση. <a href="examples/dino-lab/">Ανοίξτε το εργαστήριο</a> για να δείτε τον νέο κώδικα και να εκτελέσετε τον ίδιο έλεγχο ταχύτητας.
+            </p>
+            <p>
+              Για να εξετάσετε μόνοι σας τον στόχο, ακολουθήστε τα <a href="guides/browser/#prepare">βήματα σύνδεσης με το πρόγραμμα περιήγησης</a> χρησιμοποιώντας <a href="https://wayou.github.io/t-rex-runner/"
+                >τη σελίδα του δεινοσαύρου</a
+              >. Δώστε στον βοηθό τη διεύθυνση URL αυτής της σελίδας και το τοπικό endpoint αποσφαλμάτωσης και έπειτα αντιγράψτε την παραπάνω οδηγία.
+            </p>
+            <p class="caption">
+              <a
+                href="https://github.com/wayou/t-rex-runner/blob/5455bfa408ec6b707c7300ff194b7390733a766d/index.js#L565-L571"
+                >Κώδικας ταχύτητας που εξετάστηκε</a
+              > · <a href="../assets/licenses/dinosaur.txt"
+                >Chromium Authors · Άδεια BSD</a
+              >
+            </p>
+          </details>
+        </div>
+      </section>
+
+      <section class="section" id="calculator">
+        <div class="container">
+          <div class="section-heading">
+            <p class="eyebrow">Παράδειγμα 02 · Windows Calculator</p>
+            <h2>Ανακατασκευάστε το κουμπί % του Calculator.</h2>
+          </div>
+          <p class="lede">
+            Το κουμπί % κάνει διαφορετικά πράγματα μετά το + και το ×. Ας βρούμε τους δύο κανόνες και ας τους δοκιμάσουμε σε μια μικρή αριθμομηχανή.
+          </p>
+          <div class="home-example-grid">
+            <div class="home-case-story">
+              <h3>1. Ρωτήστε για το κουμπί %</h3>
+              <div class="agent-terminal">
+                <div class="terminal-header">
+                  <span class="terminal-title"
+                    ><span class="terminal-dots" aria-hidden="true"
+                      ><i></i><i></i><i></i></span
+                    >Παράδειγμα ερώτησης · Calculator</span
+                  >
+                  <button
+                    class="copy-button"
+                    type="button"
+                    data-copy="calculator-analysis-prompt"
+                    aria-label="Αντιγραφή του prompt ανάλυσης του Calculator"
+                  >
+                    Αντιγραφή
+                  </button>
+                </div>
+                <p class="terminal-prompt">
+                  <span class="prompt-symbol" aria-hidden="true">›</span
+                  ><span id="calculator-analysis-prompt"
+                    >Χρησιμοποίησε το REA για να εξετάσεις το κουμπί % του Windows Calculator. Ανάκτησε τους κανόνες μετά το + και το × και έπειτα κατασκεύασε μια μικρή αριθμομηχανή που χρησιμοποιεί και τους δύο.</span
+                  ><span class="terminal-cursor" aria-hidden="true"></span>
+                </p>
+              </div>
+              <h3>2. Βρείτε και τους δύο κανόνες</h3>
+              <p>
+                Το REA βοηθά τον βοηθό προγραμματισμού να διαβάσει τον κώδικα πίσω από το κουμπί %. Το κουμπί εφαρμόζει δύο διαφορετικούς κανόνες:
+              </p>
+              <dl class="percent-rules">
+                <div>
+                  <dt>Με +</dt>
+                  <dd>
+                    <span>Υπολογίστε το 10% του πρώτου αριθμού.</span
+                    ><code>10% of 200 = 20 → 200 + 20 = 220</code>
+                  </dd>
+                </div>
+                <div>
+                  <dt>Με ×</dt>
+                  <dd>
+                    <span>Μετατρέψτε το 10% σε 0.1.</span><code>200 × 0.1 = 20</code>
+                  </dd>
+                </div>
+              </dl>
+            </div>
+            <div class="home-case-result">
+              <h3>3. Δοκιμάστε το κουμπί %</h3>
+              <p>
+                Αναπαραγάγαμε και τους δύο κανόνες παρακάτω. Επιλέξτε + ή ×, πατήστε % και έπειτα =.
+              </p>
+              <figure class="percent-figure" data-percent-demo>
+                <div
+                  class="percent-operation"
+                  role="group"
+                  aria-label="Επιλογή υπολογισμού"
+                  hidden
+                >
+                  <button
+                    type="button"
+                    data-percent-operation="add"
+                    aria-pressed="true"
+                  >
+                    <span translate="no">200 + 10%</span>
+                  </button>
+                  <button
+                    type="button"
+                    data-percent-operation="multiply"
+                    aria-pressed="false"
+                  >
+                    <span translate="no">200 × 10%</span>
+                  </button>
+                </div>
+                <div class="percent-display">
+                  <span class="percent-expression" data-percent-expression
+                    >200 +</span
+                  >
+                  <strong data-percent-display>20</strong>
+                </div>
+                <div class="percent-controls" hidden>
+                  <button
+                    type="button"
+                    class="percent-key"
+                    data-percent-key="percent"
+                  >
+                    %
+                  </button>
+                  <button
+                    type="button"
+                    class="percent-key"
+                    data-percent-key="equals"
+                    disabled
+                  >
+                    =
+                  </button>
+                  <button
+                    type="button"
+                    class="percent-reset"
+                    data-percent-key="reset"
+                  >
+                    Επαναφορά
+                  </button>
+                </div>
+                <p class="percent-status" data-percent-status role="status">
+                  Το 10% του 200 είναι 20. Έπειτα, 200 + 20 = 220.
+                </p>
+                <figcaption>
+                  Διαδραστική απεικόνιση του κανόνα ποσοστού που εξετάστηκε.
+                </figcaption>
+              </figure>
+            </div>
+          </div>
+          <details class="home-evidence-details">
+            <summary>Δείτε τον πραγματικό κώδικα και πώς ελέγχθηκε η απάντηση</summary>
+            <p>
+              Σε αυτό το παράδειγμα, <code>previous = 200</code> και <code>current = 10</code>.
+            </p>
+            <div class="code-block">
+              <div class="code-header">
+                <span>Ευανάγνωστη σύνοψη του χειριστή του %</span>
+              </div>
+              <pre><code>if (operation == multiply || operation == divide) {
+  percent = current / 100;
+} else {
+  <span class="code-key">percent = current * previous / 100;</span>
+}</code></pre>
+            </div>
+            <figure class="workflow-figure calculator-trace">
+              <p class="figure-title">
+                Από την εγκατεστημένη εφαρμογή σε ένα λειτουργικό κουμπί %
+              </p>
+              <ol class="flow-steps">
+                <li>
+                  <span class="flow-label"
+                    >01 · Το REA διαβάζει το <span translate="no">calc.exe</span></span
+                  ><span class="flow-node">Εκκινεί την εφαρμογή Calculator</span
+                  ><span class="flow-note"
+                    >Ο κώδικας ανοίγει το <code>ms-calculator:</code>. Έπειτα, ο βοηθός επιλέγει τη βιβλιοθήκη της εγκατεστημένης εφαρμογής.</span
+                  >
+                </li>
+                <li>
+                  <span class="flow-label">02 · Το REA διαβάζει τη βιβλιοθήκη</span
+                  ><span class="flow-node">Επιστρέφει τον κώδικα του χειριστή του %</span
+                  ><span class="flow-note"
+                    >Η συνάρτηση ελέγχει τον τελεστή και χρησιμοποιεί τη σταθερά <code>100</code>.</span
+                  >
+                </li>
+                <li>
+                  <span class="flow-label">03 · Ο βοηθός σας τον ερμηνεύει</span
+                  ><span class="flow-node">Εξηγεί και αναπαράγει τους κανόνες</span
+                  ><span class="flow-note"
+                    >Διασταυρώνει τη διακλάδωση με τον πηγαίο κώδικα της Microsoft και έπειτα δοκιμάζει το + και το × παραπάνω.</span
+                  >
+                </li>
+              </ol>
+            </figure>
+
+            <div class="code-comparison">
+              <div class="code-block">
+                <div class="code-header">
+                  <span>REA · επιλεγμένες εντολές του αρχικού κώδικα</span>
+                </div>
+                <pre><code>0x180124945: MOV EAX, dword ptr [R13 + 0x18]
+0x180124949: <span class="code-key">CMP EAX, 0x5c</span>
+0x18012494c: JZ 0x180124aba
+0x180124952: <span class="code-key">CMP EAX, 0x5b</span>
+0x180124955: JZ 0x180124aba
+0x18012495b: <span class="code-key">MOV EDX, 0x64</span></code></pre>
+              </div>
+              <div class="code-block">
+                <div class="code-header">
+                  <span>Αναγνωριστικά τελεστών · Πηγαίος κώδικας της Microsoft</span>
+                </div>
+                <pre><code>#define IDC_MUL 92      // 0x5c
+#define IDC_DIV 91      // 0x5b
+#define IDC_PERCENT 118 // 0x76
+
+0x64 = 100</code></pre>
+              </div>
+            </div>
+
+            <p class="caption">
+              Εξετάστηκε με το REA 4.1.0: Windows Calculator 11.2508.4.0, x64. Η ευανάγνωστη σύνοψη χρησιμοποιεί ονόματα από τον δημόσιο πηγαίο κώδικα της Microsoft για να εξηγήσει την ανακτημένη διακλάδωση.
+            </p>
+            <p class="caption">
+              <a
+                href="https://github.com/microsoft/calculator/blob/d125246a4e19842ce1332e6c7839cf0e110027d8/src/CalcManager/CEngine/scifunc.cpp#L98-L111"
+                >Υλοποίηση ποσοστού</a
+              > · <a
+                href="https://github.com/microsoft/calculator/blob/d125246a4e19842ce1332e6c7839cf0e110027d8/src/CalculatorUnitTests/CalculatorManagerTest.cpp#L350-L370"
+                >Περιπτώσεις δοκιμής της Microsoft</a
+              > · <a href="../guides/native/">Οδηγός ρύθμισης ανάλυσης κώδικα μηχανής</a>
+            </p>
+          </details>
+        </div>
+      </section>
+
+      <section class="section" id="showcases">
+        <div class="container">
+          <div class="home-showcase-heading">
+            <div>
+              <h2>Μελέτες περίπτωσης του REA.</h2>
+              <p class="lede">
+                Εξερευνήστε μια λειτουργία σε μια κυκλοφορημένη εφαρμογή ή ένα παιχνίδι, με κώδικα και ελεγμένα αποτελέσματα.
+              </p>
+            </div>
+            <a class="text-link" href="showcase/">Μελέτες →</a>
+          </div>
+          <div class="home-case-grid">
+            <article class="home-case-card">
+              <p class="eyebrow">Android · Ανάλυση APK</p>
+              <h3>Πώς μια εφαρμογή ελέγχου ταυτότητας δημιουργεί κωδικό σύνδεσης</h3>
+              <p>
+                Ακολουθήστε τον εξαψήφιο κωδικό σύνδεσης του Aegis μέσα από το APK που έχει κυκλοφορήσει και έπειτα μετακινήστε το ρολόι του παραδείγματος για να δείτε γιατί αλλάζει κάθε 30 δευτερόλεπτα.
+              </p>
+              <a class="text-link" href="../showcase/aegis/"
+                >Διαβάστε τη μελέτη περίπτωσης Android</a
+              >
+            </article>
+            <article class="home-case-card">
+              <p class="eyebrow">Electron · Ιχνηλάτηση λειτουργίας</p>
+              <h3>Πώς το Notion αντιγράφει κείμενο και HTML</h3>
+              <p>
+                Ακολουθήστε τη JavaScript του πακέτου Notion μέχρι το πρόχειρο του συστήματος και δείτε πώς η αντιγραφή διατηρεί τα πλούσια δεδομένα των μπλοκ.
+              </p>
+              <a class="text-link" href="showcase/notion/"
+                >Διαβάστε τη μελέτη περίπτωσης Notion</a
+              >
+            </article>
+            <article class="home-case-card">
+              <p class="eyebrow">Κώδικας μηχανής · Ανακατασκευή</p>
+              <h3>Ο υπολογισμός στερεοφωνικής τοποθέτησης ήχου του DX-Ball</h3>
+              <p>
+                Ανακτήστε πώς η θέση μιας μπάλας μετατρέπεται σε ήχο αριστερά/δεξιά σε ένα παιχνίδι Windows του 1996.
+              </p>
+              <a class="text-link" href="showcase/dx-ball/"
+                >Διαβάστε τη μελέτη περίπτωσης DX-Ball</a
+              >
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section home-environments" id="rl-environments">
+        <div class="container home-environment-grid">
+          <div>
+            <div class="section-heading">
+              <h2>Δημιουργία περιβαλλόντων RL</h2>
+              <p class="lede">
+                Μετατρέψτε μια καταγεγραμμένη συνεδρία εφαρμογής ιστού σε εκτελέσιμο περιβάλλον για εκπαίδευση και δοκιμή πρακτόρων AI.
+              </p>
+            </div>
+            <p>
+              Ο πράκτοράς σας καταγράφει τα αιτήματα του προγράμματος περιήγησης και τις απαντήσεις της εφαρμογής. Το REA χρησιμοποιεί αυτά τα δεδομένα για να δημιουργήσει ένα τοπικό περιβάλλον όπου οι πράκτορες μπορούν να εξασκούνται σε εργασίες χωρίς να εκτελούν την αρχική εφαρμογή.
+            </p>
+            <p>
+              Για να υποστηρίζεται η διαγραφή φακέλων, η καταγραφή πρέπει να δείχνει τον φάκελο πριν από τη διαγραφή και να επιβεβαιώνει ότι δεν υπάρχει πια μετά από αυτήν.
+            </p>
+            <p>
+              <a class="text-link" href="../guides/rl-environments/"
+                >Οδηγός δημιουργίας περιβάλλοντος</a
+              > · <a href="https://x.com/reatools/status/2112574822584918075?s=20"
+                >Δείτε το demo στο X</a
+              >
+            </p>
+          </div>
+          <div>
+            <p>Ρυθμίστε το REA στον πράκτορά σας και προσαρμόστε το URL και τις εργασίες φακέλων του παραδείγματος:</p>
+            <div class="agent-terminal">
+              <div class="terminal-header">
+                <span class="terminal-title"
+                  ><span class="terminal-dots" aria-hidden="true"
+                    ><i></i><i></i><i></i></span
+                  >Ο βοηθός προγραμματισμού σας</span
+                ><button
+                  class="copy-button"
+                  type="button"
+                  data-copy="home-environment-prompt"
+                  aria-label="Αντιγραφή προτροπής"
+                >
+                  Αντιγραφή
+                </button>
+              </div>
+              <p class="terminal-prompt">
+                <span class="prompt-symbol" aria-hidden="true">›</span
+                ><span id="home-environment-prompt"
+                  >Χρησιμοποίησε το REA για να δημιουργήσεις περιβάλλον RL από τη δοκιμαστική εφαρμογή μου: <code>http://127.0.0.1:3000</code> Κάλυψε προβολή, δημιουργία, μετονομασία και διαγραφή φακέλων. Μπορείς να δημιουργείς και να αφαιρείς δοκιμαστικούς φακέλους, αλλά μην αλλάξεις τα υπάρχοντα δεδομένα. Αποθήκευσέ το σε φάκελο <code>my-env</code>, έλεγξε τις διαθέσιμες λειτουργίες και πες μου πώς εκτελείται.</span
+                ><span class="terminal-cursor" aria-hidden="true"></span>
+              </p>
+            </div>
+            <p class="caption">
+              Παράδειγμα προτροπής. Προσαρμόστε το URL και τις εργασίες φακέλων.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="try-rea">
+        <div class="container start-row">
+          <div>
+            <p class="eyebrow">Η πρώτη σας διερεύνηση</p>
+            <h2>Δοκιμάστε το REA σε μια μικρή εφαρμογή.</h2>
+            <p>
+              Κατεβάστε το παράδειγμα Notes, ιχνηλατήστε την εξαγωγή CSV και ελέγξτε μία τροποποιημένη είσοδο.
+            </p>
+          </div>
+          <a class="button" href="first-investigation/"
+            >Δοκιμάστε το καθοδηγούμενο παράδειγμα</a
+          >
+        </div>
+      </section>
+
+      <section class="section" id="analyze">
+        <div class="container">
+          <div class="section-heading">
+            <h2>Επιλέξτε τον στόχο σας.</h2>
+            <p>
+              Αυτοί οι οδηγοί καλύπτουν τη ρύθμιση και μια πρώτη διερεύνηση για κάθε είδος λογισμικού.
+            </p>
+          </div>
+          <div class="workflows" id="analysis-guides">
+            <div>
+              <h3>Δυαδικά αρχεία με κώδικα μηχανής</h3>
+              <p>
+                Εξετάστε συναρτήσεις, συμβολοσειρές, αναφορές και σχέσεις κλήσεων σε εκτελέσιμα αρχεία και βιβλιοθήκες.
+              </p>
+              <a href="../guides/native/">Οδηγός ανάλυσης κώδικα μηχανής</a>
+            </div>
+            <div>
+              <h3>JavaScript και Electron</h3>
+              <p>Ακολουθήστε τον κώδικα μέσα σε μια εφαρμογή επιφάνειας εργασίας γραμμένη σε JavaScript.</p>
+              <a href="../guides/javascript/">Ροές εργασίας εφαρμογών</a>
+            </div>
+            <div>
+              <h3>Δραστηριότητα προγράμματος περιήγησης και χρόνου εκτέλεσης</h3>
+              <p>
+                Καταγράψτε επιλεγμένη δραστηριότητα προγράμματος περιήγησης ή διεργασίας και έπειτα συγκρίνετε τα αποτελέσματα μεταξύ εκτελέσεων.
+              </p>
+              <a href="guides/browser/">Οδηγός παρατήρησης προγράμματος περιήγησης</a>
+            </div>
+          </div>
+          <details class="home-evidence-details" id="project-prompts">
+            <summary>Δοκιμάστε ένα μεγαλύτερο έργο</summary>
+            <div class="code-comparison home-project-prompts">
+              <div>
+                <div class="agent-terminal">
+                  <div class="terminal-header">
+                    <span class="terminal-title">
+                      <span class="terminal-dots" aria-hidden="true"
+                        ><i></i><i></i><i></i></span
+                      >Παράδειγμα prompt · Ιστότοπος
+                    </span>
+                    <button
+                      class="copy-button"
+                      type="button"
+                      data-copy="website-project-prompt"
+                      aria-label="Αντιγραφή του prompt για το έργο ιστοτόπου"
+                    >
+                      Αντιγραφή
+                    </button>
+                  </div>
+                  <p class="terminal-prompt">
+                    <span class="prompt-symbol" aria-hidden="true">›</span
+                    ><span id="website-project-prompt"
+                      >Χρησιμοποίησε το REA για να εξετάσεις το <span translate="no">https://rea.tools/</span>. Κλωνοποίησε αυτόν τον ιστότοπο για εμένα.</span
+                    ><span class="terminal-cursor" aria-hidden="true"></span>
+                  </p>
+                </div>
+                <p class="caption">Ναι, αυτόν εδώ.</p>
+              </div>
+              <div>
+                <div class="agent-terminal">
+                  <div class="terminal-header">
+                    <span class="terminal-title">
+                      <span class="terminal-dots" aria-hidden="true"
+                        ><i></i><i></i><i></i></span
+                      >Παράδειγμα prompt · Ανακατασκευή παιχνιδιού
+                    </span>
+                    <button
+                      class="copy-button"
+                      type="button"
+                      data-copy="game-project-prompt"
+                      aria-label="Αντιγραφή του prompt ανακατασκευής παιχνιδιού"
+                    >
+                      Αντιγραφή
+                    </button>
+                  </div>
+                  <p class="terminal-prompt">
+                    <span class="prompt-symbol" aria-hidden="true">›</span
+                    ><span id="game-project-prompt"
+                      >Χρησιμοποίησε το REA για να ανακατασκευάσεις αυτό το παιχνίδι από το εκτελέσιμο αρχείο του. Ανάκτησε τη λογική του παιχνιδιού σε C και έλεγξέ τη συγκρίνοντάς τη με το αρχικό.</span
+                    ><span class="terminal-cursor" aria-hidden="true"></span>
+                  </p>
+                </div>
+                <p class="caption">
+                  <a href="showcase/dx-ball/">Δείτε τη μελέτη περίπτωσης DX-Ball →</a>
+                </p>
+              </div>
+            </div>
+          </details>
+        </div>
+      </section>
+      <section class="section" id="community">
+        <div class="container">
+          <div>
+            <h2>Έχετε απορίες;</h2>
+            <div class="home-help-links">
+              <p>
+                <a href="faq/">Διαβάστε τις συχνές ερωτήσεις</a> για βοήθεια με τη ρύθμιση και απαντήσεις σε συνηθισμένες απορίες.
+              </p>
+              <p>
+                <a href="https://discord.gg/GkcryMnJDM">Μπείτε στο Discord</a> για να ζητήσετε βοήθεια και να συζητήσετε τις αναλύσεις σας.
+              </p>
+              <p>
+                Αναφέρετε ένα σφάλμα ή ζητήστε μια λειτουργία στα <a href="https://github.com/morluto/rea/issues/new/choose"
+                  >GitHub issues</a
+                >.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+    <!-- website:footer:start -->
+    <!-- prettier-ignore -->
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <p>REA · Reverse Engineer Anything</p>
+        <div class="footer-links">
+          <a href="faq/">FAQ</a
+          ><a href="contributors/">Συνεισφέροντες</a
+          ><a href="https://github.com/morluto/rea">Πηγαίος κώδικας</a
+          ><a href="https://github.com/morluto/rea/blob/main/LICENSE">Άδεια MIT</a
+          ><a href="https://discord.gg/GkcryMnJDM">Ελάτε στην κοινότητα</a
+          ><a href="https://x.com/reatools">Ακολουθήστε μας στο X</a>
+        </div>
+      </div>
+    </footer>
+    <p class="sr-only" id="copy-status" role="status" aria-live="polite"></p>
+    <a class="back-to-top" href="#top" aria-label="Επιστροφή στην κορυφή">
+      <span aria-hidden="true">↑</span> Κορυφή
+    </a>
+    <!-- website:footer:end -->
+  </body>
+</html>

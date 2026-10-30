@@ -1,0 +1,784 @@
+<!doctype html>
+<html lang="el" dir="ltr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Η βιομηχανική επανάσταση της αντίστροφης μηχανικής — REA</title>
+    <meta
+      name="description"
+      content="Ο N0zoM1z0 αναλογίζεται τη χειροκίνητη αντίστροφη μηχανική, την ανακατασκευή του Touhou με βοηθούς τεχνητής νοημοσύνης και το πώς συσσωρεύεται η γνώση μεταξύ των TH08, TH095 και PC-98 TH04."
+    />
+    <!-- website:sharing:start -->
+    <!-- prettier-ignore -->
+    <link rel="canonical" href="https://rea.tools/el/blog/touhou-reconstruction/" />
+    <!-- website:languages:start -->
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="en" href="https://rea.tools/blog/touhou-reconstruction/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="zh-CN" href="https://rea.tools/zh-CN/blog/touhou-reconstruction/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="zh-TW" href="https://rea.tools/zh-TW/blog/touhou-reconstruction/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="ja" href="https://rea.tools/ja/blog/touhou-reconstruction/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="ko" href="https://rea.tools/ko/blog/touhou-reconstruction/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="tr" href="https://rea.tools/tr/blog/touhou-reconstruction/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="ru" href="https://rea.tools/ru/blog/touhou-reconstruction/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="vi" href="https://rea.tools/vi/blog/touhou-reconstruction/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="th" href="https://rea.tools/th/blog/touhou-reconstruction/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="de" href="https://rea.tools/de/blog/touhou-reconstruction/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="es" href="https://rea.tools/es/blog/touhou-reconstruction/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="fr" href="https://rea.tools/fr/blog/touhou-reconstruction/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="uk" href="https://rea.tools/uk/blog/touhou-reconstruction/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="pl" href="https://rea.tools/pl/blog/touhou-reconstruction/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="pt-BR" href="https://rea.tools/pt-BR/blog/touhou-reconstruction/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="ar" href="https://rea.tools/ar/blog/touhou-reconstruction/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="fa" href="https://rea.tools/fa/blog/touhou-reconstruction/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="id" href="https://rea.tools/id/blog/touhou-reconstruction/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="it" href="https://rea.tools/it/blog/touhou-reconstruction/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="el" href="https://rea.tools/el/blog/touhou-reconstruction/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="x-default" href="https://rea.tools/blog/touhou-reconstruction/" />
+<!-- website:languages:end -->
+    <!-- prettier-ignore -->
+    <meta property="og:type" content="website" />
+    <!-- prettier-ignore -->
+    <meta property="og:site_name" content="REA" />
+    <!-- prettier-ignore -->
+    <meta property="og:title" content="Η βιομηχανική επανάσταση της αντίστροφης μηχανικής — REA" />
+    <!-- prettier-ignore -->
+    <meta property="og:description" content="Ο N0zoM1z0 αναλογίζεται τη χειροκίνητη αντίστροφη μηχανική, την ανακατασκευή του Touhou με βοηθούς τεχνητής νοημοσύνης και το πώς συσσωρεύεται η γνώση μεταξύ των TH08, TH095 και PC-98 TH04." />
+    <!-- prettier-ignore -->
+    <meta property="og:url" content="https://rea.tools/el/blog/touhou-reconstruction/" />
+    <!-- prettier-ignore -->
+    <meta property="og:image" content="https://rea.tools/assets/social-card.png" />
+    <!-- prettier-ignore -->
+    <meta property="og:image:type" content="image/png" />
+    <!-- prettier-ignore -->
+    <meta property="og:image:width" content="1200" />
+    <!-- prettier-ignore -->
+    <meta property="og:image:height" content="630" />
+    <!-- prettier-ignore -->
+    <meta
+      property="og:image:alt"
+      content="REA: Μάθετε πώς λειτουργεί το λογισμικό. Αντίστροφη μηχανική με τον βοηθό προγραμματισμού σας."
+    />
+    <!-- prettier-ignore -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <!-- prettier-ignore -->
+    <meta name="twitter:title" content="Η βιομηχανική επανάσταση της αντίστροφης μηχανικής — REA" />
+    <!-- prettier-ignore -->
+    <meta name="twitter:description" content="Ο N0zoM1z0 αναλογίζεται τη χειροκίνητη αντίστροφη μηχανική, την ανακατασκευή του Touhou με βοηθούς τεχνητής νοημοσύνης και το πώς συσσωρεύεται η γνώση μεταξύ των TH08, TH095 και PC-98 TH04." />
+    <!-- prettier-ignore -->
+    <meta name="twitter:image" content="https://rea.tools/assets/social-card.png" />
+    <!-- prettier-ignore -->
+    <meta
+      name="twitter:image:alt"
+      content="REA: Μάθετε πώς λειτουργεί το λογισμικό. Αντίστροφη μηχανική με τον βοηθό προγραμματισμού σας."
+    />
+    <!-- website:sharing:end -->
+    <!-- website:theme:start -->
+    <meta name="theme-color" content="#ffffff" />
+    <!-- Apply the saved theme before styles load, to avoid a flash on navigation. -->
+    <script src="../../../assets/theme.js"></script>
+    <!-- website:theme:end -->
+    <link rel="icon" href="../../../assets/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="../../../assets/styles.css" />
+    <script src="../../../assets/main.js" defer></script>
+  <script id="website-messages" type="application/json">{"Copied": "Αντιγράφηκε", "Code copied to clipboard.": "Ο κώδικας αντιγράφηκε στο πρόχειρο.", "Selected": "Επιλέχθηκε", "Code selected. Use your keyboard to copy it.": "Ο κώδικας επιλέχθηκε. Χρησιμοποιήστε το πληκτρολόγιό σας για να τον αντιγράψετε.", "REA on GitHub ({count})": "REA στο GitHub ({count})", "Switch to light mode": "Μετάβαση σε φωτεινή λειτουργία", "Switch to dark mode": "Μετάβαση σε σκοτεινή λειτουργία"}</script>
+  </head>
+  <body id="top" class="blog-article">
+    <a class="skip-link" href="#main">Μετάβαση στο περιεχόμενο</a>
+    <!-- website:header:start -->
+    <!-- prettier-ignore -->
+    <header class="site-header">
+      <div class="container header-inner">
+        <a class="brand" href="../../" aria-label="Αρχική σελίδα του REA"
+          ><span class="brand-name">REA</span
+          ><span class="brand-caption" data-i18n-skip>Reverse Engineer Anything</span></a
+        >
+        <nav class="navigation" aria-label="Κύρια πλοήγηση">
+          <a href="../../../get-started/" class="nav-start">Ξεκινήστε</a>
+          <a href="../../showcase/">Μελέτες</a>
+          <a href="../" aria-current="page">Ιστολόγιο</a>
+          <a href="../../guides/">Οδηγοί</a>
+        </nav>
+        <div class="header-social">
+          <details class="language-picker" data-i18n-skip><summary><span aria-hidden="true">文 / A</span> <span>Ελληνικά</span></summary><nav aria-label="Ελληνικά"><a href="../../../blog/touhou-reconstruction/" lang="en" dir="ltr" data-language="en">English</a><a href="../../../zh-CN/blog/touhou-reconstruction/" lang="zh-CN" dir="ltr" data-language="zh-CN">简体中文</a><a href="../../../zh-TW/blog/touhou-reconstruction/" lang="zh-TW" dir="ltr" data-language="zh-TW">繁體中文</a><a href="../../../ja/blog/touhou-reconstruction/" lang="ja" dir="ltr" data-language="ja">日本語</a><a href="../../../ko/blog/touhou-reconstruction/" lang="ko" dir="ltr" data-language="ko">한국어</a><a href="../../../tr/blog/touhou-reconstruction/" lang="tr" dir="ltr" data-language="tr">Türkçe</a><a href="../../../ru/blog/touhou-reconstruction/" lang="ru" dir="ltr" data-language="ru">Русский</a><a href="../../../vi/blog/touhou-reconstruction/" lang="vi" dir="ltr" data-language="vi">Tiếng Việt</a><a href="../../../th/blog/touhou-reconstruction/" lang="th" dir="ltr" data-language="th">ไทย</a><a href="../../../de/blog/touhou-reconstruction/" lang="de" dir="ltr" data-language="de">Deutsch</a><a href="../../../es/blog/touhou-reconstruction/" lang="es" dir="ltr" data-language="es">Español</a><a href="../../../fr/blog/touhou-reconstruction/" lang="fr" dir="ltr" data-language="fr">Français</a><a href="../../../uk/blog/touhou-reconstruction/" lang="uk" dir="ltr" data-language="uk">Українська</a><a href="../../../pl/blog/touhou-reconstruction/" lang="pl" dir="ltr" data-language="pl">Polski</a><a href="../../../pt-BR/blog/touhou-reconstruction/" lang="pt-BR" dir="ltr" data-language="pt-BR">Português (Brasil)</a><a href="../../../ar/blog/touhou-reconstruction/" lang="ar" dir="rtl" data-language="ar">العربية</a><a href="../../../fa/blog/touhou-reconstruction/" lang="fa" dir="rtl" data-language="fa">فارسی</a><a href="../../../id/blog/touhou-reconstruction/" lang="id" dir="ltr" data-language="id">Bahasa Indonesia</a><a href="../../../it/blog/touhou-reconstruction/" lang="it" dir="ltr" data-language="it">Italiano</a><a href="../../../el/blog/touhou-reconstruction/" lang="el" dir="ltr" data-language="el" aria-current="true">Ελληνικά</a><a href="../../../ml/blog/touhou-reconstruction/" lang="ml" dir="ltr" data-language="ml">മലയാളം · English</a><a href="../../../ur-Latn/blog/touhou-reconstruction/" lang="ur-Latn" dir="ltr" data-language="ur-Latn">Roman Urdu · English</a><a href="../../../ro/blog/touhou-reconstruction/" lang="ro" dir="ltr" data-language="ro">Română · English</a></nav></details>
+          <button class="theme-toggle" type="button" data-theme-toggle hidden>
+            <svg class="theme-moon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+              <path d="M20.9 13a9 9 0 0 1-9.9-9.9A9 9 0 1 0 20.9 13Z" />
+            </svg>
+            <svg class="theme-sun" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true" focusable="false">
+              <circle cx="12" cy="12" r="4" />
+              <path d="M12 2v2m0 16v2M2 12h2m16 0h2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42" />
+            </svg>
+          </button>
+          <a
+            class="nav-github"
+            href="https://github.com/morluto/rea"
+            aria-label="Το REA στο GitHub"
+            title="Το REA στο GitHub"
+          >
+            <svg
+              width="22"
+              height="22"
+              viewBox="0 0 16 16"
+              aria-hidden="true"
+              focusable="false"
+            >
+              <path
+                fill="currentColor"
+                d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82a7.65 7.65 0 0 1 2-.27c.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z"
+              />
+            </svg>
+            <span class="nav-github-count" hidden aria-hidden="true"></span>
+          </a>
+          <a
+            class="nav-discord"
+            href="https://discord.gg/GkcryMnJDM"
+            aria-label="Μπείτε στην κοινότητα του REA στο Discord"
+            title="Μπείτε στην κοινότητα του REA στο Discord"
+          >
+            <svg
+              width="22"
+              height="22"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+              focusable="false"
+            >
+              <path
+                fill="currentColor"
+                d="M20.317 4.3698a19.7913 19.7913 0 0 0-4.8851-1.5152.0741.0741 0 0 0-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 0 0-.0785-.037 19.7363 19.7363 0 0 0-4.8852 1.515.0699.0699 0 0 0-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 0 0 .0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 0 0 .0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 0 0-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 0 1-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 0 1 .0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 0 1 .0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 0 1-.0066.1276 12.2986 12.2986 0 0 1-1.873.8914.0766.0766 0 0 0-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 0 0 .0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 0 0 .0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 0 0-.0312-.0286ZM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189Zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189Z"
+              />
+            </svg>
+          </a>
+          <a
+            class="nav-x"
+            href="https://x.com/reatools"
+            aria-label="Ακολουθήστε το REA στο X"
+            title="Ακολουθήστε το REA στο X"
+          >
+            <svg
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+              focusable="false"
+            >
+              <path
+                fill="currentColor"
+                d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z"
+              />
+            </svg>
+          </a>
+        </div>
+      </div>
+    </header>
+    <!-- website:header:end -->
+    <main id="main" class="container">
+      <div class="page-heading">
+        <p class="breadcrumb">
+          <a href="../../">Αρχική</a> / <a href="../">Ιστολόγιο</a> / Ανακατασκευή του Touhou
+        </p>
+        <p class="eyebrow">Δοκίμιο · Ανακατασκευή του Touhou</p>
+        <h1>Η βιομηχανική επανάσταση στην αντίστροφη μηχανική.</h1>
+        <p class="page-meta">Του N0zoM1z0 · 10 Οκτωβρίου 2026</p>
+        <div class="blog-takeaway">
+          <p class="eyebrow">Βασικά συμπεράσματα</p>
+          <ul>
+            <li>
+              <strong>Δώστε στους βοηθούς αυτονομία στη διερεύνηση.</strong> Ορίστε έναν σαφή στόχο και κριτήρια αποδοχής και έπειτα αφήστε τον βοηθό να αποφασίσει τι θα δοκιμάσει στη συνέχεια.
+            </li>
+            <li>
+              <strong>Χρησιμοποιήστε το αποθετήριο και το Git ως μνήμη εργασίας.</strong> Κρατήστε το σκεπτικό μαζί με τον κώδικα. Τα σημεία καταγραφής προόδου στο Git επιτρέπουν στην επόμενη συνεδρία να συνεχίσει αφού τελειώσει η συζήτηση.
+            </li>
+            <li>
+              <strong>Αφήστε τα στοιχεία να καθορίζουν τι ισχυρίζεστε.</strong> Μια εξήγηση που διατυπώνεται με σιγουριά εξακολουθεί να χρειάζεται δοκιμή. Το «άγνωστο» είναι έγκυρη απάντηση όταν τα στοιχεία είναι ελλιπή.
+            </li>
+            <li>
+              <strong>Δοκιμάστε και την αναφορά ελέγχου.</strong> Δοκιμάστε περιπτώσεις που θα έπρεπε να απορρίπτει. Αν δεν εντοπίσει ένα σφάλμα, επανεξετάστε τα προηγούμενα αποτελέσματα που βασίστηκαν σε αυτή.
+            </li>
+            <li>
+              <strong
+                >Βρισκόμαστε στις πρώτες μέρες της βιομηχανικής επανάστασης της αντίστροφης μηχανικής.</strong
+              > Οι μέθοδοι διαμορφώνονται ακόμη. Απομένουν πολλά να εξερευνήσουμε.
+            </li>
+          </ul>
+        </div>
+      </div>
+      <figure class="reconstruction-flywheel" aria-labelledby="flywheel-title">
+        <div class="flywheel-heading">
+          <p class="eyebrow" id="flywheel-title">Πώς συσσωρεύεται η εμπειρία</p>
+          <p><strong>Ανθρώπινη καθοδήγηση</strong> · Στόχος και κριτήρια αποδοχής</p>
+        </div>
+        <div class="flywheel-diagram">
+          <svg
+            class="flywheel-arrows"
+            viewBox="0 0 720 470"
+            preserveAspectRatio="none"
+            aria-hidden="true"
+            focusable="false"
+          >
+            <defs>
+              <marker
+                id="flywheel-forward"
+                markerWidth="10"
+                markerHeight="10"
+                refX="7"
+                refY="4"
+                orient="auto"
+                markerUnits="userSpaceOnUse"
+              >
+                <path
+                  d="M 0 0 L 8 4 L 0 8"
+                  fill="none"
+                  stroke="#294f82"
+                  stroke-width="2"
+                />
+              </marker>
+              <marker
+                id="flywheel-revise"
+                markerWidth="10"
+                markerHeight="10"
+                refX="7"
+                refY="4"
+                orient="auto"
+                markerUnits="userSpaceOnUse"
+              >
+                <path
+                  d="M 0 0 L 8 4 L 0 8"
+                  fill="none"
+                  stroke="#5b6570"
+                  stroke-width="1.5"
+                />
+              </marker>
+            </defs>
+            <g
+              fill="none"
+              stroke="#294f82"
+              stroke-width="2.5"
+              marker-end="url(#flywheel-forward)"
+            >
+              <path
+                class="flywheel-path-desktop"
+                d="M 444 115 C 537 111 624 157 627 208"
+              />
+              <path d="M 528 365 C 456 437 263 437 191 365" />
+              <path
+                class="flywheel-path-desktop"
+                d="M 99 209 C 94 145 170 97 271 104"
+              />
+              <path
+                class="flywheel-path-mobile"
+                d="M 530 115 C 614 108 681 164 674 215"
+              />
+              <path
+                class="flywheel-path-mobile"
+                d="M 87 198 C 74 143 135 119 190 120"
+              />
+            </g>
+            <path
+              class="flywheel-path-desktop"
+              d="M 515 215 C 500 165 450 166 430 127"
+              fill="none"
+              stroke="#5b6570"
+              stroke-width="1.5"
+              stroke-dasharray="5 5"
+              marker-end="url(#flywheel-revise)"
+            />
+            <path
+              class="flywheel-path-mobile"
+              d="M 510 204 C 404 204 391 187 412 136"
+              fill="none"
+              stroke="#5b6570"
+              stroke-width="1.5"
+              stroke-dasharray="5 5"
+              marker-end="url(#flywheel-revise)"
+            />
+          </svg>
+          <div class="flywheel-node flywheel-agent">
+            <p class="flywheel-kicker">Αυτονομία</p>
+            <h3>Βοηθός</h3>
+            <p>Επιλέξτε ένα πείραμα.<br />Προτείνετε μια υπόθεση.</p>
+          </div>
+          <div class="flywheel-node flywheel-oracle">
+            <p class="flywheel-kicker">Επαλήθευση</p>
+            <h3>Αναφορά ελέγχου</h3>
+            <p>Δοκιμάστε με βάση μια<br />συγκεκριμένη αναφορά.</p>
+          </div>
+          <div class="flywheel-node flywheel-memory">
+            <p class="flywheel-kicker">Αποθετήριο</p>
+            <h3>Μνήμη εργασίας</h3>
+            <p>Κώδικας, στοιχεία,<br />έλεγχοι και μαθήματα.</p>
+          </div>
+          <p class="flywheel-retry">
+            Απόκλιση<br /><strong>Αναθεωρήστε την υπόθεση</strong>
+          </p>
+          <p class="flywheel-center">
+            Καλύτερο<br /><strong>σημείο εκκίνησης</strong>
+          </p>
+          <p class="flywheel-reuse">Επαναχρησιμοποίηση</p>
+          <p class="flywheel-pass">
+            <strong>Επιτυχία</strong> · Κρατήστε το αποτέλεσμα και τα στοιχεία του
+          </p>
+        </div>
+        <div
+          class="flywheel-projects"
+          aria-label="Εμπειρία που μεταφέρεται μεταξύ έργων"
+        >
+          <a href="#th08">TH08</a><span aria-hidden="true">→</span
+          ><a href="#th095">TH095</a><span aria-hidden="true">→</span
+          ><a href="#th04">TH04</a>
+        </div>
+        <figcaption>
+          Κάθε έργο αφήνει στο επόμενο ένα καλύτερο σημείο εκκίνησης. Αυτό περιλαμβάνει και τη διόρθωση των ελέγχων όταν ανακαλύπτουμε ένα κενό.
+        </figcaption>
+      </figure>
+      <div class="article-layout">
+        <nav class="contents" aria-label="Σε αυτή τη σελίδα">
+          <p>Σε αυτό το άρθρο</p>
+          <ul>
+            <li><a href="#august">Αύγουστος 2026</a></li>
+            <li><a href="#th08">TH08: η συνέχεια</a></li>
+            <li><a href="#different-approaches">Δύο προσεγγίσεις</a></li>
+            <li><a href="#th095">TH095: η εμπειρία συσσωρεύεται</a></li>
+            <li><a href="#th04">TH04: από αρχιτεκτονική σε αρχιτεκτονική</a></li>
+            <li>
+              <a href="#semantic-reconstruction">Από την ακρίβεια στην αναγνωσιμότητα</a>
+            </li>
+            <li><a href="#industrial-shift">Η βιομηχανική αλλαγή</a></li>
+            <li><a href="#possibilities">Τι γίνεται δυνατό</a></li>
+          </ul>
+        </nav>
+        <article class="article" aria-label="Δοκίμιο για την ανακατασκευή του Touhou">
+          <section class="article-section" id="august">
+            <h2>Τι άλλαξε τον Αύγουστο του 2026</h2>
+            <p>
+              Πριν από αυτή τη δουλειά, είχα κάνει πολλή χειροκίνητη αντίστροφη μηχανική. Εξέταζα μια συνάρτηση μέχρι να έχω μια εξήγηση και έπειτα δοκίμαζα αυτή την εξήγηση σε σχέση με το πρόγραμμα. Για να προχωρήσω, έπρεπε να αφιερώσω περισσότερο δικό μου χρόνο στην επόμενη συνάρτηση. Έπρεπε επίσης να κρατάω μια ολοένα μεγαλύτερη συνολική εικόνα στο μυαλό μου.
+            </p>
+            <p>
+              Το μεγαλύτερο μέρος της δουλειάς μου στην αντίστροφη μηχανική αφορά παιχνίδια. Τα ανακατασκευάζω ώστε να μπορεί να γίνει κατανοητή η συμπεριφορά τους και τελικά να μεταφερθεί σε άλλη πλατφόρμα ή σε μια τροποποίηση. Αυτή είναι η εμπειρία πίσω από το άρθρο. Η μέθοδος μπορεί να είναι χρήσιμη και αλλού, αλλά κάθε πεδίο πρέπει να προσδιορίσει τι μπορεί να ελέγξει με βάση μια αξιόπιστη αναφορά.
+            </p>
+            <p>
+              Τον Αύγουστο του 2026 άρχισα να εξερευνώ σοβαρά την αντίστροφη μηχανική με βοηθούς προγραμματισμού. Ήθελα να δω πόσο μακριά θα μπορούσε να φτάσει ένας βοηθός με πρόσβαση στο πρόγραμμα και στα συνηθισμένα εργαλεία ανάπτυξης. Η ανακατασκευή του Touhou μού έδωσε ένα σημαντικό έργο για να το διαπιστώσω.
+            </p>
+            <p>
+              Η αρχική πρόοδος ήταν εντυπωσιακή. Μια διερεύνηση μπορούσε να συνεχίζεται χωρίς να επιλέγω εγώ κάθε επιμέρους βήμα. Μια αποτυχημένη σύγκριση μπορούσε να οδηγήσει τον βοηθό σε μια άλλη συνάρτηση που καλούσε την υπό εξέταση συνάρτηση. Μπορούσε να γράψει ένα μικρό διαγνωστικό πρόγραμμα και να χρησιμοποιήσει το αποτέλεσμα για να αποφασίσει τι θα δοκιμάσει στη συνέχεια. Αυτή η ελευθερία έκανε διαφορά: μπορούσα να αφιερώσω περισσότερη προσοχή στην κατεύθυνση του έργου και στο αν οι έλεγχοι ήταν αξιόπιστοι.
+            </p>
+            <p>
+              Ο ρυθμός ήταν αυτός που πρώτα τράβηξε την προσοχή μου. Έπειτα άρχισα να αναρωτιέμαι τι θα διατηρούνταν πέρα από το τρέχον έργο. Θα ωφελούνταν το επόμενο παιχνίδι από όλα όσα είχαμε μόλις μάθει;
+            </p>
+          </section>
+          <section class="article-section" id="th08">
+            <h2>TH08: χτίζοντας πάνω στην ανθρώπινη δουλειά</h2>
+            <p>
+              Το <a href="https://github.com/N0zoM1z0/th08">TH08</a>, Imperishable Night, ξεκίνησε ως συνέχεια της <a href="https://github.com/GensokyoClub/th08"
+                >ανακατασκευής του GensokyoClub</a
+              >. Ο δημόσιος πηγαίος κώδικάς τους μού έδωσε μια σημαντική βάση. Συνοδευόταν από γνώση για τη δημιουργία του προγράμματος και από ένα ιστορικό συνεισφορών που διατήρησα στη συνέχεια του έργου.
+            </p>
+            <p>
+              Το εισαγμένο ιστορικό τελειώνει στο δημόσιο σημείο καταγραφής προόδου της 10ης Αυγούστου. Η δική μου ανεξάρτητη συνέχεια ξεκίνησε στις 13 Αυγούστου. Μέχρι τις 19 Αυγούστου, το μητρώο κατέγραφε πηγαίο κώδικα για όλες τις 1,107 αναγνωρισμένες συναρτήσεις του παιχνιδιού.
+            </p>
+            <p>
+              Μια λειτουργική μεταφορά της ανακατασκευής στο Linux καταχωρίστηκε σε commit στις 24 Αυγούστου, περίπου έντεκα ημέρες μετά την έναρξη της συνέχειας. Ακολούθησε μια έκδοση Web. Η εγγενής έκδοση Linux 64-bit κυκλοφόρησε στις 30 Αυγούστου.
+            </p>
+            <p>
+              Αυτό που μου έκανε εντύπωση ήταν ότι η δουλειά είχε φτάσει σε ένα πρόγραμμα που μπορούσε ο κόσμος να εκτελέσει. Για να φτάσουμε εκεί, έπρεπε να ακολουθήσουμε προβλήματα πέρα από μια μεμονωμένη συνάρτηση. Ακόμη και όταν δύο συναρτήσεις φαίνονταν σωστές μεμονωμένα, μπορούσαν κατά λάθος να χρησιμοποιούν ξεχωριστά αντίγραφα κατάστασης που θα έπρεπε να είναι κοινή.
+            </p>
+            <p>
+              Αυτό έκανε τους ελέγχους αναφοράς κεντρικό μέρος της δουλειάς. Τους αποκαλώ <strong>αναφορές ελέγχου (oracle)</strong>. Μια σύγκριση κώδικα μπορεί να μας πει αν μια ανακατασκευασμένη συνάρτηση αναπαράγει τις αρχικές εντολές. Ένας έλεγχος κατά την εκτέλεση μπορεί να μας πει αν μια διαδρομή που δοκιμάστηκε φτάνει στην αναμενόμενη κατάσταση. Ο βοηθός προτείνει μια εξήγηση και τη δοκιμάζει· μια απόκλιση του δίνει κάτι συγκεκριμένο να διερευνήσει.
+            </p>
+            <h3>Ακριβής ταύτιση με λάθος σταθερά</h3>
+            <p>
+              Η αναφορά ελέγχου είναι λογισμικό που έγραψε κάποιος. Το TH08 μού θύμισε ξεκάθαρα πόσα μπορεί να εξαρτώνται από αυτό το λογισμικό.
+            </p>
+            <p>
+              Τον Σεπτέμβριο, ένα σφάλμα που αναφέρθηκε από μια μεταγενέστερη μεταφορά στο Switch μάς οδήγησε στην αυτόματη συλλογή αντικειμένων. Ο ανακατασκευασμένος πηγαίος κώδικας έλεγχε την ισχύ του παίκτη σε σχέση με το <code>0.0</code>. Το πρωτότυπο χρησιμοποιούσε το <code>128.0</code>, το όριο μέγιστης ισχύος.
+            </p>
+            <p>
+              Η ισχύς υπό κανονικές συνθήκες είναι μη αρνητική, οπότε ο έλεγχος ισχύος της ανακατασκευής ουσιαστικά ικανοποιούνταν πάντα. Πάνω από τη γραμμή συλλογής, το παιχνίδι μπορούσε να προσελκύει αντικείμενα χωρίς να απαιτεί μέγιστη ισχύ. Οι άλλες εξαιρέσεις στη συνθήκη ήταν σωστές. Αυτή η μία σταθερά άλλαζε τη συμπεριφορά.
+            </p>
+            <p>
+              <strong
+                >Κι όμως, η συνάρτηση είχε ήδη περάσει την ακριβή σύγκριση.</strong
+              >
+            </p>
+            <p>
+              Μια επαναδημιουργία του προγράμματος μπορεί να τοποθετήσει μια σταθερά σε διαφορετική διεύθυνση. Το εργαλείο σύγκρισης το λάμβανε υπόψη προσαρμόζοντας τις διευθύνσεις στις μεταγλωττισμένες εντολές πριν τις συγκρίνει με τις αρχικές. Όμως δεν έλεγχε ποτέ την τιμή κινητής υποδιαστολής που ήταν αποθηκευμένη στη διεύθυνση της αναφοράς.
+            </p>
+            <p>
+              Αυτό άφηνε ένα κενό στον έλεγχο. Μπορούσε να στρέψει την ανακατασκευασμένη εντολή στο <code>128.0</code> του πρωτοτύπου, ενώ ο πηγαίος κώδικας εξακολουθούσε να γράφει <code>0.0</code>. Τα bytes των εντολών ταυτίζονταν. Ο πηγαίος κώδικας σήμαινε κάτι διαφορετικό.
+            </p>
+            <p>
+              Η <a href="https://github.com/N0zoM1z0/th08/pull/11"
+                >διόρθωση της 2ας Σεπτεμβρίου</a
+              > διόρθωσε τον πηγαίο κώδικα και έκανε τη σύγκριση να ελέγχει τα πραγματικά bytes της σταθεράς στην οποία γινόταν η αναφορά. Ένας <a href="https://github.com/N0zoM1z0/th08/pull/13">ευρύτερος έλεγχος</a> εξέτασε στη συνέχεια 1,548 αναφορές σε κυριολεκτικές τιμές κινητής υποδιαστολής. Εντόπισε άλλες δώδεκα λανθασμένες αναφορές σε πέντε συναρτήσεις που είχαν γίνει αποδεκτές.
+            </p>
+            <p>
+              Η σύγκριση ελέγχει πλέον κάθε τέτοια κυριολεκτική τιμή κινητής υποδιαστολής. Οι δοκιμές της περιλαμβάνουν σκόπιμα λανθασμένες τιμές, ώστε να διασφαλίζεται ότι απορρίπτονται. Έπρεπε επίσης να επανεξετάσουμε αποτελέσματα που είχαν περάσει τον πιο αδύναμο έλεγχο.
+            </p>
+            <p>
+              <strong>Και η αναφορά ελέγχου χρειαζόταν ανακατασκευή.</strong> Η επιδιόρθωσή της ήταν μέρος της επιδιόρθωσης του παιχνιδιού.
+            </p>
+            <p>
+              Αυτό έχει σημασία όταν η ομάδα είναι κυρίως ένα άτομο που δουλεύει με βοηθούς. Δεν μπορώ να εξετάσω προσωπικά κάθε γραμμή που παράγουν, οπότε μεγάλο μέρος της εμπιστοσύνης μου στηρίζεται στους ελέγχους τους. Ένα τυφλό σημείο σε μια κοινή αναφορά ελέγχου μπορεί να επηρεάσει πολλές διερευνήσεις πριν το προσέξω. Πρέπει να καταλαβαίνω τι επαληθεύει πραγματικά ο ελεγκτής και να τον δοκιμάζω με περιπτώσεις που θα έπρεπε να αποτυγχάνουν.
+            </p>
+            <p>
+              Καθώς συνεχιζόταν η δουλειά, αυτοί οι έλεγχοι έγιναν μέρος του αποθετηρίου. Το ίδιο συνέβη με τους λόγους των αλλαγών στον πηγαίο κώδικα και με τις σημειώσεις που επέτρεπαν σε μια μεταγενέστερη συνεδρία να συνεχίσει από εκεί όπου είχε σταματήσει μια προηγούμενη. <strong
+                >Το αποθετήριο γινόταν η μνήμη εργασίας του έργου.</strong
+              >
+            </p>
+            <p>
+              <strong
+                >Μια επιτυχημένη δέσμη εργασιών μάς έδινε και ανακτημένο κώδικα και καλύτερο περιβάλλον για την επόμενη δέσμη.</strong
+              >
+            </p>
+          </section>
+          <section class="article-section" id="different-approaches">
+            <h2>Δύο διαφορετικές αντιλήψεις για την ανακατασκευή</h2>
+            <p>
+              Το <a
+                href="https://web.archive.org/web/20260909051514/https://github.com/GensokyoClub/th08#important-notice"
+                >δημόσιο README</a
+              > του GensokyoClub εκφράζει ρητά τη διαφωνία του με αυτό το είδος δουλειάς. Η ανακοίνωση αναφέρει ότι η περαιτέρω ανάπτυξη θα γίνεται ιδιωτικά μέχρι την ολοκλήρωση. Ένα απόσπασμα γράφει:
+            </p>
+            <blockquote>
+              <p>
+                Η άνοδος απατεώνων (απομεταγλωττίσεις και μεταφορές σε άλλες πλατφόρμες με τεχνητή νοημοσύνη) σε αυτόν τον χώρο, που παίρνουν υλικό από τη δουλειά μας, δημιουργεί κακή εικόνα για τις μελλοντικές προσπάθειες απομεταγλώττισης…
+              </p>
+            </blockquote>
+            <p>
+              Η ανακοίνωση περιγράφει επίσης την ψυχολογική επιβάρυνση των υπευθύνων συντήρησης. Η πολιτική συνεισφορών τους αποκλείει pull requests που έχουν παραχθεί κυρίως με τεχνητή νοημοσύνη. Έχουν αφιερώσει τον ελεύθερο χρόνο τους σε δύσκολη δουλειά και αυτή η δουλειά βοήθησε να γίνει δυνατή η δική μου συνέχεια. Σέβομαι την προσπάθεια πίσω από αυτή. Η διαφωνία που θέλω να συζητήσω αφορά το πώς πρέπει να προχωρά η ανακατασκευή και πώς πρέπει να κρίνεται μια συνεισφορά.
+            </p>
+            <p>
+              Στη χειροκίνητη ροή εργασίας που γνώριζα, η κατανόηση μιας συνάρτησης και η ανακατασκευή της συνήθως ανατίθενταν στο ίδιο άτομο. Ένα έργο στηριζόταν σε μεγάλο βαθμό στην τεχνογνωσία αυτού του ατόμου. Η εμπιστοσύνη στον συνεισφέροντα είχε σημασία, επειδή τόσο μεγάλο μέρος του συλλογισμού γινόταν όσο εργαζόταν.
+            </p>
+            <p>
+              Τα υπάρχοντα έργα διατηρούν ήδη γνώση στον πηγαίο κώδικα και στα εργαλεία δημιουργίας τους. Αυτό που άλλαξε για μένα ήταν ότι ένας βοηθός μπορούσε να χρησιμοποιήσει αυτή τη γνώση για να συνεχίσει μόνος του την επόμενη διερεύνηση.
+            </p>
+            <p>
+              Στη δική μου συνέχεια, εγώ αποφασίζω τον στόχο και το πρότυπο αποδοχής ενός αποτελέσματος. Ο βοηθός έχει μεγάλη ελευθερία να διερευνήσει. Η ανακατασκευή που προτείνει πρέπει στη συνέχεια να αντέξει στους σχετικούς ελέγχους. Θέλω ένας άλλος άνθρωπος να μπορεί να εξετάσει γιατί επιλέξαμε μια υλοποίηση, ακόμη κι αν ο βοηθός έκανε το μεγαλύτερο μέρος της δουλειάς.
+            </p>
+            <p>
+              Αυτή η μετάβαση μπορεί να είναι δύσκολη. Χρόνια προσεκτικής δουλειάς μπορεί να γίνουν το θεμέλιο για μια συνέχεια που προχωρά πολύ γρηγορότερα. Αυτό εγείρει ουσιαστικά ερωτήματα σχετικά με την αναγνώριση της συνεισφοράς. Αλλάζει επίσης όσα πρέπει να γνωρίζουν οι υπεύθυνοι συντήρησης πριν αποδεχτούν μια συνεισφορά.
+            </p>
+            <p>
+              Η βιομηχανική αναλογία με βοηθά να το σκεφτώ. Σε μια τέχνη, μεγάλο μέρος της διαδικασίας εξαρτάται από την ικανότητα του ανθρώπου που την εκτελεί. Οι μηχανές αλλάζουν το πού χρειάζεται αυτή η ικανότητα. Κάποιος πρέπει ακόμη να σχεδιάζει τη διαδικασία και να αναγνωρίζει πότε η έξοδός της είναι λανθασμένη. Διαφορετικές κοινότητες μπορούν να επιλέξουν πόσο από αυτή την αλλαγή θέλουν να υιοθετήσουν.
+            </p>
+            <p>
+              Η δική μου επιλογή είναι να συνεχίσω ανοιχτά, αναγνωρίζοντας την κληρονομημένη δουλειά και διατηρώντας το ιστορικό της. Θέλω η νέα δουλειά να μπορεί να εξεταστεί. Αυτό μας δίνει έναν τρόπο να αναρωτηθούμε πόσο μακριά μπορεί να φτάσει αυτή η προσέγγιση και να μάθουμε από όσα πάνε στραβά στη διαδρομή.
+            </p>
+            <p class="caption">
+              Πηγή: η <a
+                href="https://github.com/GensokyoClub/th08/blob/e874b98e210b3be1ed21c5e03d54b883eac5069c/README.md#important-notice"
+                >ανακοίνωση στο README</a
+              > του GensokyoClub, που ελέγχθηκε στις 10 Οκτωβρίου 2026, και η <a
+                href="https://github.com/GensokyoClub/th08/blob/f345c7dee07b849f2ff93a0029ab5ede126bf12c/CODE_OF_CONDUCT.md"
+                >πολιτική συνεισφορών</a
+              > του. Η παράθεση είναι συντομευμένο απόσπασμα. Οι <a
+                href="https://github.com/N0zoM1z0/th08/blob/d2a00f4acb4a13916e07a00bd13f714961714628/README.md#credits-and-provenance"
+                >αναφορές συντελεστών και προέλευσης</a
+              > του TH08 καταγράφουν το όριο από το οποίο ξεκινά η συνέχεια.
+            </p>
+          </section>
+          <section class="article-section" id="th095">
+            <h2>TH095: η εμπειρία αρχίζει να συσσωρεύεται</h2>
+            <p>
+              Το <a href="https://github.com/N0zoM1z0/th095">TH095</a>, Shoot the Bullet, έκανε την αξία αυτής της εμπειρίας πολύ πιο εύκολα ορατή. Το αποθετήριό του ξεκίνησε στις 29 Αυγούστου με μηδέν επιβεβαιωμένες συναρτήσεις του παιχνιδιού στο μητρώο. Έπρεπε ακόμη να μάθουμε το παιχνίδι. Γνωρίζαμε όμως ήδη πολύ περισσότερα για το πώς να ξεκινήσουμε μια ανακατασκευή και πώς να τη συνεχίσουμε.
+            </p>
+            <p>
+              Μέχρι τις 7 Σεπτεμβρίου, και οι 697 αναγνωρισμένες συναρτήσεις του παιχνιδιού είχαν πηγαίο κώδικα. Μέχρι τις 8 Σεπτεμβρίου, 696 είχαν γίνει αποδεκτές ως ακριβείς συγκρίσεις. Ολόκληρο το πρόγραμμα συνδέθηκε στις 9 Σεπτεμβρίου. Η ανακατασκευή για Windows i386 καταγράφηκε ως λειτουργική για παιχνίδι στις 10 Σεπτεμβρίου, περίπου δώδεκα ημέρες μετά την αρχικοποίηση.
+            </p>
+            <p>
+              Αυτό το βρήκα πιο συναρπαστικό από την ταχύτητα του πρώτου έργου. Ένας καινούριος στόχος μπορούσε να ωφεληθεί από τη δουλειά που είχε γίνει σε άλλο παιχνίδι. Η εμπειρία ήταν ήδη παρούσα στα εργαλεία και στον τρόπο οργάνωσης του έργου.
+            </p>
+            <p>
+              Για παράδειγμα, το TH08 μάς είχε μάθει να δίνουμε από νωρίς προσοχή στο συναρμολογημένο πρόγραμμα. Αν αρκετές ανακτημένες συναρτήσεις εξαρτώνται από την ίδια κατάσταση, οι μεμονωμένες συγκρίσεις τους αφήνουν ένα σημαντικό ερώτημα ανοιχτό. Πρέπει να τις δούμε να λειτουργούν μαζί. Αυτό το μάθημα βοήθησε να διαμορφωθεί η προσέγγισή μας για τη δημιουργία ολόκληρου του προγράμματος TH095.
+            </p>
+            <p>
+              Ένα μάθημα που μένει στο μυαλό μου είναι χρήσιμο όσο βρίσκομαι εκεί. Μόλις γίνει ένας έλεγχος που μπορεί να εκτελέσει μια άλλη συνεδρία, μπορεί να συνεχίσει να βοηθά αφού εγώ προχωρήσω σε κάτι άλλο. Ο επόμενος βοηθός μπορεί να χρησιμοποιήσει το αποτέλεσμα χωρίς να επαναλάβει τη διερεύνηση που οδήγησε σε αυτό.
+            </p>
+            <p>
+              Το σφάλμα με τις κυριολεκτικές τιμές κινητής υποδιαστολής ανήκει επίσης σε αυτή τη μνήμη. Εξηγεί γιατί ο έλεγχος μιας αναφοράς απαιτεί και έλεγχο των δεδομένων πίσω από αυτή. Η διατήρηση αυτής της διόρθωσης μαζί με τον κώδικα βοηθά τα μεταγενέστερα έργα να μην κληρονομήσουν το τυφλό σημείο του παλιού ελέγχου.
+            </p>
+            <p>
+              <strong
+                >Η μέθοδος γίνεται μέρος του αρχικού υλικού για το επόμενο παιχνίδι.</strong
+              > Μπορούμε να αφιερώσουμε περισσότερο από τον κόπο του επόμενου έργου σε ό,τι είναι πραγματικά νέο στον στόχο του.
+            </p>
+            <p>
+              Το ίδιο όφελος είναι διαθέσιμο σε ανθρώπους που συμμετέχουν αργότερα. Μπορούν να εξετάσουν μια απόφαση και να εκτελέσουν ξανά τον έλεγχό της πριν συνεχίσουν τη δουλειά. Δεν χρειάζεται να ανασυνθέσουν ολόκληρο το ιστορικό του έργου για να μάθουν γιατί ο πηγαίος κώδικας έχει τη μορφή που έχει.
+            </p>
+          </section>
+          <section class="article-section" id="th04">
+            <h2>TH04: η ροή εργασίας αντέχει σε μια διαφορετική αρχιτεκτονική</h2>
+            <p>
+              Το <a href="https://github.com/N0zoM1z0/th04">TH04</a>, Lotus Land Story, μετέφερε αυτή τη δουλειά στην εποχή του DOS για PC-98. Ο στόχος ήταν πλέον ένα περιβάλλον 16-bit με τέσσερα προγράμματα που συνεργάζονταν. Η κατανόηση της συμπεριφοράς του υλικού του απαιτούσε διαφορετικά στοιχεία από εκείνα των παιχνιδιών Windows. Η υπάρχουσα <a href="https://github.com/nmlgc/ReC98">δουλειά του ReC98</a> μάς έδωσε και εδώ πολύτιμη γνώση και πηγαίο υλικό.
+            </p>
+            <p>
+              Η ανακατασκευή για DOS λειτουργεί πλέον. Στις χειροκίνητες δοκιμές μου, έπαιξα ολόκληρες διαδρομές Normal μέχρι το τέλος τους και έλεγξα τις αποθηκεύσεις. Η τρέχουσα δουλειά είναι μια εγγενής μεταφορά σε 64-bit. Η δημιουργία μιας λειτουργικής έκδοσης DOS πρώτα δίνει σε αυτή τη μεταφορά μια αναφορά.
+            </p>
+            <p>
+              Η αρχιτεκτονική άλλαξε όσα χρειαζόταν να διερευνήσουμε. Άλλαξε επίσης τον μεταγλωττιστή και το περιβάλλον εκτέλεσης με τα οποία ελέγχαμε τη δουλειά μας. Όμως ο βοηθός μπορούσε ακόμη να ακολουθεί ένα ερώτημα μέχρι να φτάσει σε αποτέλεσμα και να αφήνει αυτό το αποτέλεσμα να καθοδηγεί το επόμενο πείραμα.
+            </p>
+            <p>
+              Ας δούμε τη μετάβαση από το παιχνίδι σε ένα τέλος. Πρέπει να γνωρίζουμε ποια κατάσταση περνά αυτό το όριο και ποιο πρόγραμμα είναι υπεύθυνο γι' αυτή. Αυτό είναι κάτι που μπορούμε να διερευνήσουμε σε σχέση με το προϊόν για DOS. Μόλις υπάρχουν τα στοιχεία και οι έλεγχοι, ένας βοηθός μπορεί να επεξεργαστεί το ερώτημα όπως έκανε σε έναν τίτλο για Windows.
+            </p>
+            <p>
+              Γι' αυτό το TH04 έχει σημασία για το επιχείρημα. Μια σημαντική αλλαγή πλατφόρμας δεν μας ανάγκασε να ξεκινήσουμε από την αρχή με έναν νέο τρόπο δουλειάς. Η αρχιτεκτονική όριζε το πρόβλημα· η ροή εργασίας εξακολουθούσε να μας δίνει έναν τρόπο να το λύσουμε.
+            </p>
+            <p>
+              Για τη μεταφορά σε 64-bit, μπορούμε πλέον να εξετάζουμε τη νέα υλοποίηση σε σχέση με τη συμπεριφορά που έχει ήδη ανακτηθεί στο DOS. Η γνώση από την ανακατασκευή δίνει στη μεταφορά μια βάση για να χτιστεί πάνω της.
+            </p>
+            <p class="caption">
+              Κατάσταση του έργου στις 10 Οκτωβρίου 2026: <a
+                href="https://github.com/N0zoM1z0/th04/blob/bb9faca54e2eb3c0d6c757c75d59ac29d2cd5e93/docs/RE_HANDOFF.md"
+                >ανακατασκευή για DOS και χειροκίνητες δοκιμές</a
+              > · <a href="https://github.com/N0zoM1z0/th04/tree/port/modern-64"
+                >μεταφορά σε 64-bit</a
+              >. Η μεταφορά παραμένει υπό ανάπτυξη.
+            </p>
+          </section>
+          <section class="article-section" id="semantic-reconstruction">
+            <h2>Από τον ακριβή κώδικα στον αναγνώσιμο κώδικα</h2>
+            <p>
+              Μόλις μια ανακατασκευή λειτουργεί, θέλω να μπορεί να την καταλάβει και κάποιος άλλος.
+            </p>
+            <p>
+              Για μένα, η assembly και οι ακατέργαστες μετατοπίσεις μνήμης μπορεί να μοιάζουν με παλιούς φίλους. Καταλαβαίνω ότι αυτός είναι ένας κάπως ασυνήθιστος ορισμός του «αναγνώσιμου». Οι περισσότεροι θα προτιμούσαν να ακολουθούν τη λογική του παιχνιδιού χωρίς να κρατούν στο μυαλό τους τη διάταξη μνήμης του εκτελέσιμου.
+            </p>
+            <p>
+              Εδώ έρχεται η <strong>σημασιολογική ανακατασκευή</strong>. Ένα ανακτημένο πεδίο μπορεί ακόμη να είναι γνωστό κυρίως από τη μετατόπισή του. Παρακολουθούμε πώς το χρησιμοποιεί το παιχνίδι μέχρι να μπορούμε να εξηγήσουμε τον ρόλο του. Έπειτα μπορούμε να του δώσουμε ένα ουσιαστικό όνομα και έναν τύπο που ταιριάζει στα στοιχεία. Κρατάμε το σκεπτικό μαζί με τον πηγαίο κώδικα, ώστε ο επόμενος άνθρωπος να μπορεί να δει από πού προήλθε αυτή η ερμηνεία.
+            </p>
+            <p>
+              Αυτό γίνεται ιδιαίτερα σημαντικό για μια μεταφορά σε άλλη πλατφόρμα. Μια απόλυτη διεύθυνση μου λέει πού βρισκόταν κάτι στο παλιό εκτελέσιμο. Βοηθά ελάχιστα μια υλοποίηση 64-bit να αποφασίσει ποιο αντικείμενο πρέπει να έχει την ευθύνη αυτής της κατάστασης. Για να μεταφέρουμε τη συμπεριφορά με ασφάλεια, πρέπει να ανακτήσουμε τη σχέση πίσω από την παλιά πρόσβαση στη μνήμη.
+            </p>
+            <p>Η σειρά που χρησιμοποιώ πλέον είναι:</p>
+            <ol>
+              <li>
+                <strong>Ανακτήστε μια ακριβή βάση αναφοράς.</strong> Μεταγλωττίστε τα ανακατασκευασμένα μέρη με τον ιστορικό μεταγλωττιστή. Συγκρίνετε τον σχετικό κώδικα και τα δεδομένα με το αρχικό εκτελέσιμο. Καταγράψτε τις διαφορές που δεν έχουν επιλυθεί, ώστε η επόμενη φάση να έχει σαφές σημείο εκκίνησης.
+              </li>
+              <li>
+                <strong>Δημιουργήστε το πρόγραμμα και παίξτε το στην αρχική πλατφόρμα.</strong> Συνδέστε αυτά τα μέρη στο πραγματικό πρόγραμμα χρησιμοποιώντας την αρχική αρχιτεκτονική και τον αρχικό μεταγλωττιστή. Δοκιμάστε σημαντικές διαδρομές του παιχνιδιού. Εδώ μπορούμε να βρούμε προβλήματα κοινής κατάστασης ή αρχικοποίησης που διέφυγαν από μια μεμονωμένη σύγκριση συνάρτησης.
+              </li>
+              <li>
+                <strong
+                  >Ανακατασκευάστε τη σημασιολογία με βάση και τις δύο αναφορές.</strong
+                > Πάρτε ένα συνεκτικό μέρος του παιχνιδιού κάθε φορά και προσδιορίστε τι σημαίνει ο ανακτημένος πηγαίος κώδικάς του. Βελτιώστε την αναπαράστασή του, διατηρώντας τις ακριβείς συγκρίσεις και τη λειτουργική ιστορική έκδοση του παιχνιδιού.
+              </li>
+              <li>
+                <strong>Κάντε τη σύγχρονη μεταφορά σε άλλη πλατφόρμα.</strong> Μεταφέρετε την τεκμηριωμένη συμπεριφορά στο νέο περιβάλλον, όπως σε μια εγγενή έκδοση 64-bit. Το ανακατασκευασμένο παιχνίδι της αρχικής πλατφόρμας παραμένει αναφορά για τη σύγκριση της συμπεριφοράς της μεταφοράς.
+              </li>
+            </ol>
+            <p>
+              Η λειτουργική έκδοση του παιχνιδιού από το δεύτερο στάδιο γίνεται μια <strong>δεύτερη αναφορά ελέγχου</strong> κατά το τρίτο. Η πρώτη αναφορά ελέγχου εξετάζει αν ο αλλαγμένος πηγαίος κώδικάς μας εξακολουθεί να αναπαράγει τον σχετικό αρχικό κώδικα και τα δεδομένα. Η δεύτερη ελέγχει ότι το ανακατασκευασμένο πρόγραμμα εξακολουθεί να δημιουργείται και να συμπεριφέρεται σωστά στις διαδρομές που δοκιμάζουμε.
+            </p>
+            <p>
+              Εντοπίζουν διαφορετικά λάθη. Μια αλλαγή τύπου μπορεί να αλλάξει τις παραγόμενες εντολές. Μια αλλαγή στην ευθύνη διαχείρισης της κατάστασης μπορεί να αφήσει δύο μέρη του παιχνιδιού να χρησιμοποιούν διαφορετικά αντίγραφά της. Διατηρώντας διαθέσιμους και τους δύο ελέγχους, δίνουμε στον βοηθό μια συγκεκριμένη αστοχία να διερευνήσει πριν προχωρήσει περισσότερο σε μια αναδιάρθρωση.
+            </p>
+            <p>
+              Ένα όνομα χρειάζεται δικά του στοιχεία. Μια ακριβής σύγκριση δεν μπορεί να μας πει αν ένα πεδίο σημαίνει πράγματι «διάρκεια ατρωσίας». Πρέπει να το προσδιορίσουμε από τον τρόπο με τον οποίο το παιχνίδι το γράφει και το χρησιμοποιεί. Αν η σημασία παραμένει αβέβαιη, ένα ουδέτερο όνομα βοηθά τον επόμενο αναγνώστη περισσότερο από μια εικασία διατυπωμένη με σιγουριά.
+            </p>
+            <p>
+              Μάθαμε αυτή τη σειρά μέσα από τα έργα. Το TH08 είχε ήδη λειτουργικές μεταφορές σε άλλες πλατφόρμες πριν από ορισμένους μεταγενέστερους ελέγχους του στην ιστορική πλατφόρμα. Αυτό έκανε κάποια ελαττώματα πιο δύσκολα ορατά. Η <a
+                href="https://github.com/N0zoM1z0/touhou-reconstruction-factory/blob/717e1b8560783ed17a39fdf159d30aa16bb307a7/docs/semantic-reconstruction.md"
+                >τρέχουσα ροή εργασίας του Factory</a
+              > βάζει πρώτα τη δημιουργία του προγράμματος στην αρχική πλατφόρμα, ώστε η σημασιολογική εργασία να μπορεί να τη χρησιμοποιεί ως αναφορά πριν αρχίσει η μεταφορά.
+            </p>
+            <p>
+              <strong
+                >Η ακριβής ανακατασκευή μάς δίνει μια αναφορά. Η σημασιολογική ανακατασκευή κάνει την ανακτημένη γνώση αξιοποιήσιμη.</strong
+              > Μια μεταφορά σε άλλη πλατφόρμα μπορεί έπειτα να βασιστεί και στις δύο.
+            </p>
+          </section>
+          <section class="article-section" id="industrial-shift">
+            <h2>Τι κάνει αυτή την αλλαγή βιομηχανική</h2>
+            <p>
+              Αυτά τα έργα άλλαξαν το πού αφιέρωνα την προσοχή μου. Μόλις οι βοηθοί μπορούσαν να προχωρούν μεγάλο μέρος μιας διερεύνησης, η βελτίωση του περιβάλλοντος εργασίας τους έγινε ένα από τα πιο χρήσιμα πράγματα που μπορούσα να κάνω. Ένα καλύτερο εργαλείο μπορούσε να βοηθήσει σε κάθε μεταγενέστερη συνάρτηση που το χρειαζόταν.
+            </p>
+            <p>
+              Η αυτονομία έχει σημασία εδώ. Το χρήσιμο επόμενο βήμα γίνεται συχνά σαφές μόνο μετά από ένα αποτυχημένο πείραμα. Ένας βοηθός χρειάζεται αρκετή ελευθερία για να ακολουθήσει αυτό το αποτέλεσμα προς μια απροσδόκητη κατεύθυνση. Αν πρέπει να περιμένει να του ορίσω κάθε βήμα, μεγάλο μέρος της δουλειάς παραμένει δεμένο με τη δική μου προσοχή.
+            </p>
+            <p>
+              Περιμένω ότι ο βοηθός θα κάνει λανθασμένες υποθέσεις. Αυτό που έχει σημασία είναι αν μπορούμε να τις δοκιμάσουμε και να μάθουμε από το αποτέλεσμα. Ένας αποτυχημένος έλεγχος θα πρέπει να τον βοηθά να καταλάβει το λάθος αρκετά καλά ώστε να προσπαθήσει ξανά. Εγώ εξακολουθώ να πρέπει να αποφασίζω αν τα συσσωρευμένα στοιχεία στηρίζουν ένα ορόσημο του έργου.
+            </p>
+            <p>
+              Το REA δίνει στον βοηθό πρόσβαση σε εργαλεία ανάλυσης. Ένα ερώτημα για το ποια συνάρτηση καλεί μια άλλη μπορεί να οδηγήσει απευθείας στην εξέταση της συνάρτησης που την καλεί. Το έργο ανακατασκευής παρέχει τον μεταγλωττιστή και τους δικούς του ελέγχους αναφοράς. Ο βοηθός μπορεί να τους χρησιμοποιήσει για να δοκιμάσει τον πηγαίο κώδικα που προτείνει και να δει πού αντέχει η εξήγησή του.
+            </p>
+            <p>
+              Το σφάλμα του TH08 δείχνει γιατί αυτοί οι έλεγχοι αξίζουν ξεχωριστή προσοχή κατά την ανάπτυξή τους. Όταν η ίδια σύγκριση χρησιμοποιείται σε εκατοντάδες συναρτήσεις, ένα κενό της μπορεί να εξαπλωθεί πολύ περισσότερο από ένα λάθος σε μία υλοποίηση. Η δοκιμή του ελεγκτή βελτιώνει την ανατροφοδότηση που είναι διαθέσιμη σε όλη αυτή τη μεταγενέστερη δουλειά.
+            </p>
+            <p>
+              Η βιομηχανική αναλογία έχει εδώ ένα χρήσιμο ιστορικό παράδειγμα. Οι Boulton και Watt εισήγαγαν έναν <a
+                href="https://collection.sciencemuseumgroup.org.uk/objects/co51439/watts-steam-engine-indicator"
+                >ενδείκτη ατμομηχανής το 1796</a
+              > για να βοηθήσουν στη ρύθμιση των βαλβίδων της μηχανής. Μια καταγραφική έκδοση αποτύπωνε την πίεση κατά τη διαδρομή του εμβόλου. Έκανε την εσωτερική συμπεριφορά της μηχανής διαθέσιμη για εξέταση. Τα εργαλεία σύγκρισής μας υπηρετούν παρόμοιο σκοπό: μας επιτρέπουν να εξετάζουμε τι κάνουν οι μηχανισμοί όσο τους βελτιώνουμε.
+            </p>
+            <p>
+              <strong
+                >Βρισκόμαστε στα πρώτα στάδια αυτής της βιομηχανικής αλλαγής.</strong
+              > Μεγάλο μέρος της υποδομής είναι ακόμη ανώριμο. Οι βοηθοί μπορούν να κινούνται γρηγορότερα από όσο σχεδιάστηκαν να υποστηρίζουν οι έλεγχοί μας, οπότε η διαδικασία πρέπει να εξελίσσεται μαζί τους. Όταν βρίσκουμε ένα ελάττωμα σε κοινό εργαλείο, πρέπει να το διορθώνουμε και να επανεξετάζουμε τα αποτελέσματα που επηρέασε. Το επόμενο έργο μπορεί τότε να κληρονομήσει ένα ισχυρότερο εργαλείο.
+            </p>
+            <p>
+              Υπάρχει επίσης ένα πρακτικό όριο σε κάθε συζήτηση. Θα τελειώσει πριν ολοκληρωθεί μια μεγάλη ανακατασκευή. Το αποθετήριο πρέπει να επιτρέπει σε μια άλλη συνεδρία να συνεχίσει χωρίς να χαθεί ο λόγος της τελευταίας απόφασης.
+            </p>
+            <p>
+              Το <a
+                href="https://github.com/N0zoM1z0/touhou-reconstruction-factory"
+                >Touhou Reconstruction Factory</a
+              > προέκυψε από αυτή την ανάγκη. Δίνει στα έργα έναν κοινό τρόπο να μεταφέρουν τους ελέγχους και τα μαθήματά τους παρακάτω. Η δουλειά σε ένα παιχνίδι μπορεί να βελτιώσει τις αρχικές συνθήκες για ένα άλλο.
+            </p>
+            <p>
+              Αυτό δίνει νόημα στη βιομηχανική αναλογία για μένα. Η εμπειρία αρχίζει να γίνεται μέρος εργαλείων που μπορούν να χρησιμοποιήσουν άλλοι. Η βελτίωση αυτών των εργαλείων αλλάζει το πόσα μπορεί να κάνει ο επόμενος άνθρωπος — ή ο επόμενος βοηθός.
+            </p>
+          </section>
+          <section class="article-section" id="possibilities">
+            <h2>Τα έργα που μπορούμε πλέον να εξετάσουμε</h2>
+            <p>
+              Ο ρυθμός έχει σημασία επειδή αλλάζει την απόφαση να ξεκινήσω. Η αντίστροφη μηχανική ενός παιχνιδιού μπορεί να ήταν συναρπαστική και, παρ' όλα αυτά, να απαιτούσε περισσότερη δική μου προσοχή από όση μπορούσα ρεαλιστικά να του δώσω. Πολλά έργα θα έμεναν ιδέες.
+            </p>
+            <p>
+              Τώρα μπορώ να δω έναν τρόπο να συνεχίζεται ένα τέτοιο έργο μέσα από επαναλαμβανόμενες διερευνήσεις. Μια λειτουργική ανακατασκευή κάνει πιο πρακτική τη μεταφορά σε άλλη πλατφόρμα. Η ανάκτηση αναγνώσιμης σημασιολογίας διευκολύνει κάποιον άλλο να εξερευνήσει μια τροποποίηση. Ο κόπος που αφιερώθηκε στην κατανόηση του παιχνιδιού μπορεί να συνεχίσει να αποδίδει αφού εκτελεστεί η πρώτη έκδοση.
+            </p>
+            <p>
+              Πλέον κοιτάζω ένα άγνωστο πρόγραμμα και ρωτώ: <strong
+                >ποια πρόσβαση, ανατροφοδότηση και συσσωρευμένη γνώση θα επέτρεπαν σε έναν βοηθό να δουλέψει αξιόπιστα πάνω σε αυτό;</strong
+              >
+            </p>
+            <p>
+              Αυτό το ερώτημα με κάνει να εξετάζω έργα που παλιότερα θα άφηνα στην άκρη. Το καθένα μπορεί να βελτιώσει τον τρόπο με τον οποίο προσεγγίζουμε το επόμενο. Θέλω να συνεχίσω να εξερευνώ πόσο μακριά μπορεί να μας πάει αυτό.
+            </p>
+          </section>
+          <section class="article-section" id="sources">
+            <details class="native-details">
+              <summary>Ορόσημα έργων και πηγές</summary>
+              <p>
+                Οι ημερομηνίες περιγράφουν καταγεγραμμένα σημεία προόδου των έργων, τα οποία ελέγχθηκαν σε σχέση με το δημόσιο ιστορικό του GitHub στις 10 Οκτωβρίου 2026. Ο χρόνος που πέρασε είναι ημερολογιακός χρόνος μεταξύ commits. Η παρουσία πηγαίου κώδικα, οι ακριβείς συγκρίσεις, η δημιουργία ενός προγράμματος και ένα αποτέλεσμα εκτέλεσης δηλώνουν διαφορετικό ορόσημο το καθένα.
+              </p>
+              <ul>
+                <li>
+                  <strong>TH08:</strong> <a
+                    href="https://github.com/N0zoM1z0/th08/commit/001bf3e9c91cc35b79c7a0e36b3565b86f494362"
+                    >συνέχεια της 13ης Αυγούστου</a
+                  >, <a
+                    href="https://github.com/N0zoM1z0/th08/blob/15caba73df6735fc44eac4783bc61b8d098ea830/docs/PROGRESS.md"
+                    >μητρώο πηγαίου κώδικα της 19ης Αυγούστου</a
+                  >, <a
+                    href="https://github.com/N0zoM1z0/th08/commit/da07b21c8cb63230142b0a66228d6aac66555f3f"
+                    >μεταφορά στο Linux της 24ης Αυγούστου</a
+                  >, <a
+                    href="https://github.com/N0zoM1z0/th08/commit/529eb1a3afa05ae36467731eaccb12e3e50e132f"
+                    >έκδοση Web της 26ης Αυγούστου</a
+                  > και <a
+                    href="https://github.com/N0zoM1z0/th08/releases/tag/v0.2.0-linux-64bit"
+                    >κυκλοφορία Linux 64-bit της 30ής Αυγούστου</a
+                  >.
+                </li>
+                <li>
+                  <strong>TH095:</strong> <a
+                    href="https://github.com/N0zoM1z0/th095/blob/8c31e6f892d945423b7f7b439747a2bd915f82d8/docs/PROGRESS.md"
+                    >αρχικό μητρώο της 29ης Αυγούστου</a
+                  >, <a
+                    href="https://github.com/N0zoM1z0/th095/blob/0fa857fb2b2ec6237732e4d6be8d0a28069c9330/docs/PROGRESS.md"
+                    >μητρώο πηγαίου κώδικα της 7ης Σεπτεμβρίου</a
+                  >, <a
+                    href="https://github.com/N0zoM1z0/th095/blob/74baddfccb712d1311a4d6e7487a63cd1100452e/docs/PROGRESS.md"
+                    >συγκρίσεις της 8ης Σεπτεμβρίου</a
+                  >, <a
+                    href="https://github.com/N0zoM1z0/th095/commit/33d46a0ee48f37060d973125a1a7632a40f8d998"
+                    >σύνδεση της 9ης Σεπτεμβρίου</a
+                  > και <a
+                    href="https://github.com/N0zoM1z0/th095/blob/3442dcf29d9e0b5bef384a49bd0c9ad32a711826/docs/WHOLE_BUILD_TODO.md"
+                    >καταγραφή λειτουργικής έκδοσης παιχνιδιού της 10ης Σεπτεμβρίου</a
+                  >.
+                </li>
+                <li>
+                  <strong>TH04:</strong> η <a
+                    href="https://github.com/N0zoM1z0/th04/blob/bb9faca54e2eb3c0d6c757c75d59ac29d2cd5e93/docs/RE_HANDOFF.md"
+                    >παράδοση της 10ης Οκτωβρίου</a
+                  > καταγράφει τη λειτουργική ανακατασκευή για DOS, τις πλήρεις δοκιμές διαδρομών Normal από τον υπεύθυνο συντήρησης και την τρέχουσα φάση 64-bit.
+                </li>
+                <li>
+                  <strong>Διόρθωση της αναφοράς ελέγχου του TH08:</strong> <a href="https://github.com/N0zoM1z0/th08/issues/10"
+                    >το αναφερθέν σφάλμα αυτόματης συλλογής</a
+                  >, <a
+                    href="https://github.com/N0zoM1z0/th08/commit/7148a76ba224742677895c7160807a68897957d5"
+                    >η διόρθωση πηγαίου κώδικα και σύγκρισης</a
+                  > και <a
+                    href="https://github.com/N0zoM1z0/th08/commit/a393f400786e4cc6cbb1000af0dad3276da12c78"
+                    >ο πλήρης έλεγχος κυριολεκτικών τιμών κινητής υποδιαστολής</a
+                  >.
+                </li>
+                <li>
+                  <strong>Σημασιολογική ανακατασκευή:</strong> <a
+                    href="https://github.com/N0zoM1z0/th08/blob/d2a00f4acb4a13916e07a00bd13f714961714628/docs/SEMANTIC_PLAYBOOK.md"
+                    >ο οδηγός αναγνωσιμότητας του TH08</a
+                  > και <a
+                    href="https://github.com/N0zoM1z0/touhou-reconstruction-factory/blob/717e1b8560783ed17a39fdf159d30aa16bb307a7/docs/semantic-reconstruction.md"
+                    >η σειρά φάσεων και οι δύο διαδρομές επικύρωσης του Factory</a
+                  >.
+                </li>
+                <li>
+                  <strong>Βιομηχανική ιστορία:</strong> <a
+                    href="https://collection.sciencemuseumgroup.org.uk/objects/co51439/watts-steam-engine-indicator"
+                    >η καταγραφή του ενδείκτη ατμομηχανής από το Science Museum Group</a
+                  > περιγράφει την εισαγωγή του το 1796 και τον μηχανισμό καταγραφής πίεσης.
+                </li>
+                <li>
+                  <strong>Μέθοδος:</strong> τα έγγραφα του Factory για την <a
+                    href="https://github.com/N0zoM1z0/touhou-reconstruction-factory/blob/038b6bed51d273c8b3680553b6f43e1b97d19bd1/docs/agent-autonomy.md"
+                    >αυτονομία των βοηθών</a
+                  > και τη <a
+                    href="https://github.com/N0zoM1z0/touhou-reconstruction-factory/blob/038b6bed51d273c8b3680553b6f43e1b97d19bd1/docs/knowledge-base.md"
+                    >γνώση που μεταφέρεται μεταξύ παιχνιδιών</a
+                  > διατηρούν τις αρχές εργασίας και τα μαθήματα.
+                </li>
+              </ul>
+            </details>
+            <p>
+              <a class="text-link" href="../">Περισσότερα άρθρα</a> · <a class="text-link" href="../../showcase/th04/"
+                >Εξερευνήστε μια διερεύνηση του TH04</a
+              >
+            </p>
+          </section>
+        </article>
+      </div>
+    </main>
+    <!-- website:footer:start -->
+    <!-- prettier-ignore -->
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <p>REA · Reverse Engineer Anything</p>
+        <div class="footer-links">
+          <a href="../../faq/">FAQ</a
+          ><a href="../../contributors/">Συνεισφέροντες</a
+          ><a href="https://github.com/morluto/rea">Πηγαίος κώδικας</a
+          ><a href="https://github.com/morluto/rea/blob/main/LICENSE">Άδεια MIT</a
+          ><a href="https://discord.gg/GkcryMnJDM">Ελάτε στην κοινότητα</a
+          ><a href="https://x.com/reatools">Ακολουθήστε μας στο X</a>
+        </div>
+      </div>
+    </footer>
+    <p class="sr-only" id="copy-status" role="status" aria-live="polite"></p>
+    <a class="back-to-top" href="#top" aria-label="Επιστροφή στην κορυφή">
+      <span aria-hidden="true">↑</span> Κορυφή
+    </a>
+    <!-- website:footer:end -->
+  </body>
+</html>

@@ -1,0 +1,329 @@
+<!doctype html>
+<html lang="el" dir="ltr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Μελέτες αντίστροφης μηχανικής — REA</title>
+    <meta
+      name="description"
+      content="Ακολουθήστε διερευνήσεις του REA μέσα από κώδικα, σχήματα και επιδείξεις: μια εφαρμογή ελέγχου ταυτότητας Android, το DX-Ball, το Notion, το TH04 και ένα πρόγραμμα ελέγχου σημαίας DownUnderCTF."
+    />
+    <!-- website:sharing:start -->
+    <!-- prettier-ignore -->
+    <link rel="canonical" href="https://rea.tools/el/showcase/" />
+    <!-- website:languages:start -->
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="en" href="https://rea.tools/showcase/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="zh-CN" href="https://rea.tools/zh-CN/showcase/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="zh-TW" href="https://rea.tools/zh-TW/showcase/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="ja" href="https://rea.tools/ja/showcase/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="ko" href="https://rea.tools/ko/showcase/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="tr" href="https://rea.tools/tr/showcase/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="ru" href="https://rea.tools/ru/showcase/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="vi" href="https://rea.tools/vi/showcase/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="th" href="https://rea.tools/th/showcase/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="de" href="https://rea.tools/de/showcase/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="es" href="https://rea.tools/es/showcase/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="fr" href="https://rea.tools/fr/showcase/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="uk" href="https://rea.tools/uk/showcase/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="pl" href="https://rea.tools/pl/showcase/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="pt-BR" href="https://rea.tools/pt-BR/showcase/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="ar" href="https://rea.tools/ar/showcase/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="fa" href="https://rea.tools/fa/showcase/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="id" href="https://rea.tools/id/showcase/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="it" href="https://rea.tools/it/showcase/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="el" href="https://rea.tools/el/showcase/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="x-default" href="https://rea.tools/showcase/" />
+<!-- website:languages:end -->
+    <!-- prettier-ignore -->
+    <meta property="og:type" content="website" />
+    <!-- prettier-ignore -->
+    <meta property="og:site_name" content="REA" />
+    <!-- prettier-ignore -->
+    <meta property="og:title" content="Μελέτες αντίστροφης μηχανικής — REA" />
+    <!-- prettier-ignore -->
+    <meta property="og:description" content="Ακολουθήστε διερευνήσεις του REA μέσα από κώδικα, σχήματα και επιδείξεις: μια εφαρμογή ελέγχου ταυτότητας Android, το DX-Ball, το Notion, το TH04 και ένα πρόγραμμα ελέγχου σημαίας DownUnderCTF." />
+    <!-- prettier-ignore -->
+    <meta property="og:url" content="https://rea.tools/el/showcase/" />
+    <!-- prettier-ignore -->
+    <meta property="og:image" content="https://rea.tools/assets/social-card.png" />
+    <!-- prettier-ignore -->
+    <meta property="og:image:type" content="image/png" />
+    <!-- prettier-ignore -->
+    <meta property="og:image:width" content="1200" />
+    <!-- prettier-ignore -->
+    <meta property="og:image:height" content="630" />
+    <!-- prettier-ignore -->
+    <meta
+      property="og:image:alt"
+      content="REA: Μάθετε πώς λειτουργεί το λογισμικό. Αντίστροφη μηχανική με τον βοηθό προγραμματισμού σας."
+    />
+    <!-- prettier-ignore -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <!-- prettier-ignore -->
+    <meta name="twitter:title" content="Μελέτες αντίστροφης μηχανικής — REA" />
+    <!-- prettier-ignore -->
+    <meta name="twitter:description" content="Ακολουθήστε διερευνήσεις του REA μέσα από κώδικα, σχήματα και επιδείξεις: μια εφαρμογή ελέγχου ταυτότητας Android, το DX-Ball, το Notion, το TH04 και ένα πρόγραμμα ελέγχου σημαίας DownUnderCTF." />
+    <!-- prettier-ignore -->
+    <meta name="twitter:image" content="https://rea.tools/assets/social-card.png" />
+    <!-- prettier-ignore -->
+    <meta
+      name="twitter:image:alt"
+      content="REA: Μάθετε πώς λειτουργεί το λογισμικό. Αντίστροφη μηχανική με τον βοηθό προγραμματισμού σας."
+    />
+    <!-- website:sharing:end -->
+    <!-- website:theme:start -->
+    <meta name="theme-color" content="#ffffff" />
+    <!-- Apply the saved theme before styles load, to avoid a flash on navigation. -->
+    <script src="../../assets/theme.js"></script>
+    <!-- website:theme:end -->
+    <link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="../../assets/styles.css" />
+    <script src="../../assets/main.js" defer></script>
+  <script id="website-messages" type="application/json">{"Copied": "Αντιγράφηκε", "Code copied to clipboard.": "Ο κώδικας αντιγράφηκε στο πρόχειρο.", "Selected": "Επιλέχθηκε", "Code selected. Use your keyboard to copy it.": "Ο κώδικας επιλέχθηκε. Χρησιμοποιήστε το πληκτρολόγιό σας για να τον αντιγράψετε.", "REA on GitHub ({count})": "REA στο GitHub ({count})", "Switch to light mode": "Μετάβαση σε φωτεινή λειτουργία", "Switch to dark mode": "Μετάβαση σε σκοτεινή λειτουργία"}</script>
+  </head>
+  <body id="top">
+    <a class="skip-link" href="#main">Μετάβαση στο περιεχόμενο</a>
+    <!-- website:header:start -->
+    <!-- prettier-ignore -->
+    <header class="site-header">
+      <div class="container header-inner">
+        <a class="brand" href="../" aria-label="Αρχική σελίδα του REA"
+          ><span class="brand-name">REA</span
+          ><span class="brand-caption" data-i18n-skip>Reverse Engineer Anything</span></a
+        >
+        <nav class="navigation" aria-label="Κύρια πλοήγηση">
+          <a href="../../get-started/" class="nav-start">Ξεκινήστε</a>
+          <a href="./" aria-current="page">Μελέτες</a>
+          <a href="../blog/">Ιστολόγιο</a>
+          <a href="../guides/">Οδηγοί</a>
+        </nav>
+        <div class="header-social">
+          <details class="language-picker" data-i18n-skip><summary><span aria-hidden="true">文 / A</span> <span>Ελληνικά</span></summary><nav aria-label="Ελληνικά"><a href="../../showcase/" lang="en" dir="ltr" data-language="en">English</a><a href="../../zh-CN/showcase/" lang="zh-CN" dir="ltr" data-language="zh-CN">简体中文</a><a href="../../zh-TW/showcase/" lang="zh-TW" dir="ltr" data-language="zh-TW">繁體中文</a><a href="../../ja/showcase/" lang="ja" dir="ltr" data-language="ja">日本語</a><a href="../../ko/showcase/" lang="ko" dir="ltr" data-language="ko">한국어</a><a href="../../tr/showcase/" lang="tr" dir="ltr" data-language="tr">Türkçe</a><a href="../../ru/showcase/" lang="ru" dir="ltr" data-language="ru">Русский</a><a href="../../vi/showcase/" lang="vi" dir="ltr" data-language="vi">Tiếng Việt</a><a href="../../th/showcase/" lang="th" dir="ltr" data-language="th">ไทย</a><a href="../../de/showcase/" lang="de" dir="ltr" data-language="de">Deutsch</a><a href="../../es/showcase/" lang="es" dir="ltr" data-language="es">Español</a><a href="../../fr/showcase/" lang="fr" dir="ltr" data-language="fr">Français</a><a href="../../uk/showcase/" lang="uk" dir="ltr" data-language="uk">Українська</a><a href="../../pl/showcase/" lang="pl" dir="ltr" data-language="pl">Polski</a><a href="../../pt-BR/showcase/" lang="pt-BR" dir="ltr" data-language="pt-BR">Português (Brasil)</a><a href="../../ar/showcase/" lang="ar" dir="rtl" data-language="ar">العربية</a><a href="../../fa/showcase/" lang="fa" dir="rtl" data-language="fa">فارسی</a><a href="../../id/showcase/" lang="id" dir="ltr" data-language="id">Bahasa Indonesia</a><a href="../../it/showcase/" lang="it" dir="ltr" data-language="it">Italiano</a><a href="../../el/showcase/" lang="el" dir="ltr" data-language="el" aria-current="true">Ελληνικά</a><a href="../../ml/showcase/" lang="ml" dir="ltr" data-language="ml">മലയാളം · English</a><a href="../../ur-Latn/showcase/" lang="ur-Latn" dir="ltr" data-language="ur-Latn">Roman Urdu · English</a><a href="../../ro/showcase/" lang="ro" dir="ltr" data-language="ro">Română · English</a></nav></details>
+          <button class="theme-toggle" type="button" data-theme-toggle hidden>
+            <svg class="theme-moon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+              <path d="M20.9 13a9 9 0 0 1-9.9-9.9A9 9 0 1 0 20.9 13Z" />
+            </svg>
+            <svg class="theme-sun" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true" focusable="false">
+              <circle cx="12" cy="12" r="4" />
+              <path d="M12 2v2m0 16v2M2 12h2m16 0h2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42" />
+            </svg>
+          </button>
+          <a
+            class="nav-github"
+            href="https://github.com/morluto/rea"
+            aria-label="Το REA στο GitHub"
+            title="Το REA στο GitHub"
+          >
+            <svg
+              width="22"
+              height="22"
+              viewBox="0 0 16 16"
+              aria-hidden="true"
+              focusable="false"
+            >
+              <path
+                fill="currentColor"
+                d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82a7.65 7.65 0 0 1 2-.27c.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z"
+              />
+            </svg>
+            <span class="nav-github-count" hidden aria-hidden="true"></span>
+          </a>
+          <a
+            class="nav-discord"
+            href="https://discord.gg/GkcryMnJDM"
+            aria-label="Μπείτε στην κοινότητα του REA στο Discord"
+            title="Μπείτε στην κοινότητα του REA στο Discord"
+          >
+            <svg
+              width="22"
+              height="22"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+              focusable="false"
+            >
+              <path
+                fill="currentColor"
+                d="M20.317 4.3698a19.7913 19.7913 0 0 0-4.8851-1.5152.0741.0741 0 0 0-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 0 0-.0785-.037 19.7363 19.7363 0 0 0-4.8852 1.515.0699.0699 0 0 0-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 0 0 .0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 0 0 .0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 0 0-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 0 1-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 0 1 .0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 0 1 .0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 0 1-.0066.1276 12.2986 12.2986 0 0 1-1.873.8914.0766.0766 0 0 0-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 0 0 .0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 0 0 .0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 0 0-.0312-.0286ZM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189Zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189Z"
+              />
+            </svg>
+          </a>
+          <a
+            class="nav-x"
+            href="https://x.com/reatools"
+            aria-label="Ακολουθήστε το REA στο X"
+            title="Ακολουθήστε το REA στο X"
+          >
+            <svg
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+              focusable="false"
+            >
+              <path
+                fill="currentColor"
+                d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z"
+              />
+            </svg>
+          </a>
+        </div>
+      </div>
+    </header>
+    <!-- website:header:end -->
+    <main id="main" class="container">
+      <div class="page-heading">
+        <p class="breadcrumb"><a href="../">Αρχική</a> / Μελέτες</p>
+        <h1>Μελέτες REA.</h1>
+        <p class="lede">
+          Android, παιχνίδια, Electron και μια πρόκληση CTF, με κώδικα, σχήματα και ελεγμένα αποτελέσματα.
+        </p>
+      </div>
+      <div class="guide-index">
+        <section class="guide-entry">
+          <p class="eyebrow">Android · Ανάλυση APK</p>
+          <div>
+            <h2>Πώς μια εφαρμογή ελέγχου ταυτότητας δημιουργεί έναν κωδικό σύνδεσης</h2>
+            <p>
+              Βρείτε τον υπολογισμό του εξαψήφιου κωδικού του Aegis στο APK της έκδοσής του. Ακολουθήστε τις μεθόδους δημιουργίας με το REA και έπειτα μετακινήστε το ρολόι της επίδειξης για να δείτε γιατί ο κωδικός αλλάζει κάθε 30 δευτερόλεπτα.
+            </p>
+            <div class="guide-route">
+              <span>APK</span> <b aria-hidden="true">→</b>
+              <span>Κώδικας δημιουργίας</span> <b aria-hidden="true">→</b>
+              <span>Ανακτημένος κανόνας</span> <b aria-hidden="true">→</b>
+              <span>Ρυθμιζόμενο ρολόι</span>
+            </div>
+            <a class="text-link" href="../../showcase/aegis/">Διαβάστε τη μελέτη Android</a>
+          </div>
+        </section>
+        <section class="guide-entry">
+          <p class="eyebrow">CTF · Ανάλυση κώδικα μηχανής</p>
+          <div>
+            <h2>Λύστε ένα πρόγραμμα ελέγχου σημαίας CTF</h2>
+            <p>
+              Εξετάστε μια εύκολη πρόκληση DownUnderCTF με το REA. Βρείτε τις συναρτήσεις ελέγχου της, μετατρέψτε μάσκες και αθροίσματα σε εξισώσεις και έπειτα επαληθεύστε τη σημαία που βρήκατε με το αρχικό πρόγραμμα.
+            </p>
+            <div class="guide-route">
+              <span>Δυαδικό αρχείο</span> <b aria-hidden="true">→</b>
+              <span>Κώδικας ελέγχου</span> <b aria-hidden="true">→</b>
+              <span>Εξισώσεις</span> <b aria-hidden="true">→</b>
+              <span>Correct!</span>
+            </div>
+            <a class="text-link" href="ctf/">Διαβάστε τη μελέτη CTF</a>
+          </div>
+        </section>
+        <section class="guide-entry">
+          <p class="eyebrow">Κώδικας μηχανής · Ανακατασκευή</p>
+          <div>
+            <h2>Ο υπολογισμός της στερεοφωνικής θέσης του ήχου στο DX-Ball</h2>
+            <p>
+              Ανακτήστε έναν υπολογισμό στερεοφωνικής θέσης του ήχου από ένα παιχνίδι για Windows του 1996. Οι εντολές, οι αναφορές καλούντων και οι αριθμητικές σταθερές του REA οδηγούν σε μια μικρή συνάρτηση C, ελεγμένη έναντι της αρχικής συμπεριφοράς και των 63 μεταγλωττισμένων byte.
+            </p>
+            <div class="guide-route">
+              <span>Εκτελέσιμο</span> <b aria-hidden="true">→</b>
+              <span>Ευρήματα REA</span> <b aria-hidden="true">→</b>
+              <span>Ανακτημένος κώδικας C</span> <b aria-hidden="true">→</b>
+              <span>Επικύρωση</span>
+            </div>
+            <a class="text-link" href="dx-ball/">Διαβάστε τη μελέτη DX-Ball</a>
+          </div>
+        </section>
+        <section class="guide-entry">
+          <p class="eyebrow">Electron · Ιχνηλάτηση λειτουργίας</p>
+          <div>
+            <h2>Πώς το Notion αντιγράφει κείμενο και HTML</h2>
+            <p>
+              Ακολουθήστε ένα API που εκτίθεται στη σελίδα μέσα από τη συσκευασμένη JavaScript του Notion. Ακολουθήστε τα περιβλήματα IPC μέχρι το πρόχειρο του συστήματος και έπειτα δείτε πώς ένας μικρός δείκτης HTML κρατά τα δεδομένα εμπλουτισμένων μπλοκ συνδεδεμένα με ένα αντίγραφο.
+            </p>
+            <div class="guide-route">
+              <span>Συσκευασμένη εφαρμογή</span> <b aria-hidden="true">→</b>
+              <span>Εκτεθειμένο API</span> <b aria-hidden="true">→</b>
+              <span>Περιβλήματα IPC</span> <b aria-hidden="true">→</b>
+              <span>Πρόχειρο</span>
+            </div>
+            <a class="text-link" href="notion/">Διαβάστε τη μελέτη Notion</a>
+          </div>
+        </section>
+        <section class="guide-entry">
+          <p class="eyebrow">PC-98 DOS · Ανακατασκευή</p>
+          <div>
+            <h2>Πώς το TH04 στοχεύει έναν δακτύλιο βολίδων</h2>
+            <p>
+              Εξετάστε την αρχική βοηθητική συνάρτηση γωνίας 16 bit με το REA. Αντιστοιχίστε τις πράξεις πολλαπλασιασμού, διαίρεσης και συντεταγμένων με ευανάγνωστο κώδικα C++ και έπειτα δείτε πώς παράγουν έναν δακτύλιο που στοχεύει τον παίκτη.
+            </p>
+            <div class="guide-route">
+              <span>Αρχικός κώδικας DOS</span> <b aria-hidden="true">→</b>
+              <span>Εντολές REA</span> <b aria-hidden="true">→</b>
+              <span>Υπολογισμός γωνίας</span> <b aria-hidden="true">→</b>
+              <span>Δακτύλιος βολίδων</span>
+            </div>
+            <a class="text-link" href="th04/">Διαβάστε τη μελέτη TH04</a>
+          </div>
+        </section>
+        <section class="guide-entry">
+          <p class="eyebrow">Περιβάλλοντα RL</p>
+          <div>
+            <h2>Δημιουργία περιβαλλόντων RL με το REA</h2>
+            <p>
+              Καταγράψτε μια συνεδρία εφαρμογής ιστού, μετατρέψτε το API της σε εργαλεία και εξαγάγετε ένα περιβάλλον για πράκτορα AI. Εκτελέστε το με το AgentEnv και προσθέστε εργασίες και ελέγχους ανταμοιβής για εκπαίδευση RL ή αξιολόγηση.
+            </p>
+            <p>
+              <a class="text-link" href="../../guides/rl-environments/"
+                >Οδηγός δημιουργίας περιβάλλοντος</a
+              > · <a href="https://x.com/reatools/status/2112574822584918075?s=20"
+                >Δείτε το demo στο X</a
+              >
+            </p>
+          </div>
+        </section>
+      </div>
+      <section class="article-section">
+        <h2>Οδηγοί βήμα προς βήμα</h2>
+        <p>
+          Οι οδηγοί παρουσιάζουν έναν υπολογισμό σε κώδικα μηχανής, μια εξαγωγή από Electron και ένα αίτημα περιηγητή. Καθένας ξεκινά με μια προτροπή και έναν συγκεκριμένο στόχο.
+        </p>
+        <a class="text-link" href="../guides/">Διαβάστε τους οδηγούς</a>
+      </section>
+    </main>
+    <!-- website:footer:start -->
+    <!-- prettier-ignore -->
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <p>REA · Reverse Engineer Anything</p>
+        <div class="footer-links">
+          <a href="../faq/">FAQ</a
+          ><a href="../contributors/">Συνεισφέροντες</a
+          ><a href="https://github.com/morluto/rea">Πηγαίος κώδικας</a
+          ><a href="https://github.com/morluto/rea/blob/main/LICENSE">Άδεια MIT</a
+          ><a href="https://discord.gg/GkcryMnJDM">Ελάτε στην κοινότητα</a
+          ><a href="https://x.com/reatools">Ακολουθήστε μας στο X</a>
+        </div>
+      </div>
+    </footer>
+    <p class="sr-only" id="copy-status" role="status" aria-live="polite"></p>
+    <a class="back-to-top" href="#top" aria-label="Επιστροφή στην κορυφή">
+      <span aria-hidden="true">↑</span> Κορυφή
+    </a>
+    <!-- website:footer:end -->
+  </body>
+</html>

@@ -1,0 +1,570 @@
+<!doctype html>
+<html lang="es" dir="ltr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Notion Electron Ingeniería inversa: Portapapeles-REA</title>
+    <meta
+      name="description"
+      content="Siga la API del portapapeles de Notion a través de la precarga de Electron, los contenedores IPC y el proceso principal, con breves extractos de código y un vistazo a su rico formato de portapapeles."
+    />
+    <!-- website:sharing:start -->
+    <!-- prettier-ignore -->
+    <link rel="canonical" href="https://rea.tools/es/showcase/notion/" />
+    <!-- website:languages:start -->
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="en" href="https://rea.tools/showcase/notion/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="zh-CN" href="https://rea.tools/zh-CN/showcase/notion/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="zh-TW" href="https://rea.tools/zh-TW/showcase/notion/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="ja" href="https://rea.tools/ja/showcase/notion/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="ko" href="https://rea.tools/ko/showcase/notion/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="tr" href="https://rea.tools/tr/showcase/notion/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="ru" href="https://rea.tools/ru/showcase/notion/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="vi" href="https://rea.tools/vi/showcase/notion/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="th" href="https://rea.tools/th/showcase/notion/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="de" href="https://rea.tools/de/showcase/notion/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="es" href="https://rea.tools/es/showcase/notion/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="fr" href="https://rea.tools/fr/showcase/notion/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="uk" href="https://rea.tools/uk/showcase/notion/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="pl" href="https://rea.tools/pl/showcase/notion/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="pt-BR" href="https://rea.tools/pt-BR/showcase/notion/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="ar" href="https://rea.tools/ar/showcase/notion/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="fa" href="https://rea.tools/fa/showcase/notion/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="id" href="https://rea.tools/id/showcase/notion/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="it" href="https://rea.tools/it/showcase/notion/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="el" href="https://rea.tools/el/showcase/notion/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="x-default" href="https://rea.tools/showcase/notion/" />
+<!-- website:languages:end -->
+    <!-- prettier-ignore -->
+    <meta property="og:type" content="website" />
+    <!-- prettier-ignore -->
+    <meta property="og:site_name" content="REA" />
+    <!-- prettier-ignore -->
+    <meta property="og:title" content="Notion Electron Ingeniería inversa: Portapapeles-REA" />
+    <!-- prettier-ignore -->
+    <meta property="og:description" content="Siga la API del portapapeles de Notion a través de la precarga de Electron, los contenedores IPC y el proceso principal, con breves extractos de código y un vistazo a su rico formato de portapapeles." />
+    <!-- prettier-ignore -->
+    <meta property="og:url" content="https://rea.tools/es/showcase/notion/" />
+    <!-- prettier-ignore -->
+    <meta property="og:image" content="https://rea.tools/assets/social-card.png" />
+    <!-- prettier-ignore -->
+    <meta property="og:image:type" content="image/png" />
+    <!-- prettier-ignore -->
+    <meta property="og:image:width" content="1200" />
+    <!-- prettier-ignore -->
+    <meta property="og:image:height" content="630" />
+    <!-- prettier-ignore -->
+    <meta
+      property="og:image:alt"
+      content="REA: Descubra cómo funciona el software. Ingeniería inversa con su agente de codificación."
+    />
+    <!-- prettier-ignore -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <!-- prettier-ignore -->
+    <meta name="twitter:title" content="Notion Electron Ingeniería inversa: Portapapeles-REA" />
+    <!-- prettier-ignore -->
+    <meta name="twitter:description" content="Siga la API del portapapeles de Notion a través de la precarga de Electron, los contenedores IPC y el proceso principal, con breves extractos de código y un vistazo a su rico formato de portapapeles." />
+    <!-- prettier-ignore -->
+    <meta name="twitter:image" content="https://rea.tools/assets/social-card.png" />
+    <!-- prettier-ignore -->
+    <meta
+      name="twitter:image:alt"
+      content="REA: Descubra cómo funciona el software. Ingeniería inversa con su agente de codificación."
+    />
+    <!-- website:sharing:end -->
+    <!-- website:theme:start -->
+    <meta name="theme-color" content="#ffffff" />
+    <!-- Apply the saved theme before styles load, to avoid a flash on navigation. -->
+    <script src="../../../assets/theme.js"></script>
+    <!-- website:theme:end -->
+    <link rel="icon" href="../../../assets/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="../../../assets/styles.css" />
+    <script src="../../../assets/main.js" defer></script>
+  <script id="website-messages" type="application/json">{"Copied": "Copiado", "Code copied to clipboard.": "Código copiado al portapapeles.", "Selected": "Seleccionados", "Code selected. Use your keyboard to copy it.": "Código seleccionado. Usa el teclado para copiarlo.", "REA on GitHub ({count})": "REA en GitHub ({count})", "Switch to light mode": "Cambiar al modo claro", "Switch to dark mode": "Cambiar al modo oscuro"}</script>
+  </head>
+  <body id="top">
+    <a class="skip-link" href="#main">Saltar al contenido</a>
+    <!-- website:header:start -->
+    <!-- prettier-ignore -->
+    <header class="site-header">
+      <div class="container header-inner">
+        <a class="brand" href="../../" aria-label="Inicio de REA"
+          ><span class="brand-name">REA</span
+          ><span class="brand-caption" data-i18n-skip>Reverse Engineer Anything</span></a
+        >
+        <nav class="navigation" aria-label="Navegación principal">
+          <a href="../../../get-started/" class="nav-start">Primeros pasos</a>
+          <a href="../" aria-current="page">Casos prácticos</a>
+          <a href="../../blog/">Blog</a>
+          <a href="../../guides/">Guías</a>
+        </nav>
+        <div class="header-social">
+          <details class="language-picker" data-i18n-skip><summary><span aria-hidden="true">文 / A</span> <span>Español</span></summary><nav aria-label="Español"><a href="../../../showcase/notion/" lang="en" dir="ltr" data-language="en">English</a><a href="../../../zh-CN/showcase/notion/" lang="zh-CN" dir="ltr" data-language="zh-CN">简体中文</a><a href="../../../zh-TW/showcase/notion/" lang="zh-TW" dir="ltr" data-language="zh-TW">繁體中文</a><a href="../../../ja/showcase/notion/" lang="ja" dir="ltr" data-language="ja">日本語</a><a href="../../../ko/showcase/notion/" lang="ko" dir="ltr" data-language="ko">한국어</a><a href="../../../tr/showcase/notion/" lang="tr" dir="ltr" data-language="tr">Türkçe</a><a href="../../../ru/showcase/notion/" lang="ru" dir="ltr" data-language="ru">Русский</a><a href="../../../vi/showcase/notion/" lang="vi" dir="ltr" data-language="vi">Tiếng Việt</a><a href="../../../th/showcase/notion/" lang="th" dir="ltr" data-language="th">ไทย</a><a href="../../../de/showcase/notion/" lang="de" dir="ltr" data-language="de">Deutsch</a><a href="../../../es/showcase/notion/" lang="es" dir="ltr" data-language="es" aria-current="true">Español</a><a href="../../../fr/showcase/notion/" lang="fr" dir="ltr" data-language="fr">Français</a><a href="../../../uk/showcase/notion/" lang="uk" dir="ltr" data-language="uk">Українська</a><a href="../../../pl/showcase/notion/" lang="pl" dir="ltr" data-language="pl">Polski</a><a href="../../../pt-BR/showcase/notion/" lang="pt-BR" dir="ltr" data-language="pt-BR">Português (Brasil)</a><a href="../../../ar/showcase/notion/" lang="ar" dir="rtl" data-language="ar">العربية</a><a href="../../../fa/showcase/notion/" lang="fa" dir="rtl" data-language="fa">فارسی</a><a href="../../../id/showcase/notion/" lang="id" dir="ltr" data-language="id">Bahasa Indonesia</a><a href="../../../it/showcase/notion/" lang="it" dir="ltr" data-language="it">Italiano</a><a href="../../../el/showcase/notion/" lang="el" dir="ltr" data-language="el">Ελληνικά</a><a href="../../../ml/showcase/notion/" lang="ml" dir="ltr" data-language="ml">മലയാളം · English</a><a href="../../../ur-Latn/showcase/notion/" lang="ur-Latn" dir="ltr" data-language="ur-Latn">Roman Urdu · English</a><a href="../../../ro/showcase/notion/" lang="ro" dir="ltr" data-language="ro">Română · English</a></nav></details>
+          <button class="theme-toggle" type="button" data-theme-toggle hidden>
+            <svg class="theme-moon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+              <path d="M20.9 13a9 9 0 0 1-9.9-9.9A9 9 0 1 0 20.9 13Z" />
+            </svg>
+            <svg class="theme-sun" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true" focusable="false">
+              <circle cx="12" cy="12" r="4" />
+              <path d="M12 2v2m0 16v2M2 12h2m16 0h2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42" />
+            </svg>
+          </button>
+          <a
+            class="nav-github"
+            href="https://github.com/morluto/rea"
+            aria-label="REA en GitHub"
+            title="REA en GitHub"
+          >
+            <svg
+              width="22"
+              height="22"
+              viewBox="0 0 16 16"
+              aria-hidden="true"
+              focusable="false"
+            >
+              <path
+                fill="currentColor"
+                d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82a7.65 7.65 0 0 1 2-.27c.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z"
+              />
+            </svg>
+            <span class="nav-github-count" hidden aria-hidden="true"></span>
+          </a>
+          <a
+            class="nav-discord"
+            href="https://discord.gg/GkcryMnJDM"
+            aria-label="Únete a REA en Discord"
+            title="Únete a REA en Discord"
+          >
+            <svg
+              width="22"
+              height="22"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+              focusable="false"
+            >
+              <path
+                fill="currentColor"
+                d="M20.317 4.3698a19.7913 19.7913 0 0 0-4.8851-1.5152.0741.0741 0 0 0-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 0 0-.0785-.037 19.7363 19.7363 0 0 0-4.8852 1.515.0699.0699 0 0 0-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 0 0 .0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 0 0 .0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 0 0-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 0 1-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 0 1 .0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 0 1 .0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 0 1-.0066.1276 12.2986 12.2986 0 0 1-1.873.8914.0766.0766 0 0 0-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 0 0 .0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 0 0 .0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 0 0-.0312-.0286ZM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189Zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189Z"
+              />
+            </svg>
+          </a>
+          <a
+            class="nav-x"
+            href="https://x.com/reatools"
+            aria-label="Sigue a REA en X"
+            title="Sigue a REA en X"
+          >
+            <svg
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+              focusable="false"
+            >
+              <path
+                fill="currentColor"
+                d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z"
+              />
+            </svg>
+          </a>
+        </div>
+      </div>
+    </header>
+    <!-- website:header:end -->
+    <main id="main" class="container">
+      <div class="page-heading">
+        <p class="breadcrumb">
+          <a href="../../">Inicio</a> / <a href="../">Vitrinas</a> / Notion
+        </p>
+        <p class="eyebrow">Estudio de caso * Electron</p>
+        <h1>Cómo copia Notion<br />texto y HTML.</h1>
+        <p class="lede">
+          Rastree una llamada al portapapeles desde la API de la página de Notion, a través de la precarga y el proceso principal, hasta el escritor del portapapeles de Electron.
+        </p>
+        <p class="page-meta">Escritorio Notion 7.6.1 * JavaScript · REA</p>
+      </div>
+
+      <figure class="workflow-figure">
+        <p class="figure-title">El puente dentro del paquete de escritorio de Notion</p>
+        <ol class="flow-steps notion-bridge-flow">
+          <li>
+            <span class="flow-label">01 * API orientada a páginas</span> <span class="flow-node"><code>clipboard.write(data)</code></span> <span class="flow-note"
+              >La precarga expone un método invocable.</span
+            >
+          </li>
+          <li>
+            <span class="flow-label">02 * Envoltura de precarga</span> <span class="flow-node"><code>ipcRenderer.invoke</code></span> <span class="flow-note"
+              >El contenedor envía el canal y los argumentos.</span
+            >
+          </li>
+          <li>
+            <span class="flow-label">03 * Controlador de procesos principales</span> <span class="flow-node"><code>ipcMain.handle</code></span> <span class="flow-note"
+              >El receptor verifica qué página lo envió.</span
+            >
+          </li>
+          <li>
+            <span class="flow-label">04 * Portapapeles del sistema</span> <span class="flow-node"><code>clipboard.write(data)</code></span> <span class="flow-note"
+              > Electron escribe el texto y HTML suministrados.</span
+            >
+          </li>
+        </ol>
+        <p class="flow-result">
+          Un canal une los dos lados: <code class="notion-channel">notion:clipboard:write</code>
+        </p>
+        <figcaption>
+          El código empaquetado usa el mismo canal en la precarga y el proceso principal. Al resolver los contenedores, se revelan las llamadas Electron detrás de esos nombres.
+        </figcaption>
+      </figure>
+
+      <div class="article-layout">
+        <nav class="contents" aria-label="En esta página">
+          <p>En este estudio de caso</p>
+          <ul>
+            <li><a href="#clipboard">Sigue el puente del portapapeles</a></li>
+            <li><a href="#rich-clipboard">Mantener la estructura de un bloque</a></li>
+            <li><a href="#continue">Más ejemplos y fuentes</a></li>
+          </ul>
+        </nav>
+        <article class="article" aria-label="Estudio de caso Notion Electron">
+          <section class="article-section" id="clipboard">
+            <h2>¿A dónde va la operación de copia?</h2>
+            <p>
+              La página ve un método llamado <code>clipboard.write</code>. Su implementación en la precarga es un wrapper. La pregunta útil es qué envía ese contenedor y qué código lo recibe.
+            </p>
+            <div class="agent-terminal">
+              <div class="terminal-header">
+                <span class="terminal-title"
+                  ><span class="terminal-dots" aria-hidden="true"
+                    ><i></i><i></i><i></i></span
+                  >Su agente de codificación</span
+                ><button
+                  class="copy-button"
+                  type="button"
+                  data-copy="notion-prompt"
+                  aria-label="Copie el indicador de análisis Notion"
+                >
+                  Copiar
+                </button>
+              </div>
+              <p class="terminal-prompt">
+                <span class="prompt-symbol" aria-hidden="true">›</span
+                ><span id="notion-prompt"
+                  >Use REA para rastrear cómo Notion copia texto y HTML en el portapapeles del sistema. Muestre el código en cada paso.</span
+                ><span class="terminal-cursor" aria-hidden="true"></span>
+              </p>
+            </div>
+            <p class="caption">
+              Un mensaje de ejemplo con el paquete de aplicaciones locales de Notion disponible para su agente de codificación.
+            </p>
+
+            <h3 class="small-heading">REA encuentra dónde comenzar a leer</h3>
+            <p>
+              Al analizar la precarga de pestañas con REA, se localiza la API expuesta a la página y la llamada que envía una solicitud IPC. Ambos hallazgos vienen con rangos de origen en el paquete minimizado:
+            </p>
+            <figure class="workflow-figure">
+              <p class="figure-title">Hallazgos REA → dos lugares para abrir</p>
+              <div class="rea-query-pair">
+                <div class="code-block">
+                  <div class="code-header"><span>API de página expuesta</span></div>
+                  <pre><code>api_key: "__electronApi"
+api_status: "dynamic"
+source: preload.js:1:22764–22828</code></pre>
+                </div>
+                <div class="code-block">
+                  <div class="code-header"><span>Llamada IPC del renderizador</span></div>
+                  <pre><code>operation: "invoke"
+channel_expression: "e"
+source: preload.js:1:6486–6522</code></pre>
+                </div>
+              </div>
+              <figcaption>
+                Campos seleccionados de un nuevo <code>analyze_javascript_application</code> resultado en la precarga de la pestaña Notion, grabada con REA 4.1.0. Las posiciones usan la línea y la columna de base cero del paquete original.
+              </figcaption>
+            </figure>
+            <p>
+              El agente abre esas ubicaciones, encuentra el miembro del portapapeles en la API ensamblada y lee <code>invokerInMain</code>. Suministros para el sitio Its call <code class="notion-channel">notion:clipboard:write</code>. Ese nombre le da al agente algo preciso que buscar en el paquete principal. Los cuatro extractos a continuación muestran la ruta que conecta.
+            </p>
+
+            <h3 class="small-heading">Cuatro piezas cortas de código</h3>
+            <p class="caption">
+              Simplificado a partir del JavaScript empaquetado , con nombres de variables legibles. Se omiten los miembros no relacionados.
+            </p>
+            <ol class="rea-queries">
+              <li>
+                <h4>Comience en la API expuesta en la página</h4>
+                <div class="code-block">
+                  <div class="code-header">
+                    <span
+                      >tab_browser_view/<span translate="no">preload.js</span> * Miembro API</span
+                    ><button
+                      class="copy-button"
+                      type="button"
+                      data-copy="notion-preload-source"
+                      aria-label="Copie el extracto de precarga de Notion"
+                    >
+                      Copiar
+                    </button>
+                  </div>
+                  <pre><code id="notion-preload-source">const clipboardApi = {
+  write: invokerInMain(<span class="notion-channel">"notion:clipboard:write"</span>)
+};
+
+// Included in the API exposed through contextBridge:
+// window.__electronApi.clipboard</code></pre>
+                </div>
+                <p>
+                  Este miembro proporciona el nombre del canal. La implementación de <code>invokerInMain</code> nos dice cómo la solicitud sale del proceso de la página.
+                </p>
+              </li>
+              <li>
+                <h4>Resolver el contenedor de la precarga</h4>
+                <div class="code-block">
+                  <div class="code-header">
+                    <span
+                      >tab_browser_view/<span translate="no">preload.js</span> * Ayudante de IPC</span
+                    ><button
+                      class="copy-button"
+                      type="button"
+                      data-copy="notion-invoke-source"
+                      aria-label="Copiar extracto del contenedor de invocación Notion"
+                    >
+                      Copiar
+                    </button>
+                  </div>
+                  <pre><code id="notion-invoke-source">function invokerInMain(channel) {
+  return (...args) =&gt; invokeInMainAndReturnResult(channel, ...args);
+}
+
+function invokeInMainAndReturnResult(channel, ...args) {
+  return ipcRenderer.invoke(channel, ...args);
+}</code></pre>
+                </div>
+                <p>
+                  La función devuelta reenvía los argumentos a través del IPC de solicitud y respuesta de Electron. Ahora podemos buscar <code class="notion-channel">notion:clipboard:write</code> en el lado del proceso principal.
+                </p>
+              </li>
+              <li>
+                <h4>Compruebe cómo está registrado el destinatario</h4>
+                <div class="code-block">
+                  <div class="code-header">
+                    <span
+                      >principal/<span translate="no">index.js</span> * ayudante del manejador</span
+                    ><button
+                      class="copy-button"
+                      type="button"
+                      data-copy="notion-handler-source"
+                      aria-label="Copie el extracto del contenedor del controlador Notion"
+                    >
+                      Copiar
+                    </button>
+                  </div>
+                  <pre><code id="notion-handler-source">const handleRequestFromRenderer = {
+  addListener(channel, handler) {
+    ipcMain.handle(channel, handler);
+  }
+};</code></pre>
+                </div>
+                <p>
+                  El proceso principal usa otro envoltorio. Su <code>addListener</code> el método registra un <code>ipcMain.handle</code> receptor para ese canal.
+                </p>
+              </li>
+              <li>
+                <h4>Encuentre la escritura y su verificación de remitente</h4>
+                <div class="code-block">
+                  <div class="code-header">
+                    <span
+                      >principal/<span translate="no">index.js</span> * receptor del portapapeles</span
+                    ><button
+                      class="copy-button"
+                      type="button"
+                      data-copy="notion-write-source"
+                      aria-label="Copiar extracto del receptor del portapapeles Notion"
+                    >
+                      Copiar
+                    </button>
+                  </div>
+                  <pre><code id="notion-write-source">handleRequestFromRenderer.addListener(
+  <span class="notion-channel">"notion:clipboard:write"</span>,
+  (event, data) =&gt;
+    isNotionWebContents(event.sender)
+      ? clipboard.write(data)
+      : undefined
+);</code></pre>
+                </div>
+                <p>
+                  Este es el destino. Después de verificar el remitente, el controlador pasa los datos proporcionados a la API del portapapeles de Electron. El canal y los dos envoltorios resueltos conectan el método expuesto a esta llamada.
+                </p>
+              </li>
+            </ol>
+          </section>
+
+          <section class="article-section" id="rich-clipboard">
+            <h2>¿Cómo mantiene su estructura un bloque copiado?</h2>
+            <p>
+              El editor web de Notion envía texto y HTML a través de <code>electronApi.clipboard.write</code>. Mantiene los datos del bloque localmente y coloca una IDENTIFICACIÓN en el HTML copiado para conectarlos.
+            </p>
+            <figure class="workflow-figure">
+              <p class="figure-title">Enlaces HTML a los datos de bloque guardados</p>
+              <div class="notion-clipboard-grid">
+                <div class="code-block">
+                  <div class="code-header">
+                    <span>Enviado al portapapeles del sistema</span>
+                  </div>
+                  <pre><code>text: "Project notes"
+html: "&lt;p&gt;Project notes&lt;/p&gt;"
+    + "&lt;!-- notionvc: <span class="notion-channel">&lt;copy-id&gt;</span> --&gt;"</code></pre>
+                </div>
+                <div class="code-block">
+                  <div class="code-header">
+                    <span>Guardado localmente por Notion</span>
+                  </div>
+                  <pre><code>id: <span class="notion-channel">&lt;copy-id&gt;</span>
+mimeTypes:
+  text/_notion-blocks-v3-production
+    → structured block data</code></pre>
+                </div>
+              </div>
+              <ol
+                class="notion-mini-flow"
+                aria-label="Restauración de datos enriquecidos del portapapeles al pegar"
+              >
+                <li>Leer el ID HTML</li>
+                <li>Encuentre la misma identificación local</li>
+                <li>Restaurar datos de bloque Notion</li>
+              </ol>
+              <figcaption>
+                Texto ilustrativo e ID. La prueba del módulo grabado restaura los datos del bloque cuando los ID coinciden; una entrada obsoleta devuelve solo texto y HTML.
+              </figcaption>
+            </figure>
+            <p>
+              Al pegar, Notion busca el ID HTML y lo compara con la copia guardada. Los ID coincidentes restauran los datos del bloque.
+            </p>
+            <p class="caption">
+              Formato de portapapeles grabado a partir de activos web almacenados en caché el 13 de julio de 2026.
+            </p>
+          </section>
+
+          <section class="article-section" id="continue">
+            <h2>Más ejemplos y fuentes</h2>
+            <details class="evidence-details" id="markdown">
+              <summary>Otro ejemplo: Tablas de rebajas</summary>
+              <p>
+                Notion analiza Markdown en datos de bloque. Este ejemplo muestra cómo una tabla se convierte en encabezado y filas de datos.
+              </p>
+              <figure class="workflow-figure">
+                <p class="figure-title">
+                  Una tabla a través del analizador de rebajas de Notion
+                </p>
+                <div class="notion-table-example">
+                  <div class="code-block">
+                    <div class="code-header"><span>Entrada de rebajas</span></div>
+                    <pre><code>| A | B |
+| - | - |
+| 1 | 2 |</code></pre>
+                  </div>
+                  <div class="code-block">
+                    <div class="code-header">
+                      <span>Salida estructurada del analizador · extracto</span>
+                    </div>
+                    <pre><code>table · headerRow: true
+  table_row
+    cells: ["A"], ["B"]
+  table_row
+    cells: ["1"], ["2"]</code></pre>
+                  </div>
+                </div>
+                <figcaption>
+                  Salida grabada de un analizador Markdown extraído. La tabla se convierte en filas y celdas.
+                </figcaption>
+              </figure>
+            </details>
+            <details class="evidence-details">
+              <summary>Otra ruta: la conexión SQLite sin conexión</summary>
+              <p>
+                Solicitudes de renderizador de Notion <code>getSqliteMeta</code> a través de IPC. El proceso principal crea un canal de mensajes y le da un puerto al renderizador y el otro a un proceso de utilidad SQLite. Los lotes de declaraciones posteriores y los resultados viajan por ese puerto.
+              </p>
+              <p>
+                A continuación, se explica dónde se ejecuta el trabajo de la base de datos y por qué rastrear solo la solicitud inicial de IPC pierde la conversación posterior.
+              </p>
+            </details>
+            <details class="evidence-details">
+              <summary>Fuentes y cómo leer los extractos</summary>
+              <p>
+                El puente del portapapeles proviene de Notion Desktop 7.6.1 <code>app.asar</code>: la pestaña precarga y <code>main/index.js</code>. Los extractos expanden los nombres de variables minimizados y omiten el código no relacionado; el ayudante de verificación del remitente se muestra con su subyacente <code>isNotionWebContents</code> llama.
+              </p>
+              <p>
+                Los ejemplos del portapapeles virtual y Markdown provienen de activos web almacenados en caché el 13 de julio de 2026, incluidos los módulos <code>747001</code>, <code>58169</code>, <code>736810</code> y <code>422457</code>. Esos activos tienen su propia versión. Las sondas guardadas ejecutaron módulos extraídos y arneses pequeños; sus resultados describen esas sondas en lugar de una sesión de IU de escritorio capturada.
+              </p>
+              <p>
+                El resultado de REA que se muestra aquí es un análisis enfocado de la precarga de pestañas guardada, registrada con el paquete REA 4.1.0 publicado. Localiza la API y la operación de invocación. El miembro del portapapeles y el receptor coincidente se conectan leyendo sus implementaciones de envoltura en el paquete.
+              </p>
+              <p>
+                El ejemplo de Markdown usa el módulo analizador <code>422457</code>. Las pruebas de módulo guardadas muestran que tanto los filtros de página como de chat conservan esta tabla. Los analizadores pegar/importar, Markdown estructurado y AI/chat tienen puntos de entrada separados y formatos intermedios.
+              </p>
+            </details>
+            <ul class="reading-list">
+              <li>
+                <a href="../../../guides/javascript/"
+                  > Guía de aplicación de JavaScript</a
+                ><span
+                  >Siga la función de exportación de una pequeña aplicación Electron.</span
+                >
+              </li>
+              <li>
+                <a href="../dx-ball/"> Reconstrucción DX-Ball</a
+                ><span
+                  >Siga las instrucciones nativas de una función C marcada.</span
+                >
+              </li>
+            </ul>
+            <div class="actions">
+              <a class="button" href="../../../get-started/"
+                >Analiza tu propia app</a
+              >
+            </div>
+          </section>
+        </article>
+      </div>
+    </main>
+    <!-- website:footer:start -->
+    <!-- prettier-ignore -->
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <p>REA · Reverse Engineer Anything</p>
+        <div class="footer-links">
+          <a href="../../faq/">FAQ</a
+          ><a href="../../contributors/">Colaboradores</a
+          ><a href="https://github.com/morluto/rea">Código fuente</a
+          ><a href="https://github.com/morluto/rea/blob/main/LICENSE">Licencia MIT</a
+          ><a href="https://discord.gg/GkcryMnJDM">Únete a la comunidad</a
+          ><a href="https://x.com/reatools">Síguenos en X</a>
+        </div>
+      </div>
+    </footer>
+    <p class="sr-only" id="copy-status" role="status" aria-live="polite"></p>
+    <a class="back-to-top" href="#top" aria-label="Volver arriba">
+      <span aria-hidden="true">↑</span> Arriba
+    </a>
+    <!-- website:footer:end -->
+  </body>
+</html>

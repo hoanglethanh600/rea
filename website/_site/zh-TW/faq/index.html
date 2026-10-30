@@ -1,0 +1,515 @@
+<!doctype html>
+<html lang="zh-TW" dir="ltr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>REA FAQ：安裝、更新與故障排查</title>
+    <meta
+      name="description"
+      content="解答 REA 的常見問題：安裝、更新、分析工具、程式設計助手、故障排查和分享案例。"
+    />
+    <!-- website:sharing:start -->
+    <!-- prettier-ignore -->
+    <link rel="canonical" href="https://rea.tools/zh-TW/faq/" />
+    <!-- website:languages:start -->
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="en" href="https://rea.tools/faq/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="zh-CN" href="https://rea.tools/zh-CN/faq/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="zh-TW" href="https://rea.tools/zh-TW/faq/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="ja" href="https://rea.tools/ja/faq/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="ko" href="https://rea.tools/ko/faq/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="tr" href="https://rea.tools/tr/faq/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="ru" href="https://rea.tools/ru/faq/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="vi" href="https://rea.tools/vi/faq/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="th" href="https://rea.tools/th/faq/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="de" href="https://rea.tools/de/faq/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="es" href="https://rea.tools/es/faq/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="fr" href="https://rea.tools/fr/faq/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="uk" href="https://rea.tools/uk/faq/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="pl" href="https://rea.tools/pl/faq/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="pt-BR" href="https://rea.tools/pt-BR/faq/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="ar" href="https://rea.tools/ar/faq/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="fa" href="https://rea.tools/fa/faq/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="id" href="https://rea.tools/id/faq/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="it" href="https://rea.tools/it/faq/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="el" href="https://rea.tools/el/faq/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="x-default" href="https://rea.tools/faq/" />
+<!-- website:languages:end -->
+    <!-- prettier-ignore -->
+    <meta property="og:type" content="website" />
+    <!-- prettier-ignore -->
+    <meta property="og:site_name" content="REA" />
+    <!-- prettier-ignore -->
+    <meta property="og:title" content="REA FAQ：安裝、更新與故障排查" />
+    <!-- prettier-ignore -->
+    <meta property="og:description" content="解答 REA 的常見問題：安裝、更新、分析工具、程式設計助手、故障排查和分享案例。" />
+    <!-- prettier-ignore -->
+    <meta property="og:url" content="https://rea.tools/zh-TW/faq/" />
+    <!-- prettier-ignore -->
+    <meta property="og:image" content="https://rea.tools/assets/social-card.png" />
+    <!-- prettier-ignore -->
+    <meta property="og:image:type" content="image/png" />
+    <!-- prettier-ignore -->
+    <meta property="og:image:width" content="1200" />
+    <!-- prettier-ignore -->
+    <meta property="og:image:height" content="630" />
+    <!-- prettier-ignore -->
+    <meta
+      property="og:image:alt"
+      content="REA-瞭解軟體的工作原理。 逆向工程與你的程式設計助手."
+    />
+    <!-- prettier-ignore -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <!-- prettier-ignore -->
+    <meta name="twitter:title" content="REA FAQ：安裝、更新與故障排查" />
+    <!-- prettier-ignore -->
+    <meta name="twitter:description" content="解答 REA 的常見問題：安裝、更新、分析工具、程式設計助手、故障排查和分享案例。" />
+    <!-- prettier-ignore -->
+    <meta name="twitter:image" content="https://rea.tools/assets/social-card.png" />
+    <!-- prettier-ignore -->
+    <meta
+      name="twitter:image:alt"
+      content="REA-瞭解軟體的工作原理。 逆向工程與你的程式設計助手."
+    />
+    <!-- website:sharing:end -->
+    <!-- website:theme:start -->
+    <meta name="theme-color" content="#ffffff" />
+    <!-- Apply the saved theme before styles load, to avoid a flash on navigation. -->
+    <script src="../../assets/theme.js"></script>
+    <!-- website:theme:end -->
+    <link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="../../assets/styles.css" />
+    <script src="../../assets/main.js" defer></script>
+  <script id="website-messages" type="application/json">{"Copied": "已複製", "Code copied to clipboard.": "程式碼已複製到剪貼簿。", "Selected": "已選中", "Code selected. Use your keyboard to copy it.": "程式碼已選中，請用鍵盤快捷鍵複製。", "REA on GitHub ({count})": "REA在GitHub（{count})", "Switch to light mode": "切換至淺色模式", "Switch to dark mode": "切換至深色模式"}</script>
+  </head>
+  <body id="top">
+    <a class="skip-link" href="#main">跳轉到內容</a>
+    <!-- website:header:start -->
+    <!-- prettier-ignore -->
+    <header class="site-header">
+      <div class="container header-inner">
+        <a class="brand" href="../" aria-label="REA 首頁"
+          ><span class="brand-name">REA</span
+          ><span class="brand-caption" data-i18n-skip>Reverse Engineer Anything</span></a
+        >
+        <nav class="navigation" aria-label="主導航">
+          <a href="../../get-started/" class="nav-start">開始使用</a>
+          <a href="../showcase/">案例展示</a>
+          <a href="../blog/">部落格</a>
+          <a href="../guides/">指南</a>
+        </nav>
+        <div class="header-social">
+          <details class="language-picker" data-i18n-skip><summary><span aria-hidden="true">文 / A</span> <span>繁體中文</span></summary><nav aria-label="繁體中文"><a href="../../faq/" lang="en" dir="ltr" data-language="en">English</a><a href="../../zh-CN/faq/" lang="zh-CN" dir="ltr" data-language="zh-CN">简体中文</a><a href="../../zh-TW/faq/" lang="zh-TW" dir="ltr" data-language="zh-TW" aria-current="true">繁體中文</a><a href="../../ja/faq/" lang="ja" dir="ltr" data-language="ja">日本語</a><a href="../../ko/faq/" lang="ko" dir="ltr" data-language="ko">한국어</a><a href="../../tr/faq/" lang="tr" dir="ltr" data-language="tr">Türkçe</a><a href="../../ru/faq/" lang="ru" dir="ltr" data-language="ru">Русский</a><a href="../../vi/faq/" lang="vi" dir="ltr" data-language="vi">Tiếng Việt</a><a href="../../th/faq/" lang="th" dir="ltr" data-language="th">ไทย</a><a href="../../de/faq/" lang="de" dir="ltr" data-language="de">Deutsch</a><a href="../../es/faq/" lang="es" dir="ltr" data-language="es">Español</a><a href="../../fr/faq/" lang="fr" dir="ltr" data-language="fr">Français</a><a href="../../uk/faq/" lang="uk" dir="ltr" data-language="uk">Українська</a><a href="../../pl/faq/" lang="pl" dir="ltr" data-language="pl">Polski</a><a href="../../pt-BR/faq/" lang="pt-BR" dir="ltr" data-language="pt-BR">Português (Brasil)</a><a href="../../ar/faq/" lang="ar" dir="rtl" data-language="ar">العربية</a><a href="../../fa/faq/" lang="fa" dir="rtl" data-language="fa">فارسی</a><a href="../../id/faq/" lang="id" dir="ltr" data-language="id">Bahasa Indonesia</a><a href="../../it/faq/" lang="it" dir="ltr" data-language="it">Italiano</a><a href="../../el/faq/" lang="el" dir="ltr" data-language="el">Ελληνικά</a><a href="../../ml/faq/" lang="ml" dir="ltr" data-language="ml">മലയാളം · English</a><a href="../../ur-Latn/faq/" lang="ur-Latn" dir="ltr" data-language="ur-Latn">Roman Urdu · English</a><a href="../../ro/faq/" lang="ro" dir="ltr" data-language="ro">Română · English</a></nav></details>
+          <button class="theme-toggle" type="button" data-theme-toggle hidden>
+            <svg class="theme-moon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+              <path d="M20.9 13a9 9 0 0 1-9.9-9.9A9 9 0 1 0 20.9 13Z" />
+            </svg>
+            <svg class="theme-sun" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true" focusable="false">
+              <circle cx="12" cy="12" r="4" />
+              <path d="M12 2v2m0 16v2M2 12h2m16 0h2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42" />
+            </svg>
+          </button>
+          <a
+            class="nav-github"
+            href="https://github.com/morluto/rea"
+            aria-label="在 GitHub 檢視 REA"
+            title="在 GitHub 檢視 REA"
+          >
+            <svg
+              width="22"
+              height="22"
+              viewBox="0 0 16 16"
+              aria-hidden="true"
+              focusable="false"
+            >
+              <path
+                fill="currentColor"
+                d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82a7.65 7.65 0 0 1 2-.27c.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z"
+              />
+            </svg>
+            <span class="nav-github-count" hidden aria-hidden="true"></span>
+          </a>
+          <a
+            class="nav-discord"
+            href="https://discord.gg/GkcryMnJDM"
+            aria-label="加入 REA 的 Discord 社群"
+            title="加入 REA 的 Discord 社群"
+          >
+            <svg
+              width="22"
+              height="22"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+              focusable="false"
+            >
+              <path
+                fill="currentColor"
+                d="M20.317 4.3698a19.7913 19.7913 0 0 0-4.8851-1.5152.0741.0741 0 0 0-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 0 0-.0785-.037 19.7363 19.7363 0 0 0-4.8852 1.515.0699.0699 0 0 0-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 0 0 .0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 0 0 .0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 0 0-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 0 1-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 0 1 .0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 0 1 .0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 0 1-.0066.1276 12.2986 12.2986 0 0 1-1.873.8914.0766.0766 0 0 0-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 0 0 .0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 0 0 .0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 0 0-.0312-.0286ZM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189Zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189Z"
+              />
+            </svg>
+          </a>
+          <a
+            class="nav-x"
+            href="https://x.com/reatools"
+            aria-label="在 X 上關注 REA"
+            title="在 X 上關注 REA"
+          >
+            <svg
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+              focusable="false"
+            >
+              <path
+                fill="currentColor"
+                d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z"
+              />
+            </svg>
+          </a>
+        </div>
+      </div>
+    </header>
+    <!-- website:header:end -->
+    <main id="main" class="container">
+      <div class="page-heading">
+        <p class="breadcrumb"><a href="../">首頁</a> / FAQ</p>
+        <h1>REA 常見問題。</h1>
+        <p class="lede">安裝、更新、分析和故障排查。</p>
+      </div>
+      <div class="article-layout">
+        <nav class="contents" aria-label="在本頁">
+          <p>主題</p>
+          <ul>
+            <li><a href="#setup">安裝與更新</a></li>
+            <li><a href="#analysis">分析</a></li>
+            <li><a href="#troubleshooting">故障排除</a></li>
+            <li><a href="#sharing">資料與分享</a></li>
+          </ul>
+        </nav>
+        <article
+          class="article"
+          data-faq
+          aria-label="REA 常見問題"
+        >
+          <section class="article-section" id="setup">
+            <h2>安裝與更新</h2>
+            <div class="faq-list">
+              <details class="faq-item" id="install">
+                <summary>如何安裝 REA？</summary>
+                <p>
+                  準備好 <span translate="no">Node.js</span> 和 npm 後，執行 setup，選擇程式設計助手，再確認擬進行的更改。
+                </p>
+                <div class="code-block">
+                  <div class="code-header">
+                    <span>終端 · 配置程式設計助手</span
+                    ><button
+                      class="copy-button"
+                      type="button"
+                      data-copy="faq-setup"
+                      aria-label="複製REA設定命令"
+                    >
+                      複製
+                    </button>
+                  </div>
+                  <pre><code id="faq-setup">npx rea-agents@latest setup</code></pre>
+                </div>
+                <p>
+                  setup 會註冊 REA 的 MCP 連線，並安裝配套的調查技能。完成後重啟助手，再提供目標路徑和問題。<a href="../../get-started/">檢視安裝指南</a>，瞭解前置條件和第一次分析的步驟。
+                </p>
+              </details>
+              <details class="faq-item" id="agents">
+                <summary>哪些程式設計助手能使用 REA？</summary>
+                <p>
+                  支援本地 MCP 伺服器的助手都可以。setup 提供 Claude Code、Claude Desktop、Codex、Cursor、Gemini CLI、Windsurf、Devin、OpenCode、Antigravity、GitHub Copilot CLI、Command Code、Grok Build、OMP 和 VS Code 的配置。Grok Bot 的聯結器從聊天中新增。
+                </p>
+                <p>
+                  <a href="../../get-started/#agent">連線程式設計助手</a>。
+                </p>
+              </details>
+              <details class="faq-item" id="update">
+                <summary>如何更新 REA？</summary>
+                <p>
+                  REA 更新很頻繁，也會持續修復 bug。如果你透過 npm 安裝了 CLI：
+                </p>
+                <div class="code-block">
+                  <div class="code-header">
+                    <span>終端 · 已安裝的 CLI</span
+                    ><button
+                      class="copy-button"
+                      type="button"
+                      data-copy="faq-update-cli"
+                      aria-label="複製REA更新命令"
+                    >
+                      複製
+                    </button>
+                  </div>
+                  <pre><code id="faq-update-cli">rea update</code></pre>
+                </div>
+                <p>
+                  更新後，按照輸出中的命令重新整理配置。如果之前透過 <code>npx</code> 配置助手，執行：
+                </p>
+                <div class="code-block">
+                  <div class="code-header">
+                    <span>終端 · 重新整理助手配置</span
+                    ><button
+                      class="copy-button"
+                      type="button"
+                      data-copy="faq-update-agent"
+                      aria-label="複製程式設計助手設定重新整理命令"
+                    >
+                      複製
+                    </button>
+                  </div>
+                  <pre><code id="faq-update-agent">npx rea-agents@latest setup</code></pre>
+                </div>
+                <p>
+                  檢查變更後，重啟程式設計助手。REA 的連線配置指定了包版本，重新執行 setup 才會讓助手使用新版本。臨時執行 CLI 命令時，在 <code>npx -y rea-agents@latest</code> 後面接具體命令即可。
+                </p>
+              </details>
+              <details class="faq-item" id="skill">
+                <summary>
+                  只從 skills.sh 安裝技能就夠了嗎？
+                </summary>
+                <p>
+                  技能告訴助手如何開展調查。還需要執行 <a href="#install">REA setup</a>，連線 MCP 伺服器並安裝配套技能。隨後重啟助手，它才能呼叫工具。
+                </p>
+              </details>
+            </div>
+          </section>
+
+          <section class="article-section" id="analysis">
+            <h2>分析</h2>
+            <div class="faq-list">
+              <details class="faq-item" id="targets">
+                <summary>REA 可以分析什麼？</summary>
+                <p>根據手裡的軟體型別選擇：</p>
+                <ul>
+                  <li>
+                    <a href="../../guides/native/"
+                      >原生可執行檔案和庫</a
+                    >：函式、彙編、虛擬碼和引用。
+                  </li>
+                  <li>
+                    <a href="../../guides/javascript/"
+                      >JavaScript 和 Electron 應用</a
+                    >：模組、匯入、IPC 和原始碼位置。
+                  </li>
+                  <li>
+                    <a href="../guides/browser/">瀏覽器頁面</a>：指令碼、請求和執行時觀察。
+                  </li>
+                </ul>
+                <p>
+                  REA 也提供託管程式集、Android APK、韌體和打包資源的分析流程。<a href="../showcase/">檢視案例</a>，瞭解完整的調查過程。
+                </p>
+              </details>
+              <details class="faq-item" id="providers">
+                <summary>需要 Hopper、Ghidra 或 IDA 嗎？</summary>
+                <p>
+                  深度原生分析需要其中一個工具。靜態 JavaScript 和 .NET 檢查直接使用提供的檔案，不需要原生分析引擎。
+                </p>
+                <p>
+                  連線已有的 Ghidra 或 IDA 安裝，或讓 setup 檢測 Hopper 並提出安裝計劃。可用的分析後端取決於你的系統和分析目標。<a href="../../get-started/#native">配置原生分析</a>。
+                </p>
+              </details>
+              <details class="faq-item" id="cli">
+                <summary>不用程式設計助手，也能用 REA 嗎？</summary>
+                <p>
+                  可以。CLI 使用同一套分析流程。對於本地 JavaScript 或 Electron 應用：
+                </p>
+                <div class="code-block">
+                  <div class="code-header">
+                    <span>終端 · 靜態應用分析</span
+                    ><button
+                      class="copy-button"
+                      type="button"
+                      data-copy="faq-cli-analysis"
+                      aria-label="複製REA CLI分析命令"
+                    >
+                      複製
+                    </button>
+                  </div>
+                  <pre><code id="faq-cli-analysis">npx -y rea-agents@latest analyze-javascript-application \
+  /absolute/path/to/app --json</code></pre>
+                </div>
+                <p>
+                  把路徑換成解包後的應用目錄或 ASAR 檔案。<a href="../../get-started/#terminal">檢視 CLI 的安裝方式</a>。
+                </p>
+              </details>
+              <details class="faq-item" id="code">
+                <summary>REA 會返回什麼程式碼？</summary>
+                <p>
+                  原生程式分析返回彙編、虛擬碼、函式呼叫、引用和相關常量。JavaScript 分析返回模組、模組之間的關係，以及原始碼位置。
+                </p>
+                <p>
+                  助手根據這些結果解釋行為，或編寫實現並測試。<a href="../showcase/dx-ball/#sound-pan"
+                    >DX-Ball 計算規則</a
+                  >和<a href="../showcase/ctf/">CTF flag 檢查器</a>展示了這個過程。
+                </p>
+              </details>
+              <details class="faq-item" id="prompt">
+                <summary>應該向助手提什麼問題？</summary>
+                <p>
+                  提供一個本地目標，以及一個想調查的行為。比如 JavaScript 或 Electron 應用：
+                </p>
+                <div class="agent-terminal">
+                  <div class="terminal-header">
+                    <span class="terminal-title"
+                      ><span class="terminal-dots" aria-hidden="true"
+                        ><i></i><i></i><i></i></span
+                      >你的程式設計助手</span
+                    ><button
+                      class="copy-button"
+                      type="button"
+                      data-copy="faq-analysis-prompt"
+                      aria-label="複製示例分析提示"
+                    >
+                      複製
+                    </button>
+                  </div>
+                  <p class="terminal-prompt">
+                    <span class="prompt-symbol" aria-hidden="true">›</span
+                    ><span id="faq-analysis-prompt"
+                      >用 REA 分析 <span translate="no">/absolute/path/to/app</span>，解釋它如何匯出資料。給出相關程式碼和原始碼位置。</span
+                    ><span class="terminal-cursor" aria-hidden="true"></span>
+                  </p>
+                </div>
+                <p class="caption">
+                  把路徑換成自己的目標。<a href="../guides/">指南</a>提供了原生、Electron 和瀏覽器示例的 prompt。
+                </p>
+              </details>
+            </div>
+          </section>
+
+          <section class="article-section" id="troubleshooting">
+            <h2>故障排除</h2>
+            <div class="faq-list">
+              <details class="faq-item" id="connection">
+                <summary>為什麼助手看不到 REA 工具？</summary>
+                <p>
+                  安裝後重啟或重新連線助手。用 <code>doctor</code> 檢查 REA 註冊情況。以 Codex 為例：
+                </p>
+                <div class="code-block">
+                  <div class="code-header">
+                    <span>終端 · 檢查一個客戶端</span
+                    ><button
+                      class="copy-button"
+                      type="button"
+                      data-copy="faq-doctor"
+                      aria-label="複製客戶端診斷命令"
+                    >
+                      複製
+                    </button>
+                  </div>
+                  <pre><code id="faq-doctor">npx -y rea-agents@latest doctor --client codex --json</code></pre>
+                </div>
+                <p>
+                  把 <code>codex</code> 換成客戶端 ID，例如 <code>claude_code</code> 或 <code>cursor</code>。如果報告顯示註冊缺失或過期，為這個客戶端執行 setup：
+                </p>
+                <div class="code-block">
+                  <div class="code-header">
+                    <span>終端 · 修復一個客戶端的配置</span
+                    ><button
+                      class="copy-button"
+                      type="button"
+                      data-copy="faq-repair"
+                      aria-label="複製作用域設定命令"
+                    >
+                      複製
+                    </button>
+                  </div>
+                  <pre><code id="faq-repair">npx rea-agents@latest setup --client codex</code></pre>
+                </div>
+                <p>
+                  確認計劃後重啟客戶端。如果註冊正常但工具仍未出現，檢查客戶端的 MCP 連線錯誤。<a href="../../get-started/#help">檢視更多配置診斷</a>。
+                </p>
+              </details>
+              <details class="faq-item" id="hopper">
+                <summary>需要先啟動 Hopper 嗎？</summary>
+                <p>
+                  REA 會在操作需要時啟動 Hopper。在 macOS 上，首次使用時先完成演示模式或許可證啟用的選擇，再進行無人值守分析。<a href="../../get-started/#native">檢視原生分析配置</a
+                  >。
+                </p>
+              </details>
+              <details class="faq-item" id="bugs">
+                <summary>遇到 bug 怎麼辦？</summary>
+                <p>
+                  先<a href="#update">更新 REA</a>，重啟助手，再試一次相同任務。新版本可能已經修復這個問題。
+                </p>
+                <p>
+                  如果問題仍然存在，<a href="https://github.com/morluto/rea/issues/new/choose"
+                    >提交 issue</a
+                  >，附上 REA 版本、作業系統、目標型別、復現步驟和錯誤輸出。涉及原生分析時，也寫明分析後端。
+                </p>
+              </details>
+            </div>
+          </section>
+
+          <section class="article-section" id="sharing">
+            <h2>資料與分享</h2>
+            <div class="faq-list">
+              <details class="faq-item" id="privacy">
+                <summary>REA 會上傳我的應用嗎？</summary>
+                <p>
+                  REA 在你的機器上分析目標。助手會收到分析結果，這些結果受其模型服務商的資料政策約束。
+                </p>
+              </details>
+              <details class="faq-item" id="contribute">
+                <summary>如何分享案例或參與貢獻？</summary>
+                <p>
+                  做出了有用的 REA 案例？我們很想看看！透過 <a href="https://github.com/morluto/rea/issues/new/choose"
+                    >issue</a
+                  > 或 <a href="https://github.com/morluto/rea/pulls">PR</a
+                  > 分享目標、問題、結果，以及如何驗證。簡短的程式碼片段和圖示，能幫助大家理解調查過程。
+                </p>
+                <p>
+                  也歡迎反饋 bug、提出需求、改進文件和程式碼。你還可以在<a href="https://discord.gg/GkcryMnJDM">社群</a>裡討論自己的案例。
+                </p>
+              </details>
+            </div>
+          </section>
+        </article>
+      </div>
+    </main>
+    <!-- website:footer:start -->
+    <!-- prettier-ignore -->
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <p>REA · Reverse Engineer Anything</p>
+        <div class="footer-links">
+          <a href="./">FAQ</a
+          ><a href="../contributors/">貢獻者</a
+          ><a href="https://github.com/morluto/rea">原始碼</a
+          ><a href="https://github.com/morluto/rea/blob/main/LICENSE">MIT 許可證</a
+          ><a href="https://discord.gg/GkcryMnJDM">加入社群</a
+          ><a href="https://x.com/reatools">在 X 上關注我們</a>
+        </div>
+      </div>
+    </footer>
+    <p class="sr-only" id="copy-status" role="status" aria-live="polite"></p>
+    <a class="back-to-top" href="#top" aria-label="回到頂部">
+      <span aria-hidden="true">↑</span> 頂部
+    </a>
+    <!-- website:footer:end -->
+  </body>
+</html>

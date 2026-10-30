@@ -1,0 +1,507 @@
+<!doctype html>
+<html lang="uk" dir="ltr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Ваше перше дослідження в області реверс-інжинірингу-REA</title>
+    <meta
+      name="description"
+      content="Спробуйте REA у невеликому додатку для нотаток. Налаштуйте свого агента, запитайте, куди надсилаються експортовані нотатки, і перевірте форматування CSV із прикладом заголовка."
+    />
+    <!-- website:sharing:start -->
+    <!-- prettier-ignore -->
+    <link rel="canonical" href="https://rea.tools/uk/first-investigation/" />
+    <!-- website:languages:start -->
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="en" href="https://rea.tools/first-investigation/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="zh-CN" href="https://rea.tools/zh-CN/first-investigation/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="zh-TW" href="https://rea.tools/zh-TW/first-investigation/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="ja" href="https://rea.tools/ja/first-investigation/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="ko" href="https://rea.tools/ko/first-investigation/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="tr" href="https://rea.tools/tr/first-investigation/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="ru" href="https://rea.tools/ru/first-investigation/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="vi" href="https://rea.tools/vi/first-investigation/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="th" href="https://rea.tools/th/first-investigation/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="de" href="https://rea.tools/de/first-investigation/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="es" href="https://rea.tools/es/first-investigation/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="fr" href="https://rea.tools/fr/first-investigation/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="uk" href="https://rea.tools/uk/first-investigation/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="pl" href="https://rea.tools/pl/first-investigation/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="pt-BR" href="https://rea.tools/pt-BR/first-investigation/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="ar" href="https://rea.tools/ar/first-investigation/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="fa" href="https://rea.tools/fa/first-investigation/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="id" href="https://rea.tools/id/first-investigation/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="it" href="https://rea.tools/it/first-investigation/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="el" href="https://rea.tools/el/first-investigation/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="x-default" href="https://rea.tools/first-investigation/" />
+<!-- website:languages:end -->
+    <!-- prettier-ignore -->
+    <meta property="og:type" content="website" />
+    <!-- prettier-ignore -->
+    <meta property="og:site_name" content="REA" />
+    <!-- prettier-ignore -->
+    <meta property="og:title" content="Ваше перше дослідження в області реверс-інжинірингу-REA" />
+    <!-- prettier-ignore -->
+    <meta property="og:description" content="Спробуйте REA у невеликому додатку для нотаток. Налаштуйте свого агента, запитайте, куди надсилаються експортовані нотатки, і перевірте форматування CSV із прикладом заголовка." />
+    <!-- prettier-ignore -->
+    <meta property="og:url" content="https://rea.tools/uk/first-investigation/" />
+    <!-- prettier-ignore -->
+    <meta property="og:image" content="https://rea.tools/assets/social-card.png" />
+    <!-- prettier-ignore -->
+    <meta property="og:image:type" content="image/png" />
+    <!-- prettier-ignore -->
+    <meta property="og:image:width" content="1200" />
+    <!-- prettier-ignore -->
+    <meta property="og:image:height" content="630" />
+    <!-- prettier-ignore -->
+    <meta
+      property="og:image:alt"
+      content="REA: Дізнайтеся, як працює програмне забезпечення. Зворотне проектування за допомогою вашого ШІ-помічника для програмування."
+    />
+    <!-- prettier-ignore -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <!-- prettier-ignore -->
+    <meta name="twitter:title" content="Ваше перше дослідження в області реверс-інжинірингу-REA" />
+    <!-- prettier-ignore -->
+    <meta name="twitter:description" content="Спробуйте REA у невеликому додатку для нотаток. Налаштуйте свого агента, запитайте, куди надсилаються експортовані нотатки, і перевірте форматування CSV із прикладом заголовка." />
+    <!-- prettier-ignore -->
+    <meta name="twitter:image" content="https://rea.tools/assets/social-card.png" />
+    <!-- prettier-ignore -->
+    <meta
+      name="twitter:image:alt"
+      content="REA: Дізнайтеся, як працює програмне забезпечення. Зворотне проектування за допомогою вашого ШІ-помічника для програмування."
+    />
+    <!-- website:sharing:end -->
+    <!-- website:theme:start -->
+    <meta name="theme-color" content="#ffffff" />
+    <!-- Apply the saved theme before styles load, to avoid a flash on navigation. -->
+    <script src="../../assets/theme.js"></script>
+    <!-- website:theme:end -->
+    <link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="../../assets/styles.css" />
+    <script src="../../assets/main.js" defer></script>
+  <script id="website-messages" type="application/json">{"Copied": "Скопійований", "Code copied to clipboard.": "Код копіюється в буфер обміну.", "Selected": "Вибраний", "Code selected. Use your keyboard to copy it.": "Обраний код. Скопіюйте його з клавіатури.", "REA on GitHub ({count})": "REA на GitHub ({count})", "Switch to light mode": "Перемкнути на світлу тему", "Switch to dark mode": "Перемкнути на темну тему"}</script>
+  </head>
+  <body id="top">
+    <a class="skip-link" href="#main">Перейти до змісту</a>
+    <!-- website:header:start -->
+    <!-- prettier-ignore -->
+    <header class="site-header">
+      <div class="container header-inner">
+        <a class="brand" href="../" aria-label="Головна REA"
+          ><span class="brand-name">REA</span
+          ><span class="brand-caption" data-i18n-skip>Reverse Engineer Anything</span></a
+        >
+        <nav class="navigation" aria-label="Основна навігація">
+          <a href="../../get-started/" class="nav-start">Почати</a>
+          <a href="../showcase/">Приклади</a>
+          <a href="../blog/">Блог</a>
+          <a href="../guides/">Посібники</a>
+        </nav>
+        <div class="header-social">
+          <details class="language-picker" data-i18n-skip><summary><span aria-hidden="true">文 / A</span> <span>Українська</span></summary><nav aria-label="Українська"><a href="../../first-investigation/" lang="en" dir="ltr" data-language="en">English</a><a href="../../zh-CN/first-investigation/" lang="zh-CN" dir="ltr" data-language="zh-CN">简体中文</a><a href="../../zh-TW/first-investigation/" lang="zh-TW" dir="ltr" data-language="zh-TW">繁體中文</a><a href="../../ja/first-investigation/" lang="ja" dir="ltr" data-language="ja">日本語</a><a href="../../ko/first-investigation/" lang="ko" dir="ltr" data-language="ko">한국어</a><a href="../../tr/first-investigation/" lang="tr" dir="ltr" data-language="tr">Türkçe</a><a href="../../ru/first-investigation/" lang="ru" dir="ltr" data-language="ru">Русский</a><a href="../../vi/first-investigation/" lang="vi" dir="ltr" data-language="vi">Tiếng Việt</a><a href="../../th/first-investigation/" lang="th" dir="ltr" data-language="th">ไทย</a><a href="../../de/first-investigation/" lang="de" dir="ltr" data-language="de">Deutsch</a><a href="../../es/first-investigation/" lang="es" dir="ltr" data-language="es">Español</a><a href="../../fr/first-investigation/" lang="fr" dir="ltr" data-language="fr">Français</a><a href="../../uk/first-investigation/" lang="uk" dir="ltr" data-language="uk" aria-current="true">Українська</a><a href="../../pl/first-investigation/" lang="pl" dir="ltr" data-language="pl">Polski</a><a href="../../pt-BR/first-investigation/" lang="pt-BR" dir="ltr" data-language="pt-BR">Português (Brasil)</a><a href="../../ar/first-investigation/" lang="ar" dir="rtl" data-language="ar">العربية</a><a href="../../fa/first-investigation/" lang="fa" dir="rtl" data-language="fa">فارسی</a><a href="../../id/first-investigation/" lang="id" dir="ltr" data-language="id">Bahasa Indonesia</a><a href="../../it/first-investigation/" lang="it" dir="ltr" data-language="it">Italiano</a><a href="../../el/first-investigation/" lang="el" dir="ltr" data-language="el">Ελληνικά</a><a href="../../ml/first-investigation/" lang="ml" dir="ltr" data-language="ml">മലയാളം · English</a><a href="../../ur-Latn/first-investigation/" lang="ur-Latn" dir="ltr" data-language="ur-Latn">Roman Urdu · English</a><a href="../../ro/first-investigation/" lang="ro" dir="ltr" data-language="ro">Română · English</a></nav></details>
+          <button class="theme-toggle" type="button" data-theme-toggle hidden>
+            <svg class="theme-moon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+              <path d="M20.9 13a9 9 0 0 1-9.9-9.9A9 9 0 1 0 20.9 13Z" />
+            </svg>
+            <svg class="theme-sun" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true" focusable="false">
+              <circle cx="12" cy="12" r="4" />
+              <path d="M12 2v2m0 16v2M2 12h2m16 0h2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42" />
+            </svg>
+          </button>
+          <a
+            class="nav-github"
+            href="https://github.com/morluto/rea"
+            aria-label="REA на GitHub"
+            title="REA на GitHub"
+          >
+            <svg
+              width="22"
+              height="22"
+              viewBox="0 0 16 16"
+              aria-hidden="true"
+              focusable="false"
+            >
+              <path
+                fill="currentColor"
+                d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82a7.65 7.65 0 0 1 2-.27c.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z"
+              />
+            </svg>
+            <span class="nav-github-count" hidden aria-hidden="true"></span>
+          </a>
+          <a
+            class="nav-discord"
+            href="https://discord.gg/GkcryMnJDM"
+            aria-label="Приєднатися до REA в Discord"
+            title="Приєднатися до REA в Discord"
+          >
+            <svg
+              width="22"
+              height="22"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+              focusable="false"
+            >
+              <path
+                fill="currentColor"
+                d="M20.317 4.3698a19.7913 19.7913 0 0 0-4.8851-1.5152.0741.0741 0 0 0-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 0 0-.0785-.037 19.7363 19.7363 0 0 0-4.8852 1.515.0699.0699 0 0 0-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 0 0 .0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 0 0 .0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 0 0-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 0 1-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 0 1 .0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 0 1 .0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 0 1-.0066.1276 12.2986 12.2986 0 0 1-1.873.8914.0766.0766 0 0 0-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 0 0 .0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 0 0 .0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 0 0-.0312-.0286ZM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189Zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189Z"
+              />
+            </svg>
+          </a>
+          <a
+            class="nav-x"
+            href="https://x.com/reatools"
+            aria-label="Стежити за REA в X"
+            title="Стежити за REA в X"
+          >
+            <svg
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+              focusable="false"
+            >
+              <path
+                fill="currentColor"
+                d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z"
+              />
+            </svg>
+          </a>
+        </div>
+      </div>
+    </header>
+    <!-- website:header:end -->
+    <main id="main" class="container">
+      <div class="page-heading">
+        <p class="breadcrumb">
+          <a href="../">Головний</a> / Ваше перше розслідування
+        </p>
+        <h1>Дізнайтеся, куди відправляються<br />експортовані нотатки.</h1>
+        <p class="lede">
+          Використовуйте REA для перевірки невеликого додатки, натисніть на кнопку "Експорт заміток" і перевірте одну деталь самостійно.
+        </p>
+        <p class="page-meta">
+          Наведений приклад · <span translate="no">Node.js</span> та npm * ваш кодуючий агент
+        </p>
+      </div>
+      <div class="article-layout">
+        <nav class="contents" aria-label="На цій сторінці">
+          <p>У цій вправі</p>
+          <ul>
+            <li><a href="#setup">1. Настройка</a></li>
+            <li><a href="#ask">2. Запитайте про експорт</a></li>
+            <li><a href="#answer">3. Дотримуйтесь відповіді</a></li>
+            <li><a href="#check">4. Перевірте прогноз</a></li>
+            <li><a href="#next">5. Задайте ще одне питання</a></li>
+          </ul>
+        </nav>
+        <article class="article" aria-label="Ваше перше розслідування REA">
+          <section class="article-section" id="setup">
+            <h2>1. Підключіть свого агента до REA.</h2>
+            <p>
+              Використовуйте інструмент кодування, такий як Claude Code, Codex або Cursor. Вам знадобляться <span translate="no">Node.js</span> і npm; в <a href="../../get-started/">керівництві по установці перераховані підтримувані версії</a
+              >.
+            </p>
+            <div class="agent-terminal">
+              <div class="terminal-header">
+                <span class="terminal-title"
+                  ><span class="terminal-dots" aria-hidden="true"
+                    ><i></i><i></i><i></i></span
+                  >Ваш кодуючий агент</span
+                >
+                <button
+                  class="copy-button"
+                  type="button"
+                  data-copy="first-install-prompt"
+                  aria-label="Скопіюйте запит на встановлення REA"
+                >
+                  Копіювати
+                </button>
+              </div>
+              <p class="terminal-prompt">
+                <span class="prompt-symbol" aria-hidden="true">›</span
+                ><span id="first-install-prompt"
+                  >Встанови REA та підключи його до цього ШІ-помічника за допомогою <span translate="no">npx rea-agents@latest setup</span>. Спочатку покажи план змін і дочекайся мого схвалення. Потім перевір встановлення.</span
+                ><span class="terminal-cursor" aria-hidden="true"></span>
+              </p>
+            </div>
+            <p class="caption">Або запустіть цю команду у своєму терміналі:</p>
+            <div class="code-block code-inline">
+              <code id="first-setup-command">npx rea-agents@latest setup</code>
+              <button
+                class="copy-button"
+                type="button"
+                data-copy="first-setup-command"
+                aria-label="Команда Налаштування Копіювання"
+              >
+                Копіювати
+              </button>
+            </div>
+            <p>
+              Ознайомтеся з планом, схваліть налаштування, а потім перезапустіть свого агента. Ви вже підключені? Продовження нижче.
+            </p>
+          </section>
+          <section class="article-section" id="ask">
+            <h2>2. Запитайте, де записаний CSV</h2>
+            <p>
+              Прикладом може служити додаток Electron, що складається з шести файлів, з кнопкою <strong>експорту заміток</strong>. Ваш агент може перевірити його код, не встановлюючи та не запускаючи Electron.
+            </p>
+            <div class="agent-terminal">
+              <div class="terminal-header">
+                <span class="terminal-title"
+                  ><span class="terminal-dots" aria-hidden="true"
+                    ><i></i><i></i><i></i></span
+                  >Ваш кодуючий агент</span
+                >
+                <button
+                  class="copy-button"
+                  type="button"
+                  data-copy="first-analysis-prompt"
+                  aria-label="Запит на копіювання нотаток для розслідування"
+                >
+                  Копіювати
+                </button>
+              </div>
+              <p class="terminal-prompt">
+                <span class="prompt-symbol" aria-hidden="true">"</span
+                ><span id="first-analysis-prompt"
+                  >Завантаживши <span translate="no"
+                    >https://rea.tools/examples/notes-example.zip</span
+                  >в нову папку з прикладами і розпакуйте її. Використовуйте REA, щоб побачити, що відбувається, коли я натискаю "експортувати нотатки". Покажіть, де <span translate="no">notes.csv</span>що записано, які поля воно містить, а також відповідні файли і рядки.</span
+                ><span class="terminal-cursor" aria-hidden="true"></span>
+              </p>
+            </div>
+            <p>
+              Ваш агент завантажує файли та передає розпаковану папку REA для перевірки.
+            </p>
+            <p>
+              <a
+                class="button"
+                href="../../examples/notes-example.zip"
+                download="notes-example.zip"
+                >Приклад завантаження ZIP-файлу</a
+              >
+            </p>
+            <p class="caption">
+              Якщо ваш агент не може завантажити файли, розпакуйте цей архів самостійно. Вкажіть шлях до папки <code>notes-example</code> і задайте те саме питання щодо експорту.
+            </p>
+          </section>
+          <section class="article-section" id="answer">
+            <h2>3. Дотримуйтесь відповіді назад до коду</h2>
+            <p>Шукайте коротке пояснення з посиланнями на файли та рядки:</p>
+            <blockquote class="prompt">
+              <p>
+                Кнопка надсилає повідомлення <code>notes:export</code>. Основний процес форматує нотатки як CSV і записує <code>notes.csv</code> в папку завантажень користувача. Це стовпці <code>id</code> і <code>title</code>.
+              </p>
+            </blockquote>
+            <figure class="workflow-figure">
+              <p class="figure-title">Від кнопки до пристрою запису файлів</p>
+              <ol class="flow-steps">
+                <li>
+                  <span class="flow-label"
+                    >Сторінка * <span translate="no">renderer.js</span></span
+                  ><span class="flow-node"> При експорті нотаток</span
+                  ><span class="flow-note"
+                    > викликається функція <code>notes.exportCsv()</code>.</span
+                  >
+                </li>
+                <li>
+                  <span class="flow-label"
+                    >Міст * <span translate="no">preload.js</span></span
+                  ><span class="flow-node"><code>notes:export</code></span
+                  ><span class="flow-note"
+                    > в основний процес відправляється іменоване повідомлення.</span
+                  >
+                </li>
+                <li>
+                  <span class="flow-label"
+                    >Обробник · <span translate="no">main.js</span></span
+                  ><span class="flow-node"
+                    >Write <span translate="no">notes.csv</span></span
+                  ><span class="flow-note"
+                    >Викликає засіб форматування в <code>csv.js</code> і записує файл.</span
+                  >
+                </li>
+              </ol>
+              <figcaption>
+                Статичний аналіз REA відображає повідомлення з його обробником. Адресат зчитується з коду.
+              </figcaption>
+            </figure>
+            <div class="code-block">
+              <div class="code-header">
+                <span><span translate="no">main.js</span> * рядки 8-12</span
+                ><a href="../../examples/notes-electron/main.js">Вихідний код</a>
+              </div>
+              <pre><code>ipcMain.handle("notes:export", () =&gt; {
+  const destination = path.join(app.getPath("downloads"), "notes.csv");
+  writeFileSync(destination, toCsv(notes), "utf8");
+  return destination;
+});</code></pre>
+            </div>
+            <p>
+              Шлях до файлу, інструмент форматування та виклик запису знаходяться в цьому обробнику разом. Попросіть свого агента показати ці рядки, якщо у його відповіді їх немає.
+            </p>
+            <p>
+              <a href="../../guides/javascript/#follow"
+                >Перегляньте повний трасування коду та записаний результат</a
+              > REA.
+            </p>
+          </section>
+          <section class="article-section" id="check">
+            <h2>4. Перевірте прогноз</h2>
+            <p>
+              Стовпці CSV розділені комою. Що відбувається, коли заголовок нотатки сам по собі містить кому або лапки?
+            </p>
+            <div class="agent-terminal">
+              <div class="terminal-header">
+                <span class="terminal-title"
+                  ><span class="terminal-dots" aria-hidden="true"
+                    ><i></i><i></i><i></i></span
+                  >Ваш кодуючий агент</span
+                >
+                <button
+                  class="copy-button"
+                  type="button"
+                  data-copy="first-check-prompt"
+                  aria-label="Скопіювати запит перевірки CSV"
+                >
+                  Копіювати
+                </button>
+              </div>
+              <p class="terminal-prompt">
+                <span class="prompt-symbol" aria-hidden="true">"</span
+                ><span id="first-check-prompt"
+                  >Прогнозуйте CSV для примітки з ідентифікатором 1 та заголовком <span translate="no">Hello, "REA"</span>. Потім запустіть <span translate="no">toCsv</span>програму форматування прикладу з<span translate="no">Node.js</span>, щоб перевірити це. Покажіть прогноз і фактичний результат.</span
+                ><span class="terminal-cursor" aria-hidden="true"></span>
+              </p>
+            </div>
+            <div class="code-block">
+              <div class="code-header">
+                <span>Очікуваний результат форматування</span>
+              </div>
+              <pre><code>id,title
+1,"Hello, ""REA"""</code></pre>
+            </div>
+            <p>
+              Заголовок залишається в одному полі, укладеному в лапки; кожна лапка подвоюється. При цьому виконується пряма перевірка форматування за допомогою <span translate="no">Node.js</span>.
+            </p>
+            <details class="evidence-details">
+              <summary>Проведіть перевірку самостійно</summary>
+              <p>
+                Відкрийте термінал у розпакованій папці <code>notes-example</code>:
+              </p>
+              <div class="code-block">
+                <div class="code-header">
+                  <span translate="no">macOS / Linux · Bash / Zsh</span
+                  ><button
+                    class="copy-button"
+                    type="button"
+                    data-copy="first-check-command"
+                    aria-label="Команда перевірки форматування копії"
+                  >
+                    Копіювати
+                  </button>
+                </div>
+                <pre><code id="first-check-command">node &lt;&lt;'JS'
+const { toCsv } = require('./csv.js');
+process.stdout.write(toCsv([{ id: 1, title: 'Hello, "REA"' }]));
+JS</code></pre>
+              </div>
+              <div class="code-block">
+                <div class="code-header">
+                  <span translate="no">Windows · PowerShell</span>
+                  <button
+                    class="copy-button"
+                    type="button"
+                    data-copy="first-check-powershell"
+                    aria-label="Команда перевірки форматування копії"
+                  >
+                    Копіювати
+                  </button>
+                </div>
+                <pre><code id="first-check-powershell">@'
+const { toCsv } = require('./csv.js');
+process.stdout.write(toCsv([{ id: 1, title: 'Hello, "REA"' }]));
+'@ | node</code></pre>
+              </div>
+            </details>
+          </section>
+          <section class="article-section" id="next">
+            <h2>5. Задайте ще одне питання</h2>
+            <p>Спробуйте продовжити ту саму розмову:</p>
+            <blockquote class="prompt">
+              <p>
+                Що станеться, якщо файл не може бути записаний? Поверніться на сторінку, вказану в повідомленні про помилку.
+              </p>
+            </blockquote>
+            <p>
+              Або надайте своєму агенту власну програму та запитайте про одну кнопку, файл чи поведінку.
+            </p>
+            <ul class="reading-list">
+              <li>
+                <a href="../showcase/notion/">Як Notion копіює текст та HTML</a
+                ><span
+                  > за допомогою функції буфера обміну в вбудованому додатку Electron.</span
+                >
+              </li>
+              <li>
+                <a href="../showcase/dx-ball/"
+                  >Як DX-Ball обчислює розташування стереозвуку</a
+                ><span
+                  >, читайте в оригінальних інструкціях і перевірках реконструкції.</span
+                >
+              </li>
+              <li>
+                <a href="../faq/#troubleshooting"
+                  >Усуньте неполадки в програмі установки або аналітичному</a
+                ><span
+                  > оновіть REA і перевірте з'єднання, якщо воно не працює.</span
+                >
+              </li>
+            </ul>
+          </section>
+        </article>
+      </div>
+    </main>
+    <!-- website:footer:start -->
+    <!-- prettier-ignore -->
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <p>REA · Reverse Engineer Anything</p>
+        <div class="footer-links">
+          <a href="../faq/">FAQ</a
+          ><a href="../contributors/">Учасники</a
+          ><a href="https://github.com/morluto/rea">Вихідний код</a
+          ><a href="https://github.com/morluto/rea/blob/main/LICENSE">Ліцензія MIT</a
+          ><a href="https://discord.gg/GkcryMnJDM">Приєднатися до спільноти</a
+          ><a href="https://x.com/reatools">Стежити в X</a>
+        </div>
+      </div>
+    </footer>
+    <p class="sr-only" id="copy-status" role="status" aria-live="polite"></p>
+    <a class="back-to-top" href="#top" aria-label="Нагору">
+      <span aria-hidden="true">↑</span> Топ
+    </a>
+    <!-- website:footer:end -->
+  </body>
+</html>

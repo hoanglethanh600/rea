@@ -1,0 +1,621 @@
+<!doctype html>
+<html lang="de" dir="ltr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Braucht Reverse Engineering ein größeres Modell? | REA</title>
+    <meta
+      name="description"
+      content="Was ich durch die Rekonstruktion von Touhou über allgemeine Modelle, Spezialmodelle und das Lernen, bessere Hypothesen anhand des Compiler-Feedbacks aufzustellen, gelernt habe."
+    />
+    <!-- website:sharing:start -->
+    <!-- prettier-ignore -->
+    <link rel="canonical" href="https://rea.tools/de/blog/reverse-engineering-models/" />
+    <!-- website:languages:start -->
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="en" href="https://rea.tools/blog/reverse-engineering-models/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="zh-CN" href="https://rea.tools/zh-CN/blog/reverse-engineering-models/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="zh-TW" href="https://rea.tools/zh-TW/blog/reverse-engineering-models/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="ja" href="https://rea.tools/ja/blog/reverse-engineering-models/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="ko" href="https://rea.tools/ko/blog/reverse-engineering-models/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="tr" href="https://rea.tools/tr/blog/reverse-engineering-models/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="ru" href="https://rea.tools/ru/blog/reverse-engineering-models/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="vi" href="https://rea.tools/vi/blog/reverse-engineering-models/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="th" href="https://rea.tools/th/blog/reverse-engineering-models/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="de" href="https://rea.tools/de/blog/reverse-engineering-models/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="es" href="https://rea.tools/es/blog/reverse-engineering-models/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="fr" href="https://rea.tools/fr/blog/reverse-engineering-models/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="uk" href="https://rea.tools/uk/blog/reverse-engineering-models/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="pl" href="https://rea.tools/pl/blog/reverse-engineering-models/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="pt-BR" href="https://rea.tools/pt-BR/blog/reverse-engineering-models/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="ar" href="https://rea.tools/ar/blog/reverse-engineering-models/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="fa" href="https://rea.tools/fa/blog/reverse-engineering-models/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="id" href="https://rea.tools/id/blog/reverse-engineering-models/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="it" href="https://rea.tools/it/blog/reverse-engineering-models/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="el" href="https://rea.tools/el/blog/reverse-engineering-models/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="x-default" href="https://rea.tools/blog/reverse-engineering-models/" />
+<!-- website:languages:end -->
+    <!-- prettier-ignore -->
+    <meta property="og:type" content="website" />
+    <!-- prettier-ignore -->
+    <meta property="og:site_name" content="REA" />
+    <!-- prettier-ignore -->
+    <meta property="og:title" content="Braucht Reverse Engineering ein größeres Modell? | REA" />
+    <!-- prettier-ignore -->
+    <meta property="og:description" content="Was ich durch die Rekonstruktion von Touhou über allgemeine Modelle, Spezialmodelle und das Lernen, bessere Hypothesen anhand des Compiler-Feedbacks aufzustellen, gelernt habe." />
+    <!-- prettier-ignore -->
+    <meta property="og:url" content="https://rea.tools/de/blog/reverse-engineering-models/" />
+    <!-- prettier-ignore -->
+    <meta property="og:image" content="https://rea.tools/assets/social-card.png" />
+    <!-- prettier-ignore -->
+    <meta property="og:image:type" content="image/png" />
+    <!-- prettier-ignore -->
+    <meta property="og:image:width" content="1200" />
+    <!-- prettier-ignore -->
+    <meta property="og:image:height" content="630" />
+    <!-- prettier-ignore -->
+    <meta
+      property="og:image:alt"
+      content="REA - Finden Sie heraus, wie Software funktioniert. Reverse Engineering mit Ihrem Codierungsagenten."
+    />
+    <!-- prettier-ignore -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <!-- prettier-ignore -->
+    <meta name="twitter:title" content="Braucht Reverse Engineering ein größeres Modell? | REA" />
+    <!-- prettier-ignore -->
+    <meta name="twitter:description" content="Was ich durch die Rekonstruktion von Touhou über allgemeine Modelle, Spezialmodelle und das Lernen, bessere Hypothesen anhand des Compiler-Feedbacks aufzustellen, gelernt habe." />
+    <!-- prettier-ignore -->
+    <meta name="twitter:image" content="https://rea.tools/assets/social-card.png" />
+    <!-- prettier-ignore -->
+    <meta
+      name="twitter:image:alt"
+      content="REA - Finden Sie heraus, wie Software funktioniert. Reverse Engineering mit Ihrem Codierungsagenten."
+    />
+    <!-- website:sharing:end -->
+    <!-- website:theme:start -->
+    <meta name="theme-color" content="#ffffff" />
+    <!-- Apply the saved theme before styles load, to avoid a flash on navigation. -->
+    <script src="../../../assets/theme.js"></script>
+    <!-- website:theme:end -->
+    <link rel="icon" href="../../../assets/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="../../../assets/styles.css" />
+    <script src="../../../assets/main.js" defer></script>
+  <script id="website-messages" type="application/json">{"Copied": "Kopieren", "Code copied to clipboard.": "Code in die Zwischenablage kopiert.", "Selected": "Ausgew", "Code selected. Use your keyboard to copy it.": "Code ausgewählt. Verwenden Sie Ihre Tastatur, um es zu kopieren.", "REA on GitHub ({count})": "REA auf GitHub ({count})", "Switch to light mode": "Zum hellen Modus wechseln", "Switch to dark mode": "Zum dunklen Modus wechseln"}</script>
+  </head>
+  <body id="top">
+    <a class="skip-link" href="#main">Zum Inhalt springen</a>
+    <!-- website:header:start -->
+    <!-- prettier-ignore -->
+    <header class="site-header">
+      <div class="container header-inner">
+        <a class="brand" href="../../" aria-label="REA-Startseite"
+          ><span class="brand-name">REA</span
+          ><span class="brand-caption" data-i18n-skip>Reverse Engineer Anything</span></a
+        >
+        <nav class="navigation" aria-label="Hauptnavigation">
+          <a href="../../../get-started/" class="nav-start">Erste Schritte</a>
+          <a href="../../showcase/">Fallstudien</a>
+          <a href="../" aria-current="page">Blog</a>
+          <a href="../../guides/">Anleitungen</a>
+        </nav>
+        <div class="header-social">
+          <details class="language-picker" data-i18n-skip><summary><span aria-hidden="true">文 / A</span> <span>Deutsch</span></summary><nav aria-label="Deutsch"><a href="../../../blog/reverse-engineering-models/" lang="en" dir="ltr" data-language="en">English</a><a href="../../../zh-CN/blog/reverse-engineering-models/" lang="zh-CN" dir="ltr" data-language="zh-CN">简体中文</a><a href="../../../zh-TW/blog/reverse-engineering-models/" lang="zh-TW" dir="ltr" data-language="zh-TW">繁體中文</a><a href="../../../ja/blog/reverse-engineering-models/" lang="ja" dir="ltr" data-language="ja">日本語</a><a href="../../../ko/blog/reverse-engineering-models/" lang="ko" dir="ltr" data-language="ko">한국어</a><a href="../../../tr/blog/reverse-engineering-models/" lang="tr" dir="ltr" data-language="tr">Türkçe</a><a href="../../../ru/blog/reverse-engineering-models/" lang="ru" dir="ltr" data-language="ru">Русский</a><a href="../../../vi/blog/reverse-engineering-models/" lang="vi" dir="ltr" data-language="vi">Tiếng Việt</a><a href="../../../th/blog/reverse-engineering-models/" lang="th" dir="ltr" data-language="th">ไทย</a><a href="../../../de/blog/reverse-engineering-models/" lang="de" dir="ltr" data-language="de" aria-current="true">Deutsch</a><a href="../../../es/blog/reverse-engineering-models/" lang="es" dir="ltr" data-language="es">Español</a><a href="../../../fr/blog/reverse-engineering-models/" lang="fr" dir="ltr" data-language="fr">Français</a><a href="../../../uk/blog/reverse-engineering-models/" lang="uk" dir="ltr" data-language="uk">Українська</a><a href="../../../pl/blog/reverse-engineering-models/" lang="pl" dir="ltr" data-language="pl">Polski</a><a href="../../../pt-BR/blog/reverse-engineering-models/" lang="pt-BR" dir="ltr" data-language="pt-BR">Português (Brasil)</a><a href="../../../ar/blog/reverse-engineering-models/" lang="ar" dir="rtl" data-language="ar">العربية</a><a href="../../../fa/blog/reverse-engineering-models/" lang="fa" dir="rtl" data-language="fa">فارسی</a><a href="../../../id/blog/reverse-engineering-models/" lang="id" dir="ltr" data-language="id">Bahasa Indonesia</a><a href="../../../it/blog/reverse-engineering-models/" lang="it" dir="ltr" data-language="it">Italiano</a><a href="../../../el/blog/reverse-engineering-models/" lang="el" dir="ltr" data-language="el">Ελληνικά</a><a href="../../../ml/blog/reverse-engineering-models/" lang="ml" dir="ltr" data-language="ml">മലയാളം · English</a><a href="../../../ur-Latn/blog/reverse-engineering-models/" lang="ur-Latn" dir="ltr" data-language="ur-Latn">Roman Urdu · English</a><a href="../../../ro/blog/reverse-engineering-models/" lang="ro" dir="ltr" data-language="ro">Română · English</a></nav></details>
+          <button class="theme-toggle" type="button" data-theme-toggle hidden>
+            <svg class="theme-moon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+              <path d="M20.9 13a9 9 0 0 1-9.9-9.9A9 9 0 1 0 20.9 13Z" />
+            </svg>
+            <svg class="theme-sun" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true" focusable="false">
+              <circle cx="12" cy="12" r="4" />
+              <path d="M12 2v2m0 16v2M2 12h2m16 0h2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42" />
+            </svg>
+          </button>
+          <a
+            class="nav-github"
+            href="https://github.com/morluto/rea"
+            aria-label="REA auf GitHub"
+            title="REA auf GitHub"
+          >
+            <svg
+              width="22"
+              height="22"
+              viewBox="0 0 16 16"
+              aria-hidden="true"
+              focusable="false"
+            >
+              <path
+                fill="currentColor"
+                d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82a7.65 7.65 0 0 1 2-.27c.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z"
+              />
+            </svg>
+            <span class="nav-github-count" hidden aria-hidden="true"></span>
+          </a>
+          <a
+            class="nav-discord"
+            href="https://discord.gg/GkcryMnJDM"
+            aria-label="REA auf Discord beitreten"
+            title="REA auf Discord beitreten"
+          >
+            <svg
+              width="22"
+              height="22"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+              focusable="false"
+            >
+              <path
+                fill="currentColor"
+                d="M20.317 4.3698a19.7913 19.7913 0 0 0-4.8851-1.5152.0741.0741 0 0 0-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 0 0-.0785-.037 19.7363 19.7363 0 0 0-4.8852 1.515.0699.0699 0 0 0-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 0 0 .0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 0 0 .0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 0 0-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 0 1-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 0 1 .0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 0 1 .0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 0 1-.0066.1276 12.2986 12.2986 0 0 1-1.873.8914.0766.0766 0 0 0-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 0 0 .0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 0 0 .0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 0 0-.0312-.0286ZM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189Zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189Z"
+              />
+            </svg>
+          </a>
+          <a
+            class="nav-x"
+            href="https://x.com/reatools"
+            aria-label="REA auf X folgen"
+            title="REA auf X folgen"
+          >
+            <svg
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+              focusable="false"
+            >
+              <path
+                fill="currentColor"
+                d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z"
+              />
+            </svg>
+          </a>
+        </div>
+      </div>
+    </header>
+    <!-- website:header:end -->
+    <main id="main" class="container">
+      <div class="page-heading">
+        <p class="breadcrumb">
+          <a href="../../">Home</a> / <a href="../">Blog</a> / Modelle und Reverse Engineering
+        </p>
+        <p class="eyebrow">Aufsatz</p>
+        <h1>Braucht Reverse Engineering ein größeres Modell?</h1>
+        <p class="page-meta">Von N0zoM1z0 · 13. Oktober 2026</p>
+        <div class="blog-takeaway">
+          <p class="eyebrow">Das Wichtigste</p>
+          <ul>
+            <li>
+              <strong
+                >Die Modellfähigkeit beeinflusst, welche Hypothesen ein KI-Agent vorschlagen kann.</strong
+              > Spätere Sitzungen lösten Probleme, die in früheren Arbeiten ungelöst geblieben waren.
+            </li>
+            <li>
+              <strong
+                >Ein bekannter Compiler bietet konkrete Muster für ein spezielles Modell zum Lernen.</strong
+              > Einige genaue Maschinencode-Übereinstimmungen hängen von bestimmten, wiederverwendbaren Quellcodemustern ab.
+            </li>
+            <li>
+              <strong>Beziehen Sie das Repository-Wissen in einen fairen Vergleich ein.</strong> Ein kleineres Modell mit gutem Wissensabruf verfügt möglicherweise bereits über genügend Informationen, um Fortschritte zu erzielen.
+            </li>
+            <li>
+              <strong
+                >Trainieren Sie das Modell, um das nächste nützliche Experiment auszuwählen, und testen Sie seinen Prüfer.</strong
+              > Feedback ist nur insoweit nützlich, als der Prüfer die richtigen Dinge überprüft.
+            </li>
+            <li>
+              <strong
+                >Bewerten Sie verifizierte Rekonstruktionsergebnisse neben Zeit und Kosten.</strong
+              > Das ist es, was ich für den gesamten KI-Agent-Workflow messen möchte.
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="article-layout">
+        <nav class="contents" aria-label="Auf dieser Seite">
+          <p>In diesem Artikel</p>
+          <ul>
+            <li><a href="#model-capability">Was leistungsfähigere Modelle verändert haben</a></li>
+            <li><a href="#specialization">Warum spezialisieren?</a></li>
+            <li><a href="#repository-knowledge">Wo sollte diese Erfahrung gespeichert werden?</a></li>
+            <li><a href="#learning-search">Lernen Sie das nächste nützliche Experiment</a></li>
+            <li><a href="#re-and-rl">Reverse Engineering und verstärkendes Lernen</a></li>
+            <li><a href="#oracle">Wenn der Prüfer falsch ist</a></li>
+            <li><a href="#comparison">Ein Vergleich, der sich lohnt</a></li>
+            <li><a href="#future-agent">Was für einen KI-Agenten lässt dies vermuten?</a></li>
+          </ul>
+        </nav>
+        <article
+          class="article"
+          aria-label="Essay über Modelle und Reverse Engineering"
+        >
+          <section class="article-section" id="model-capability">
+            <h2>Was leistungsfähigere Modelle verändert haben</h2>
+            <p>
+              Seit August 2026 erforsche ich, wie viel Reverse Engineering ein Agent mit Zugriff auf ein Programm und einer Möglichkeit zur Überprüfung seiner Arbeit durchführen kann. Der größte Teil meiner Erfahrung stammt aus der Rekonstruktion von Spielen, insbesondere Touhou. Da ich die Modelle geändert habe, haben die Repositorys aufgezeichnet, was jede Sitzung wiederherstellen konnte.
+            </p>
+            <p>
+              Ein Großteil dieser Arbeit zielt auf eine exakte Rekonstruktion ab: Wir kompilieren die gepflegte Quelle unter einer historischen Toolchain mit festen Versionen und prüfen, ob sie die Zielfunktion reproduziert. Wenn ein späteres Modell erfolgreich ist, wo frühere Arbeiten ins Stocken geraten sind, zeigen die Quelländerungen, was diesen Fortschritt ermöglicht hat.
+            </p>
+            <h3>Die temporären Variablen benötigten überlappende Lebensdauern</h3>
+            <p>
+              Ein Großteil der Logik einer TH09-Angriffsfunktion war bereits rekonstruiert, aber der Compiler speicherte temporäre Ergebnisse immer noch anders als das Original. Das verbleibende Problem bestand darin, wie lange diese Ergebnisse am Leben bleiben mussten und wann ihr Speicher wiederverwendet werden konnte.
+            </p>
+            <p>
+              Ein <a
+                href="https://github.com/N0zoM1z0/th09/commit/de63c0f9121963f3a6b1ab5471c4878625fd3425"
+                >GPT-6-Sol-Sitzungsdatensatz</a
+              > hat diese Nichtübereinstimmung gemeldet, nachdem mehrere gewöhnliche Quellcode-Anordnungen getestet wurden. Als <a
+                href="https://github.com/N0zoM1z0/th09/commit/52929ed7c299f1a5f29cc13964e22510145fd616"
+                >GPT-6.1-Sol das Problem erneut untersuchte</a
+              >, schlug es eine nützliche Hypothese über die Lebensdauer dieser temporären Variablen vor.
+            </p>
+            <p>
+              Die Funktion erzeugte temporäre Ergebnisse und kopierte sie in Animationspositionen. In C++ bleibt ein temporäres Ergebnis bestehen, bis der Ausdruck, der es verwendet, beendet ist. Durch die Gruppierung der realen Operationen in einem Ausdruck blieben diese Ergebnisse zusammen erhalten, sodass der Compiler nicht mehr denselben Speicher für alle wiederverwenden konnte.
+            </p>
+            <p>
+              Ein Ergebnis wird weiterhin gemeinsam mit einem Wert gespeichert, der später für Kollisionsprüfungen verwendet wird. Indem man diesem Wert seine eigene Lebensdauer zuordnete, wurde die verbleibende Überlappung behoben. Nach mehreren gezielten Experimenten bestätigte <strong
+                >eine saubere Neukompilierung aus dem Quellcode, dass die vollständige Funktion übereinstimmte</strong
+              >.
+            </p>
+            <p>
+              Mich interessiert, wie sich Entdeckung und Tests gegenseitig unterstützten. Die Hypothese über die temporäre Lebensdauer von Objekten gab dem KI-Agenten eine neue Richtung. Das Feedback des Compilers half dabei, diese Hypothese in eine passende Quellcode-Anordnung zu verfeinern.
+            </p>
+            <h3>Ein anderes Kontrollflussdiagramm</h3>
+            <p>
+              Eine zweite TH09-Funktion zeigt, warum eine neue Richtung wichtig sein kann. Hier ging es darum, wie mehrere Verzweigungen dieselben abschließenden Operationen nutzen. <a
+                href="https://github.com/N0zoM1z0/th09/commit/f8d12d72aaf02212ee1b585a8f3f86d7ed000269"
+                >GPT-6.1-Sols frühere Arbeit</a
+              > brachte Teile der Funktion zur Übereinstimmung, doch die Verzweigungen liefen noch anders zusammen als im Original.
+            </p>
+            <p>
+              <a
+                href="https://github.com/N0zoM1z0/th09/commit/da33a646221198ceb7f3df2b96e2ca0e9b2f705f"
+                >GPT-6-Astra hat das umgebende Kontrollflussdiagramm</a
+              > geändert. Die Hauptwege führten nun zu einer gemeinsamen finalen Aktualisierung und Rückkehr. In dieser Quellstruktur kombinierte der Compiler die Zweige auf die gleiche Weise wie im Original. Die vollständige Funktion stimmte überein und eine <a
+                href="https://github.com/N0zoM1z0/th09/commit/5f825b28a862f8e1a6d4aea2f78a42f04c09a1c0"
+                >separate Neuerstellungsprüfung bestätigte dies</a
+              >.
+            </p>
+            <p>
+              <strong
+                >Durch die Änderung der Darstellung wurde ein produktiverer Suchraum eröffnet.</strong
+              > Beide Fälle geben mir einen Grund, die allgemeine Modellfähigkeit ernst zu nehmen: Ein Agent kann lange Zeit lokale Variationen ausprobieren, bevor er eine bessere Möglichkeit findet, die umgebende Arbeit auszudrücken.
+            </p>
+            <p>
+              Die späteren Sitzungen übernahmen allerdings auch früheren Quellcode und aufgezeichnete Fehlversuche. Diese Vorarbeit war Teil ihres Vorteils. Die Historie macht die Entdeckungen und ihre Prüfungen nachvollziehbar. Ein kontrollierter Vergleich würde helfen, den Beitrag des Modells vom Beitrag der übernommenen Erfahrung zu trennen.
+            </p>
+            <p>
+              Das macht die Frage für mich interessant. Einige Fortschritte wurden durch die Suche nach einer neuen Vertretung erzielt. Ein Großteil der verbleibenden Arbeit bestand darin, verschiedene Quellcode-Anordnungen mit einem vertrauten Compiler zu testen. Wie viel davon erfordert ein breites Denkvermögen? Wie viel könnte ein Modell lernen, wenn es wiederholt mit diesem Compiler und Code arbeitet?
+            </p>
+          </section>
+          <section class="article-section" id="specialization">
+            <h2>Warum könnte ein spezialisiertes KI-Modell gut funktionieren?</h2>
+            <p>
+              Touhou gibt uns einen konkreten Grund zu der Annahme, dass diese Erfahrung hilfreich sein wird. Ein Großteil des Spielcodes stammt vom selben Autor, ZUN, daher sind wiederkehrende Gewohnheiten eine vernünftige Ausgangsannahme. Die Repositories untermauern dies mit nützlichen Beispielen: Verwandte Schleifen und Hilfsanordnungen haben spielübergreifend Hypothesen geliefert.
+            </p>
+            <p>
+              Diese Quellmuster werden spezifischer, wenn wir den Compiler einbeziehen. Unter einer bestimmten Version und einem bestimmten Optionssatz können kleine Änderungen in der Quelle zu wiederholbaren Unterschieden im Maschinencode führen. Einige dieser Unterschiede sind überraschend unklar.
+            </p>
+            <p>
+              In TH095 beispielsweise könnte <strong
+                >sogar der Name einer lokalen Variablen Einfluss darauf haben, wo VC7.1 sie gespeichert hat</strong
+              >. Das Verschieben der Deklaration hat das Speicherlayout nicht gelöst. Allerdings hatte eine frühere Hintergrundfunktion ein Namensmuster offenbart, das die Wahl des Compilers beeinflusste. Das legte eine vielversprechendere Hypothese für die <a
+                href="https://github.com/N0zoM1z0/th095/commit/26bb64bdb093a13f73abd0ee8ae7ce199ee4658f"
+                >Rekonstruktion von <code>Supervisor::LoadDat</code></a
+              > nahe.
+            </p>
+            <p>
+              Durch die Wiederverwendung dieses Musters für die Dateigrößenvariable wurde das erforderliche Layout erstellt, ohne dass Speicherplatz hinzugefügt werden musste. Die gesamte Funktion stimmte dann überein.
+            </p>
+            <p>
+              Dies ist ein sehr spezifisches Detail, das einem allgemeines KI-Modell möglicherweise nicht bekannt ist, wenn es zum ersten Mal auf das Problem stößt. Ein auf diesen Compiler spezialisiertes Modell könnte viele solcher Fälle erkennen und herausfinden, welche Quellcodevarianten es wert sind, zuerst getestet zu werden.
+            </p>
+            <p>
+              Die Chance wird besonders deutlich bei finalen Matching-Problemen, bei denen wir das Verhalten bereits verstehen. Wir fragen uns dann, welche gewöhnliche Quellcodeanordnung dieser Compiler in die beobachteten Anweisungen umwandelt. Durch die Spezialisierung könnte das Modell diese Formen effizienter vorschlagen, während das Ziel weiterhin bestimmt, welche Hypothesen bestehen bleiben.
+            </p>
+            <p>
+              Nützliche Muster müssen ihren Kontext behalten. TH08 verwendet eine frühere Visual C++-Version als TH095 und TH09. TH04 verwendet einen anderen Compiler aus der DOS-Ära. Für die <a
+                href="https://github.com/N0zoM1z0/th04/commit/6dce0a79d5b931f0e2a08475b90e0c33d2321b98"
+                >Rekonstruktion des Spielercodes</a
+              > waren unterschiedliche Hypothesen über Quellcodemuster und die Art und Weise erforderlich, wie kompilierter Code mit einer ausführbaren Datei verknüpft wurde. Wenn wir denselben Autor haben, haben wir zunächst eine Erwartung, aber jedes Ziel sagt uns, ob es zutrifft. Ein spezielles Modell müsste diese Kontexte unterscheiden.
+            </p>
+          </section>
+          <section class="article-section" id="repository-knowledge">
+            <h2>Wo sollte diese Erfahrung gespeichert werden?</h2>
+            <p>
+              Bevor ich mich entscheide, diese Muster durch Modelltraining zu lehren, würde ich mir das Wissen ansehen, das wir bereits im Repository speichern. Im <a href="../touhou-reconstruction/">vorherigen Aufsatz</a> habe ich darüber geschrieben, dass es zum Arbeitsgedächtnis des Projekts wird. Dieser Speicher umfasst Compiler-Lektionen sowie die Quelle und fehlgeschlagene Experimente, die sie nützlich gemacht haben.
+            </p>
+            <p>
+              Durch das Abrufen dieses Datensatzes kann ein Agent mit einem bekannten Ergebnis beginnen und prüfen, wie wir zu diesem Ergebnis gelangt sind. Es können auch Alternativen vermieden werden, die im gleichen Kontext bereits gescheitert sind. Der Ausgangspunkt verbessert sich, ohne die trainierten Parameter des Modells zu ändern.
+            </p>
+            <p>
+              Bei der Rekonstruktion der Funktion von TH09 zum Erstellen von Feinden hat eine <a
+                href="https://github.com/N0zoM1z0/th09/commit/1eb843383941d00065622a9e353146c4bb96979e"
+                >GPT-6-Luna-max-Sitzung</a
+              > eine Hypothese aus dem zugehörigen TH08-Quellcode übernommen. Dieser frühere Code schlug vor, wie die Schleife organisiert und Fehler darin behandelt werden sollten. Die eigenen Beweise von TH09 lieferten die spielspezifischen Details. Neuaufbauten aus der Quelle bestätigten, dass die vollständige Funktion übereinstimmte.
+            </p>
+            <p>
+              <strong
+                >„Das Modell kannte diese Compiler-Eigenart nicht“ und „Das Modell konnte sie nicht verwenden“ sind unterschiedliche Probleme.</strong
+              > Das erste Problem kann durch das Abrufen gelöst werden, aber die Umwandlung dieser Tatsache in einen nützlichen Kandidaten erfordert noch Arbeit. Und wenn der Quellcode des Kandidaten fehlschlägt, muss das Modell entscheiden, was das Ergebnis für seinen nächsten Versuch bedeutet. Die Kenntnis des relevanten Musters ist nur der Anfang dieses Prozesses.
+            </p>
+            <p>
+              Aus diesem Grund würde ich in jeden Vergleich ein kleineres allgemeines KI-Modell mit gutem Abruf einbeziehen. Wenn wir ihm die gleiche Erfahrungsbibliothek zur Verfügung stellen, können wir herausfinden, was die Schulung bringt: bessere Kandidatengenerierung, bessere Entscheidungen nach Feedback oder beides.
+            </p>
+          </section>
+          <section class="article-section" id="learning-search">
+            <h2>Lernen Sie das nächste nützliche Experiment</h2>
+            <p>
+              Diese Entscheidungen nach Feedback sind das, was ich am liebsten studieren würde. Bei der Agentenrekonstruktion schlägt das Modell eine Erklärung vor und testet sie anhand des Programms. Selbst wenn der Quellcode des Kandidaten fehlschlägt, kann das Ergebnis die verbleibenden Möglichkeiten einschränken und ein nützlicheres nächstes Experiment vorschlagen.
+            </p>
+            <p>
+              Das Beispiel der temporären Ergebnisse zeigt auch das. Der endgültige Quellcode enthält die Anordnung, die funktioniert hat. Der Weg dorthin enthält jedoch zusätzliche Informationen: Jedes der folgenden Experimente zeigte, was noch geändert werden musste.
+            </p>
+            <div class="evidence-table-wrap">
+              <table
+                class="evidence-table"
+                aria-label="Ausgewählte Rekonstruktionsexperimente"
+              >
+                <thead>
+                  <tr>
+                    <th scope="col">Experimentieren</th>
+                    <th scope="col">Was uns das Ergebnis lehrte</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Versuchen Sie es mit einer anderen Möglichkeit, die Ergebnisse zu kopieren</td>
+                    <td>
+                      Der Kopiercode ändert sich, aber die Funktion unterscheidet sich immer noch.
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Verwenden Sie die zurückgegebenen Werte direkt</td>
+                    <td>
+                      Das Kopieren erfolgt nach dem ursprünglichen Muster, die temporäre Speicherung unterscheidet sich jedoch noch.
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Halten Sie alle temporären Variablen gleichzeitig gültig</td>
+                    <td>
+                      Sie erhalten einen separaten Speicher, aber einer überlappt immer noch einen Wert, der später für Kollisionsprüfungen verwendet wird.
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Halten Sie den Wert für die Kollisionsprüfung getrennt</td>
+                    <td>Eine saubere Neukompilierung aus dem Quellcode bestätigt die vollständige Übereinstimmung.</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <p class="caption">
+              Ausgewählte Experimente aus der Angriffsfunktionsrekonstruktion oben, gruppiert nach dem, was sie uns gelehrt haben.
+            </p>
+            <p>
+              Eine Trainingsaufzeichnung, die diese Reihenfolge beibehält, kann mehr lehren als die endgültige Quelle allein. Es verbindet jede vorgeschlagene Änderung mit einem beobachteten Ergebnis und der nächsten Entscheidung. Es ist auch wichtig, ineffektive Variationen beizubehalten: Sie teilen einem späteren Agenten mit, welche Hypothesen in diesem Zusammenhang bereits getestet wurden.
+            </p>
+            <p>
+              <strong
+                >Ich möchte, dass das Modell lernt, Feedback zu nutzen.</strong
+              > Ein neutrales Ergebnis ist ein Grund, die Variation noch einmal zu überdenken. Eine veränderte Nichtübereinstimmung kann auf eine andere Ursache hinweisen. Wenn lokale Änderungen nicht mehr informativ sind, sollte der Agent in der Lage sein, die Quellendarstellung noch einmal aufzurufen oder die Beweise erneut zu prüfen.
+            </p>
+            <p>
+              Zu lernen, diese Entscheidungen zu treffen, erfordert Autonomie. Manchmal besteht der nützliche nächste Schritt darin, einen anderen Aufrufer zu überprüfen, anstatt eine weitere Bearbeitung zu kompilieren. Eine starre Abfolge erforderlicher Umschreibungen würde diese Wahlmöglichkeit zusammen mit einem Teil des Verhaltens, das das Modell lernen soll, aufheben.
+            </p>
+          </section>
+          <section class="article-section" id="re-and-rl">
+            <h2>Warum Reverse Engineering für Reinforcement Learning interessant ist</h2>
+            <p>
+              Rekonstruktion mit klar abgegrenztem Umfang bietet eine praktische Umgebung, um diese Entscheidungen zu untersuchen. Bei festgelegtem Ziel und Compiler liefern viele Quellcodeexperimente schnelles, wiederholbares Feedback. Der Agent kann einen Kandidaten kompilieren, die Abweichungen prüfen und daraus den nächsten Schritt wählen.
+            </p>
+            <p>
+              Reinforcement Learning könnte diesen Entscheidungsprozess durch das erhaltene Feedback trainieren. Ein durch eine definierte Prüfung angenommener Kandidat gibt uns ein konkretes Ergebnis, während wir anhand der Abfolge der Versuche sehen können, wie viel Arbeit es gekostet hat, dieses zu erreichen.
+            </p>
+            <p>
+              Es gibt bereits Forschungsergebnisse, die diese Richtung unterstützen. <a href="https://aclanthology.org/2024.emnlp-main.203/"
+                >LLM4Decompile</a
+              > untersucht Modelle, die auf die Dekompilierung spezialisiert sind. <a href="https://arxiv.org/html/2606.16162v1">AutoDecompiler</a> trainiert die Multi-Turn-Verfeinerung mithilfe von Compiler- und Ausführungsfeedback. Der Schwerpunkt ihrer Studien liegt auf der Wiederherstellung des Programmverhaltens. Für diese Arbeit würde ich sie als Ausgangspunkt für die damit verbundene Aufgabe verwenden, eine Quelle zu finden, die mit der Ausgabe eines historischen Compilers übereinstimmt.
+            </p>
+            <p>
+              Um eine so klar definierte Aufgabe zu erfüllen, müssen wir jedoch möglicherweise zunächst feststellen, welche Ressourcen eine Funktion besitzt, oder eine neue Methode zur Beobachtung des Programms während der Ausführung entwickeln. In TH08 beispielsweise führte ein <a
+                href="https://github.com/N0zoM1z0/th08/commit/af9cb1d3e839b15a78b47ac1701506083cc82847"
+                >Kollisionsunterschied dazu, wie das ursprüngliche Programm Gleitkommaberechnungen verarbeitete</a
+              >. Bevor der Agent eine nützliche Korrektur testen konnte, musste er herausfinden, was gemessen werden sollte.
+            </p>
+            <p>
+              Dies deutet auf eine weitere Rolle eines allgemein leistungsfähigen Modells hin: Es hilft dabei, das Problem überhaupt überprüfbar zu machen. Sobald diese Prüfung vorliegt, können wir untersuchen, wie weit eine erlernte Suchrichtlinie damit kommen kann.
+            </p>
+          </section>
+          <section class="article-section" id="oracle">
+            <h2>Wenn der Prüfer falsch ist</h2>
+            <p>
+              Wenn wir eine Prüfung für das Training verwenden, wird auch ihr Prüfungsumfang Teil der Lernumgebung. Ich nenne eine solche Referenz oder einen solchen Prüfer ein Oracle. Selbst eine wiederholbare Antwort müssen wir danach beurteilen, was sie tatsächlich überprüft.
+            </p>
+            <p>
+              TH08 hat gezeigt, wie viel sich außerhalb dieser Abdeckung verbergen kann. Einige rekonstruierte Funktionen haben ihre exakten Vergleiche mit falschen Gleitkommakonstanten bestanden. Der Komparator passte die verschobenen Adressen an, bevor er die Anweisungen überprüfte, überprüfte die Werte hinter diesen Adressen jedoch nur, wenn sie explizit zur Überprüfung aufgezeichnet wurden. Andere wörtliche Verweise könnten ohne Prüfung ihrer Werte bestehen bleiben.
+            </p>
+            <p>
+              Um diese Lücke zu schließen, wurden bei einer <a
+                href="https://github.com/N0zoM1z0/th08/commit/a393f400786e4cc6cbb1000af0dad3276da12c78"
+                >umfassenderen Prüfung</a
+              > falsche Konstanten in Funktionen gefunden, die bereits die Überprüfung bestanden hatten. In einer Berechnung fügte der rekonstruierte Quellcode <code>1.0f</code> hinzu, während das Original <code>32.0f</code> hinzufügte.
+            </p>
+            <p>
+              <strong
+                >Ein Modell, das durch die alte Verifizierungsprüfung belohnt wurde, könnte lernen, eine falsche Rekonstruktion zu erzeugen.</strong
+              > Wir haben mit diesem Prüfer kein RL-Modell trainiert. Der von uns beobachtete Fehler lag in der Prüfung selbst. Aber wenn wir es als Belohnung nutzen würden, würde derselbe blinde Fleck Teil der Lernumgebung werden.
+            </p>
+            <p>
+              Ein Funktionstest kann einen ähnlichen blinden Fleck haben. <a href="https://arxiv.org/html/2609.05370v1"
+                >Untersuchungen mit differenziellem Fuzzing auf LLM-Decompilern</a
+              > ergaben Verhaltensunterschiede außerhalb der bereitgestellten Tests. Wir müssen daher einen bestandenen Test im Hinblick auf die Fälle verstehen, in denen er durchgeführt wird. Ebenso muss eine Befehlsübereinstimmung im Hinblick auf die Bytes und Daten verstanden werden, die sie überprüft.
+            </p>
+            <p>
+              Bevor ich eine Art Verifizierungsprüfung als Belohnung verwende, würde ich sie mit absichtlich falschen Ergebnissen testen. Ich würde die Endabnahme auch getrennt vom Quellcode durchführen, den der KI-Agent bearbeiten kann. Das Modell muss die Verifizierung bestehen, indem es das Programm korrekt rekonstruiert. Andernfalls könnte das einfache Kopieren eines Byte-Arrays vom Ziel ein naives Bewertungssystem täuschen, ohne dass nützlicher Quellcode wiederhergestellt wird.
+            </p>
+            <p>
+              <strong
+                >Die Verbesserung des Lernenden und die Verbesserung seines Prüfers gehören zum selben Forschungsproblem.</strong
+              > Je besser der Lernende darin wird, das Feedback, das wir ihm geben, zu optimieren, desto wichtiger wird auch das Verständnis dieses Feedbacks.
+            </p>
+          </section>
+          <section class="article-section" id="comparison">
+            <h2>Ein Vergleich, der sich lohnt</h2>
+            <p>
+              Wenn diese Prüfungen vorhanden sind, würde ich den Vergleich für eine feste VC7.1-Aufgabenfamilie starten. Zunächst würde ich Grundlinien für ein starkes allgemeines KI-Modell und ein kleineres Modell festlegen. Das Hinzufügen von Repository-Wissen zum kleineren Modell würde zeigen, welche Änderungen sich beim Abruf ergeben. Von dort aus würden wir durch eine überwachte Spezialisierung und eine RL-trainierte Version untersuchen können, was Training hinzufügt.
+            </p>
+            <p>
+              Um diese Vergleiche aussagekräftig zu machen, würde jedes Modell die gleichen Zieldaten und Tools erhalten. Für die ausbildungsspezifischen Vergleiche würde ich das Basismodell und das verfügbare Wissen ebenfalls unverändert lassen. Wiederholte Versuche würden dabei helfen, eine zuverlässige Suchstrategie von einer Kandidatenlösung zu unterscheiden, die zufällig erfolgreich ist.
+            </p>
+            <p>
+              Ich würde dann zwei Startbedingungen trennen: die Rekonstruktion einer Funktion aus ihren Anweisungen und die Beseitigung der letzten paar Unterschiede in der gepflegten Quelle. Bei der zweiten Aufgabe könnte ein spezialisiertes KI-Modell hervorragend geeignet sein, während ein allgemeines KI-Modell einen Großteil der dafür erforderlichen Arbeit übernimmt. Eine getrennte Messung würde diese Arbeitsteilung offenbaren.
+            </p>
+            <p>
+              Für beide Aufgaben sind Testbeispiele erforderlich, die vom Training und Abruf ausgeschlossen sind. Verwandte Touhou-Spiele teilen den Engine-Code. Der Ausschluss eines Spiels vom Training könnte dennoch dazu führen, dass nahezu identische Funktionen im Trainingsset verbleiben. Stattdessen würde ich ganze Gruppen verwandten Quellcodes ausschließen und ihre verifizierten Antworten sowohl aus den Trainingsdaten als auch aus der Abrufbibliothek heraushalten.
+            </p>
+            <p>
+              Das Ergebnis wären vollständige, unabhängig verifizierte Übereinstimmungen. Gleiche Budgets für Kandidaten oder Kompilierungsversuche helfen, die Suchqualität zu vergleichen. Gesamtzeit und Gesamtkosten einschließlich Kompilierung zeigen, ob diese Qualität einen effizienten Arbeitsablauf ermöglicht. Trainingskosten sollten separat erfasst werden.
+            </p>
+            <p>
+              Beide Messungen sind wichtig. Ein billiger Vorschlag kann zu einem teuren Arbeitsablauf führen, wenn er mehr Kompilierungen verursacht, die keine nützlichen Informationen liefern. Umgekehrt kann ein langsameres Modell wirtschaftlicher sein, wenn es früher ein nützliches Experiment findet. Der Vergleich sollte diese Kosten einbeziehen.
+            </p>
+            <p>
+              Akzeptierte Ergebnisse zu zählen hilft auch, Zwischenfortschritte einzuordnen. Ein <a
+                href="https://github.com/N0zoM1z0/th09/commit/ab72fd77728293fc0beacfc656ca701b0e266016"
+                >Replay-Save-Kandidat</a
+              > aus TH09 wirkte vielversprechend, weil die kompilierte Funktion die erwartete Größe hatte. Der vollständige Vergleich fand aber noch erhebliche Unterschiede. Eine andere Anordnung der Befehle kann einen Kandidaten näher am Ziel erscheinen lassen, ohne das eigentliche Problem zu lösen. Solche Diagnosen können das nächste Experiment leiten; eine Belohnung für mehr Nähe würde ich jedoch anhand der vollständigen Abnahmeprüfung validieren.
+            </p>
+            <p>
+              Mich würde das Muster dieser Ergebnisse interessieren. Wenn ein spezialisiertes KI-Modell in einer bekannten Compilerfamilie gut funktioniert, überlebt dieser Vorteil dann auch eine Änderung der Toolchain? Und wenn beide KI-Modelle eine gute Retrievalfähigkeit haben, wie viel bringt das Training dann noch? Die Antworten würden uns helfen zu entscheiden, wo welche Art von Modell am nützlichsten ist.
+            </p>
+          </section>
+          <section class="article-section" id="future-agent">
+            <h2>Was für einen KI-Agenten lässt dies vermuten?</h2>
+            <p>
+              Wenn sich herausstellt, dass die Modelle in verschiedenen Phasen hilfreich sind, könnte ein umfassender Agent mit Zugriff auf ein spezielles KI-Modell eine nützliche Lösung sein. Sobald eine Aufgabe zu einer vertrauten Compiler-Suche wird, könnte sie das spezialisierte KI-Modell nach Kandidaten fragen. Wenn die Ergebnisse keinen Sinn mehr ergeben, könnte der breitere Agent zum Zielbeweis zurückkehren oder die Messung selbst untersuchen.
+            </p>
+            <p>
+              In dieser Vereinbarung wird die Spezialisierung zu einem Instrument, das der Agent im Verlauf der Untersuchung wählen kann. Der Agent behält die Freiheit, die Richtung zu ändern, die die früheren Durchbrüche ermöglicht hat.
+            </p>
+            <p>
+              Dies ergibt sich natürlich aus dem industriellen Wandel, den ich im vorherigen Aufsatz beschrieben habe. Die Möglichkeit, viel mehr Experimente durchführen zu können, verändert die Art und Weise, wie wir die Arbeit organisieren. Es gibt uns auch einen Grund zu fragen, welche Entscheidungen ein breites Urteilsvermögen erfordern und welche sich durch wiederholte Erfahrung mit einem bestimmten Handwerk verbessern.
+            </p>
+            <p>
+              Vorerst hat sich das stärkste allgemeine KI-Modell seinen Platz in meinem Arbeitsablauf verdient, indem es Probleme löste, die ich ungelöst gelassen hatte. Gerade diese Erfolge machen mich neugierig: Wie viel hing von seiner breiten Fähigkeit ab? Wie viel könnte ein Modell übernehmen, das auf diese Art der Rekonstruktion spezialisiert ist?
+            </p>
+            <p>
+              <strong
+                >Die Repositorys bieten uns eine Möglichkeit, die Frage zu testen.</strong
+              > Ich möchte diesen Datensatz verwenden, um den Vergleich zu erstellen und zu sehen, was wir lernen.
+            </p>
+          </section>
+          <section class="article-section" id="sources">
+            <details class="native-details">
+              <summary>Beweise und Modellzuschreibung</summary>
+              <p>
+                Die <a
+                  href="https://github.com/morluto/rea/blob/main/website/evidence/reverse-engineering-models.md"
+                  >ausführlichen Evidenznotizen</a
+                > enthalten die aufgezeichneten Vergleiche und den Kontext der Experimente.
+              </p>
+              <p>
+                Die Beispiele beschreiben historische Vergleiche auf Funktionsebene, die in den verknüpften Commits aufgezeichnet wurden. Laufzeitprüfungen für das gesamte Spiel sind separate Meilensteine. Quelle und übereinstimmende Aufzeichnungen wurden am 13. Oktober 2026 überprüft.
+              </p>
+              <p>
+                Die Bezeichnung TH09 <code>gpt-dots</code> bedeutet GPT-6-Astra. Das mit <code>gpt-web</code> verknüpfte Modell hat sich im Laufe der Zeit geändert, sodass die Bezeichnung allein das in einem bestimmten Lauf verwendete Modell nicht identifizieren kann. Explizite Modellnamen in den anderen zitierten Commits liefern die aufgezeichnete Zuschreibung. Diese Historien enthalten keine konsistenten Messungen der Kosten oder des Aufwands für jeden Lauf.
+              </p>
+              <ul>
+                <li>
+                  <strong>TH09 temporäre Objektlebensdauern:</strong> die <a
+                    href="https://github.com/N0zoM1z0/th09/commit/de63c0f9121963f3a6b1ab5471c4878625fd3425"
+                    >frühere Kontextüberprüfung</a
+                  > und <a
+                    href="https://github.com/N0zoM1z0/th09/commit/52929ed7c299f1a5f29cc13964e22510145fd616"
+                    >vollständige Rekonstruktion, verifiziert durch eine saubere Neukompilierung aus der Quelle</a
+                  >.
+                </li>
+                <li>
+                  <strong>TH09 Front-Callback:</strong> <a
+                    href="https://github.com/N0zoM1z0/th09/commit/f8d12d72aaf02212ee1b585a8f3f86d7ed000269"
+                    >Diagnosebereiche, die nicht übereinstimmten</a
+                  >, <a
+                    href="https://github.com/N0zoM1z0/th09/commit/da33a646221198ceb7f3df2b96e2ca0e9b2f705f"
+                    >Astras neues Kontrollflussdiagramm</a
+                  > und seine <a
+                    href="https://github.com/N0zoM1z0/th09/commit/5f825b28a862f8e1a6d4aea2f78a42f04c09a1c0"
+                    >akzeptierte Neukompilierungsprüfung</a
+                  >.
+                </li>
+                <li>
+                  <strong>Compiler-Kenntnisse:</strong> <a
+                    href="https://github.com/N0zoM1z0/th095/commit/26bb64bdb093a13f73abd0ee8ae7ce199ee4658f"
+                    >TH095 Wiederverwendung des Identifier-Bucket-Verhaltens</a
+                  >, <a
+                    href="https://github.com/N0zoM1z0/th04/commit/6dce0a79d5b931f0e2a08475b90e0c33d2321b98"
+                    >TH04 Player-Quellcode und Linker-Reihenfolge</a
+                  > und <a
+                    href="https://github.com/N0zoM1z0/th09/commit/1eb843383941d00065622a9e353146c4bb96979e"
+                    >Lunas vollständige Rekonstruktion der Feinderschaffungsfunktion von TH09</a
+                  >.
+                </li>
+                <li>
+                  <strong>Prüfungen und Diagnosen:</strong> <a
+                    href="https://github.com/N0zoM1z0/th08/commit/a393f400786e4cc6cbb1000af0dad3276da12c78"
+                    >TH08-Prüfung der Gleitkommakonstanten</a
+                  >, <a
+                    href="https://github.com/N0zoM1z0/th08/commit/af9cb1d3e839b15a78b47ac1701506083cc82847"
+                    >TH08-Untersuchung numerischer Unterschiede</a
+                  > und <a
+                    href="https://github.com/N0zoM1z0/th09/commit/ab72fd77728293fc0beacfc656ca701b0e266016"
+                    >TH09-Rekonstruktion der Replay-Speicherung</a
+                  >.
+                </li>
+              </ul>
+              <p>
+                Die vorgeschlagenen Vergleiche spezialisierter Modelle und RL-Training sind zukünftige Experimente. Die Projektgeschichten motivieren sie. Für diesen Aufsatz wurde kein trainiertes Spezialmodell evaluiert.
+              </p>
+            </details>
+          </section>
+        </article>
+      </div>
+    </main>
+    <!-- website:footer:start -->
+    <!-- prettier-ignore -->
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <p>REA · Reverse Engineer Anything</p>
+        <div class="footer-links">
+          <a href="../../faq/">FAQ</a
+          ><a href="../../contributors/">Mitwirkende</a
+          ><a href="https://github.com/morluto/rea">Quellcode</a
+          ><a href="https://github.com/morluto/rea/blob/main/LICENSE">MIT-Lizenz</a
+          ><a href="https://discord.gg/GkcryMnJDM">Zur Community</a
+          ><a href="https://x.com/reatools">Auf X folgen</a>
+        </div>
+      </div>
+    </footer>
+    <p class="sr-only" id="copy-status" role="status" aria-live="polite"></p>
+    <a class="back-to-top" href="#top" aria-label="Nach oben">
+      <span aria-hidden="true">↑</span> Oberen
+    </a>
+    <!-- website:footer:end -->
+  </body>
+</html>

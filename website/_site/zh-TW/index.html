@@ -1,0 +1,1222 @@
+<!doctype html>
+<html lang="zh-TW" dir="ltr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>REA: 和程式設計助手一起做逆向工程</title>
+    <meta
+      name="description"
+      content="和程式設計助手一起分析應用、二進位制檔案和瀏覽器行為。跟著清晰的指南，體驗 REA 的互動示例。"
+    />
+    <!-- website:sharing:start -->
+    <!-- prettier-ignore -->
+    <link rel="canonical" href="https://rea.tools/zh-TW/" />
+    <!-- website:languages:start -->
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="en" href="https://rea.tools/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="zh-CN" href="https://rea.tools/zh-CN/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="zh-TW" href="https://rea.tools/zh-TW/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="ja" href="https://rea.tools/ja/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="ko" href="https://rea.tools/ko/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="tr" href="https://rea.tools/tr/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="ru" href="https://rea.tools/ru/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="vi" href="https://rea.tools/vi/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="th" href="https://rea.tools/th/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="de" href="https://rea.tools/de/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="es" href="https://rea.tools/es/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="fr" href="https://rea.tools/fr/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="uk" href="https://rea.tools/uk/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="pl" href="https://rea.tools/pl/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="pt-BR" href="https://rea.tools/pt-BR/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="ar" href="https://rea.tools/ar/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="fa" href="https://rea.tools/fa/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="id" href="https://rea.tools/id/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="it" href="https://rea.tools/it/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="el" href="https://rea.tools/el/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="x-default" href="https://rea.tools/" />
+<!-- website:languages:end -->
+    <!-- prettier-ignore -->
+    <meta property="og:type" content="website" />
+    <!-- prettier-ignore -->
+    <meta property="og:site_name" content="REA" />
+    <!-- prettier-ignore -->
+    <meta property="og:title" content="REA: 和程式設計助手一起做逆向工程" />
+    <!-- prettier-ignore -->
+    <meta property="og:description" content="和程式設計助手一起分析應用、二進位制檔案和瀏覽器行為。跟著清晰的指南，體驗 REA 的互動示例。" />
+    <!-- prettier-ignore -->
+    <meta property="og:url" content="https://rea.tools/zh-TW/" />
+    <!-- prettier-ignore -->
+    <meta property="og:image" content="https://rea.tools/assets/social-card.png" />
+    <!-- prettier-ignore -->
+    <meta property="og:image:type" content="image/png" />
+    <!-- prettier-ignore -->
+    <meta property="og:image:width" content="1200" />
+    <!-- prettier-ignore -->
+    <meta property="og:image:height" content="630" />
+    <!-- prettier-ignore -->
+    <meta
+      property="og:image:alt"
+      content="REA-瞭解軟體的工作原理。 逆向工程與你的程式設計助手."
+    />
+    <!-- prettier-ignore -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <!-- prettier-ignore -->
+    <meta name="twitter:title" content="REA: 和程式設計助手一起做逆向工程" />
+    <!-- prettier-ignore -->
+    <meta name="twitter:description" content="和程式設計助手一起分析應用、二進位制檔案和瀏覽器行為。跟著清晰的指南，體驗 REA 的互動示例。" />
+    <!-- prettier-ignore -->
+    <meta name="twitter:image" content="https://rea.tools/assets/social-card.png" />
+    <!-- prettier-ignore -->
+    <meta
+      name="twitter:image:alt"
+      content="REA-瞭解軟體的工作原理。 逆向工程與你的程式設計助手."
+    />
+    <!-- website:sharing:end -->
+    <!-- website:theme:start -->
+    <meta name="theme-color" content="#ffffff" />
+    <!-- Apply the saved theme before styles load, to avoid a flash on navigation. -->
+    <script src="../assets/theme.js"></script>
+    <!-- website:theme:end -->
+    <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="../assets/styles.css" />
+    <script src="../assets/main.js" defer></script>
+    <script type="module" src="../assets/home.js"></script>
+    <script type="module" src="../assets/dino-demo.js"></script>
+  <script id="website-messages" type="application/json">{"Distance {distance}": "距離 {distance}", "Hit a cactus. Try another speed.": "撞到仙人掌了，試試其他速度。", "Space or Jump ↑": "空格鍵或“跳躍” ↑", "Play again": "再玩一次", "Play": "開始", "Press Play, then jump over the cactus.": "點選“開始”，再跳過仙人掌。", "Hit a cactus. Press Play again, or change the speed and restart.": "撞到仙人掌了。再點選“開始”，或調整速度後重新開始。", "Pause": "暫停", "Running. Space or Jump clears a cactus.": "遊戲執行中。按空格鍵或“跳躍”越過仙人掌。", "Paused. Press Play to continue.": "已暫停。點選“開始”繼續。", "Fixed speed: {speed}. Space or Jump clears a cactus.": "固定速度：{speed}。按空格鍵或“跳躍”越過仙人掌。", "Fixed speed: {speed}. Press Play to try it.": "固定速度：{speed}。點選“開始”試試。", "Recovered rule: start at 6, then increase toward 13.": "還原的規則：速度從 6 開始，逐漸增加到 13。", "Fixed speed: {speed}.": "固定速度: {speed}.", "Replayed the recovered rule. All four values match the controlled original-game check when rounded to three decimals.": "重放了恢復的規則。 當四捨五入到三位小數時，所有四個值都匹配受控的原始遊戲檢查。", "The replay differs from the recorded original-game values. Compare the speed rule and settings above.": "重播與記錄的原始遊戲值不同。 比較上面的速度規則和設定。", "Press % to see what happens to 10.": "按%檢視10會發生什麼。", "10% of 200 is 20. Press = to add it.": "200的10%是20. 按=新增它。", "For multiplication, 10 becomes 0.1. Press = to multiply.": "對於乘法，10變為0.1。 按=相乘。", "Copied": "已複製", "Code copied to clipboard.": "程式碼已複製到剪貼簿。", "Selected": "已選中", "Code selected. Use your keyboard to copy it.": "程式碼已選中，請用鍵盤快捷鍵複製。", "REA on GitHub ({count})": "REA在GitHub（{count})", "Switch to light mode": "切換至淺色模式", "Switch to dark mode": "切換至深色模式"}</script>
+  </head>
+  <body class="home-page" id="top">
+    <a class="skip-link" href="#main">跳轉到內容</a>
+    <!-- website:header:start -->
+    <!-- prettier-ignore -->
+    <header class="site-header">
+      <div class="container header-inner">
+        <a class="brand" href="./" aria-label="REA 首頁"
+          ><span class="brand-name">REA</span
+          ><span class="brand-caption" data-i18n-skip>Reverse Engineer Anything</span></a
+        >
+        <nav class="navigation" aria-label="主導航">
+          <a href="../get-started/" class="nav-start">開始使用</a>
+          <a href="showcase/">案例展示</a>
+          <a href="blog/">部落格</a>
+          <a href="guides/">指南</a>
+        </nav>
+        <div class="header-social">
+          <details class="language-picker" data-i18n-skip><summary><span aria-hidden="true">文 / A</span> <span>繁體中文</span></summary><nav aria-label="繁體中文"><a href="../" lang="en" dir="ltr" data-language="en">English</a><a href="../zh-CN/" lang="zh-CN" dir="ltr" data-language="zh-CN">简体中文</a><a href="../zh-TW/" lang="zh-TW" dir="ltr" data-language="zh-TW" aria-current="true">繁體中文</a><a href="../ja/" lang="ja" dir="ltr" data-language="ja">日本語</a><a href="../ko/" lang="ko" dir="ltr" data-language="ko">한국어</a><a href="../tr/" lang="tr" dir="ltr" data-language="tr">Türkçe</a><a href="../ru/" lang="ru" dir="ltr" data-language="ru">Русский</a><a href="../vi/" lang="vi" dir="ltr" data-language="vi">Tiếng Việt</a><a href="../th/" lang="th" dir="ltr" data-language="th">ไทย</a><a href="../de/" lang="de" dir="ltr" data-language="de">Deutsch</a><a href="../es/" lang="es" dir="ltr" data-language="es">Español</a><a href="../fr/" lang="fr" dir="ltr" data-language="fr">Français</a><a href="../uk/" lang="uk" dir="ltr" data-language="uk">Українська</a><a href="../pl/" lang="pl" dir="ltr" data-language="pl">Polski</a><a href="../pt-BR/" lang="pt-BR" dir="ltr" data-language="pt-BR">Português (Brasil)</a><a href="../ar/" lang="ar" dir="rtl" data-language="ar">العربية</a><a href="../fa/" lang="fa" dir="rtl" data-language="fa">فارسی</a><a href="../id/" lang="id" dir="ltr" data-language="id">Bahasa Indonesia</a><a href="../it/" lang="it" dir="ltr" data-language="it">Italiano</a><a href="../el/" lang="el" dir="ltr" data-language="el">Ελληνικά</a><a href="../ml/" lang="ml" dir="ltr" data-language="ml">മലയാളം · English</a><a href="../ur-Latn/" lang="ur-Latn" dir="ltr" data-language="ur-Latn">Roman Urdu · English</a><a href="../ro/" lang="ro" dir="ltr" data-language="ro">Română · English</a></nav></details>
+          <button class="theme-toggle" type="button" data-theme-toggle hidden>
+            <svg class="theme-moon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+              <path d="M20.9 13a9 9 0 0 1-9.9-9.9A9 9 0 1 0 20.9 13Z" />
+            </svg>
+            <svg class="theme-sun" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true" focusable="false">
+              <circle cx="12" cy="12" r="4" />
+              <path d="M12 2v2m0 16v2M2 12h2m16 0h2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42" />
+            </svg>
+          </button>
+          <a
+            class="nav-github"
+            href="https://github.com/morluto/rea"
+            aria-label="在 GitHub 檢視 REA"
+            title="在 GitHub 檢視 REA"
+          >
+            <svg
+              width="22"
+              height="22"
+              viewBox="0 0 16 16"
+              aria-hidden="true"
+              focusable="false"
+            >
+              <path
+                fill="currentColor"
+                d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82a7.65 7.65 0 0 1 2-.27c.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z"
+              />
+            </svg>
+            <span class="nav-github-count" hidden aria-hidden="true"></span>
+          </a>
+          <a
+            class="nav-discord"
+            href="https://discord.gg/GkcryMnJDM"
+            aria-label="加入 REA 的 Discord 社群"
+            title="加入 REA 的 Discord 社群"
+          >
+            <svg
+              width="22"
+              height="22"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+              focusable="false"
+            >
+              <path
+                fill="currentColor"
+                d="M20.317 4.3698a19.7913 19.7913 0 0 0-4.8851-1.5152.0741.0741 0 0 0-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 0 0-.0785-.037 19.7363 19.7363 0 0 0-4.8852 1.515.0699.0699 0 0 0-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 0 0 .0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 0 0 .0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 0 0-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 0 1-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 0 1 .0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 0 1 .0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 0 1-.0066.1276 12.2986 12.2986 0 0 1-1.873.8914.0766.0766 0 0 0-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 0 0 .0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 0 0 .0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 0 0-.0312-.0286ZM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189Zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189Z"
+              />
+            </svg>
+          </a>
+          <a
+            class="nav-x"
+            href="https://x.com/reatools"
+            aria-label="在 X 上關注 REA"
+            title="在 X 上關注 REA"
+          >
+            <svg
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+              focusable="false"
+            >
+              <path
+                fill="currentColor"
+                d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z"
+              />
+            </svg>
+          </a>
+        </div>
+      </div>
+    </header>
+    <!-- website:header:end -->
+    <main id="main">
+      <section class="container hero home-hero" id="setup">
+        <div class="home-start-grid">
+          <div>
+            <p class="eyebrow">和程式設計助手一起做逆向工程</p>
+            <h1>弄清楚<br />軟體如何工作。</h1>
+            <p class="lede">
+              向你的程式開發助手提一個關於應用程式、遊戲或網站的問題。REA 為它提供工具，讓它檢查答案背後的程式碼。
+            </p>
+            <div class="actions">
+              <a class="button" href="../get-started/">開始使用</a>
+              <a class="text-link" href="#dinosaur">看一個例子 ↓</a>
+            </div>
+          </div>
+          <div class="home-setup" id="install">
+            <div class="home-setup-agent">
+              <h2>安裝與配置 REA</h2>
+              <p>把這段話複製給程式設計助手：</p>
+              <div class="agent-terminal">
+                <div class="terminal-header">
+                  <span class="terminal-title"
+                    ><span class="terminal-dots" aria-hidden="true"
+                      ><i></i><i></i><i></i></span
+                    >你的程式設計助手</span
+                  >
+                  <button
+                    class="copy-button"
+                    type="button"
+                    data-copy="home-install-prompt"
+                    aria-label="複製REA安裝提示"
+                  >
+                    複製
+                  </button>
+                </div>
+                <p class="terminal-prompt">
+                  <span class="prompt-symbol" aria-hidden="true">›</span
+                  ><span id="home-install-prompt"
+                    >使用 <span translate="no">npx rea-agents@latest setup</span> 安裝 REA，並連線到這個程式設計助手。先展示安裝計劃，等我確認後再執行，然後驗證安裝結果。</span
+                  ><span class="terminal-cursor" aria-hidden="true"></span>
+                </p>
+              </div>
+            </div>
+            <details class="home-setup-command" open>
+              <summary>也可以在終端執行：</summary>
+              <div class="code-block code-inline">
+                <code id="setup-command">npx rea-agents@latest setup</code>
+                <button
+                  class="copy-button"
+                  type="button"
+                  data-copy="setup-command"
+                  aria-label="複製安裝命令"
+                >
+                  複製
+                </button>
+              </div>
+              <p class="caption">
+                確認安裝計劃後，重啟程式設計助手。
+              </p>
+            </details>
+            <details class="home-install-options" open>
+              <summary>配置方式</summary>
+              <nav class="home-install-resources" aria-label="配置方式">
+                <span>依你的平台設定：</span>
+                <a href="../get-started/#node-windows-help"
+                  ><span translate="no">Windows (PowerShell)</span></a
+                >
+                <a href="../get-started/#node-macos-help"
+                  ><span translate="no">macOS</span></a
+                >
+                <a href="../get-started/#node-linux-help"
+                  ><span translate="no">Linux</span></a
+                >
+              </nav>
+              <p class="home-other-install-options">
+                其他安裝方式：<a href="../get-started/#curl-installation"
+                  ><span translate="no">curl</span> →</a
+                >
+              </p>
+            </details>
+            <p class="home-expert-shortcut">
+              第一次使用，還沒安裝 <span translate="no">Node.js</span> 或程式設計助手？<a href="../get-started/">跟著安裝指南一步步來 →</a>
+            </p>
+          </div>
+        </div>
+        <div class="home-reading-links">
+          <div>
+            <a class="text-link" href="#rl-environments"
+              >建立 RL 環境 →</a
+            >
+            <p>錄製 Web 應用程式，用於訓練與測試代理。</p>
+          </div>
+          <div>
+            <a class="text-link" href="showcase/">檢視案例 →</a>
+            <p>調查過程與互動示範。</p>
+          </div>
+          <div>
+            <a class="text-link" href="blog/">部落格 →</a>
+            <p>方法與軟體重建筆記。</p>
+          </div>
+        </div>
+      </section>
+
+      <details class="home-page-nav" data-home-nav open>
+        <summary class="container">
+          <span>在本頁</span>
+          <span
+            class="home-nav-current"
+            data-home-nav-current
+            aria-hidden="true"
+            >安裝與配置 REA</span
+          >
+          <svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true">
+            <path d="m2 4 4 4 4-4" fill="none" stroke="currentColor" />
+          </svg>
+        </summary>
+        <nav class="home-nav-links" aria-label="在本頁">
+          <div class="container">
+            <p class="home-nav-title">在本頁</p>
+            <ul>
+              <li><a href="#setup" aria-current="location">安裝與配置 REA</a></li>
+              <li><a href="#what-is-re">如何運作</a></li>
+              <li><a href="#dinosaur">恐龍游戲</a></li>
+              <li><a href="#calculator">計算器</a></li>
+              <li><a href="#showcases">案例展示</a></li>
+              <li><a href="#rl-environments">RL 環境</a></li>
+              <li><a href="#try-rea">試試REA </a></li>
+              <li><a href="#analyze">更深入</a></li>
+            </ul>
+          </div>
+        </nav>
+      </details>
+
+      <section class="section" id="what-is-re">
+        <div class="container">
+          <div class="section-heading">
+            <h2>如何運作</h2>
+          </div>
+          <p class="lede">
+            逆向工程就是透過檢查程式本身，了解軟體如何運作。有了 REA，你的助手可以追蹤程式碼、解釋一個功能，並幫你重新實作它。
+          </p>
+          <ol class="home-workflow" id="how-rea-helps">
+            <li>
+              <h3>問一個具體功能</h3>
+              <p>給助手一個程式或頁面，再提一個問題。</p>
+            </li>
+            <li>
+              <h3>檢查程式</h3>
+              <p>
+                REA 協助你的代理閱讀程式碼，了解程式執行時的行為。
+              </p>
+            </li>
+            <li>
+              <h3>理解它，再試著修改</h3>
+              <p>
+                助手根據這些發現解釋或重新實作這個功能。
+              </p>
+            </li>
+          </ol>
+          <details class="home-evidence-details" open>
+            <summary>展開完整的計算機調查</summary>
+            <p class="comparison-question">
+              為什麼計算機中的 <span translate="no">200 + 10%</span> 得到 220？
+            </p>
+            <figure class="home-role-comparison">
+              <div
+                class="manual-investigation step-comparison"
+                data-step-comparison
+              >
+                <h3 class="comparison-label">
+                  一步步閱讀指令
+                </h3>
+                <div
+                  class="step-selector expert-step-selector"
+                  role="group"
+                  aria-label="按照手動計算器分析"
+                >
+                  <button
+                    type="button"
+                    data-select-step="1"
+                    aria-pressed="true"
+                    aria-controls="expert-assembly expert-reasoning"
+                  >
+                    <span>01</span> 分析分支
+                  </button>
+                  <button
+                    type="button"
+                    data-select-step="2"
+                    aria-pressed="false"
+                    aria-controls="expert-assembly expert-reasoning"
+                  >
+                    <span>02</span> 追蹤函式呼叫
+                  </button>
+                  <button
+                    type="button"
+                    data-select-step="3"
+                    aria-pressed="false"
+                    aria-controls="expert-assembly expert-reasoning"
+                  >
+                    <span>03</span> 還原計算規則
+                  </button>
+                </div>
+                <div class="expert-analysis-grid">
+                  <details class="code-block expert-assembly" open>
+                    <summary class="code-header">
+                      <span>原始 x64 指令節選</span> <span
+                        class="assembly-disclosure"
+                        aria-hidden="true"
+                      ></span>
+                    </summary>
+                    <pre><code id="expert-assembly"><span class="code-step is-active" data-step="1">0x180124945: MOV EAX, dword ptr [R13 + 0x18]
+0x180124949: CMP EAX, 0x5c
+0x18012494c: JZ 0x180124aba
+0x180124952: CMP EAX, 0x5b
+0x180124955: JZ 0x180124aba</span>
+<span class="code-step" data-step="2">0x18012495b: MOV EDX, 0x64
+0x180124960: LEA RCX, [RSP + 0x160]
+0x180124968: CALL 0x180122650
+0x18012496e: LEA RDX, [R13 + 0x160]
+0x180124975: LEA RCX, [RSP + 0x78]
+0x18012497a: CALL 0x180109720</span>
+0x18012497f: MOV RSI, RAX
+0x180124982: MOV qword ptr [RSP + 0x28], RAX
+<span class="code-step" data-step="2">0x180124987: LEA RDX, [RSP + 0x160]
+0x18012498f: MOV RCX, RAX
+0x180124992: CALL 0x180123190</span>
+<span class="assembly-omission">; … value-copy instructions omitted …</span>
+<span class="code-step" data-step="3">0x180124a14: MOV RDX, RDI
+0x180124a17: LEA RCX, [RSP + 0xf8]
+0x180124a1f: CALL 0x180109720
+0x180124a24: LEA R8, [RSP + 0x30]
+0x180124a29: MOV RDX, RAX
+0x180124a2c: LEA RCX, [RSP + 0xb8]
+0x180124a34: CALL 0x180123c10</span></code></pre>
+                  </details>
+                  <aside
+                    class="expert-reasoning"
+                    aria-label="專家思考過程示意"
+                  >
+                    <div
+                      id="expert-reasoning"
+                      aria-live="polite"
+                      aria-atomic="true"
+                    >
+                      <div class="expert-thought" data-step-note="1">
+                        <p class="thought-label">01 · 走哪個分支？</p>
+                        <p>
+                          “<strong>0x5b？0x5c？</strong>兩個跳轉去了同一個位置。它們對應哪些運算子？”
+                        </p>
+                        <p class="expert-task">
+                          查詢命令 ID，再標明分支含義。
+                        </p>
+                        <dl class="expert-facts">
+                          <div>
+                            <dt>0x5b</dt>
+                            <dd>除÷</dd>
+                          </div>
+                          <div>
+                            <dt>0x5c</dt>
+                            <dd>乘×</dd>
+                          </div>
+                        </dl>
+                      </div>
+                      <div class="expert-thought" data-step-note="2">
+                        <p class="thought-label">02 · 這些函式呼叫做什麼？</p>
+                        <p>
+                          “100 很明確，但函式呼叫只有地址。<strong
+                            >哪個負責除法？傳進去的是哪個值？</strong
+                          >”
+                        </p>
+                        <p class="expert-task">
+                          檢查輔助函式，追蹤儲存的數值。
+                        </p>
+                        <dl class="expert-facts">
+                          <div>
+                            <dt>0x64</dt>
+                            <dd>100</dd>
+                          </div>
+                          <div>
+                            <dt>…123190</dt>
+                            <dd>除法</dd>
+                          </div>
+                        </dl>
+                      </div>
+                      <div class="expert-thought" data-step-note="3">
+                        <p class="thought-label">03 · 規則是什麼？</p>
+                        <p>
+                          “這個分支乘上了另一個輸入。所以在 + 之後，<strong>10% 表示 200 的 10%</strong>。”
+                        </p>
+                        <p class="expert-task">
+                          確定運算元的含義，並檢查兩條運算路徑。
+                        </p>
+                        <div class="expert-rule">
+                          <span>200 × 10 / 100</span>
+                          <strong>20</strong>
+                        </div>
+                      </div>
+                    </div>
+                    <img
+                      class="expert-illustration"
+                      src="../assets/localized/zh-TW/figures/analyst-thinking.svg"
+                      alt=""
+                      width="160"
+                      height="120"
+                    />
+                    <p class="expert-caption">專家思考過程示意</p>
+                  </aside>
+                </div>
+                <p class="manual-work-summary">
+                  <strong
+                    >你需要讀懂指令、追蹤呼叫，再還原計算過程。</strong
+                  >
+                </p>
+              </div>
+              <div class="agent-investigation" id="ask-your-agent">
+                <p class="comparison-label">向助手提同一個問題</p>
+                <div class="agent-terminal home-analysis-terminal">
+                  <div class="terminal-header">
+                    <span class="terminal-title"
+                      ><span class="terminal-dots" aria-hidden="true"
+                        ><i></i><i></i><i></i></span
+                      >示例 prompt · 計算器</span
+                    >
+                    <button
+                      class="copy-button"
+                      type="button"
+                      data-copy="home-analysis-prompt"
+                      aria-label="複製計算器百分比問題"
+                    >
+                      複製
+                    </button>
+                  </div>
+                  <p class="terminal-prompt">
+                    <span class="prompt-symbol" aria-hidden="true">›</span
+                    ><span id="home-analysis-prompt"
+                      >用 REA 檢查 Windows 計算器。為什麼 <span translate="no">200 + 10%</span> 會得到 220？</span
+                    ><span class="terminal-cursor" aria-hidden="true"></span>
+                  </p>
+                  <div class="agent-reply">
+                    <p class="reply-label">
+                      示例回答 · 根據分析結果
+                    </p>
+                    <p>
+                      在 + 之後，% 按鈕計算的是<strong>第一個數的百分比。</strong>
+                    </p>
+                    <div class="agent-percent-rule">
+                      <code>10% of 200 = 20</code
+                      ><span aria-hidden="true">↓</span
+                      ><strong>200 + 20 = 220</strong>
+                    </div>
+                  </div>
+                </div>
+                <dl class="agent-evidence-roles">
+                  <div>
+                    <dt>REA 提供</dt>
+                    <dd>
+                      處理函式的指令、反編譯程式碼和呼叫關係。
+                    </dd>
+                  </div>
+                  <div>
+                    <dt>程式設計助手解釋</dt>
+                    <dd>
+                      走哪個分支、怎樣計算，以及如何重新實現。
+                    </dd>
+                  </div>
+                </dl>
+              </div>
+              <figcaption>
+                彙編節選自已安裝的計算器 DLL。思考過程和回答用於解釋分析結果。<a href="#calculator">繼續看完整的計算器示例 ↓</a>
+              </figcaption>
+            </figure>
+          </details>
+        </div>
+      </section>
+
+      <section class="section" id="dinosaur">
+        <div class="container">
+          <p class="home-examples-intro">
+            試兩個例子吧：先改變遊戲速度，再重新實作計算機的 % 按鈕。
+          </p>
+          <div class="section-heading">
+            <p class="eyebrow">示例 01 · Chrome 小恐龍游戲</p>
+            <h2>為什麼恐龍變得更快？</h2>
+          </div>
+          <p class="lede">
+            遊戲會隨著奔跑越來越快。要重新實作它並加上速度控制，我們先得弄清速度怎麼變化。
+          </p>
+          <div class="home-example-grid dino-example-grid">
+            <div class="home-case-story">
+              <h3>1. 問一問速度</h3>
+              <div class="agent-terminal home-analysis-terminal">
+                <div class="terminal-header">
+                  <span class="terminal-title"
+                    ><span class="terminal-dots" aria-hidden="true"
+                      ><i></i><i></i><i></i></span
+                    >範例問題 · 恐龍遊戲</span
+                  >
+                  <button
+                    class="copy-button"
+                    type="button"
+                    data-copy="dino-analysis-prompt"
+                    aria-label="複製恐龍分析提示"
+                  >
+                    複製
+                  </button>
+                </div>
+                <p class="terminal-prompt">
+                  <span class="prompt-symbol" aria-hidden="true">›</span
+                  ><span id="dino-analysis-prompt"
+                    >用 REA 檢查這個小恐龍游戲。它為什麼會越來越快？找出速度規則，再做一個速度可調的小版本。</span
+                  ><span class="terminal-cursor" aria-hidden="true"></span>
+                </p>
+              </div>
+              <h3>2. 找到速度規則</h3>
+              <p>
+                REA 讓助手讀到遊戲正在執行的程式碼。速度從 6 開始，低於 13 時，每次更新都會增加一點。
+              </p>
+            </div>
+            <div class="home-case-result">
+              <h3>3. 玩一玩結果</h3>
+              <p>
+                我們把這條規則用在下面的小遊戲裡，加上了速度滑桿。點擊開始，再選一個自己的速度。
+              </p>
+              <figure class="dino-demo" data-dino-demo>
+                <div class="dino-stage">
+                  <svg
+                    class="dino-fallback"
+                    viewBox="0 0 600 180"
+                    role="img"
+                    aria-label="A small dinosaur running toward a cactus. Recovered speed: starts at 6, increases by 0.001 per update while below 13."
+                  >
+                    <path
+                      d="M0 150H600 M55 113v-30h17V65h27v24H85v17H72v16H62v13h-7v-22m-5-8v-8h-8v-9h-6v22h19m14 15v15h8v-7h-4v-8 M420 150v-48h10v48m-10-15h-12v-22h7v15h5m10-4h12v-22h-7v15h-5"
+                      fill="currentColor"
+                    />
+                    <text
+                      x="300"
+                      y="65"
+                      text-anchor="middle"
+                      fill="currentColor"
+                      font-size="18"
+                    >
+                      6 → 10 → 13
+                    </text>
+                  </svg>
+                  <canvas
+                    width="600"
+                    height="180"
+                    tabindex="0"
+                    aria-label="小恐龍游戲。點選“跳躍”，或在遊戲獲得焦點後按空格鍵。"
+                    hidden
+                  ></canvas>
+                </div>
+                <div class="dino-controls" hidden>
+                  <div class="dino-buttons">
+                    <button class="button" type="button" data-dino-start>
+                      開始
+                    </button>
+                    <button type="button" data-dino-jump>跳躍 ↑</button>
+                    <button type="button" data-dino-reset>重新開始</button>
+                  </div>
+                  <label class="dino-speed-label"
+                    >速度 <output data-dino-speed>6.0</output
+                    ><input
+                      type="range"
+                      min="2"
+                      max="18"
+                      step="0.1"
+                      value="6"
+                      data-dino-slider
+                  /></label>
+                  <label class="dino-auto-label"
+                    ><input type="checkbox" data-dino-auto checked /> 使用還原的加速規則</label
+                  >
+                </div>
+                <p class="dino-status" data-dino-status role="status">
+                  原版規則：速度從 6 開始，逐漸增加到 13。
+                </p>
+                <figcaption>
+                  拖動滑塊，選擇自己的速度。按空格鍵或“跳躍”越過仙人掌。
+                </figcaption>
+                <noscript
+                  ><p class="caption">
+                    開啟 JavaScript 就能玩。你仍然可以閱讀規則，並展開下方的原始碼。
+                  </p></noscript
+                >
+              </figure>
+              <a class="text-link" href="examples/dino-lab/"
+                >開啟速度實驗室 →</a
+              >
+            </div>
+          </div>
+          <details class="home-evidence-details">
+            <summary>
+              檢視指令碼、驗證過程和分析步驟
+            </summary>
+            <p class="caption">
+              分析目標：<a href="https://wayou.github.io/t-rex-runner/"
+                >wayou 基於 Chromium 製作的瀏覽器版本</a
+              >。
+            </p>
+            <div class="code-block">
+              <div class="code-header">
+                <span
+                  >REA · 已載入 <span translate="no">index.js</span> · 程式碼節選</span
+                >
+              </div>
+              <pre><code>if (this.currentSpeed &lt; this.config.MAX_SPEED) {
+  <span class="code-key">this.currentSpeed += this.config.ACCELERATION;</span>
+}</code></pre>
+            </div>
+            <p class="dino-rule">
+              起始速度為 6。速度低於 13 時，每次沒有發生碰撞的更新增加 0.001。
+            </p>
+            <figure class="workflow-figure dino-loop">
+              <p class="figure-title">各部分負責什麼</p>
+              <ol class="flow-steps">
+                <li>
+                  <span class="flow-label">01 · REA</span
+                  ><span class="flow-node">讀取正在執行的遊戲指令碼</span
+                  ><span class="flow-note"
+                    >把實際程式碼和設定交給助手。</span
+                  >
+                </li>
+                <li>
+                  <span class="flow-label">02 · 程式設計助手</span
+                  ><span class="flow-node">重建規則，加入控制</span
+                  ><span class="flow-note"
+                    >把還原的加速規則用於帶速度滑塊的小遊戲。</span
+                  >
+                </li>
+                <li>
+                  <span class="flow-label">03 · 你</span
+                  ><span class="flow-node">調整速度，親自試玩</span
+                  ><span class="flow-note"
+                    >先體驗原版加速，再選擇自己的節奏。</span
+                  >
+                </li>
+              </ol>
+            </figure>
+            <p>
+              REA 透過本地除錯連線檢查 HTTP 瀏覽器版本，返回了已載入的 <code>index.js</code>，包含原始碼和摘要。
+            </p>
+            <div class="code-block">
+              <div class="code-header">
+                <span>實際指令碼中的設定節選</span>
+              </div>
+              <pre><code>ACCELERATION: 0.001,
+MAX_SPEED: 13,
+SPEED: 6</code></pre>
+            </div>
+            <p>
+              我們在受控的瀏覽器檢查中呼叫原版更新函式，禁用了障礙物和自動排程。保留一位小數時，更新 4,000 次後的速度為 10.0，更新 10,000 次後為 13.0。
+            </p>
+            <p>
+              新小遊戲保留了這條速度規則。繪圖、跳躍和碰撞程式碼是簡化的教學實現。<a href="examples/dino-lab/">開啟實驗室</a>，可以檢視新程式碼並執行同樣的速度檢查。
+            </p>
+            <p>
+              想親自分析？用<a href="https://wayou.github.io/t-rex-runner/"
+                >小恐龍頁面</a
+              >跟著<a href="guides/browser/#prepare">瀏覽器連線步驟</a>操作。把頁面網址和本地除錯地址交給助手，再複製上面的 prompt。
+            </p>
+            <p class="caption">
+              <a
+                href="https://github.com/wayou/t-rex-runner/blob/5455bfa408ec6b707c7300ff194b7390733a766d/index.js#L565-L571"
+                >分析的速度程式碼</a
+              > · <a href="../assets/licenses/dinosaur.txt"
+                >Chromium Authors · BSD 許可證</a
+              >
+            </p>
+          </details>
+        </div>
+      </section>
+
+      <section class="section" id="calculator">
+        <div class="container">
+          <div class="section-heading">
+            <p class="eyebrow">示例 02 · Windows 計算器</p>
+            <h2>重新實現計算器的 % 按鈕。</h2>
+          </div>
+          <p class="lede">
+            % 按鈕在 + 和 × 之後做的事情不同。我們來找出兩條規則，在一個小計算機裡試試。
+          </p>
+          <div class="home-example-grid">
+            <div class="home-case-story">
+              <h3>1. 問一問 % 按鈕</h3>
+              <div class="agent-terminal">
+                <div class="terminal-header">
+                  <span class="terminal-title"
+                    ><span class="terminal-dots" aria-hidden="true"
+                      ><i></i><i></i><i></i></span
+                    >範例問題 · 計算機</span
+                  >
+                  <button
+                    class="copy-button"
+                    type="button"
+                    data-copy="calculator-analysis-prompt"
+                    aria-label="複製計算器分析提示"
+                  >
+                    複製
+                  </button>
+                </div>
+                <p class="terminal-prompt">
+                  <span class="prompt-symbol" aria-hidden="true">›</span
+                  ><span id="calculator-analysis-prompt"
+                    >用 REA 檢查 Windows 計算器的 % 按鈕。還原 + 和 × 後的規則，再做一個同時採用這兩條規則的小計算器。</span
+                  ><span class="terminal-cursor" aria-hidden="true"></span>
+                </p>
+              </div>
+              <h3>2. 找到兩條規則</h3>
+              <p>
+                REA 幫助助手讀到 % 按鈕背後的程式碼。它使用兩條不同的規則：
+              </p>
+              <dl class="percent-rules">
+                <div>
+                  <dt>在 + 之後</dt>
+                  <dd>
+                    <span>取第一個數字的10％。</span
+                    ><code>10% of 200 = 20 → 200 + 20 = 220</code>
+                  </dd>
+                </div>
+                <div>
+                  <dt>在 × 之後</dt>
+                  <dd>
+                    <span>把10%變成0.1。</span><code>200 × 0.1 = 20</code>
+                  </dd>
+                </div>
+              </dl>
+            </div>
+            <div class="home-case-result">
+              <h3>3. 試試 % 按鈕</h3>
+              <p>
+                我們在下面重新實作了兩條規則。選 + 或 ×，按 %，再按 =。
+              </p>
+              <figure class="percent-figure" data-percent-demo>
+                <div
+                  class="percent-operation"
+                  role="group"
+                  aria-label="選擇計算"
+                  hidden
+                >
+                  <button
+                    type="button"
+                    data-percent-operation="add"
+                    aria-pressed="true"
+                  >
+                    <span translate="no">200 + 10%</span>
+                  </button>
+                  <button
+                    type="button"
+                    data-percent-operation="multiply"
+                    aria-pressed="false"
+                  >
+                    <span translate="no">200 × 10%</span>
+                  </button>
+                </div>
+                <div class="percent-display">
+                  <span class="percent-expression" data-percent-expression
+                    >200 +</span
+                  >
+                  <strong data-percent-display>20</strong>
+                </div>
+                <div class="percent-controls" hidden>
+                  <button
+                    type="button"
+                    class="percent-key"
+                    data-percent-key="percent"
+                  >
+                    %
+                  </button>
+                  <button
+                    type="button"
+                    class="percent-key"
+                    data-percent-key="equals"
+                    disabled
+                  >
+                    =
+                  </button>
+                  <button
+                    type="button"
+                    class="percent-reset"
+                    data-percent-key="reset"
+                  >
+                    重置
+                  </button>
+                </div>
+                <p class="percent-status" data-percent-status role="status">
+                  200的10%=20. 則200+20=220。
+                </p>
+                <figcaption>
+                  根據實際分析得到的百分比規則製作的互動示例。
+                </figcaption>
+              </figure>
+            </div>
+          </div>
+          <details class="home-evidence-details">
+            <summary>檢視實際程式碼和驗證方式</summary>
+            <p>
+              對於這個例子, <code>previous = 200</code> 和 <code>current = 10</code>.
+            </p>
+            <div class="code-block">
+              <div class="code-header">
+                <span>% 處理函式的可讀摘要</span>
+              </div>
+              <pre><code>if (operation == multiply || operation == divide) {
+  percent = current / 100;
+} else {
+  <span class="code-key">percent = current * previous / 100;</span>
+}</code></pre>
+            </div>
+            <figure class="workflow-figure calculator-trace">
+              <p class="figure-title">
+                從已安裝的應用，到能執行的 % 按鈕
+              </p>
+              <ol class="flow-steps">
+                <li>
+                  <span class="flow-label"
+                    >01 · REA 讀取 <span translate="no">calc.exe</span></span
+                  ><span class="flow-node">它啟動計算器應用</span
+                  ><span class="flow-note"
+                    >程式碼開啟 <code>ms-calculator:</code>。助手隨後選擇已安裝應用的庫。</span
+                  >
+                </li>
+                <li>
+                  <span class="flow-label">02 · REA 讀取庫</span
+                  ><span class="flow-node">返回 % 處理函式的程式碼</span
+                  ><span class="flow-note"
+                    >函式檢查運算子，並使用常量 <code>100</code>。</span
+                  >
+                </li>
+                <li>
+                  <span class="flow-label">03 · 程式設計助手解釋</span
+                  ><span class="flow-node">解釋並復現規則</span
+                  ><span class="flow-note"
+                    >對照 Microsoft 的原始碼核實分支，再試試上面的 + 和 ×。</span
+                  >
+                </li>
+              </ol>
+            </figure>
+
+            <div class="code-comparison">
+              <div class="code-block">
+                <div class="code-header">
+                  <span>REA · 原始指令節選</span>
+                </div>
+                <pre><code>0x180124945: MOV EAX, dword ptr [R13 + 0x18]
+0x180124949: <span class="code-key">CMP EAX, 0x5c</span>
+0x18012494c: JZ 0x180124aba
+0x180124952: <span class="code-key">CMP EAX, 0x5b</span>
+0x180124955: JZ 0x180124aba
+0x18012495b: <span class="code-key">MOV EDX, 0x64</span></code></pre>
+              </div>
+              <div class="code-block">
+                <div class="code-header">
+                  <span>運算子 ID · Microsoft 原始碼</span>
+                </div>
+                <pre><code>#define IDC_MUL 92      // 0x5c
+#define IDC_DIV 91      // 0x5b
+#define IDC_PERCENT 118 // 0x76
+
+0x64 = 100</code></pre>
+              </div>
+            </div>
+
+            <p class="caption">
+              使用 REA 4.1.0 檢查 Windows 計算器 11.2508.4.0（x64）。可讀摘要採用 Microsoft 公開原始碼中的名稱，解釋還原的分支。
+            </p>
+            <p class="caption">
+              <a
+                href="https://github.com/microsoft/calculator/blob/d125246a4e19842ce1332e6c7839cf0e110027d8/src/CalcManager/CEngine/scifunc.cpp#L98-L111"
+                >百分比實現</a
+              > · <a
+                href="https://github.com/microsoft/calculator/blob/d125246a4e19842ce1332e6c7839cf0e110027d8/src/CalculatorUnitTests/CalculatorManagerTest.cpp#L350-L370"
+                >Microsoft 測試用例</a
+              > · <a href="../guides/native/">原生分析配置指南</a>
+            </p>
+          </details>
+        </div>
+      </section>
+
+      <section class="section" id="showcases">
+        <div class="container">
+          <div class="home-showcase-heading">
+            <div>
+              <h2>REA 實際案例。</h2>
+              <p class="lede">
+                查看已發行應用程式或遊戲中的一個功能，以及相關程式碼和驗證結果。
+              </p>
+            </div>
+            <a class="text-link" href="showcase/">檢視案例 →</a>
+          </div>
+          <div class="home-case-grid">
+            <article class="home-case-card">
+              <p class="eyebrow">Android · APK 分析</p>
+              <h3>驗證器如何生成登入驗證碼</h3>
+              <p>
+                在 Aegis 已發行的 APK 中追蹤六位登入驗證碼，再移動示範時鐘，看看它為什麼每 30 秒變化一次。
+              </p>
+              <a class="text-link" href="../showcase/aegis/"
+                >閱讀Android案例研究</a
+              >
+            </article>
+            <article class="home-case-card">
+              <p class="eyebrow">Electron · 功能追蹤</p>
+              <h3>Notion 如何複製文字和 HTML</h3>
+              <p>
+                從 Notion 打包的 JavaScript 追蹤到系統剪貼簿，看看複製如何保留豐富的區塊資料。
+              </p>
+              <a class="text-link" href="showcase/notion/"
+                >閱讀Notion案例研究</a
+              >
+            </article>
+            <article class="home-case-card">
+              <p class="eyebrow">原生程式 · 重建</p>
+              <h3>DX-Ball 的聲像計算</h3>
+              <p>
+                還原一款 1996 年 Windows 遊戲如何把球的位置轉成左右聲道的聲音。
+              </p>
+              <a class="text-link" href="showcase/dx-ball/"
+                >閱讀DX-Ball案例研究</a
+              >
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section home-environments" id="rl-environments">
+        <div class="container home-environment-grid">
+          <div>
+            <div class="section-heading">
+              <h2>建立 RL 環境</h2>
+              <p class="lede">
+                將錄製的 Web 應用程式工作階段轉為可執行的環境，用於訓練與測試 AI 代理。
+              </p>
+            </div>
+            <p>
+              你的代理會記錄瀏覽器送出的請求和應用程式傳回的回應。REA 利用這些資料建立本機環境，讓代理不必執行原應用程式就能練習任務。
+            </p>
+            <p>
+              若要支援刪除資料夾，記錄必須包含刪除前的資料夾，並確認它在刪除後已不存在。
+            </p>
+            <p>
+              <a class="text-link" href="../guides/rl-environments/"
+                >建立環境指南</a
+              > · <a href="https://x.com/reatools/status/2112574822584918075?s=20"
+                >在 X 上觀看示範</a
+              >
+            </p>
+          </div>
+          <div>
+            <p>在代理中設定好 REA 後，將下方範例的網址與資料夾任務替換為你自己的：</p>
+            <div class="agent-terminal">
+              <div class="terminal-header">
+                <span class="terminal-title"
+                  ><span class="terminal-dots" aria-hidden="true"
+                    ><i></i><i></i><i></i></span
+                  >你的程式設計助手</span
+                ><button
+                  class="copy-button"
+                  type="button"
+                  data-copy="home-environment-prompt"
+                  aria-label="複製提示詞"
+                >
+                  複製
+                </button>
+              </div>
+              <p class="terminal-prompt">
+                <span class="prompt-symbol" aria-hidden="true">›</span
+                ><span id="home-environment-prompt"
+                  >使用 REA 為我的測試 Web 應用程式建立 RL 環境，網址是 <code>http://127.0.0.1:3000</code>。 涵蓋列出、建立、重新命名與刪除資料夾。可以建立和刪除測試資料夾， 但不要修改既有資料。 將環境儲存到名為 <code>my-env</code> 的資料夾。檢查哪些操作可用，並告訴我如何執行。</span
+                ><span class="terminal-cursor" aria-hidden="true"></span>
+              </p>
+            </div>
+            <p class="caption">
+              範例提示詞。請替換為你的應用程式網址與任務。
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="try-rea">
+        <div class="container start-row">
+          <div>
+            <p class="eyebrow">第一次調查</p>
+            <h2>用一個小應用試試 REA。</h2>
+            <p>
+              下載 Notes 示例，追蹤 CSV 匯出，再修改一個輸入來驗證。
+            </p>
+          </div>
+          <a class="button" href="first-investigation/"
+            >跟著示例開始</a
+          >
+        </div>
+      </section>
+
+      <section class="section" id="analyze">
+        <div class="container">
+          <div class="section-heading">
+            <h2>選擇你的目標。</h2>
+            <p>
+              這些指南介紹各類軟體的環境設定和第一次調查。
+            </p>
+          </div>
+          <div class="workflows" id="analysis-guides">
+            <div>
+              <h3>原生二進位制</h3>
+              <p>
+                檢查可執行檔案和庫中的函式、字串、引用和函式呼叫關係。
+              </p>
+              <a href="../guides/native/">原生分析指南</a>
+            </div>
+            <div>
+              <h3>JavaScript&amp;Electron</h3>
+              <p>追蹤 JavaScript 桌面應用程式內部的程式碼。</p>
+              <a href="../guides/javascript/">應用分析流程</a>
+            </div>
+            <div>
+              <h3>瀏覽器與執行時活動</h3>
+              <p>
+                記錄指定的瀏覽器或程序活動，再比較不同執行的結果。
+              </p>
+              <a href="guides/browser/">瀏覽器觀察指南</a>
+            </div>
+          </div>
+          <details class="home-evidence-details" id="project-prompts">
+            <summary>試一個更大的專案</summary>
+            <div class="code-comparison home-project-prompts">
+              <div>
+                <div class="agent-terminal">
+                  <div class="terminal-header">
+                    <span class="terminal-title">
+                      <span class="terminal-dots" aria-hidden="true"
+                        ><i></i><i></i><i></i></span
+                      >示例 prompt · 網站
+                    </span>
+                    <button
+                      class="copy-button"
+                      type="button"
+                      data-copy="website-project-prompt"
+                      aria-label="複製網站專案提示"
+                    >
+                      複製
+                    </button>
+                  </div>
+                  <p class="terminal-prompt">
+                    <span class="prompt-symbol" aria-hidden="true">›</span
+                    ><span id="website-project-prompt"
+                      >用 REA 檢查 <span translate="no">https://rea.tools/</span>。幫我克隆這個網站。</span
+                    ><span class="terminal-cursor" aria-hidden="true"></span>
+                  </p>
+                </div>
+                <p class="caption">對，就是這個網站。</p>
+              </div>
+              <div>
+                <div class="agent-terminal">
+                  <div class="terminal-header">
+                    <span class="terminal-title">
+                      <span class="terminal-dots" aria-hidden="true"
+                        ><i></i><i></i><i></i></span
+                      >示例 prompt · 遊戲重建
+                    </span>
+                    <button
+                      class="copy-button"
+                      type="button"
+                      data-copy="game-project-prompt"
+                      aria-label="複製遊戲重建提示"
+                    >
+                      複製
+                    </button>
+                  </div>
+                  <p class="terminal-prompt">
+                    <span class="prompt-symbol" aria-hidden="true">›</span
+                    ><span id="game-project-prompt"
+                      >用 REA 從這個遊戲的可執行檔案重建遊戲。用 C 還原遊戲邏輯，並對照原版測試。</span
+                    ><span class="terminal-cursor" aria-hidden="true"></span>
+                  </p>
+                </div>
+                <p class="caption">
+                  <a href="showcase/dx-ball/">檢視 DX-Ball 案例 →</a>
+                </p>
+              </div>
+            </div>
+          </details>
+        </div>
+      </section>
+      <section class="section" id="community">
+        <div class="container">
+          <div>
+            <h2>有什麼問題嗎？</h2>
+            <div class="home-help-links">
+              <p>
+                <a href="faq/">閱讀常見問題</a>，取得安裝協助與常見問題解答。
+              </p>
+              <p>
+                <a href="https://discord.gg/GkcryMnJDM">加入 Discord</a>，取得協助並討論你的分析。
+              </p>
+              <p>
+                在 <a href="https://github.com/morluto/rea/issues/new/choose"
+                  >GitHub Issues</a
+                > 中回報錯誤或提出功能需求。
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+    <!-- website:footer:start -->
+    <!-- prettier-ignore -->
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <p>REA · Reverse Engineer Anything</p>
+        <div class="footer-links">
+          <a href="faq/">FAQ</a
+          ><a href="contributors/">貢獻者</a
+          ><a href="https://github.com/morluto/rea">原始碼</a
+          ><a href="https://github.com/morluto/rea/blob/main/LICENSE">MIT 許可證</a
+          ><a href="https://discord.gg/GkcryMnJDM">加入社群</a
+          ><a href="https://x.com/reatools">在 X 上關注我們</a>
+        </div>
+      </div>
+    </footer>
+    <p class="sr-only" id="copy-status" role="status" aria-live="polite"></p>
+    <a class="back-to-top" href="#top" aria-label="回到頂部">
+      <span aria-hidden="true">↑</span> 頂部
+    </a>
+    <!-- website:footer:end -->
+  </body>
+</html>

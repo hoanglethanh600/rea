@@ -1,0 +1,515 @@
+<!doctype html>
+<html lang="es" dir="ltr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Preguntas frecuentes sobre REA: Configuración, Actualizaciones y Solución de problemas</title>
+    <meta
+      name="description"
+      content="Respuestas a preguntas comunes sobre REA: instalación, actualizaciones, herramientas de análisis, agentes de codificación, solución de problemas y ejemplos para compartir."
+    />
+    <!-- website:sharing:start -->
+    <!-- prettier-ignore -->
+    <link rel="canonical" href="https://rea.tools/es/faq/" />
+    <!-- website:languages:start -->
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="en" href="https://rea.tools/faq/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="zh-CN" href="https://rea.tools/zh-CN/faq/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="zh-TW" href="https://rea.tools/zh-TW/faq/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="ja" href="https://rea.tools/ja/faq/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="ko" href="https://rea.tools/ko/faq/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="tr" href="https://rea.tools/tr/faq/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="ru" href="https://rea.tools/ru/faq/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="vi" href="https://rea.tools/vi/faq/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="th" href="https://rea.tools/th/faq/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="de" href="https://rea.tools/de/faq/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="es" href="https://rea.tools/es/faq/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="fr" href="https://rea.tools/fr/faq/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="uk" href="https://rea.tools/uk/faq/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="pl" href="https://rea.tools/pl/faq/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="pt-BR" href="https://rea.tools/pt-BR/faq/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="ar" href="https://rea.tools/ar/faq/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="fa" href="https://rea.tools/fa/faq/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="id" href="https://rea.tools/id/faq/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="it" href="https://rea.tools/it/faq/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="el" href="https://rea.tools/el/faq/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="x-default" href="https://rea.tools/faq/" />
+<!-- website:languages:end -->
+    <!-- prettier-ignore -->
+    <meta property="og:type" content="website" />
+    <!-- prettier-ignore -->
+    <meta property="og:site_name" content="REA" />
+    <!-- prettier-ignore -->
+    <meta property="og:title" content="Preguntas frecuentes sobre REA: Configuración, Actualizaciones y Solución de problemas" />
+    <!-- prettier-ignore -->
+    <meta property="og:description" content="Respuestas a preguntas comunes sobre REA: instalación, actualizaciones, herramientas de análisis, agentes de codificación, solución de problemas y ejemplos para compartir." />
+    <!-- prettier-ignore -->
+    <meta property="og:url" content="https://rea.tools/es/faq/" />
+    <!-- prettier-ignore -->
+    <meta property="og:image" content="https://rea.tools/assets/social-card.png" />
+    <!-- prettier-ignore -->
+    <meta property="og:image:type" content="image/png" />
+    <!-- prettier-ignore -->
+    <meta property="og:image:width" content="1200" />
+    <!-- prettier-ignore -->
+    <meta property="og:image:height" content="630" />
+    <!-- prettier-ignore -->
+    <meta
+      property="og:image:alt"
+      content="REA: Descubra cómo funciona el software. Ingeniería inversa con su agente de codificación."
+    />
+    <!-- prettier-ignore -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <!-- prettier-ignore -->
+    <meta name="twitter:title" content="Preguntas frecuentes sobre REA: Configuración, Actualizaciones y Solución de problemas" />
+    <!-- prettier-ignore -->
+    <meta name="twitter:description" content="Respuestas a preguntas comunes sobre REA: instalación, actualizaciones, herramientas de análisis, agentes de codificación, solución de problemas y ejemplos para compartir." />
+    <!-- prettier-ignore -->
+    <meta name="twitter:image" content="https://rea.tools/assets/social-card.png" />
+    <!-- prettier-ignore -->
+    <meta
+      name="twitter:image:alt"
+      content="REA: Descubra cómo funciona el software. Ingeniería inversa con su agente de codificación."
+    />
+    <!-- website:sharing:end -->
+    <!-- website:theme:start -->
+    <meta name="theme-color" content="#ffffff" />
+    <!-- Apply the saved theme before styles load, to avoid a flash on navigation. -->
+    <script src="../../assets/theme.js"></script>
+    <!-- website:theme:end -->
+    <link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="../../assets/styles.css" />
+    <script src="../../assets/main.js" defer></script>
+  <script id="website-messages" type="application/json">{"Copied": "Copiado", "Code copied to clipboard.": "Código copiado al portapapeles.", "Selected": "Seleccionados", "Code selected. Use your keyboard to copy it.": "Código seleccionado. Usa el teclado para copiarlo.", "REA on GitHub ({count})": "REA en GitHub ({count})", "Switch to light mode": "Cambiar al modo claro", "Switch to dark mode": "Cambiar al modo oscuro"}</script>
+  </head>
+  <body id="top">
+    <a class="skip-link" href="#main">Saltar al contenido</a>
+    <!-- website:header:start -->
+    <!-- prettier-ignore -->
+    <header class="site-header">
+      <div class="container header-inner">
+        <a class="brand" href="../" aria-label="Inicio de REA"
+          ><span class="brand-name">REA</span
+          ><span class="brand-caption" data-i18n-skip>Reverse Engineer Anything</span></a
+        >
+        <nav class="navigation" aria-label="Navegación principal">
+          <a href="../../get-started/" class="nav-start">Primeros pasos</a>
+          <a href="../showcase/">Casos prácticos</a>
+          <a href="../blog/">Blog</a>
+          <a href="../guides/">Guías</a>
+        </nav>
+        <div class="header-social">
+          <details class="language-picker" data-i18n-skip><summary><span aria-hidden="true">文 / A</span> <span>Español</span></summary><nav aria-label="Español"><a href="../../faq/" lang="en" dir="ltr" data-language="en">English</a><a href="../../zh-CN/faq/" lang="zh-CN" dir="ltr" data-language="zh-CN">简体中文</a><a href="../../zh-TW/faq/" lang="zh-TW" dir="ltr" data-language="zh-TW">繁體中文</a><a href="../../ja/faq/" lang="ja" dir="ltr" data-language="ja">日本語</a><a href="../../ko/faq/" lang="ko" dir="ltr" data-language="ko">한국어</a><a href="../../tr/faq/" lang="tr" dir="ltr" data-language="tr">Türkçe</a><a href="../../ru/faq/" lang="ru" dir="ltr" data-language="ru">Русский</a><a href="../../vi/faq/" lang="vi" dir="ltr" data-language="vi">Tiếng Việt</a><a href="../../th/faq/" lang="th" dir="ltr" data-language="th">ไทย</a><a href="../../de/faq/" lang="de" dir="ltr" data-language="de">Deutsch</a><a href="../../es/faq/" lang="es" dir="ltr" data-language="es" aria-current="true">Español</a><a href="../../fr/faq/" lang="fr" dir="ltr" data-language="fr">Français</a><a href="../../uk/faq/" lang="uk" dir="ltr" data-language="uk">Українська</a><a href="../../pl/faq/" lang="pl" dir="ltr" data-language="pl">Polski</a><a href="../../pt-BR/faq/" lang="pt-BR" dir="ltr" data-language="pt-BR">Português (Brasil)</a><a href="../../ar/faq/" lang="ar" dir="rtl" data-language="ar">العربية</a><a href="../../fa/faq/" lang="fa" dir="rtl" data-language="fa">فارسی</a><a href="../../id/faq/" lang="id" dir="ltr" data-language="id">Bahasa Indonesia</a><a href="../../it/faq/" lang="it" dir="ltr" data-language="it">Italiano</a><a href="../../el/faq/" lang="el" dir="ltr" data-language="el">Ελληνικά</a><a href="../../ml/faq/" lang="ml" dir="ltr" data-language="ml">മലയാളം · English</a><a href="../../ur-Latn/faq/" lang="ur-Latn" dir="ltr" data-language="ur-Latn">Roman Urdu · English</a><a href="../../ro/faq/" lang="ro" dir="ltr" data-language="ro">Română · English</a></nav></details>
+          <button class="theme-toggle" type="button" data-theme-toggle hidden>
+            <svg class="theme-moon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+              <path d="M20.9 13a9 9 0 0 1-9.9-9.9A9 9 0 1 0 20.9 13Z" />
+            </svg>
+            <svg class="theme-sun" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true" focusable="false">
+              <circle cx="12" cy="12" r="4" />
+              <path d="M12 2v2m0 16v2M2 12h2m16 0h2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42" />
+            </svg>
+          </button>
+          <a
+            class="nav-github"
+            href="https://github.com/morluto/rea"
+            aria-label="REA en GitHub"
+            title="REA en GitHub"
+          >
+            <svg
+              width="22"
+              height="22"
+              viewBox="0 0 16 16"
+              aria-hidden="true"
+              focusable="false"
+            >
+              <path
+                fill="currentColor"
+                d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82a7.65 7.65 0 0 1 2-.27c.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z"
+              />
+            </svg>
+            <span class="nav-github-count" hidden aria-hidden="true"></span>
+          </a>
+          <a
+            class="nav-discord"
+            href="https://discord.gg/GkcryMnJDM"
+            aria-label="Únete a REA en Discord"
+            title="Únete a REA en Discord"
+          >
+            <svg
+              width="22"
+              height="22"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+              focusable="false"
+            >
+              <path
+                fill="currentColor"
+                d="M20.317 4.3698a19.7913 19.7913 0 0 0-4.8851-1.5152.0741.0741 0 0 0-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 0 0-.0785-.037 19.7363 19.7363 0 0 0-4.8852 1.515.0699.0699 0 0 0-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 0 0 .0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 0 0 .0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 0 0-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 0 1-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 0 1 .0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 0 1 .0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 0 1-.0066.1276 12.2986 12.2986 0 0 1-1.873.8914.0766.0766 0 0 0-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 0 0 .0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 0 0 .0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 0 0-.0312-.0286ZM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189Zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189Z"
+              />
+            </svg>
+          </a>
+          <a
+            class="nav-x"
+            href="https://x.com/reatools"
+            aria-label="Sigue a REA en X"
+            title="Sigue a REA en X"
+          >
+            <svg
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+              focusable="false"
+            >
+              <path
+                fill="currentColor"
+                d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z"
+              />
+            </svg>
+          </a>
+        </div>
+      </div>
+    </header>
+    <!-- website:header:end -->
+    <main id="main" class="container">
+      <div class="page-heading">
+        <p class="breadcrumb"><a href="../">Inicio</a> / Preguntas frecuentes</p>
+        <h1>REA PREGUNTAS frecuentes.</h1>
+        <p class="lede">Configuración, actualizaciones, análisis y solución de problemas.</p>
+      </div>
+      <div class="article-layout">
+        <nav class="contents" aria-label="En esta página">
+          <p>Temas</p>
+          <ul>
+            <li><a href="#setup">Configuración y actualizaciones</a></li>
+            <li><a href="#analysis">Análisis</a></li>
+            <li><a href="#troubleshooting">Solución de Problemas</a></li>
+            <li><a href="#sharing">Datos e intercambio</a></li>
+          </ul>
+        </nav>
+        <article
+          class="article"
+          data-faq
+          aria-label="Preguntas frecuentes sobre REA"
+        >
+          <section class="article-section" id="setup">
+            <h2>Configuración y actualizaciones</h2>
+            <div class="faq-list">
+              <details class="faq-item" id="install">
+                <summary>¿Cómo instalo REA ?</summary>
+                <p>
+                  Con <span translate="no">Node.js</span> y npm disponible, ejecute el programa de instalación, elija su agente de codificación y revise los cambios propuestos.
+                </p>
+                <div class="code-block">
+                  <div class="code-header">
+                    <span>Terminal * configuración del agente</span
+                    ><button
+                      class="copy-button"
+                      type="button"
+                      data-copy="faq-setup"
+                      aria-label="Copie el comando de configuración REA"
+                    >
+                      Copiar
+                    </button>
+                  </div>
+                  <pre><code id="faq-setup">npx rea-agents@latest setup</code></pre>
+                </div>
+                <p>
+                  La configuración registra la conexión MCP de REA e instala la skill de investigación correspondiente. Al terminar, reinicia tu agente y dale la ruta del archivo y una pregunta. La <a href="../../get-started/">guía de configuración</a> explica los requisitos y los pasos de tu primer análisis.
+                </p>
+              </details>
+              <details class="faq-item" id="agents">
+                <summary>¿Qué agentes de codificación pueden usar REA ?</summary>
+                <p>
+                  Cualquier agente que admita servidores MCP locales. La configuración incluye escritorio Claude Code , Claude, Codex , Cursor , Gemini CLI , Windsurf , Devin , OpenCode , Antigravity , GitHub Copilot CLI , Command Code , Grok Build , OMP y VS Code . El conector de Grok Bot se agrega desde su chat.
+                </p>
+                <p>
+                  <a href="../../get-started/#agent">Conecte a su agente de codificación</a>.
+                </p>
+              </details>
+              <details class="faq-item" id="update">
+                <summary>¿Cómo actualizo REA ?</summary>
+                <p>
+                  REA se publica con frecuencia, incluidas correcciones de errores. Si instaló el CLI con npm :
+                </p>
+                <div class="code-block">
+                  <div class="code-header">
+                    <span>Terminal * instalado CLI</span
+                    ><button
+                      class="copy-button"
+                      type="button"
+                      data-copy="faq-update-cli"
+                      aria-label="Copie el comando de actualización REA"
+                    >
+                      Copiar
+                    </button>
+                  </div>
+                  <pre><code id="faq-update-cli">rea update</code></pre>
+                </div>
+                <p>
+                  Siga el comando de actualización de configuración que imprime la actualización. Si configura su agente a través de <code>npx</code>, corre:
+                </p>
+                <div class="code-block">
+                  <div class="code-header">
+                    <span>Terminal * actualizar la configuración del agente</span
+                    ><button
+                      class="copy-button"
+                      type="button"
+                      data-copy="faq-update-agent"
+                      aria-label="Comando de actualización de la configuración del agente de copia"
+                    >
+                      Copiar
+                    </button>
+                  </div>
+                  <pre><code id="faq-update-agent">npx rea-agents@latest setup</code></pre>
+                </div>
+                <p>
+                  Revisa los cambios y reinicia tu agente. Su conexión a REA usa una versión fija del paquete, así que debes volver a ejecutar la configuración para usar la nueva versión. Para un comando puntual de CLI, añade el comando después de <code>npx -y rea-agents@latest</code>.
+                </p>
+              </details>
+              <details class="faq-item" id="skill">
+                <summary>
+                  Está instalando la habilidad desde skills.sh ¿suficiente?
+                </summary>
+                <p>
+                  La habilidad le da instrucciones de investigación a su agente. Corre <a href="#install"> Configuración de REA</a> para conectar el servidor MCP e instalar la habilidad correspondiente, reinicie su agente para que pueda llamar a las herramientas.
+                </p>
+              </details>
+            </div>
+          </section>
+
+          <section class="article-section" id="analysis">
+            <h2>Análisis</h2>
+            <div class="faq-list">
+              <details class="faq-item" id="targets">
+                <summary>¿Qué puedo analizar con REA ?</summary>
+                <p>Comience con el tipo de software que tiene:</p>
+                <ul>
+                  <li>
+                    <a href="../../guides/native/"
+                      >Bibliotecas y ejecutables nativos</a
+                    >: funciones, ensamblado, pseudocódigo y referencias.
+                  </li>
+                  <li>
+                    <a href="../../guides/javascript/"
+                      > Aplicaciones JavaScript y Electron</a
+                    >: módulos, importaciones, IPC y ubicaciones de origen.
+                  </li>
+                  <li>
+                    <a href="../guides/browser/">Páginas del navegador</a>: scripts, solicitudes y observaciones en tiempo de ejecución.
+                  </li>
+                </ul>
+                <p>
+                  REA también tiene flujos de trabajo para ensamblados administrados, APK de Android, firmware y recursos empaquetados. <a href="../showcase/">Ver los estudios de caso</a> para investigaciones trabajadas.
+                </p>
+              </details>
+              <details class="faq-item" id="providers">
+                <summary>¿Necesito Hopper, Ghidra o IDA ?</summary>
+                <p>
+                  El análisis profundo de programas de código máquina utiliza uno de ellos. La inspección estática JavaScript y. NET funciona con los archivos suministrados y no necesita un motor de análisis de programas de código máquina.
+                </p>
+                <p>
+                  Conecte su instalación existente de Ghidra o IDA, o deje que el programa de instalación detecte Hopper y proponga una instalación. Su anfitrión y destino determinan qué proveedor se puede utilizar. <a href="../../get-started/#native">Configurar el análisis de programas de código máquina</a>.
+                </p>
+              </details>
+              <details class="faq-item" id="cli">
+                <summary>¿Puedo usar REA sin un agente de codificación?</summary>
+                <p>
+                  Sí. El CLI utiliza los mismos flujos de trabajo de análisis. Para una aplicación JavaScript o Electron local:
+                </p>
+                <div class="code-block">
+                  <div class="code-header">
+                    <span>Terminal * análisis estático de aplicaciones</span
+                    ><button
+                      class="copy-button"
+                      type="button"
+                      data-copy="faq-cli-analysis"
+                      aria-label="Copie el comando de análisis REA CLI"
+                    >
+                      Copiar
+                    </button>
+                  </div>
+                  <pre><code id="faq-cli-analysis">npx -y rea-agents@latest analyze-javascript-application \
+  /absolute/path/to/app --json</code></pre>
+                </div>
+                <p>
+                  Reemplace la ruta con una carpeta de aplicación extraída o un archivo ASAR. <a href="../../get-started/#terminal">Utilice el CLI </a> para opciones de instalación.
+                </p>
+              </details>
+              <details class="faq-item" id="code">
+                <summary>¿Qué código devuelve REA?</summary>
+                <p>
+                  El análisis nativo devuelve ensamblador y pseudocódigo, junto con llamadas a funciones, referencias y constantes relevantes. El análisis de JavaScript devuelve módulos, sus relaciones y las ubicaciones en el código fuente.
+                </p>
+                <p>
+                  Su agente usa estos hallazgos para explicar el comportamiento o escribir y probar una implementación. El <a href="../showcase/dx-ball/#sound-pan"
+                    > Cálculo de DX-Ball</a
+                  > y <a href="../showcase/ctf/">Comprobador de banderas CTF</a> muestre cómo funciona ese proceso.
+                </p>
+              </details>
+              <details class="faq-item" id="prompt">
+                <summary>¿Qué le pregunto a mi agente?</summary>
+                <p>
+                  Asígnele un objetivo local y un comportamiento para investigar. Para una aplicación JavaScript o Electron:
+                </p>
+                <div class="agent-terminal">
+                  <div class="terminal-header">
+                    <span class="terminal-title"
+                      ><span class="terminal-dots" aria-hidden="true"
+                        ><i></i><i></i><i></i></span
+                      >Su agente de codificación</span
+                    ><button
+                      class="copy-button"
+                      type="button"
+                      data-copy="faq-analysis-prompt"
+                      aria-label="Copie el mensaje de análisis de ejemplo"
+                    >
+                      Copiar
+                    </button>
+                  </div>
+                  <p class="terminal-prompt">
+                    <span class="prompt-symbol" aria-hidden="true">›</span
+                    ><span id="faq-analysis-prompt"
+                      >Utilice REA para analizar <span translate="no">/absolute/path/to/app</span> y explique cómo exporta datos. Muestre el código relevante y las ubicaciones de origen.</span
+                    ><span class="terminal-cursor" aria-hidden="true"></span>
+                  </p>
+                </div>
+                <p class="caption">
+                  Reemplaza el camino con tu objetivo. El <a href="../guides/">guías</a> proporcione indicaciones para ejemplos nativos, Electron y del navegador.
+                </p>
+              </details>
+            </div>
+          </section>
+
+          <section class="article-section" id="troubleshooting">
+            <h2>Solución de Problemas</h2>
+            <div class="faq-list">
+              <details class="faq-item" id="connection">
+                <summary>¿Por qué mi agente no puede ver las herramientas REA?</summary>
+                <p>
+                  Reinicie o vuelva a conectar su agente después de la configuración. Verifique su registro REA con <code>doctor</code>; para Codex :
+                </p>
+                <div class="code-block">
+                  <div class="code-header">
+                    <span>Terminal * compruebe un cliente</span
+                    ><button
+                      class="copy-button"
+                      type="button"
+                      data-copy="faq-doctor"
+                      aria-label="Copie el comando de diagnóstico del cliente"
+                    >
+                      Copiar
+                    </button>
+                  </div>
+                  <pre><code id="faq-doctor">npx -y rea-agents@latest doctor --client codex --json</code></pre>
+                </div>
+                <p>
+                  Reemplazar <code>codex</code> con su ID de cliente, como <code>claude_code</code> o <code>cursor</code>. Si el informe muestra un registro faltante o obsoleto, ejecute el programa de instalación para ese cliente:
+                </p>
+                <div class="code-block">
+                  <div class="code-header">
+                    <span>Terminal * reparar la configuración de un cliente</span
+                    ><button
+                      class="copy-button"
+                      type="button"
+                      data-copy="faq-repair"
+                      aria-label="Copiar comando de configuración de ámbito"
+                    >
+                      Copiar
+                    </button>
+                  </div>
+                  <pre><code id="faq-repair">npx rea-agents@latest setup --client codex</code></pre>
+                </div>
+                <p>
+                  Revise su plan y reinicie el cliente. Si el registro es correcto pero faltan herramientas, verifique el error de conexión MCP del cliente. <a href="../../get-started/#help">Más diagnósticos de configuración</a>.
+                </p>
+              </details>
+              <details class="faq-item" id="hopper">
+                <summary>¿Necesito iniciar Hopper primero?</summary>
+                <p>
+                  REA inicia Hopper cuando una operación lo necesita. En macOS , complete la opción de primera ejecución de modo de demostración o activación de licencia antes del análisis desatendido. <a href="../../get-started/#native">Consulte configuración de proveedor nativo</a
+                  >.
+                </p>
+              </details>
+              <details class="faq-item" id="bugs">
+                <summary>¿Qué hago si encuentro un error?</summary>
+                <p>
+                  <a href="#update">Actualización REA </a>, reinicie su agente y vuelva a intentar la misma tarea. Es posible que una versión reciente ya solucione el problema.
+                </p>
+                <p>
+                  Si persiste, <a href="https://github.com/morluto/rea/issues/new/choose"
+                    >abrir una incidencia</a
+                  > con su versión REA, sistema operativo, tipo de destino, pasos para reproducir y salida de error. Incluya el nombre del proveedor cuando el problema implique el análisis de programas de código máquina.
+                </p>
+              </details>
+            </div>
+          </section>
+
+          <section class="article-section" id="sharing">
+            <h2>Datos e intercambio</h2>
+            <div class="faq-list">
+              <details class="faq-item" id="privacy">
+                <summary>¿REA carga mi aplicación?</summary>
+                <p>
+                  REA analiza los objetivos en su máquina. Su agente recibe los resultados y la política de datos de su proveedor de modelos se aplica a esos resultados.
+                </p>
+              </details>
+              <details class="faq-item" id="contribute">
+                <summary>¿Cómo puedo compartir un ejemplo o contribuir?</summary>
+                <p>
+                  ¿Tiene un ejemplo útil de REA? Nos encantaría verlo. Comparta el objetivo, su pregunta, los hallazgos y cómo los verificó en un <a href="https://github.com/morluto/rea/issues/new/choose"
+                    >cuestión</a
+                  > o <a href="https://github.com/morluto/rea/pulls">solicitud de extracción</a
+                  >. Extractos de códigos cortos y figuras ayudan a otros a seguir la investigación.
+                </p>
+                <p>
+                  Los informes de errores, solicitudes de funciones, documentación y mejoras de código también son bienvenidos. También puede analizar un ejemplo en el <a href="https://discord.gg/GkcryMnJDM">comunidad</a>.
+                </p>
+              </details>
+            </div>
+          </section>
+        </article>
+      </div>
+    </main>
+    <!-- website:footer:start -->
+    <!-- prettier-ignore -->
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <p>REA · Reverse Engineer Anything</p>
+        <div class="footer-links">
+          <a href="./">FAQ</a
+          ><a href="../contributors/">Colaboradores</a
+          ><a href="https://github.com/morluto/rea">Código fuente</a
+          ><a href="https://github.com/morluto/rea/blob/main/LICENSE">Licencia MIT</a
+          ><a href="https://discord.gg/GkcryMnJDM">Únete a la comunidad</a
+          ><a href="https://x.com/reatools">Síguenos en X</a>
+        </div>
+      </div>
+    </footer>
+    <p class="sr-only" id="copy-status" role="status" aria-live="polite"></p>
+    <a class="back-to-top" href="#top" aria-label="Volver arriba">
+      <span aria-hidden="true">↑</span> Arriba
+    </a>
+    <!-- website:footer:end -->
+  </body>
+</html>

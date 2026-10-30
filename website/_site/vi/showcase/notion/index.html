@@ -1,0 +1,570 @@
+<!doctype html>
+<html lang="vi" dir="ltr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Notion Electron Kỹ Thuật Đảo Ngược: Clipboard-REA</title>
+    <meta
+      name="description"
+      content="Thực HIỆN THEO Notion &#x27; S CLIPBOARD API thông QUA Electron &#x27;s preload, IPC wrappers và quy trình chính, với đoạn trích mã ngắn và xem xét định dạng clipboard phong phú của NÓ."
+    />
+    <!-- website:sharing:start -->
+    <!-- prettier-ignore -->
+    <link rel="canonical" href="https://rea.tools/vi/showcase/notion/" />
+    <!-- website:languages:start -->
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="en" href="https://rea.tools/showcase/notion/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="zh-CN" href="https://rea.tools/zh-CN/showcase/notion/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="zh-TW" href="https://rea.tools/zh-TW/showcase/notion/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="ja" href="https://rea.tools/ja/showcase/notion/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="ko" href="https://rea.tools/ko/showcase/notion/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="tr" href="https://rea.tools/tr/showcase/notion/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="ru" href="https://rea.tools/ru/showcase/notion/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="vi" href="https://rea.tools/vi/showcase/notion/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="th" href="https://rea.tools/th/showcase/notion/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="de" href="https://rea.tools/de/showcase/notion/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="es" href="https://rea.tools/es/showcase/notion/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="fr" href="https://rea.tools/fr/showcase/notion/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="uk" href="https://rea.tools/uk/showcase/notion/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="pl" href="https://rea.tools/pl/showcase/notion/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="pt-BR" href="https://rea.tools/pt-BR/showcase/notion/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="ar" href="https://rea.tools/ar/showcase/notion/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="fa" href="https://rea.tools/fa/showcase/notion/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="id" href="https://rea.tools/id/showcase/notion/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="it" href="https://rea.tools/it/showcase/notion/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="el" href="https://rea.tools/el/showcase/notion/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="x-default" href="https://rea.tools/showcase/notion/" />
+<!-- website:languages:end -->
+    <!-- prettier-ignore -->
+    <meta property="og:type" content="website" />
+    <!-- prettier-ignore -->
+    <meta property="og:site_name" content="REA" />
+    <!-- prettier-ignore -->
+    <meta property="og:title" content="Notion Electron Kỹ Thuật Đảo Ngược: Clipboard-REA" />
+    <!-- prettier-ignore -->
+    <meta property="og:description" content="Thực HIỆN THEO Notion &#x27; S CLIPBOARD API thông QUA Electron &#x27;s preload, IPC wrappers và quy trình chính, với đoạn trích mã ngắn và xem xét định dạng clipboard phong phú của NÓ." />
+    <!-- prettier-ignore -->
+    <meta property="og:url" content="https://rea.tools/vi/showcase/notion/" />
+    <!-- prettier-ignore -->
+    <meta property="og:image" content="https://rea.tools/assets/social-card.png" />
+    <!-- prettier-ignore -->
+    <meta property="og:image:type" content="image/png" />
+    <!-- prettier-ignore -->
+    <meta property="og:image:width" content="1200" />
+    <!-- prettier-ignore -->
+    <meta property="og:image:height" content="630" />
+    <!-- prettier-ignore -->
+    <meta
+      property="og:image:alt"
+      content="REA-Tìm hiểu cách thức hoạt động của phần mềm. Kỹ thuật đảo ngược với agent mã hóa của bạn."
+    />
+    <!-- prettier-ignore -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <!-- prettier-ignore -->
+    <meta name="twitter:title" content="Notion Electron Kỹ Thuật Đảo Ngược: Clipboard-REA" />
+    <!-- prettier-ignore -->
+    <meta name="twitter:description" content="Thực HIỆN THEO Notion &#x27; S CLIPBOARD API thông QUA Electron &#x27;s preload, IPC wrappers và quy trình chính, với đoạn trích mã ngắn và xem xét định dạng clipboard phong phú của NÓ." />
+    <!-- prettier-ignore -->
+    <meta name="twitter:image" content="https://rea.tools/assets/social-card.png" />
+    <!-- prettier-ignore -->
+    <meta
+      name="twitter:image:alt"
+      content="REA-Tìm hiểu cách thức hoạt động của phần mềm. Kỹ thuật đảo ngược với agent mã hóa của bạn."
+    />
+    <!-- website:sharing:end -->
+    <!-- website:theme:start -->
+    <meta name="theme-color" content="#ffffff" />
+    <!-- Apply the saved theme before styles load, to avoid a flash on navigation. -->
+    <script src="../../../assets/theme.js"></script>
+    <!-- website:theme:end -->
+    <link rel="icon" href="../../../assets/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="../../../assets/styles.css" />
+    <script src="../../../assets/main.js" defer></script>
+  <script id="website-messages" type="application/json">{"Copied": "Sao chép", "Code copied to clipboard.": "Mã sao chép vào clipboard.", "Selected": "Đã chọn", "Code selected. Use your keyboard to copy it.": "Mã được chọn. Sử dụng bàn phím của bạn để sao chép nó.", "REA on GitHub ({count})": "REA TRÊN GitHub ({count})", "Switch to light mode": "Chuyển sang giao diện sáng", "Switch to dark mode": "Chuyển sang giao diện tối"}</script>
+  </head>
+  <body id="top">
+    <a class="skip-link" href="#main">Bỏ qua nội dung</a>
+    <!-- website:header:start -->
+    <!-- prettier-ignore -->
+    <header class="site-header">
+      <div class="container header-inner">
+        <a class="brand" href="../../" aria-label="Trang chủ REA"
+          ><span class="brand-name">REA</span
+          ><span class="brand-caption" data-i18n-skip>Reverse Engineer Anything</span></a
+        >
+        <nav class="navigation" aria-label="Điều hướng chính">
+          <a href="../../../get-started/" class="nav-start">Bắt đầu</a>
+          <a href="../" aria-current="page">Ví dụ thực tế</a>
+          <a href="../../blog/">Blog</a>
+          <a href="../../guides/">Hướng dẫn</a>
+        </nav>
+        <div class="header-social">
+          <details class="language-picker" data-i18n-skip><summary><span aria-hidden="true">文 / A</span> <span>Tiếng Việt</span></summary><nav aria-label="Tiếng Việt"><a href="../../../showcase/notion/" lang="en" dir="ltr" data-language="en">English</a><a href="../../../zh-CN/showcase/notion/" lang="zh-CN" dir="ltr" data-language="zh-CN">简体中文</a><a href="../../../zh-TW/showcase/notion/" lang="zh-TW" dir="ltr" data-language="zh-TW">繁體中文</a><a href="../../../ja/showcase/notion/" lang="ja" dir="ltr" data-language="ja">日本語</a><a href="../../../ko/showcase/notion/" lang="ko" dir="ltr" data-language="ko">한국어</a><a href="../../../tr/showcase/notion/" lang="tr" dir="ltr" data-language="tr">Türkçe</a><a href="../../../ru/showcase/notion/" lang="ru" dir="ltr" data-language="ru">Русский</a><a href="../../../vi/showcase/notion/" lang="vi" dir="ltr" data-language="vi" aria-current="true">Tiếng Việt</a><a href="../../../th/showcase/notion/" lang="th" dir="ltr" data-language="th">ไทย</a><a href="../../../de/showcase/notion/" lang="de" dir="ltr" data-language="de">Deutsch</a><a href="../../../es/showcase/notion/" lang="es" dir="ltr" data-language="es">Español</a><a href="../../../fr/showcase/notion/" lang="fr" dir="ltr" data-language="fr">Français</a><a href="../../../uk/showcase/notion/" lang="uk" dir="ltr" data-language="uk">Українська</a><a href="../../../pl/showcase/notion/" lang="pl" dir="ltr" data-language="pl">Polski</a><a href="../../../pt-BR/showcase/notion/" lang="pt-BR" dir="ltr" data-language="pt-BR">Português (Brasil)</a><a href="../../../ar/showcase/notion/" lang="ar" dir="rtl" data-language="ar">العربية</a><a href="../../../fa/showcase/notion/" lang="fa" dir="rtl" data-language="fa">فارسی</a><a href="../../../id/showcase/notion/" lang="id" dir="ltr" data-language="id">Bahasa Indonesia</a><a href="../../../it/showcase/notion/" lang="it" dir="ltr" data-language="it">Italiano</a><a href="../../../el/showcase/notion/" lang="el" dir="ltr" data-language="el">Ελληνικά</a><a href="../../../ml/showcase/notion/" lang="ml" dir="ltr" data-language="ml">മലയാളം · English</a><a href="../../../ur-Latn/showcase/notion/" lang="ur-Latn" dir="ltr" data-language="ur-Latn">Roman Urdu · English</a><a href="../../../ro/showcase/notion/" lang="ro" dir="ltr" data-language="ro">Română · English</a></nav></details>
+          <button class="theme-toggle" type="button" data-theme-toggle hidden>
+            <svg class="theme-moon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+              <path d="M20.9 13a9 9 0 0 1-9.9-9.9A9 9 0 1 0 20.9 13Z" />
+            </svg>
+            <svg class="theme-sun" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true" focusable="false">
+              <circle cx="12" cy="12" r="4" />
+              <path d="M12 2v2m0 16v2M2 12h2m16 0h2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42" />
+            </svg>
+          </button>
+          <a
+            class="nav-github"
+            href="https://github.com/morluto/rea"
+            aria-label="REA TRÊN GitHub"
+            title="REA TRÊN GitHub"
+          >
+            <svg
+              width="22"
+              height="22"
+              viewBox="0 0 16 16"
+              aria-hidden="true"
+              focusable="false"
+            >
+              <path
+                fill="currentColor"
+                d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82a7.65 7.65 0 0 1 2-.27c.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z"
+              />
+            </svg>
+            <span class="nav-github-count" hidden aria-hidden="true"></span>
+          </a>
+          <a
+            class="nav-discord"
+            href="https://discord.gg/GkcryMnJDM"
+            aria-label="Tham gia Discord của REA"
+            title="Tham gia Discord của REA"
+          >
+            <svg
+              width="22"
+              height="22"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+              focusable="false"
+            >
+              <path
+                fill="currentColor"
+                d="M20.317 4.3698a19.7913 19.7913 0 0 0-4.8851-1.5152.0741.0741 0 0 0-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 0 0-.0785-.037 19.7363 19.7363 0 0 0-4.8852 1.515.0699.0699 0 0 0-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 0 0 .0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 0 0 .0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 0 0-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 0 1-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 0 1 .0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 0 1 .0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 0 1-.0066.1276 12.2986 12.2986 0 0 1-1.873.8914.0766.0766 0 0 0-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 0 0 .0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 0 0 .0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 0 0-.0312-.0286ZM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189Zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189Z"
+              />
+            </svg>
+          </a>
+          <a
+            class="nav-x"
+            href="https://x.com/reatools"
+            aria-label="Theo DÕI REA Trên X"
+            title="Theo DÕI REA Trên X"
+          >
+            <svg
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+              focusable="false"
+            >
+              <path
+                fill="currentColor"
+                d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z"
+              />
+            </svg>
+          </a>
+        </div>
+      </div>
+    </header>
+    <!-- website:header:end -->
+    <main id="main" class="container">
+      <div class="page-heading">
+        <p class="breadcrumb">
+          <a href="../../">Nhà</a> / <a href="../">Giới thiệu</a> / Notion
+        </p>
+        <p class="eyebrow">Nghiên cứu trường hợp * Electron</p>
+        <h1>Notion sao CHÉP như THẾ NÀO<br />văn bản VÀ HTML.</h1>
+        <p class="lede">
+          Theo dõi cuộc gọi clipboard TỪ API trang CỦA Notion, thông qua quá trình tải trước và quy trình chính, ĐẾN TRÌNH ghi clipboard CỦA Electron.
+        </p>
+        <p class="page-meta">Notion Máy tính để bàn 7.6.1 * JavaScript * REA</p>
+      </div>
+
+      <figure class="workflow-figure">
+        <p class="figure-title">Cây cầu BÊN TRONG GÓI máy TÍNH ĐỂ BÀN CỦA Notion</p>
+        <ol class="flow-steps notion-bridge-flow">
+          <li>
+            <span class="flow-label">01 * Api Hướng Trang</span> <span class="flow-node"><code>clipboard.write(data)</code></span> <span class="flow-note"
+              >Tải trước hiển thị một phương thức có thể gọi được.</span
+            >
+          </li>
+          <li>
+            <span class="flow-label">02 * tải trước wrapper</span> <span class="flow-node"><code>ipcRenderer.invoke</code></span> <span class="flow-note"
+              >Trình bao bọc gửi kênh và đối số.</span
+            >
+          </li>
+          <li>
+            <span class="flow-label">03 · Xử lý quy Trình Chính</span> <span class="flow-node"><code>ipcMain.handle</code></span> <span class="flow-note"
+              >Người nhận kiểm tra trang nào đã gửi nó.</span
+            >
+          </li>
+          <li>
+            <span class="flow-label">04 * Hệ thống clipboard</span> <span class="flow-node"><code>clipboard.write(data)</code></span> <span class="flow-note"
+              > Electron viết văn bản và HTML được cung cấp.</span
+            >
+          </li>
+        </ol>
+        <p class="flow-result">
+          Một kênh nối hai bên: <code class="notion-channel">notion:clipboard:write</code>
+        </p>
+        <figcaption>
+          Mã đóng gói sử dụng cùng một kênh trong quá trình tải trước và chính. Giải quyết các trình bao bọc cho thấy CÁC cuộc gọi Electron đằng sau những tên đó.
+        </figcaption>
+      </figure>
+
+      <div class="article-layout">
+        <nav class="contents" aria-label="Trên trang này">
+          <p>Trong trường hợp này nghiên cứu</p>
+          <ul>
+            <li><a href="#clipboard">Theo cầu clipboard</a></li>
+            <li><a href="#rich-clipboard">Giữ cấu trúc của một khối</a></li>
+            <li><a href="#continue">Thêm ví dụ và nguồn</a></li>
+          </ul>
+        </nav>
+        <article class="article" aria-label="Notion Electron trường hợp nghiên cứu">
+          <section class="article-section" id="clipboard">
+            <h2>Thao tác sao chép đi đâu?</h2>
+            <p>
+              Trang thấy một phương thức được gọi là <code>clipboard.write</code>. Việc triển khai nó trong tải trước là một trình bao bọc. Câu hỏi hữu ích là những gì trình bao bọc đó gửi và mã nào nhận được nó.
+            </p>
+            <div class="agent-terminal">
+              <div class="terminal-header">
+                <span class="terminal-title"
+                  ><span class="terminal-dots" aria-hidden="true"
+                    ><i></i><i></i><i></i></span
+                  >Agent mã hóa của bạn</span
+                ><button
+                  class="copy-button"
+                  type="button"
+                  data-copy="notion-prompt"
+                  aria-label="Sao CHÉP DẤU NHẮC PHÂN TÍCH Notion"
+                >
+                  Sao chép
+                </button>
+              </div>
+              <p class="terminal-prompt">
+                <span class="prompt-symbol" aria-hidden="true">›</span
+                ><span id="notion-prompt"
+                  >SỬ DỤNG REA để theo dõi CÁCH Notion sao chép văn bản và HTML vào bảng tạm hệ thống. Hiển thị mã ở mỗi bước.</span
+                ><span class="terminal-cursor" aria-hidden="true"></span>
+              </p>
+            </div>
+            <p class="caption">
+              Một lời nhắc ví dụ VỚI GÓI ứng dụng CỤC BỘ CỦA Notion có sẵn cho agent mã hóa của bạn.
+            </p>
+
+            <h3 class="small-heading">REA tìm nơi bắt đầu đọc</h3>
+            <p>
+              Phân tích tab tải trước VỚI REA định vị API tiếp xúc với trang và cuộc gọi gửi yêu cầu IPC. Cả hai phát hiện đều đi kèm với phạm vi nguồn trong gói thu nhỏ:
+            </p>
+            <figure class="workflow-figure">
+              <p class="figure-title">REA phát hiện → hai nơi để mở</p>
+              <div class="rea-query-pair">
+                <div class="code-block">
+                  <div class="code-header"><span>Api trang tiếp xúc</span></div>
+                  <pre><code>api_key: "__electronApi"
+api_status: "dynamic"
+source: preload.js:1:22764–22828</code></pre>
+                </div>
+                <div class="code-block">
+                  <div class="code-header"><span>Trình kết XUẤT CUỘC GỌI IPC</span></div>
+                  <pre><code>operation: "invoke"
+channel_expression: "e"
+source: preload.js:1:6486–6522</code></pre>
+                </div>
+              </div>
+              <figcaption>
+                Các lĩnh vực được lựa chọn từ một tươi <code>analyze_javascript_application</code> kết quả TRÊN Notion 's tab tải trước, ghi LẠI VỚI REA 4.1.0. Các vị trí sử dụng dòng của gói ban đầu và cột không dựa trên.
+              </figcaption>
+            </figure>
+            <p>
+              Tác nhân mở các vị trí đó, tìm thành viên clipboard trong API được lắp ráp và đọc <code>invokerInMain</code>. Nguồn cung cấp trang web cuộc gọi của nó <code class="notion-channel">notion:clipboard:write</code>. Tên đó cung cấp cho tác nhân một cái gì đó chính xác để tìm kiếm trong gói chính. Bốn đoạn trích dưới đây cho thấy tuyến đường mà nó kết nối.
+            </p>
+
+            <h3 class="small-heading">Bốn đoạn mã ngắn</h3>
+            <p class="caption">
+              Đơn giản hóa TỪ JavaScript đóng gói , với tên biến có thể đọc được. Các thành viên không liên quan bị bỏ qua.
+            </p>
+            <ol class="rea-queries">
+              <li>
+                <h4>Bắt đầu TẠI API tiếp xúc với trang</h4>
+                <div class="code-block">
+                  <div class="code-header">
+                    <span
+                      >tab_browser_view/<span translate="no">preload.js</span> * THÀNH VIÊN API</span
+                    ><button
+                      class="copy-button"
+                      type="button"
+                      data-copy="notion-preload-source"
+                      aria-label="Sao CHÉP Notion tải trước đoạn trích"
+                    >
+                      Sao chép
+                    </button>
+                  </div>
+                  <pre><code id="notion-preload-source">const clipboardApi = {
+  write: invokerInMain(<span class="notion-channel">"notion:clipboard:write"</span>)
+};
+
+// Included in the API exposed through contextBridge:
+// window.__electronApi.clipboard</code></pre>
+                </div>
+                <p>
+                  Thành viên này cung cấp tên kênh. Việc thực hiện <code>invokerInMain</code> cho chúng tôi biết cách yêu cầu rời khỏi quy trình của trang.
+                </p>
+              </li>
+              <li>
+                <h4>Giải quyết trình bao bọc tải trước</h4>
+                <div class="code-block">
+                  <div class="code-header">
+                    <span
+                      >tab_browser_view/<span translate="no">preload.js</span> * TRỢ GIÚP IPC</span
+                    ><button
+                      class="copy-button"
+                      type="button"
+                      data-copy="notion-invoke-source"
+                      aria-label="Sao CHÉP Notion gọi wrapper đoạn trích"
+                    >
+                      Sao chép
+                    </button>
+                  </div>
+                  <pre><code id="notion-invoke-source">function invokerInMain(channel) {
+  return (...args) =&gt; invokeInMainAndReturnResult(channel, ...args);
+}
+
+function invokeInMainAndReturnResult(channel, ...args) {
+  return ipcRenderer.invoke(channel, ...args);
+}</code></pre>
+                </div>
+                <p>
+                  Hàm trả về chuyển tiếp các đối số thông qua IPC YÊU cầu và phản hồi CỦA Electron. Bây giờ chúng ta có thể tìm kiếm <code class="notion-channel">notion:clipboard:write</code> về phía chính-quá trình.
+                </p>
+              </li>
+              <li>
+                <h4>Kiểm tra cách người nhận được đăng ký</h4>
+                <div class="code-block">
+                  <div class="code-header">
+                    <span
+                      >chính/<span translate="no">index.js</span> * trình trợ giúp xử lý</span
+                    ><button
+                      class="copy-button"
+                      type="button"
+                      data-copy="notion-handler-source"
+                      aria-label="Sao CHÉP Notion handler wrapper đoạn trích"
+                    >
+                      Sao chép
+                    </button>
+                  </div>
+                  <pre><code id="notion-handler-source">const handleRequestFromRenderer = {
+  addListener(channel, handler) {
+    ipcMain.handle(channel, handler);
+  }
+};</code></pre>
+                </div>
+                <p>
+                  Quá trình chính sử dụng một trình bao bọc khác. Của nó <code>addListener</code> phương pháp đăng ký một <code>ipcMain.handle</code> người nhận cho kênh đó.
+                </p>
+              </li>
+              <li>
+                <h4>Tìm ghi và kiểm tra người gửi của nó</h4>
+                <div class="code-block">
+                  <div class="code-header">
+                    <span
+                      >chính/<span translate="no">index.js</span> * bộ thu clipboard</span
+                    ><button
+                      class="copy-button"
+                      type="button"
+                      data-copy="notion-write-source"
+                      aria-label="Sao CHÉP Notion clipboard receiver đoạn trích"
+                    >
+                      Sao chép
+                    </button>
+                  </div>
+                  <pre><code id="notion-write-source">handleRequestFromRenderer.addListener(
+  <span class="notion-channel">"notion:clipboard:write"</span>,
+  (event, data) =&gt;
+    isNotionWebContents(event.sender)
+      ? clipboard.write(data)
+      : undefined
+);</code></pre>
+                </div>
+                <p>
+                  Đây là điểm đến. Sau khi kiểm tra người gửi, trình xử lý chuyển dữ liệu được cung cấp cho API clipboard CỦA Electron. Kênh và hai trình bao bọc được giải quyết kết nối phương thức tiếp xúc với cuộc gọi này.
+                </p>
+              </li>
+            </ol>
+          </section>
+
+          <section class="article-section" id="rich-clipboard">
+            <h2>Làm thế nào để một khối được sao chép giữ cấu trúc của nó?</h2>
+            <p>
+              Notion ' s web editor gửi văn bản VÀ HTML thông qua <code>electronApi.clipboard.write</code>. Nó giữ dữ liệu khối cục bộ và ĐẶT ID vào HTML đã sao chép để kết nối chúng.
+            </p>
+            <figure class="workflow-figure">
+              <p class="figure-title">LIÊN KẾT HTML để lưu dữ liệu khối</p>
+              <div class="notion-clipboard-grid">
+                <div class="code-block">
+                  <div class="code-header">
+                    <span>Gửi đến clipboard hệ thống</span>
+                  </div>
+                  <pre><code>text: "Project notes"
+html: "&lt;p&gt;Project notes&lt;/p&gt;"
+    + "&lt;!-- notionvc: <span class="notion-channel">&lt;copy-id&gt;</span> --&gt;"</code></pre>
+                </div>
+                <div class="code-block">
+                  <div class="code-header">
+                    <span>Lưu cục BỘ BỞI Notion</span>
+                  </div>
+                  <pre><code>id: <span class="notion-channel">&lt;copy-id&gt;</span>
+mimeTypes:
+  text/_notion-blocks-v3-production
+    → structured block data</code></pre>
+                </div>
+              </div>
+              <ol
+                class="notion-mini-flow"
+                aria-label="Khôi phục dữ liệu clipboard phong phú trên dán"
+              >
+                <li>Đọc ID HTML</li>
+                <li>Tìm CÙNG MỘT ID cục BỘ</li>
+                <li>Khôi phục DỮ LIỆU KHỐI Notion</li>
+              </ol>
+              <figcaption>
+                Văn BẢN minh họa VÀ ID. Kiểm tra mô-đun được ghi sẽ khôi phục dữ liệu khối khi id khớp; một mục cũ chỉ trả về văn bản và HTML.
+              </figcaption>
+            </figure>
+            <p>
+              Khi dán, Notion tìm ID HTML và kiểm tra NÓ với bản sao đã lưu. Id phù hợp khôi phục dữ liệu khối.
+            </p>
+            <p class="caption">
+              Định dạng Clipboard được ghi lại từ tài sản web được lưu trong bộ nhớ cache vào ngày 13 tháng 7 năm 2026.
+            </p>
+          </section>
+
+          <section class="article-section" id="continue">
+            <h2>Thêm ví dụ và nguồn</h2>
+            <details class="evidence-details" id="markdown">
+              <summary>Một ví dụ khác: Bảng Markdown</summary>
+              <p>
+                Notion phân Tích Markdown thành dữ liệu khối. Ví dụ này cho thấy cách một bảng trở thành tiêu đề và các hàng dữ liệu.
+              </p>
+              <figure class="workflow-figure">
+                <p class="figure-title">
+                  Một bảng thông QUA TRÌNH phân tích Cú pháp Markdown CỦA Notion
+                </p>
+                <div class="notion-table-example">
+                  <div class="code-block">
+                    <div class="code-header"><span>Đầu vào đánh dấu</span></div>
+                    <pre><code>| A | B |
+| - | - |
+| 1 | 2 |</code></pre>
+                  </div>
+                  <div class="code-block">
+                    <div class="code-header">
+                      <span>Đầu ra trình phân tích cú pháp có cấu trúc · đoạn trích</span>
+                    </div>
+                    <pre><code>table · headerRow: true
+  table_row
+    cells: ["A"], ["B"]
+  table_row
+    cells: ["1"], ["2"]</code></pre>
+                  </div>
+                </div>
+                <figcaption>
+                  Ghi lại đầu ra từ Một Trình phân tích Cú pháp Markdown trích xuất. Bảng trở thành hàng và ô.
+                </figcaption>
+              </figure>
+            </details>
+            <details class="evidence-details">
+              <summary>Một đường dẫn khác: kết nối sqlite ngoại tuyến</summary>
+              <p>
+                YÊU CẦU trình kết xuất CỦA Notion <code>getSqliteMeta</code> THÔNG QUA IPC. Quá trình chính tạo kênh tin nhắn và cung cấp một cổng cho trình kết xuất và cổng kia cho quy trình tiện ích SQLite. Các lô tuyên bố tiếp theo và kết quả đi qua cổng đó.
+              </p>
+              <p>
+                Sau đó, handoff giải thích nơi công việc cơ sở dữ liệu chạy và tại sao chỉ truy tìm yêu cầu IPC ban đầu bỏ lỡ cuộc trò chuyện sau này.
+              </p>
+            </details>
+            <details class="evidence-details">
+              <summary>Nguồn và cách đọc các đoạn trích</summary>
+              <p>
+                Cầu clipboard đến TỪ Notion Desktop 7.6.1 <code>app.asar</code>: tab tải trước và <code>main/index.js</code>. Các đoạn trích mở rộng tên biến được thu nhỏ và bỏ qua mã không liên quan; trình trợ giúp kiểm tra người gửi được hiển thị với phần bên dưới của nó <code>isNotionWebContents</code> gọi.
+              </p>
+              <p>
+                Các ví dụ về clipboard và Markdown ảo đến từ các tài sản web được lưu trong bộ nhớ cache vào ngày 13 tháng 7 năm 2026, bao gồm các mô-đun <code>747001</code>, <code>58169</code>, <code>736810</code> và <code>422457</code>. Những tài sản đó có phiên bản riêng. Các đầu dò đã lưu thực thi các mô-đun được trích xuất và các dây nịt nhỏ; đầu ra của chúng mô tả các đầu dò đó thay vì một phiên GIAO diện người dùng máy tính để bàn bị bắt.
+              </p>
+              <p>
+                KẾT quả REA được hiển thị ở đây là phân tích tập trung của tab đã lưu tải trước, được ghi lại với gói REA 4.1.0 đã xuất bản. Nó định vị API và gọi hoạt động. Thành viên clipboard và bộ thu phù hợp được kết nối bằng cách đọc các triển khai trình bao bọc của chúng trong gói.
+              </p>
+              <p>
+                Ví Dụ Markdown sử dụng mô đun trình phân tích cú pháp <code>422457</code>. Các bài kiểm tra mô-đun đã lưu cho thấy cả bộ lọc trang và trò chuyện đều giữ nguyên bảng này. Các trình phân tích cú pháp dán/nhập, Đánh dấu Có cấu trúc và ai/trò chuyện có các điểm nhập và định dạng trung gian riêng biệt.
+              </p>
+            </details>
+            <ul class="reading-list">
+              <li>
+                <a href="../../../guides/javascript/"
+                  > JavaScript hướng dẫn ứng DỤNG</a
+                ><span
+                  >Thực hiện theo tính năng xuất của ỨNG dụng Electron nhỏ.</span
+                >
+              </li>
+              <li>
+                <a href="../dx-ball/"> TÁI THIẾT DX-Ball</a
+                ><span
+                  >Thực hiện theo hướng dẫn bản địa đến một chức năng C kiểm tra.</span
+                >
+              </li>
+            </ul>
+            <div class="actions">
+              <a class="button" href="../../../get-started/"
+                >Phân tích ứng dụng của riêng bạn</a
+              >
+            </div>
+          </section>
+        </article>
+      </div>
+    </main>
+    <!-- website:footer:start -->
+    <!-- prettier-ignore -->
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <p>REA · Reverse Engineer Anything</p>
+        <div class="footer-links">
+          <a href="../../faq/">FAQ</a
+          ><a href="../../contributors/">Người đóng góp</a
+          ><a href="https://github.com/morluto/rea">Mã nguồn</a
+          ><a href="https://github.com/morluto/rea/blob/main/LICENSE">Giấy phép MIT</a
+          ><a href="https://discord.gg/GkcryMnJDM">Tham gia cộng đồng</a
+          ><a href="https://x.com/reatools">Theo dõi trên X</a>
+        </div>
+      </div>
+    </footer>
+    <p class="sr-only" id="copy-status" role="status" aria-live="polite"></p>
+    <a class="back-to-top" href="#top" aria-label="Về đầu trang">
+      <span aria-hidden="true">↑</span> Hàng đầu
+    </a>
+    <!-- website:footer:end -->
+  </body>
+</html>

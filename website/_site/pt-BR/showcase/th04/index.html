@@ -1,0 +1,734 @@
+<!doctype html>
+<html lang="pt-BR" dir="ltr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Engenharia reversa de TH04: testes padrões da bala do DOS-REA</title>
+    <meta
+      name="description"
+      content="Inspeccionar o código DOS original de 16 bits do TH04 com o REA . Siga a montagem e recuperou C++ para ver como um anel de balas é espaçado e apontou para o jogador."
+    />
+    <!-- website:sharing:start -->
+    <!-- prettier-ignore -->
+    <link rel="canonical" href="https://rea.tools/pt-BR/showcase/th04/" />
+    <!-- website:languages:start -->
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="en" href="https://rea.tools/showcase/th04/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="zh-CN" href="https://rea.tools/zh-CN/showcase/th04/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="zh-TW" href="https://rea.tools/zh-TW/showcase/th04/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="ja" href="https://rea.tools/ja/showcase/th04/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="ko" href="https://rea.tools/ko/showcase/th04/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="tr" href="https://rea.tools/tr/showcase/th04/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="ru" href="https://rea.tools/ru/showcase/th04/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="vi" href="https://rea.tools/vi/showcase/th04/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="th" href="https://rea.tools/th/showcase/th04/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="de" href="https://rea.tools/de/showcase/th04/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="es" href="https://rea.tools/es/showcase/th04/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="fr" href="https://rea.tools/fr/showcase/th04/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="uk" href="https://rea.tools/uk/showcase/th04/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="pl" href="https://rea.tools/pl/showcase/th04/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="pt-BR" href="https://rea.tools/pt-BR/showcase/th04/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="ar" href="https://rea.tools/ar/showcase/th04/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="fa" href="https://rea.tools/fa/showcase/th04/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="id" href="https://rea.tools/id/showcase/th04/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="it" href="https://rea.tools/it/showcase/th04/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="el" href="https://rea.tools/el/showcase/th04/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="x-default" href="https://rea.tools/showcase/th04/" />
+<!-- website:languages:end -->
+    <!-- prettier-ignore -->
+    <meta property="og:type" content="website" />
+    <!-- prettier-ignore -->
+    <meta property="og:site_name" content="REA" />
+    <!-- prettier-ignore -->
+    <meta property="og:title" content="Engenharia reversa de TH04: testes padrões da bala do DOS-REA" />
+    <!-- prettier-ignore -->
+    <meta property="og:description" content="Inspeccionar o código DOS original de 16 bits do TH04 com o REA . Siga a montagem e recuperou C++ para ver como um anel de balas é espaçado e apontou para o jogador." />
+    <!-- prettier-ignore -->
+    <meta property="og:url" content="https://rea.tools/pt-BR/showcase/th04/" />
+    <!-- prettier-ignore -->
+    <meta property="og:image" content="https://rea.tools/assets/social-card.png" />
+    <!-- prettier-ignore -->
+    <meta property="og:image:type" content="image/png" />
+    <!-- prettier-ignore -->
+    <meta property="og:image:width" content="1200" />
+    <!-- prettier-ignore -->
+    <meta property="og:image:height" content="630" />
+    <!-- prettier-ignore -->
+    <meta
+      property="og:image:alt"
+      content="REA-descubra como o software funciona. Engenharia reversa com seu agente de codificação."
+    />
+    <!-- prettier-ignore -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <!-- prettier-ignore -->
+    <meta name="twitter:title" content="Engenharia reversa de TH04: testes padrões da bala do DOS-REA" />
+    <!-- prettier-ignore -->
+    <meta name="twitter:description" content="Inspeccionar o código DOS original de 16 bits do TH04 com o REA . Siga a montagem e recuperou C++ para ver como um anel de balas é espaçado e apontou para o jogador." />
+    <!-- prettier-ignore -->
+    <meta name="twitter:image" content="https://rea.tools/assets/social-card.png" />
+    <!-- prettier-ignore -->
+    <meta
+      name="twitter:image:alt"
+      content="REA-descubra como o software funciona. Engenharia reversa com seu agente de codificação."
+    />
+    <!-- website:sharing:end -->
+    <!-- website:theme:start -->
+    <meta name="theme-color" content="#ffffff" />
+    <!-- Apply the saved theme before styles load, to avoid a flash on navigation. -->
+    <script src="../../../assets/theme.js"></script>
+    <!-- website:theme:end -->
+    <link rel="icon" href="../../../assets/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="../../../assets/styles.css" />
+    <script src="../../../assets/main.js" defer></script>
+  <script id="website-messages" type="application/json">{"Copied": "Copiados", "Code copied to clipboard.": "Código copiado para a área de transferência.", "Selected": "Seleccionado", "Code selected. Use your keyboard to copy it.": "Código seleccionado. Use o teclado para copiá-lo.", "REA on GitHub ({count})": "REA em GitHub ({count})", "Switch to light mode": "Alternar para o modo claro", "Switch to dark mode": "Alternar para o modo escuro"}</script>
+  </head>
+  <body id="top">
+    <a class="skip-link" href="#main">Ir para o conteúdo</a>
+    <!-- website:header:start -->
+    <!-- prettier-ignore -->
+    <header class="site-header">
+      <div class="container header-inner">
+        <a class="brand" href="../../" aria-label="Página inicial do REA"
+          ><span class="brand-name">REA</span
+          ><span class="brand-caption" data-i18n-skip>Reverse Engineer Anything</span></a
+        >
+        <nav class="navigation" aria-label="Navegação principal">
+          <a href="../../../get-started/" class="nav-start">Começar</a>
+          <a href="../" aria-current="page">Casos práticos</a>
+          <a href="../../blog/">Blog</a>
+          <a href="../../guides/">Guias</a>
+        </nav>
+        <div class="header-social">
+          <details class="language-picker" data-i18n-skip><summary><span aria-hidden="true">文 / A</span> <span>Português (Brasil)</span></summary><nav aria-label="Português (Brasil)"><a href="../../../showcase/th04/" lang="en" dir="ltr" data-language="en">English</a><a href="../../../zh-CN/showcase/th04/" lang="zh-CN" dir="ltr" data-language="zh-CN">简体中文</a><a href="../../../zh-TW/showcase/th04/" lang="zh-TW" dir="ltr" data-language="zh-TW">繁體中文</a><a href="../../../ja/showcase/th04/" lang="ja" dir="ltr" data-language="ja">日本語</a><a href="../../../ko/showcase/th04/" lang="ko" dir="ltr" data-language="ko">한국어</a><a href="../../../tr/showcase/th04/" lang="tr" dir="ltr" data-language="tr">Türkçe</a><a href="../../../ru/showcase/th04/" lang="ru" dir="ltr" data-language="ru">Русский</a><a href="../../../vi/showcase/th04/" lang="vi" dir="ltr" data-language="vi">Tiếng Việt</a><a href="../../../th/showcase/th04/" lang="th" dir="ltr" data-language="th">ไทย</a><a href="../../../de/showcase/th04/" lang="de" dir="ltr" data-language="de">Deutsch</a><a href="../../../es/showcase/th04/" lang="es" dir="ltr" data-language="es">Español</a><a href="../../../fr/showcase/th04/" lang="fr" dir="ltr" data-language="fr">Français</a><a href="../../../uk/showcase/th04/" lang="uk" dir="ltr" data-language="uk">Українська</a><a href="../../../pl/showcase/th04/" lang="pl" dir="ltr" data-language="pl">Polski</a><a href="../../../pt-BR/showcase/th04/" lang="pt-BR" dir="ltr" data-language="pt-BR" aria-current="true">Português (Brasil)</a><a href="../../../ar/showcase/th04/" lang="ar" dir="rtl" data-language="ar">العربية</a><a href="../../../fa/showcase/th04/" lang="fa" dir="rtl" data-language="fa">فارسی</a><a href="../../../id/showcase/th04/" lang="id" dir="ltr" data-language="id">Bahasa Indonesia</a><a href="../../../it/showcase/th04/" lang="it" dir="ltr" data-language="it">Italiano</a><a href="../../../el/showcase/th04/" lang="el" dir="ltr" data-language="el">Ελληνικά</a><a href="../../../ml/showcase/th04/" lang="ml" dir="ltr" data-language="ml">മലയാളം · English</a><a href="../../../ur-Latn/showcase/th04/" lang="ur-Latn" dir="ltr" data-language="ur-Latn">Roman Urdu · English</a><a href="../../../ro/showcase/th04/" lang="ro" dir="ltr" data-language="ro">Română · English</a></nav></details>
+          <button class="theme-toggle" type="button" data-theme-toggle hidden>
+            <svg class="theme-moon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+              <path d="M20.9 13a9 9 0 0 1-9.9-9.9A9 9 0 1 0 20.9 13Z" />
+            </svg>
+            <svg class="theme-sun" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true" focusable="false">
+              <circle cx="12" cy="12" r="4" />
+              <path d="M12 2v2m0 16v2M2 12h2m16 0h2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42" />
+            </svg>
+          </button>
+          <a
+            class="nav-github"
+            href="https://github.com/morluto/rea"
+            aria-label="REA no GitHub"
+            title="REA no GitHub"
+          >
+            <svg
+              width="22"
+              height="22"
+              viewBox="0 0 16 16"
+              aria-hidden="true"
+              focusable="false"
+            >
+              <path
+                fill="currentColor"
+                d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82a7.65 7.65 0 0 1 2-.27c.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z"
+              />
+            </svg>
+            <span class="nav-github-count" hidden aria-hidden="true"></span>
+          </a>
+          <a
+            class="nav-discord"
+            href="https://discord.gg/GkcryMnJDM"
+            aria-label="Participe do Discord do REA"
+            title="Participe do Discord do REA"
+          >
+            <svg
+              width="22"
+              height="22"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+              focusable="false"
+            >
+              <path
+                fill="currentColor"
+                d="M20.317 4.3698a19.7913 19.7913 0 0 0-4.8851-1.5152.0741.0741 0 0 0-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 0 0-.0785-.037 19.7363 19.7363 0 0 0-4.8852 1.515.0699.0699 0 0 0-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 0 0 .0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 0 0 .0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 0 0-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 0 1-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 0 1 .0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 0 1 .0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 0 1-.0066.1276 12.2986 12.2986 0 0 1-1.873.8914.0766.0766 0 0 0-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 0 0 .0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 0 0 .0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 0 0-.0312-.0286ZM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189Zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189Z"
+              />
+            </svg>
+          </a>
+          <a
+            class="nav-x"
+            href="https://x.com/reatools"
+            aria-label="Siga o REA no X"
+            title="Siga o REA no X"
+          >
+            <svg
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+              focusable="false"
+            >
+              <path
+                fill="currentColor"
+                d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z"
+              />
+            </svg>
+          </a>
+        </div>
+      </div>
+    </header>
+    <!-- website:header:end -->
+    <main id="main" class="container">
+      <div class="page-heading">
+        <p class="breadcrumb">
+          <a href="../../">Casa</a> / <a href="../">Vitrines</a> / TH04
+        </p>
+        <p class="eyebrow">Estudo de caso · Touhou 4: História da Lotus Land</p>
+        <h1>Reconstrução de TH04<br />padrões de bala.</h1>
+        <p class="lede">
+          Um anel de balas começa com um cálculo de ângulo curto. Use REA para inspecionar a função DOS original e, em seguida, siga suas instruções em C++legível.
+        </p>
+        <p class="page-meta">PC-98 · 16-bit DOS * C++ e montagem</p>
+        <a class="text-link" href="https://github.com/N0zoM1z0/th04"
+          >Ver a reconstrução TH04</a
+        >
+      </div>
+
+      <figure class="workflow-figure th04-overview">
+        <p class="figure-title">Das instruções originais à fonte verificada</p>
+        <ol class="flow-steps th04-flow">
+          <li>
+            <span class="flow-label">01 * jogo Original</span
+            ><strong class="flow-node">Principal.EXE</strong
+            ><span class="flow-note"
+              >O executável PC-98 e seu auxiliar de ângulo de bala.</span
+            >
+          </li>
+          <li>
+            <span class="flow-label">02 * inspeccionar com REA </span
+            ><strong class="flow-node">Instruções + referências</strong
+            ><span class="flow-note"
+              >Verifique o código dos carregado e leia o cálculo do ângulo do executável.</span
+            >
+          </li>
+          <li>
+            <span class="flow-label">03 * leia o c++</span
+            ><strong class="flow-node">Espaço * objectivo * rotação</strong
+            ><span class="flow-note"
+              >Ligar cada operação à reconstrução mantida.</span
+            >
+          </li>
+          <li>
+            <span class="flow-label">04 * verificar a fonte</span
+            ><strong class="flow-node">2.139 bytes correspondentes</strong
+            ><span class="flow-note"
+              >As verificações do compilador gravadas cobrem o código de geração de marcadores que contém este auxiliar.</span
+            >
+          </li>
+        </ol>
+        <figcaption>
+          REA retorna o código original e sua evidência de análise. O projeto TH04 fornece as verificações de origem e compilador mantidas.
+        </figcaption>
+      </figure>
+
+      <div class="article-layout">
+        <nav class="contents" aria-label="Nesta página">
+          <p>Neste estudo de caso</p>
+          <ul>
+            <li><a href="#ring">O anel bala</a></li>
+            <li><a href="#rea">O que REA retorna</a></li>
+            <li><a href="#source">Montagem Em C++</a></li>
+            <li><a href="#checking">Verificação da fonte</a></li>
+            <li><a href="#project">O projecto completo</a></li>
+          </ul>
+        </nav>
+        <article class="article" aria-label="Estudo de caso com padrão de marcadores TH04">
+          <section class="article-section" id="ring">
+            <h2>Como um anel visa o jogador</h2>
+            <p>
+              O ataque de Elly solicita um anel apontado Com uma contagem inicial de 16. Um auxiliar calcula a direção de cada bala. O mesmo anel pode estar voltado para uma direção fixa ou virar em direção ao jogador.
+            </p>
+            <div class="agent-terminal">
+              <div class="terminal-header">
+                <span class="terminal-title"
+                  ><span class="terminal-dots" aria-hidden="true"
+                    ><i></i><i></i><i></i></span
+                  >O seu agente de codificação</span
+                >
+                <button
+                  class="copy-button"
+                  type="button"
+                  data-copy="th04-prompt"
+                  aria-label="Copiar o prompt de exemplo TH04"
+                >
+                  Copiar
+                </button>
+              </div>
+              <p class="terminal-prompt">
+                <span class="prompt-symbol" aria-hidden="true">›</span
+                ><span id="th04-prompt"
+                  >Use REA para descobrir como TH04 cria um anel de balas e o aponta para o jogador. Explique o cálculo e mostre o código.</span
+                ><span class="terminal-cursor" aria-hidden="true"></span>
+              </p>
+            </div>
+            <p class="caption">
+              Um exemplo de prompt, com o executável original e o checkout de reconstrução disponíveis localmente.
+            </p>
+            <p>
+              TH04 armazena uma volta completa no sentido horário em 256 unidades do ângulo. Para 16 marcadores, cada índice adiciona 16 unidades: <code>0, 16, 32, …, 240</code>. Adicionar a direção do jogador gira essas posições juntas.
+            </p>
+            <figure class="explanatory-figure th04-ring-figure">
+              <div
+                class="figure-viewport"
+                tabindex="0"
+                role="region"
+                aria-label="TH04 anéis de bala fixos e apontados; deslocar horizontalmente em ecrãs mais pequenos"
+              >
+                <img
+                  src="../../../assets/localized/pt-BR/figures/th04-bullet-ring.svg"
+                  width="1000"
+                  height="520"
+                  alt="Dois diagramas de um anel de 16 balas. O anel fixo começa no ângulo zero. Adicionar uma direção de Jogador de 40 gira todas as direções na mesma quantidade; o primeiro marcador destacado aponta para o jogador. Ambos mantêm um espaçamento de 16 unidades de ângulo, ou 22,5 graus."
+                  decoding="async"
+                />
+              </div>
+              <figcaption>
+                Uma ilustração da matemática do ângulo recuperado para a contagem 16, direção do jogador 40 e rotação do Modelo 0. <a href="../../../assets/localized/pt-BR/figures/th04-bullet-ring.svg"
+                  >Figura aberta</a
+                >
+              </figcaption>
+            </figure>
+            <h3 class="small-heading">
+              O modelo de disparo na fonte recuperada
+            </h3>
+            <div class="code-block">
+              <div class="code-header">
+                <span>Elly's ring attack * trecho da fonte</span
+                ><button
+                  class="copy-button"
+                  type="button"
+                  data-copy="th04-template"
+                  aria-label="Copiar modelo de disparo TH04"
+                >
+                  Copiar
+                </button>
+              </div>
+              <pre><code id="th04-template">bullet_template.angle = 0;
+bullet_template.group = BG_RING_AIMED;
+bullet_template.count = 16;
+bullet_template_tune();</code></pre>
+            </div>
+            <p class="caption">
+              Essas linhas selecionam o padrão antes da dificuldade e do ajuste de desempenho. <a
+                href="https://github.com/N0zoM1z0/th04/blob/0d72e9801a5c14c10384efcbb6734ceccb74ee63/src/main/boss/elly_phase_ring16.cpp#L26"
+                >Leia a fonte do ataque</a
+              >.
+            </p>
+          </section>
+
+          <section class="article-section" id="rea">
+            <h2>O que REA retorna</h2>
+            <p>
+              Nós inspecionamos <code>bullet_velocity_and_angle_set()</code>, a função que define a velocidade e o ângulo de cada bala.  REA retorna suas instruções, pseudocódigo e referências. Três partes desse resultado explicam o padrão.
+            </p>
+            <ol class="rea-queries">
+              <li>
+                <h4>Verifique a imagem do DOS antes de ler seu código</h4>
+                <div class="rea-query-pair">
+                  <div class="code-block">
+                    <div class="code-header"><span>Agente REA</span></div>
+                    <pre><code>open_binary
+{"path": "MAIN.EXE"}
+
+inspect_native_load_image
+{}</code></pre>
+                  </div>
+                  <div class="code-block">
+                    <div class="code-header">
+                      <span>REA extraterritorial * campos seleccionados</span>
+                    </div>
+                    <pre><code>status: "verified"
+format: "dos-mz"
+load_segment: 4096
+header_bytes: 6144
+module_bytes: 150114</code></pre>
+                  </div>
+                </div>
+                <p>
+                  A verificação vincula o código carregado e os registros de realocação ao executável fornecido. O caminho acima é encurtado para exibição.
+                </p>
+              </li>
+              <li>
+                <h4>Leia o anel multiplicar e dividir</h4>
+                <div class="rea-query-pair">
+                  <div class="code-block">
+                    <div class="code-header">
+                      <span>Agente REA  · <code>analyze_function</code></span>
+                    </div>
+                    <pre><code>{"procedure": "0x2cfc8"}</code></pre>
+                  </div>
+                  <div class="code-block">
+                    <div class="code-header">
+                      <span>REA7 agente * excerto de instruções</span>
+                    </div>
+                    <pre><code>0x2d0eb: MOV AX, SI
+0x2d0ed: SHL AX, 0x8
+0x2d0f0: MOV DL, byte ptr [0x53af]
+0x2d0f9: IDIV BX</code></pre>
+                  </div>
+                </div>
+                <p>
+                  <code>SI</code> mantém o índice de marcadores. O deslocamento o multiplica por 256, então a divisão usa a contagem lida de <code>DS:53AF</code>. Os nomes de origem mantidos nesse campo <code>bullet_template.count</code>. A sequência completa é apresentada abaixo.
+                </p>
+              </li>
+              <li>
+                <h4>Encontre onde o padrão gira em direção ao jogador</h4>
+                <div class="rea-query-pair">
+                  <div class="code-block">
+                    <div class="code-header">
+                      <span>Resultado da mesma função * trecho aim</span>
+                    </div>
+                    <pre><code>0x2d190: SUB AX, word ptr [0x53a6]
+0x2d198: SUB AX, word ptr [0x53a4]
+0x2d19d: CALLF 0x1000:1da8
+0x2d1a2: ADD word ptr [BP + -0x2], AX</code></pre>
+                  </div>
+                  <div class="code-block">
+                    <div class="code-header">
+                      <span>C++mantido correspondente</span>
+                    </div>
+                    <pre><code>group_angle_offset += iatan2(
+  player_pos.cur.y - bullet_template.origin.y,
+  player_pos.cur.x - bullet_template.origin.x
+);</code></pre>
+                  </div>
+                </div>
+                <p>
+                  Os operandos de instrução expõem duas diferenças de coordenadas e um auxiliar de direção. O seu valor de retorno é adicionado ao ângulo relativo do anel. Os nomes de origem tornam esses endereços legíveis; REA permite que o agente verifique as operações originais por trás deles.
+                </p>
+              </li>
+            </ol>
+          </section>
+
+          <section class="article-section" id="source">
+            <h2>Da montagem ao C++legível</h2>
+            <p>
+              Selecione uma etapa para corresponder às instruções originais com o cálculo do ângulo. Este resumo segue a trajectória do anel visado; a fonte completa também lida com spreads, stacks e padrões aleatórios.
+            </p>
+            <div class="step-comparison" data-step-comparison>
+              <div
+                class="step-selector"
+                role="group"
+                aria-label="Siga o cálculo do anel direcionado TH04"
+              >
+                <button
+                  type="button"
+                  data-select-step="1"
+                  aria-pressed="true"
+                  aria-controls="ring-assembly ring-source ring-step-detail"
+                >
+                  <span>01</span> Índice
+                </button>
+                <button
+                  type="button"
+                  data-select-step="2"
+                  aria-pressed="false"
+                  aria-controls="ring-assembly ring-source ring-step-detail"
+                >
+                  <span>02</span> Espaço
+                </button>
+                <button
+                  type="button"
+                  data-select-step="3"
+                  aria-pressed="false"
+                  aria-controls="ring-assembly ring-source ring-step-detail"
+                >
+                  <span>03</span> Objectivo
+                </button>
+                <button
+                  type="button"
+                  data-select-step="4"
+                  aria-pressed="false"
+                  aria-controls="ring-assembly ring-source ring-step-detail"
+                >
+                  <span>04</span> Rodar
+                </button>
+                <button
+                  type="button"
+                  data-select-step="5"
+                  aria-pressed="false"
+                  aria-controls="ring-assembly ring-source ring-step-detail"
+                >
+                  <span>05</span> Loja
+                </button>
+              </div>
+              <div class="code-comparison">
+                <div class="code-block">
+                  <div class="code-header">
+                    <span>REA * instruções originais de 16 bits</span
+                    ><button
+                      class="copy-button"
+                      type="button"
+                      data-copy="ring-assembly"
+                      aria-label="Copiar o excerto do conjunto TH04"
+                    >
+                      Copiar
+                    </button>
+                  </div>
+                  <pre><code id="ring-assembly"><span class="code-step is-active" data-step="1">0x2cfcf: MOV SI, word ptr [BP + 0x4]
+0x2d0eb: MOV AX, SI</span>
+<span class="code-step" data-step="2">0x2d0ed: SHL AX, 0x8
+0x2d0f0: MOV DL, byte ptr [0x53af]
+0x2d0f4: MOV DH, 0x0
+0x2d0f6: PUSH DX
+0x2d0f7: CWD
+0x2d0f8: POP BX
+0x2d0f9: IDIV BX
+0x2d0fb: MOV word ptr [BP + -0x2], AX</span>
+<span class="code-step" data-step="3">0x2d18d: MOV AX, [0x4650]
+0x2d190: SUB AX, word ptr [0x53a6]
+0x2d194: PUSH AX
+0x2d195: MOV AX, [0x464e]
+0x2d198: SUB AX, word ptr [0x53a4]
+0x2d19c: PUSH AX
+0x2d19d: CALLF 0x1000:1da8
+0x2d1a2: ADD word ptr [BP + -0x2], AX</span>
+<span class="code-step" data-step="4">0x2d1b9: MOV AL, byte ptr [BP + -0x2]
+0x2d1bc: ADD AL, byte ptr [0x53ad]</span>
+<span class="code-step" data-step="5">0x2d1c0: MOV [0xbcc8], AL</span></code></pre>
+                </div>
+                <div class="code-block">
+                  <div class="code-header">
+                    <span>C++ legível · resumo do anel direcionado</span
+                    ><button
+                      class="copy-button"
+                      type="button"
+                      data-copy="ring-source"
+                      aria-label="Cópia legível cálculo do anel destinado"
+                    >
+                      Copiar
+                    </button>
+                  </div>
+                  <pre><code id="ring-source">unsigned char aimed_ring_angle(
+    <span class="is-active" data-step="1">int index</span>, int count,
+    int player_direction,
+    unsigned char rotation)
+{
+<span class="code-step is-active" data-step="1">    int angle = index;</span>
+<span class="code-step" data-step="2">    angle = (angle * 256) / count;</span>
+<span class="code-step" data-step="3">    angle += player_direction;</span>
+<span class="code-step" data-step="4">    angle += rotation;</span>
+<span class="code-step" data-step="5">    return (unsigned char)angle;</span>
+}</code></pre>
+                </div>
+              </div>
+              <div
+                class="step-detail"
+                id="ring-step-detail"
+                aria-live="polite"
+                aria-atomic="true"
+              >
+                <p data-step-note="1">
+                  <strong>01 * leia o índice do marcador.</strong> O argumento stack é carregado em <code>SI</code>. Num anel de 16 marcadores, este índice de membros vai de 0 a 15.
+                </p>
+                <p data-step-note="2" hidden>
+                  <strong>02 * Espaço as direções em torno de uma volta completa.</strong> <code>SHL AX,8</code> multiplicado por 256. A contagem é zero-estendida em uma palavra, então <code>IDIV</code> divide o produto por essa contagem. Para a contagem 16, cada Índice avança 16 unidades angulares.
+                </p>
+                <p data-step-note="3" hidden>
+                  <strong>03 * adicione a direção do jogador.</strong> As duas subtrações formam coordenadas Jogador-menos-origem. O Auxiliar de direção retorna um ângulo em <code>AX</code>; adicionando-o vira todo o anel em direção ao jogador.
+                </p>
+                <p data-step-note="4" hidden>
+                  <strong>04 * adicionar a rotação do padrão.</strong> <code>ADD AL,[0x53ad]</code> adiciona o ângulo do modelo. O modelo inicial de Elly o define como zero; outros padrões podem usar o mesmo auxiliar com uma rotação.
+                </p>
+                <p data-step-note="5" hidden>
+                  <strong>05 * mantenha o ângulo final em um byte.</strong> A loja escreve <code>AL</code> para o campo spawn-angle. Valores wrap após 255, assim como o elenco unsigned-byte faz. A fonte circundante também converte este ângulo e velocidade em velocidade.
+                </p>
+              </div>
+            </div>
+            <p class="caption">
+              O conjunto selecciona a ramificação do anel de mira, o cálculo da mira e o armazenamento final. O C++ acima é um resumo legível. As verificações do compilador abaixo se aplicam à fonte mantida no projeto vinculado.
+            </p>
+            <details class="evidence-details">
+              <summary>Leia o anel mantido e aim fonte</summary>
+              <div class="code-block">
+                <div class="code-header">
+                  <span>Macro do anel * ramificação TH04, excerto</span>
+                </div>
+                <pre><code>angle_offset = (i * BULLET_ANGLE_FULL_TURN) / count;
+if (i &gt;= (count - 1)) {
+    group_complete = true;
+}
+goto aim_or_no_aim;</code></pre>
+              </div>
+              <div class="code-block">
+                <div class="code-header">
+                  <span>Ângulo e velocidade * excerto da fonte</span>
+                </div>
+                <pre><code>aim:
+    group_angle_offset += iatan2(
+        (player_pos.cur.y - bullet_template.origin.y),
+        (player_pos.cur.x - bullet_template.origin.x)
+    );
+
+no_aim:
+    vector2_near(
+        bullet_template.velocity,
+        (group_angle_offset + bullet_template.angle),
+        speed
+    );
+    bullet_spawn_angle = (group_angle_offset + bullet_template.angle);</code></pre>
+              </div>
+              <p class="caption">
+                <a
+                  href="https://github.com/N0zoM1z0/th04/blob/0d72e9801a5c14c10384efcbb6734ceccb74ee63/src/main/bullet/add_impl.hpp#L4"
+                  >Anel macro</a
+                > · <a
+                  href="https://github.com/N0zoM1z0/th04/blob/0d72e9801a5c14c10384efcbb6734ceccb74ee63/src/main/bullet/add.cpp#L422"
+                  >Alvo e fonte de velocidade</a
+                > · <a
+                  href="https://github.com/N0zoM1z0/th04/blob/0d72e9801a5c14c10384efcbb6734ceccb74ee63/src/main/bullet/types.hpp#L6"
+                  >Representação do ângulo</a
+                >
+              </p>
+            </details>
+          </section>
+
+          <section class="article-section" id="checking">
+            <h2>Verificação da fonte mantida</h2>
+            <p>
+              As verificações registadas do projecto TH04 compilam o código de geração de marcadores, incluindo este auxiliar, com a sua cadeia de ferramentas Turbo C++ 4.0 j fixada.
+            </p>
+            <div class="verification">
+              <div>
+                <h3>2.139 bytes correspondentes</h3>
+                <p>
+                  O código compilado de geração de marcadores corresponde a uma seção de 2.139 bytes do executável original.
+                </p>
+              </div>
+              <div>
+                <h3>Duas construções limpas</h3>
+                <p>
+                  Duas compilações separadas produzem os mesmos bytes correspondentes. Os hashes de entrada gravados correspondem à fonte mantida mostrada aqui.
+                </p>
+              </div>
+            </div>
+            <p class="caption">
+              Gravado em 3 de outubro de 2026. <a
+                href="https://github.com/N0zoM1z0/th04/blob/0d72e9801a5c14c10384efcbb6734ceccb74ee63/docs/reconstruction/product/TH04_SEMANTIC_BULLET_GENERATION_V1236.md#validation"
+                >Leia as verificações do compilador</a
+              >.
+            </p>
+            <details class="evidence-details">
+              <summary>Identidade-alvo e âmbito de análise</summary>
+              <div class="evidence-table-wrap">
+                <table class="evidence-table">
+                  <tbody>
+                    <tr>
+                      <th scope="row">Alvo Original</th>
+                      <td><code>MAIN.EXE</code>, 156.258 bytes, dos MZ</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Entrada auxiliar</th>
+                      <td><code>0x2cfc8</code> na imagem carregada de REA</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Deslocamento do ficheiro Original</th>
+                      <td>
+                        <code>0x1e7c8</code>, devolvido por <code>address_to_file_offset</code>
+                      </td>
+                    </tr>
+                    <tr>
+                      <th scope="row">Inspecção do Código registado</th>
+                      <td>REA 4.1.0 * 7 de outubro de 2026</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <p>
+                As verificações do compilador cobrem a seção completa do código de adição de marcadores, incluindo este auxiliar. Eles também comparam a contribuição do mapa e a deslocalização sobreposta.
+              </p>
+              <p>
+                REA verificou a imagem estática de Carga Dos no segmento de carga <code>0x1000</code>. Os seus endereços descrevem essa imagem de análise. O resultado da função reporta 503 bytes de corpo em dois intervalos num intervalo de 517 bytes; as instruções seleccionadas acima situam-se nesses intervalos comunicados.
+              </p>
+              <p>
+                Os nomes de origem e as verificações do compilador vêm do ponto de verificação TH04 <code>0d72e980</code>. As observações de reconstrução anteriores utilizaram os próprios scripts de análise do projecto; esta página inclui uma nova inspecção REA do mesmo alvo original. A identidade do jogo fornecido é fixada por seu manifesto de repositório, com proveniência independente de despejo intocado ainda aberta.
+              </p>
+              <p>
+                A figura ilustra o cálculo do ângulo. Os controlos completos do jogo, a temporização e o comportamento do hardware PC-98 têm verificações de tempo de execução separadas no projecto de reconstrução.
+              </p>
+            </details>
+          </section>
+
+          <section class="article-section" id="project">
+            <h2>A reconstrução completa do TH04</h2>
+            <p>
+              O projeto constrói os quatro produtos DOS do jogo a partir de C++ e assembly mantidos. Além da geração de marcadores, a fonte abrange estágios, chefes, renderização, entrada, menus, finais e manipulação de pontuação.
+            </p>
+            <p>
+              <a class="text-link" href="https://github.com/N0zoM1z0/th04"
+                >Explore o repositório TH04</a
+              >
+            </p>
+            <ul class="reading-list">
+              <li>
+                <a
+                  href="https://github.com/N0zoM1z0/th04/blob/0d72e9801a5c14c10384efcbb6734ceccb74ee63/src/main/bullet/add.cpp#L292"
+                  >Fonte de geração de marcadores</a
+                ><span
+                  >O auxiliar completo, outros tipos de padrões e ajuste de modelos.</span
+                >
+              </li>
+              <li>
+                <a
+                  href="https://github.com/N0zoM1z0/th04/blob/0d72e9801a5c14c10384efcbb6734ceccb74ee63/docs/DOS_BUILD.md"
+                  >Guia de construção e execução do DOS</a
+                ><span
+                  >Construa a fonte e teste-a no fluxo de trabalho do emulador PC-98 do projeto.</span
+                >
+              </li>
+              <li>
+                <a
+                  href="https://github.com/N0zoM1z0/th04/blob/0d72e9801a5c14c10384efcbb6734ceccb74ee63/docs/RE_HANDOFF.md"
+                  >Estado actual do projecto</a
+                ><span>Verificação DOS e a porta x64 nativa separada.</span>
+              </li>
+            </ul>
+          </section>
+        </article>
+      </div>
+    </main>
+    <!-- website:footer:start -->
+    <!-- prettier-ignore -->
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <p>REA · Reverse Engineer Anything</p>
+        <div class="footer-links">
+          <a href="../../faq/">FAQ</a
+          ><a href="../../contributors/">Colaboradores</a
+          ><a href="https://github.com/morluto/rea">Código-fonte</a
+          ><a href="https://github.com/morluto/rea/blob/main/LICENSE">Licença MIT</a
+          ><a href="https://discord.gg/GkcryMnJDM">Participe da comunidade</a
+          ><a href="https://x.com/reatools">Siga no X</a>
+        </div>
+      </div>
+    </footer>
+    <p class="sr-only" id="copy-status" role="status" aria-live="polite"></p>
+    <a class="back-to-top" href="#top" aria-label="Voltar ao topo">
+      <span aria-hidden="true">↑</span> Top
+    </a>
+    <!-- website:footer:end -->
+  </body>
+</html>

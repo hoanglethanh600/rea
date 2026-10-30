@@ -1,0 +1,507 @@
+<!doctype html>
+<html lang="zh-CN" dir="ltr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>你的第一次逆向工程调查-REA</title>
+    <meta
+      name="description"
+      content="用小型 Notes 应用尝试 REA。配置助手，询问导出的笔记写到哪里，再用一个示例标题验证 CSV 格式化函数。"
+    />
+    <!-- website:sharing:start -->
+    <!-- prettier-ignore -->
+    <link rel="canonical" href="https://rea.tools/zh-CN/first-investigation/" />
+    <!-- website:languages:start -->
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="en" href="https://rea.tools/first-investigation/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="zh-CN" href="https://rea.tools/zh-CN/first-investigation/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="zh-TW" href="https://rea.tools/zh-TW/first-investigation/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="ja" href="https://rea.tools/ja/first-investigation/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="ko" href="https://rea.tools/ko/first-investigation/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="tr" href="https://rea.tools/tr/first-investigation/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="ru" href="https://rea.tools/ru/first-investigation/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="vi" href="https://rea.tools/vi/first-investigation/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="th" href="https://rea.tools/th/first-investigation/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="de" href="https://rea.tools/de/first-investigation/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="es" href="https://rea.tools/es/first-investigation/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="fr" href="https://rea.tools/fr/first-investigation/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="uk" href="https://rea.tools/uk/first-investigation/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="pl" href="https://rea.tools/pl/first-investigation/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="pt-BR" href="https://rea.tools/pt-BR/first-investigation/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="ar" href="https://rea.tools/ar/first-investigation/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="fa" href="https://rea.tools/fa/first-investigation/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="id" href="https://rea.tools/id/first-investigation/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="it" href="https://rea.tools/it/first-investigation/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="el" href="https://rea.tools/el/first-investigation/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="x-default" href="https://rea.tools/first-investigation/" />
+<!-- website:languages:end -->
+    <!-- prettier-ignore -->
+    <meta property="og:type" content="website" />
+    <!-- prettier-ignore -->
+    <meta property="og:site_name" content="REA" />
+    <!-- prettier-ignore -->
+    <meta property="og:title" content="你的第一次逆向工程调查-REA" />
+    <!-- prettier-ignore -->
+    <meta property="og:description" content="用小型 Notes 应用尝试 REA。配置助手，询问导出的笔记写到哪里，再用一个示例标题验证 CSV 格式化函数。" />
+    <!-- prettier-ignore -->
+    <meta property="og:url" content="https://rea.tools/zh-CN/first-investigation/" />
+    <!-- prettier-ignore -->
+    <meta property="og:image" content="https://rea.tools/assets/social-card.png" />
+    <!-- prettier-ignore -->
+    <meta property="og:image:type" content="image/png" />
+    <!-- prettier-ignore -->
+    <meta property="og:image:width" content="1200" />
+    <!-- prettier-ignore -->
+    <meta property="og:image:height" content="630" />
+    <!-- prettier-ignore -->
+    <meta
+      property="og:image:alt"
+      content="REA: 了解软件如何工作。和你的编程助手一起做逆向工程。"
+    />
+    <!-- prettier-ignore -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <!-- prettier-ignore -->
+    <meta name="twitter:title" content="你的第一次逆向工程调查-REA" />
+    <!-- prettier-ignore -->
+    <meta name="twitter:description" content="用小型 Notes 应用尝试 REA。配置助手，询问导出的笔记写到哪里，再用一个示例标题验证 CSV 格式化函数。" />
+    <!-- prettier-ignore -->
+    <meta name="twitter:image" content="https://rea.tools/assets/social-card.png" />
+    <!-- prettier-ignore -->
+    <meta
+      name="twitter:image:alt"
+      content="REA: 了解软件如何工作。和你的编程助手一起做逆向工程。"
+    />
+    <!-- website:sharing:end -->
+    <!-- website:theme:start -->
+    <meta name="theme-color" content="#ffffff" />
+    <!-- Apply the saved theme before styles load, to avoid a flash on navigation. -->
+    <script src="../../assets/theme.js"></script>
+    <!-- website:theme:end -->
+    <link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="../../assets/styles.css" />
+    <script src="../../assets/main.js" defer></script>
+  <script id="website-messages" type="application/json">{"Copied": "已复制", "Code copied to clipboard.": "代码已复制到剪贴板。", "Selected": "已选中", "Code selected. Use your keyboard to copy it.": "代码已选中，请用键盘快捷键复制。", "REA on GitHub ({count})": "REA 在 GitHub 上（{count}）", "Switch to light mode": "切换到浅色模式", "Switch to dark mode": "切换到深色模式"}</script>
+  </head>
+  <body id="top">
+    <a class="skip-link" href="#main">跳转到内容</a>
+    <!-- website:header:start -->
+    <!-- prettier-ignore -->
+    <header class="site-header">
+      <div class="container header-inner">
+        <a class="brand" href="../" aria-label="REA 首页"
+          ><span class="brand-name">REA</span
+          ><span class="brand-caption" data-i18n-skip>Reverse Engineer Anything</span></a
+        >
+        <nav class="navigation" aria-label="主导航">
+          <a href="../../get-started/" class="nav-start">开始使用</a>
+          <a href="../showcase/">案例展示</a>
+          <a href="../blog/">博客</a>
+          <a href="../guides/">指南</a>
+        </nav>
+        <div class="header-social">
+          <details class="language-picker" data-i18n-skip><summary><span aria-hidden="true">文 / A</span> <span>简体中文</span></summary><nav aria-label="简体中文"><a href="../../first-investigation/" lang="en" dir="ltr" data-language="en">English</a><a href="../../zh-CN/first-investigation/" lang="zh-CN" dir="ltr" data-language="zh-CN" aria-current="true">简体中文</a><a href="../../zh-TW/first-investigation/" lang="zh-TW" dir="ltr" data-language="zh-TW">繁體中文</a><a href="../../ja/first-investigation/" lang="ja" dir="ltr" data-language="ja">日本語</a><a href="../../ko/first-investigation/" lang="ko" dir="ltr" data-language="ko">한국어</a><a href="../../tr/first-investigation/" lang="tr" dir="ltr" data-language="tr">Türkçe</a><a href="../../ru/first-investigation/" lang="ru" dir="ltr" data-language="ru">Русский</a><a href="../../vi/first-investigation/" lang="vi" dir="ltr" data-language="vi">Tiếng Việt</a><a href="../../th/first-investigation/" lang="th" dir="ltr" data-language="th">ไทย</a><a href="../../de/first-investigation/" lang="de" dir="ltr" data-language="de">Deutsch</a><a href="../../es/first-investigation/" lang="es" dir="ltr" data-language="es">Español</a><a href="../../fr/first-investigation/" lang="fr" dir="ltr" data-language="fr">Français</a><a href="../../uk/first-investigation/" lang="uk" dir="ltr" data-language="uk">Українська</a><a href="../../pl/first-investigation/" lang="pl" dir="ltr" data-language="pl">Polski</a><a href="../../pt-BR/first-investigation/" lang="pt-BR" dir="ltr" data-language="pt-BR">Português (Brasil)</a><a href="../../ar/first-investigation/" lang="ar" dir="rtl" data-language="ar">العربية</a><a href="../../fa/first-investigation/" lang="fa" dir="rtl" data-language="fa">فارسی</a><a href="../../id/first-investigation/" lang="id" dir="ltr" data-language="id">Bahasa Indonesia</a><a href="../../it/first-investigation/" lang="it" dir="ltr" data-language="it">Italiano</a><a href="../../el/first-investigation/" lang="el" dir="ltr" data-language="el">Ελληνικά</a><a href="../../ml/first-investigation/" lang="ml" dir="ltr" data-language="ml">മലയാളം · English</a><a href="../../ur-Latn/first-investigation/" lang="ur-Latn" dir="ltr" data-language="ur-Latn">Roman Urdu · English</a><a href="../../ro/first-investigation/" lang="ro" dir="ltr" data-language="ro">Română · English</a></nav></details>
+          <button class="theme-toggle" type="button" data-theme-toggle hidden>
+            <svg class="theme-moon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+              <path d="M20.9 13a9 9 0 0 1-9.9-9.9A9 9 0 1 0 20.9 13Z" />
+            </svg>
+            <svg class="theme-sun" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true" focusable="false">
+              <circle cx="12" cy="12" r="4" />
+              <path d="M12 2v2m0 16v2M2 12h2m16 0h2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42" />
+            </svg>
+          </button>
+          <a
+            class="nav-github"
+            href="https://github.com/morluto/rea"
+            aria-label="在 GitHub 查看 REA"
+            title="在 GitHub 查看 REA"
+          >
+            <svg
+              width="22"
+              height="22"
+              viewBox="0 0 16 16"
+              aria-hidden="true"
+              focusable="false"
+            >
+              <path
+                fill="currentColor"
+                d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82a7.65 7.65 0 0 1 2-.27c.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z"
+              />
+            </svg>
+            <span class="nav-github-count" hidden aria-hidden="true"></span>
+          </a>
+          <a
+            class="nav-discord"
+            href="https://discord.gg/GkcryMnJDM"
+            aria-label="加入 REA 的 Discord 社区"
+            title="加入 REA 的 Discord 社区"
+          >
+            <svg
+              width="22"
+              height="22"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+              focusable="false"
+            >
+              <path
+                fill="currentColor"
+                d="M20.317 4.3698a19.7913 19.7913 0 0 0-4.8851-1.5152.0741.0741 0 0 0-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 0 0-.0785-.037 19.7363 19.7363 0 0 0-4.8852 1.515.0699.0699 0 0 0-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 0 0 .0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 0 0 .0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 0 0-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 0 1-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 0 1 .0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 0 1 .0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 0 1-.0066.1276 12.2986 12.2986 0 0 1-1.873.8914.0766.0766 0 0 0-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 0 0 .0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 0 0 .0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 0 0-.0312-.0286ZM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189Zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189Z"
+              />
+            </svg>
+          </a>
+          <a
+            class="nav-x"
+            href="https://x.com/reatools"
+            aria-label="在 X 上关注 REA"
+            title="在 X 上关注 REA"
+          >
+            <svg
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+              focusable="false"
+            >
+              <path
+                fill="currentColor"
+                d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z"
+              />
+            </svg>
+          </a>
+        </div>
+      </div>
+    </header>
+    <!-- website:header:end -->
+    <main id="main" class="container">
+      <div class="page-heading">
+        <p class="breadcrumb">
+          <a href="../">首页</a> / 第一次调查
+        </p>
+        <h1>弄清楚<br />导出的笔记写到哪里。</h1>
+        <p class="lede">
+          用 REA 检查一个小应用，追踪 Export notes 按钮，再亲自验证一个细节。
+        </p>
+        <p class="page-meta">
+          提供的示例 · <span translate="no">Node.js</span> 和 npm · 编程助手
+        </p>
+      </div>
+      <div class="article-layout">
+        <nav class="contents" aria-label="在本页">
+          <p>在这个练习中</p>
+          <ul>
+            <li><a href="#setup">1. 配置</a></li>
+            <li><a href="#ask">2. 询问导出过程</a></li>
+            <li><a href="#answer">3. 追踪回答</a></li>
+            <li><a href="#check">4. 检查预测</a></li>
+            <li><a href="#next">5. 再问一个问题</a></li>
+          </ul>
+        </nav>
+        <article class="article" aria-label="你的第一次REA调查">
+          <section class="article-section" id="setup">
+            <h2>1. 把助手连接到 REA</h2>
+            <p>
+              使用 Claude Code、Codex、Cursor 等编程助手。需要 <span translate="no">Node.js</span> 和 npm；<a href="../../get-started/">安装指南列出了支持的版本</a
+              >。
+            </p>
+            <div class="agent-terminal">
+              <div class="terminal-header">
+                <span class="terminal-title"
+                  ><span class="terminal-dots" aria-hidden="true"
+                    ><i></i><i></i><i></i></span
+                  >你的编程助手</span
+                >
+                <button
+                  class="copy-button"
+                  type="button"
+                  data-copy="first-install-prompt"
+                  aria-label="复制REA安装提示"
+                >
+                  复制
+                </button>
+              </div>
+              <p class="terminal-prompt">
+                <span class="prompt-symbol" aria-hidden="true">›</span
+                ><span id="first-install-prompt"
+                  >使用 <span translate="no">npx rea-agents@latest setup</span> 安装 REA，并连接到这个编程助手。先展示安装计划，等我确认后再执行，然后验证安装结果。</span
+                ><span class="terminal-cursor" aria-hidden="true"></span>
+              </p>
+            </div>
+            <p class="caption">或者在终端中运行此命令:</p>
+            <div class="code-block code-inline">
+              <code id="first-setup-command">npx rea-agents@latest setup</code>
+              <button
+                class="copy-button"
+                type="button"
+                data-copy="first-setup-command"
+                aria-label="复制安装命令"
+              >
+                复制
+              </button>
+            </div>
+            <p>
+              查看计划，确认配置后重启助手。如果已经连接，直接继续。
+            </p>
+          </section>
+          <section class="article-section" id="ask">
+            <h2>2. 问清 CSV 写到哪里</h2>
+            <p>
+              示例是一个包含六个文件的 Electron 应用，带有<strong>Export notes（导出笔记）</strong>按钮。助手无需安装或启动 Electron 就能检查代码。
+            </p>
+            <div class="agent-terminal">
+              <div class="terminal-header">
+                <span class="terminal-title"
+                  ><span class="terminal-dots" aria-hidden="true"
+                    ><i></i><i></i><i></i></span
+                  >你的编程助手</span
+                >
+                <button
+                  class="copy-button"
+                  type="button"
+                  data-copy="first-analysis-prompt"
+                  aria-label="复制笔记调查提示"
+                >
+                  复制
+                </button>
+              </div>
+              <p class="terminal-prompt">
+                <span class="prompt-symbol" aria-hidden="true">›</span
+                ><span id="first-analysis-prompt"
+                  >下载 <span translate="no"
+                    >https://rea.tools/examples/notes-example.zip</span
+                  >，放进一个新的示例文件夹并解压。用 REA 找出点击 Export notes 后发生了什么。展示 <span translate="no">notes.csv</span> 写到哪里、有哪些字段，以及相关文件和行号。</span
+                ><span class="terminal-cursor" aria-hidden="true"></span>
+              </p>
+            </div>
+            <p>
+              助手会下载并解压文件，再把目录交给 REA 检查。
+            </p>
+            <p>
+              <a
+                class="button"
+                href="../../examples/notes-example.zip"
+                download="notes-example.zip"
+                >下载示例ZIP</a
+              >
+            </p>
+            <p class="caption">
+              如果助手不能下载文件，你也可以手动解压。把 <code>notes-example</code> 文件夹的路径交给它，再问同一个导出问题。
+            </p>
+          </section>
+          <section class="article-section" id="answer">
+            <h2>3. 从回答追踪到代码</h2>
+            <p>寻找带文件和行号的简短解释：</p>
+            <blockquote class="prompt">
+              <p>
+                按钮发送 <code>notes:export</code> 消息。主进程把笔记转换为 CSV，并将 <code>notes.csv</code> 写到用户的下载文件夹。列名为 <code>id</code> 和 <code>title</code>。
+              </p>
+            </blockquote>
+            <figure class="workflow-figure">
+              <p class="figure-title">从按钮到文件写入</p>
+              <ol class="flow-steps">
+                <li>
+                  <span class="flow-label"
+                    >页面 · <span translate="no">renderer.js</span></span
+                  ><span class="flow-node">Export notes</span
+                  ><span class="flow-note"
+                    >调用 <code>notes.exportCsv()</code>。</span
+                  >
+                </li>
+                <li>
+                  <span class="flow-label"
+                    >桥接 · <span translate="no">preload.js</span></span
+                  ><span class="flow-node"><code>notes:export</code></span
+                  ><span class="flow-note"
+                    >向主进程发送命名消息。</span
+                  >
+                </li>
+                <li>
+                  <span class="flow-label"
+                    >处理函数 · <span translate="no">main.js</span></span
+                  ><span class="flow-node"
+                    >写入 <span translate="no">notes.csv</span></span
+                  ><span class="flow-note"
+                    >调用 <code>csv.js</code> 中的格式化函数，再写入文件。</span
+                  >
+                </li>
+              </ol>
+              <figcaption>
+                REA 的静态分析把消息和处理函数关联起来。导出位置是从代码中读到的。
+              </figcaption>
+            </figure>
+            <div class="code-block">
+              <div class="code-header">
+                <span><span translate="no">main.js</span> · 第 8–12 行</span
+                ><a href="../../examples/notes-electron/main.js">源代码</a>
+              </div>
+              <pre><code>ipcMain.handle("notes:export", () =&gt; {
+  const destination = path.join(app.getPath("downloads"), "notes.csv");
+  writeFileSync(destination, toCsv(notes), "utf8");
+  return destination;
+});</code></pre>
+            </div>
+            <p>
+              文件路径、格式化函数和写入调用都在这个处理函数中。如果回答没有展示这些行，可以让助手补上。
+            </p>
+            <p>
+              <a href="../../guides/javascript/#follow"
+                >查看完整的代码追踪和记录的 REA 结果</a
+              >。
+            </p>
+          </section>
+          <section class="article-section" id="check">
+            <h2>4. 检查预测</h2>
+            <p>
+              CSV 用逗号分隔各列。如果笔记标题本身包含逗号或引号，会发生什么？
+            </p>
+            <div class="agent-terminal">
+              <div class="terminal-header">
+                <span class="terminal-title"
+                  ><span class="terminal-dots" aria-hidden="true"
+                    ><i></i><i></i><i></i></span
+                  >你的编程助手</span
+                >
+                <button
+                  class="copy-button"
+                  type="button"
+                  data-copy="first-check-prompt"
+                  aria-label="复制CSV检查提示"
+                >
+                  复制
+                </button>
+              </div>
+              <p class="terminal-prompt">
+                <span class="prompt-symbol" aria-hidden="true">›</span
+                ><span id="first-check-prompt"
+                  >预测 id 为 1、标题为 <span translate="no">Hello, "REA"</span> 的笔记会导出怎样的 CSV。再用 <span translate="no">Node.js</span> 运行示例的 <span translate="no">toCsv</span> 格式化函数验证。展示预测和实际输出。</span
+                ><span class="terminal-cursor" aria-hidden="true"></span>
+              </p>
+            </div>
+            <div class="code-block">
+              <div class="code-header">
+                <span>预期格式化程序输出</span>
+              </div>
+              <pre><code>id,title
+1,"Hello, ""REA"""</code></pre>
+            </div>
+            <p>
+              标题保留在一个带引号的字段里，每个引号都写成两个。这里用 <span translate="no">Node.js</span> 直接检查格式化函数。
+            </p>
+            <details class="evidence-details">
+              <summary>自己检查一下</summary>
+              <p>
+                在解压后的 <code>notes-example</code> 文件夹里打开终端：
+              </p>
+              <div class="code-block">
+                <div class="code-header">
+                  <span translate="no">macOS / Linux · Bash / Zsh</span
+                  ><button
+                    class="copy-button"
+                    type="button"
+                    data-copy="first-check-command"
+                    aria-label="复制格式化程序检查命令"
+                  >
+                    复制
+                  </button>
+                </div>
+                <pre><code id="first-check-command">node &lt;&lt;'JS'
+const { toCsv } = require('./csv.js');
+process.stdout.write(toCsv([{ id: 1, title: 'Hello, "REA"' }]));
+JS</code></pre>
+              </div>
+              <div class="code-block">
+                <div class="code-header">
+                  <span translate="no">Windows · PowerShell</span>
+                  <button
+                    class="copy-button"
+                    type="button"
+                    data-copy="first-check-powershell"
+                    aria-label="复制格式化程序检查命令"
+                  >
+                    复制
+                  </button>
+                </div>
+                <pre><code id="first-check-powershell">@'
+const { toCsv } = require('./csv.js');
+process.stdout.write(toCsv([{ id: 1, title: 'Hello, "REA"' }]));
+'@ | node</code></pre>
+              </div>
+            </details>
+          </section>
+          <section class="article-section" id="next">
+            <h2>5. 再问一个问题</h2>
+            <p>在同一段对话中继续提问：</p>
+            <blockquote class="prompt">
+              <p>
+                如果文件无法写入，会发生什么？沿着错误处理追踪回页面。
+              </p>
+            </blockquote>
+            <p>
+              也可以提供自己的应用，询问其中一个按钮、文件或行为。
+            </p>
+            <ul class="reading-list">
+              <li>
+                <a href="../showcase/notion/">Notion 如何复制文本和 HTML</a
+                ><span
+                  >追踪打包 Electron 应用中的剪贴板功能。</span
+                >
+              </li>
+              <li>
+                <a href="../showcase/dx-ball/"
+                  >DX-Ball 如何计算声像定位</a
+                ><span
+                  >阅读原始指令，以及重建结果的校验。</span
+                >
+              </li>
+              <li>
+                <a href="../faq/#troubleshooting"
+                  >安装或分析遇到问题</a
+                ><span
+                  >先更新 REA，再检查连接。</span
+                >
+              </li>
+            </ul>
+          </section>
+        </article>
+      </div>
+    </main>
+    <!-- website:footer:start -->
+    <!-- prettier-ignore -->
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <p>REA · Reverse Engineer Anything</p>
+        <div class="footer-links">
+          <a href="../faq/">FAQ</a
+          ><a href="../contributors/">贡献者</a
+          ><a href="https://github.com/morluto/rea">源代码</a
+          ><a href="https://github.com/morluto/rea/blob/main/LICENSE">MIT 许可证</a
+          ><a href="https://discord.gg/GkcryMnJDM">加入社区</a
+          ><a href="https://x.com/reatools">在 X 上关注我们</a>
+        </div>
+      </div>
+    </footer>
+    <p class="sr-only" id="copy-status" role="status" aria-live="polite"></p>
+    <a class="back-to-top" href="#top" aria-label="回到顶部">
+      <span aria-hidden="true">↑</span> 顶部
+    </a>
+    <!-- website:footer:end -->
+  </body>
+</html>

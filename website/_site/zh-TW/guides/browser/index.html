@@ -1,0 +1,477 @@
+<!doctype html>
+<html lang="zh-TW" dir="ltr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>瀏覽器和網路分析-REA</title>
+    <meta
+      name="description"
+      content="觀察一個筆記匯出與 REA：選擇瀏覽器頁面，捕獲單擊，檢查請求並遵循匯出指令碼。"
+    />
+    <!-- website:sharing:start -->
+    <!-- prettier-ignore -->
+    <link rel="canonical" href="https://rea.tools/zh-TW/guides/browser/" />
+    <!-- website:languages:start -->
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="en" href="https://rea.tools/guides/browser/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="zh-CN" href="https://rea.tools/zh-CN/guides/browser/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="zh-TW" href="https://rea.tools/zh-TW/guides/browser/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="ja" href="https://rea.tools/ja/guides/browser/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="ko" href="https://rea.tools/ko/guides/browser/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="tr" href="https://rea.tools/tr/guides/browser/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="ru" href="https://rea.tools/ru/guides/browser/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="vi" href="https://rea.tools/vi/guides/browser/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="th" href="https://rea.tools/th/guides/browser/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="de" href="https://rea.tools/de/guides/browser/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="es" href="https://rea.tools/es/guides/browser/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="fr" href="https://rea.tools/fr/guides/browser/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="uk" href="https://rea.tools/uk/guides/browser/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="pl" href="https://rea.tools/pl/guides/browser/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="pt-BR" href="https://rea.tools/pt-BR/guides/browser/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="ar" href="https://rea.tools/ar/guides/browser/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="fa" href="https://rea.tools/fa/guides/browser/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="id" href="https://rea.tools/id/guides/browser/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="it" href="https://rea.tools/it/guides/browser/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="el" href="https://rea.tools/el/guides/browser/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="x-default" href="https://rea.tools/guides/browser/" />
+<!-- website:languages:end -->
+    <!-- prettier-ignore -->
+    <meta property="og:type" content="website" />
+    <!-- prettier-ignore -->
+    <meta property="og:site_name" content="REA" />
+    <!-- prettier-ignore -->
+    <meta property="og:title" content="瀏覽器和網路分析-REA" />
+    <!-- prettier-ignore -->
+    <meta property="og:description" content="觀察一個筆記匯出與 REA：選擇瀏覽器頁面，捕獲單擊，檢查請求並遵循匯出指令碼。" />
+    <!-- prettier-ignore -->
+    <meta property="og:url" content="https://rea.tools/zh-TW/guides/browser/" />
+    <!-- prettier-ignore -->
+    <meta property="og:image" content="https://rea.tools/assets/social-card.png" />
+    <!-- prettier-ignore -->
+    <meta property="og:image:type" content="image/png" />
+    <!-- prettier-ignore -->
+    <meta property="og:image:width" content="1200" />
+    <!-- prettier-ignore -->
+    <meta property="og:image:height" content="630" />
+    <!-- prettier-ignore -->
+    <meta
+      property="og:image:alt"
+      content="REA-瞭解軟體的工作原理。 逆向工程與你的程式設計助手."
+    />
+    <!-- prettier-ignore -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <!-- prettier-ignore -->
+    <meta name="twitter:title" content="瀏覽器和網路分析-REA" />
+    <!-- prettier-ignore -->
+    <meta name="twitter:description" content="觀察一個筆記匯出與 REA：選擇瀏覽器頁面，捕獲單擊，檢查請求並遵循匯出指令碼。" />
+    <!-- prettier-ignore -->
+    <meta name="twitter:image" content="https://rea.tools/assets/social-card.png" />
+    <!-- prettier-ignore -->
+    <meta
+      name="twitter:image:alt"
+      content="REA-瞭解軟體的工作原理。 逆向工程與你的程式設計助手."
+    />
+    <!-- website:sharing:end -->
+    <!-- website:theme:start -->
+    <meta name="theme-color" content="#ffffff" />
+    <!-- Apply the saved theme before styles load, to avoid a flash on navigation. -->
+    <script src="../../../assets/theme.js"></script>
+    <!-- website:theme:end -->
+    <link rel="icon" href="../../../assets/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="../../../assets/styles.css" />
+    <script src="../../../assets/main.js" defer></script>
+  <script id="website-messages" type="application/json">{"Copied": "已複製", "Code copied to clipboard.": "程式碼已複製到剪貼簿。", "Selected": "已選中", "Code selected. Use your keyboard to copy it.": "程式碼已選中，請用鍵盤快捷鍵複製。", "REA on GitHub ({count})": "REA在GitHub（{count})", "Switch to light mode": "切換至淺色模式", "Switch to dark mode": "切換至深色模式"}</script>
+  </head>
+  <body id="top">
+    <a class="skip-link" href="#main">跳轉到內容</a>
+    <!-- website:header:start -->
+    <!-- prettier-ignore -->
+    <header class="site-header">
+      <div class="container header-inner">
+        <a class="brand" href="../../" aria-label="REA 首頁"
+          ><span class="brand-name">REA</span
+          ><span class="brand-caption" data-i18n-skip>Reverse Engineer Anything</span></a
+        >
+        <nav class="navigation" aria-label="主導航">
+          <a href="../../../get-started/" class="nav-start">開始使用</a>
+          <a href="../../showcase/">案例展示</a>
+          <a href="../../blog/">部落格</a>
+          <a href="../" aria-current="page">指南</a>
+        </nav>
+        <div class="header-social">
+          <details class="language-picker" data-i18n-skip><summary><span aria-hidden="true">文 / A</span> <span>繁體中文</span></summary><nav aria-label="繁體中文"><a href="../../../guides/browser/" lang="en" dir="ltr" data-language="en">English</a><a href="../../../zh-CN/guides/browser/" lang="zh-CN" dir="ltr" data-language="zh-CN">简体中文</a><a href="../../../zh-TW/guides/browser/" lang="zh-TW" dir="ltr" data-language="zh-TW" aria-current="true">繁體中文</a><a href="../../../ja/guides/browser/" lang="ja" dir="ltr" data-language="ja">日本語</a><a href="../../../ko/guides/browser/" lang="ko" dir="ltr" data-language="ko">한국어</a><a href="../../../tr/guides/browser/" lang="tr" dir="ltr" data-language="tr">Türkçe</a><a href="../../../ru/guides/browser/" lang="ru" dir="ltr" data-language="ru">Русский</a><a href="../../../vi/guides/browser/" lang="vi" dir="ltr" data-language="vi">Tiếng Việt</a><a href="../../../th/guides/browser/" lang="th" dir="ltr" data-language="th">ไทย</a><a href="../../../de/guides/browser/" lang="de" dir="ltr" data-language="de">Deutsch</a><a href="../../../es/guides/browser/" lang="es" dir="ltr" data-language="es">Español</a><a href="../../../fr/guides/browser/" lang="fr" dir="ltr" data-language="fr">Français</a><a href="../../../uk/guides/browser/" lang="uk" dir="ltr" data-language="uk">Українська</a><a href="../../../pl/guides/browser/" lang="pl" dir="ltr" data-language="pl">Polski</a><a href="../../../pt-BR/guides/browser/" lang="pt-BR" dir="ltr" data-language="pt-BR">Português (Brasil)</a><a href="../../../ar/guides/browser/" lang="ar" dir="rtl" data-language="ar">العربية</a><a href="../../../fa/guides/browser/" lang="fa" dir="rtl" data-language="fa">فارسی</a><a href="../../../id/guides/browser/" lang="id" dir="ltr" data-language="id">Bahasa Indonesia</a><a href="../../../it/guides/browser/" lang="it" dir="ltr" data-language="it">Italiano</a><a href="../../../el/guides/browser/" lang="el" dir="ltr" data-language="el">Ελληνικά</a><a href="../../../ml/guides/browser/" lang="ml" dir="ltr" data-language="ml">മലയാളം · English</a><a href="../../../ur-Latn/guides/browser/" lang="ur-Latn" dir="ltr" data-language="ur-Latn">Roman Urdu · English</a><a href="../../../ro/guides/browser/" lang="ro" dir="ltr" data-language="ro">Română · English</a></nav></details>
+          <button class="theme-toggle" type="button" data-theme-toggle hidden>
+            <svg class="theme-moon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+              <path d="M20.9 13a9 9 0 0 1-9.9-9.9A9 9 0 1 0 20.9 13Z" />
+            </svg>
+            <svg class="theme-sun" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true" focusable="false">
+              <circle cx="12" cy="12" r="4" />
+              <path d="M12 2v2m0 16v2M2 12h2m16 0h2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42" />
+            </svg>
+          </button>
+          <a
+            class="nav-github"
+            href="https://github.com/morluto/rea"
+            aria-label="在 GitHub 檢視 REA"
+            title="在 GitHub 檢視 REA"
+          >
+            <svg
+              width="22"
+              height="22"
+              viewBox="0 0 16 16"
+              aria-hidden="true"
+              focusable="false"
+            >
+              <path
+                fill="currentColor"
+                d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82a7.65 7.65 0 0 1 2-.27c.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z"
+              />
+            </svg>
+            <span class="nav-github-count" hidden aria-hidden="true"></span>
+          </a>
+          <a
+            class="nav-discord"
+            href="https://discord.gg/GkcryMnJDM"
+            aria-label="加入 REA 的 Discord 社群"
+            title="加入 REA 的 Discord 社群"
+          >
+            <svg
+              width="22"
+              height="22"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+              focusable="false"
+            >
+              <path
+                fill="currentColor"
+                d="M20.317 4.3698a19.7913 19.7913 0 0 0-4.8851-1.5152.0741.0741 0 0 0-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 0 0-.0785-.037 19.7363 19.7363 0 0 0-4.8852 1.515.0699.0699 0 0 0-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 0 0 .0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 0 0 .0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 0 0-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 0 1-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 0 1 .0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 0 1 .0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 0 1-.0066.1276 12.2986 12.2986 0 0 1-1.873.8914.0766.0766 0 0 0-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 0 0 .0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 0 0 .0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 0 0-.0312-.0286ZM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189Zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189Z"
+              />
+            </svg>
+          </a>
+          <a
+            class="nav-x"
+            href="https://x.com/reatools"
+            aria-label="在 X 上關注 REA"
+            title="在 X 上關注 REA"
+          >
+            <svg
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+              focusable="false"
+            >
+              <path
+                fill="currentColor"
+                d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z"
+              />
+            </svg>
+          </a>
+        </div>
+      </div>
+    </header>
+    <!-- website:header:end -->
+    <main id="main" class="container">
+      <div class="page-heading">
+        <p class="breadcrumb">
+          <a href="../../">首頁</a> / <a href="../">指南</a> /瀏覽器觀察
+        </p>
+        <h1>看看會發生什麼<br />當你點選。</h1>
+        <p class="lede">
+          使用小型瀏覽器應用程式連線操作，其網路請求和構建下載的JavaScript。
+        </p>
+      </div>
+      <div class="article-layout">
+        <nav class="contents" aria-label="在本頁">
+          <p>在本指南中</p>
+          <ul>
+            <li><a href="#example">例子</a></li>
+            <li><a href="#prepare">開啟瀏覽器</a></li>
+            <li><a href="#ask">問問你的程式設計助手</a></li>
+            <li><a href="#capture">從CLI捕獲 </a></li>
+            <li><a href="#result">閱讀請求和指令碼</a></li>
+          </ul>
+        </nav>
+        <article class="article" aria-label="瀏覽器觀察">
+          <section class="article-section" id="example">
+            <h2>單擊匯出時會發生什麼？</h2>
+            <p>
+              <a href="../../../examples/notes-web/">Notes 瀏覽器示例</a>有一個<strong>Export notes（匯出筆記）</strong>按鈕。點選後載入 <code>notes.json</code>，把兩條筆記格式化為 CSV，再開始下載。
+            </p>
+            <figure class="workflow-figure">
+              <p class="figure-title">從點選到CSV下載</p>
+              <ol class="flow-steps">
+                <li>
+                  <span class="flow-label">01 · 你</span
+                  ><span class="flow-node">點選 Export notes</span
+                  ><span class="flow-note"
+                    >在捕獲進行時，用瀏覽器執行操作。</span
+                  >
+                </li>
+                <li>
+                  <span class="flow-label">02*REA </span
+                  ><span class="flow-node">記錄請求</span
+                  ><span class="flow-note"
+                    >從所選頁面捕獲請求URL，響應狀態和JSON結構。</span
+                  >
+                </li>
+                <li>
+                  <span class="flow-label">03 · 程式設計助手</span
+                  ><span class="flow-node">讀取匯出程式碼</span
+                  ><span class="flow-note"
+                    >把觀察到的請求與 <code>export.js</code> 中的 <code>fetch("./notes.json")</code> 關聯起來。</span
+                  >
+                </li>
+              </ol>
+              <p class="flow-result">
+                <code>GET notes.json → 200 → notes[] → CSV</code>
+              </p>
+              <figcaption>
+                在單擊匯出註釋之前開始捕獲。
+              </figcaption>
+            </figure>
+          </section>
+          <section class="article-section" id="prepare">
+            <h2>使用遠端除錯開啟Chrome</h2>
+            <p>
+              用獨立的瀏覽器配置和本地除錯埠開啟線上 Notes 示例。Linux 上：
+            </p>
+            <div class="code-block">
+              <div class="code-header">
+                <span>啟動示例瀏覽器</span
+                ><button
+                  class="copy-button"
+                  type="button"
+                  data-copy="browser-start"
+                  aria-label="複製啟動示例瀏覽器"
+                >
+                  複製
+                </button>
+              </div>
+              <pre><code id="browser-start">google-chrome \
+  --remote-debugging-port=9222 \
+  --user-data-dir=/tmp/rea-notes-browser \
+  https://rea.tools/examples/notes-web/</code></pre>
+            </div>
+            <p>
+              在macOS或Windows上使用已安裝的瀏覽器的可執行路徑。 你可以將頁面URL替換為要檢查的其他頁面。
+            </p>
+            <p>
+              REA連線到這個現有的瀏覽器。 你可以控制頁面，執行操作，並在完成後關閉瀏覽器。
+            </p>
+          </section>
+          <section class="article-section" id="ask">
+            <h2>讓你的程式設計助手看一個動作</h2>
+            <div class="agent-terminal">
+              <div class="terminal-header">
+                <span class="terminal-title"
+                  ><span class="terminal-dots" aria-hidden="true"
+                    ><i></i><i></i><i></i></span
+                  >你的程式設計助手</span
+                ><button
+                  class="copy-button"
+                  type="button"
+                  data-copy="browser-prompt"
+                  aria-label="複製示例提示"
+                >
+                  複製
+                </button>
+              </div>
+              <p class="terminal-prompt">
+                <span class="prompt-symbol" aria-hidden="true">›</span
+                ><span id="browser-prompt"
+                  >用 REA 檢查這個頁面。我點選 Export notes 時，它發起什麼請求？CSV 是怎樣生成的？</span
+                ><span class="terminal-cursor" aria-hidden="true"></span>
+              </p>
+            </div>
+            <p class="caption">
+              示例 prompt。把除錯地址 <code>http://127.0.0.1:9222</code> 和頁面網址交給助手。等它開始捕獲，再點選按鈕。
+            </p>
+            <p>
+              你的程式設計助手發現頁面目標，啟動觀察視窗，並讀取生成的證據。 然後，它可以檢查匯出後面的指令碼。
+            </p>
+          </section>
+          <section class="article-section" id="capture">
+            <h2>或從終端捕獲</h2>
+            <p>查詢頁面的目標ID:</p>
+            <div class="code-block">
+              <div class="code-header">
+                <span>查詢頁面</span
+                ><button
+                  class="copy-button"
+                  type="button"
+                  data-copy="browser-targets"
+                  aria-label="複製查詢頁面"
+                >
+                  複製
+                </button>
+              </div>
+              <pre><code id="browser-targets">npx -y rea-agents@latest list-browser-targets \
+  http://127.0.0.1:9222 --json</code></pre>
+            </div>
+            <p>
+              選擇網址為 Notes 示例的目標，把下面的 <code>TARGET_ID</code> 換成目標 ID，再執行：
+            </p>
+            <div class="code-block">
+              <div class="code-header">
+                <span>捕捉接下來的十秒</span
+                ><button
+                  class="copy-button"
+                  type="button"
+                  data-copy="browser-capture"
+                  aria-label="複製捕獲接下來的十秒鐘"
+                >
+                  複製
+                </button>
+              </div>
+              <pre><code id="browser-capture">npx -y rea-agents@latest inspect-web-page \
+  http://127.0.0.1:9222 TARGET_ID \
+  --observation-ms 10000 \
+  --include-accessibility-text \
+  --include-json-body-shapes --json</code></pre>
+            </div>
+            <p>
+              讓命令連線幾秒鐘，再在瀏覽器中點選<strong>Export notes</strong>。觀察時間視窗結束後會返回結果。
+            </p>
+            <p>
+              捕獲的結果包括所選頁面、該視窗期間的網路活動以及JSON響應的形狀。 較早的請求在此捕獲之外。
+            </p>
+          </section>
+          <section class="article-section" id="result">
+            <h2>讀取請求和匯出指令碼</h2>
+            <div class="evidence-table-wrap">
+              <table class="evidence-table">
+                <caption>
+                  在本地筆記示例中用REA4.1.0記錄
+                </caption>
+                <thead>
+                  <tr>
+                    <th>捕獲的事實</th>
+                    <th>數值</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>請求</td>
+                    <td><code>GET /examples/notes-web/notes.json</code></td>
+                  </tr>
+                  <tr>
+                    <td>回應</td>
+                    <td><code>200 · application/json</code></td>
+                  </tr>
+                  <tr>
+                    <td>請求發起者</td>
+                    <td><code>export.js</code>  · 指令碼</td>
+                  </tr>
+                  <tr>
+                    <td>響應結構</td>
+                    <td>
+                      <code>notes[]</code> 與 <code>id</code> 和 <code>title</code> 欄位
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="code-block">
+              <div class="code-header">
+                <span>閱讀載入的指令碼</span
+                ><button
+                  class="copy-button"
+                  type="button"
+                  data-copy="browser-scripts"
+                  aria-label="複製讀取載入的指令碼"
+                >
+                  複製
+                </button>
+              </div>
+              <pre><code id="browser-scripts">npx -y rea-agents@latest inspect-web-page \
+  http://127.0.0.1:9222 TARGET_ID \
+  --include-script-sources --json</code></pre>
+            </div>
+            <p>
+              請求指出了資料來源，REA 記錄的請求發起方是 <code>export.js</code>。讀取捕獲的指令碼原始碼，看看它如何使用資料：
+            </p>
+            <div class="code-block">
+              <div class="code-header">
+                <span
+                  ><span translate="no">export.js</span>  · 示例源摘錄</span
+                >
+              </div>
+              <pre><code>const response = await fetch(&quot;./notes.json&quot;);
+const { notes } = await response.json();
+// Format each note as a CSV row.
+const url = URL.createObjectURL(new Blob([csv], { type: &quot;text/csv&quot; }));
+link.href = url;
+link.download = &quot;notes.csv&quot;;
+link.click();</code></pre>
+            </div>
+            <p>
+              下載是使用JSON響應在頁面中構建的。 CSV格式化步驟來自指令碼;網路捕獲建立此單擊請求 <code>notes.json</code>.
+            </p>
+            <p>
+              <a href="../../../examples/notes-web/">開啟示例</a> · <a href="../../../examples/notes-web/export.js" download
+                >下載 <span translate="no">export.js</span></a
+              > · <a href="../../../examples/notes-web/notes.json" download
+                >下載 <span translate="no">notes.json</span></a
+              >
+            </p>
+            <blockquote class="prompt">
+              <p>
+                查詢請求的指令碼 <code>notes.json</code>. 它如何轉義包含逗號或引號的標題？
+              </p>
+            </blockquote>
+            <p>
+              對於已安裝的JavaScript或Electron應用程式，請繼續 <a href="../../../guides/javascript/">應用程式工作流程</a> 要遵循檔案和程序邊界。
+            </p>
+            <p>
+              若要檢查 HTTP 請求與回應本文，請使用<a
+                href="https://github.com/morluto/rea/blob/main/docs/web-network-captures.md"
+                >Fiddler Everywhere：SAZ 擷取、MCP 與公開技能</a
+              >。匯出 SAZ ? HAR 1.2 可在 REA 中離線取得擷取 Evidence，也可以連接 Everywhere 的 MCP 伺服器，讓代理檢查已擷取的流量。
+            </p>
+          </section>
+        </article>
+      </div>
+    </main>
+    <!-- website:footer:start -->
+    <!-- prettier-ignore -->
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <p>REA · Reverse Engineer Anything</p>
+        <div class="footer-links">
+          <a href="../../faq/">FAQ</a
+          ><a href="../../contributors/">貢獻者</a
+          ><a href="https://github.com/morluto/rea">原始碼</a
+          ><a href="https://github.com/morluto/rea/blob/main/LICENSE">MIT 許可證</a
+          ><a href="https://discord.gg/GkcryMnJDM">加入社群</a
+          ><a href="https://x.com/reatools">在 X 上關注我們</a>
+        </div>
+      </div>
+    </footer>
+    <p class="sr-only" id="copy-status" role="status" aria-live="polite"></p>
+    <a class="back-to-top" href="#top" aria-label="回到頂部">
+      <span aria-hidden="true">↑</span> 頂部
+    </a>
+    <!-- website:footer:end -->
+  </body>
+</html>

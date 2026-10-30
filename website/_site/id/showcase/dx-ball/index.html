@@ -1,0 +1,721 @@
+<!doctype html>
+<html lang="id" dir="ltr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Rekayasa Balik DX-Ball: Panning Suara-REA</title>
+    <meta
+      name="description"
+      content="Ikuti rekonstruksi DX-Ball dari analisis biner melalui REA ke pengujian C, original-x86 yang dipertahankan, dan pencocokan byte fungsi yang dikompilasi."
+    />
+    <!-- website:sharing:start -->
+    <!-- prettier-ignore -->
+    <link rel="canonical" href="https://rea.tools/id/showcase/dx-ball/" />
+    <!-- website:languages:start -->
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="en" href="https://rea.tools/showcase/dx-ball/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="zh-CN" href="https://rea.tools/zh-CN/showcase/dx-ball/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="zh-TW" href="https://rea.tools/zh-TW/showcase/dx-ball/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="ja" href="https://rea.tools/ja/showcase/dx-ball/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="ko" href="https://rea.tools/ko/showcase/dx-ball/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="tr" href="https://rea.tools/tr/showcase/dx-ball/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="ru" href="https://rea.tools/ru/showcase/dx-ball/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="vi" href="https://rea.tools/vi/showcase/dx-ball/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="th" href="https://rea.tools/th/showcase/dx-ball/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="de" href="https://rea.tools/de/showcase/dx-ball/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="es" href="https://rea.tools/es/showcase/dx-ball/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="fr" href="https://rea.tools/fr/showcase/dx-ball/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="uk" href="https://rea.tools/uk/showcase/dx-ball/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="pl" href="https://rea.tools/pl/showcase/dx-ball/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="pt-BR" href="https://rea.tools/pt-BR/showcase/dx-ball/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="ar" href="https://rea.tools/ar/showcase/dx-ball/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="fa" href="https://rea.tools/fa/showcase/dx-ball/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="id" href="https://rea.tools/id/showcase/dx-ball/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="it" href="https://rea.tools/it/showcase/dx-ball/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="el" href="https://rea.tools/el/showcase/dx-ball/" />
+<!-- prettier-ignore -->
+<link rel="alternate" hreflang="x-default" href="https://rea.tools/showcase/dx-ball/" />
+<!-- website:languages:end -->
+    <!-- prettier-ignore -->
+    <meta property="og:type" content="website" />
+    <!-- prettier-ignore -->
+    <meta property="og:site_name" content="REA" />
+    <!-- prettier-ignore -->
+    <meta property="og:title" content="Rekayasa Balik DX-Ball: Panning Suara-REA" />
+    <!-- prettier-ignore -->
+    <meta property="og:description" content="Ikuti rekonstruksi DX-Ball dari analisis biner melalui REA ke pengujian C, original-x86 yang dipertahankan, dan pencocokan byte fungsi yang dikompilasi." />
+    <!-- prettier-ignore -->
+    <meta property="og:url" content="https://rea.tools/id/showcase/dx-ball/" />
+    <!-- prettier-ignore -->
+    <meta property="og:image" content="https://rea.tools/assets/social-card.png" />
+    <!-- prettier-ignore -->
+    <meta property="og:image:type" content="image/png" />
+    <!-- prettier-ignore -->
+    <meta property="og:image:width" content="1200" />
+    <!-- prettier-ignore -->
+    <meta property="og:image:height" content="630" />
+    <!-- prettier-ignore -->
+    <meta
+      property="og:image:alt"
+      content="REA-Cari tahu cara kerja perangkat lunak. Rekayasa balik dengan agen pengkodean Anda."
+    />
+    <!-- prettier-ignore -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <!-- prettier-ignore -->
+    <meta name="twitter:title" content="Rekayasa Balik DX-Ball: Panning Suara-REA" />
+    <!-- prettier-ignore -->
+    <meta name="twitter:description" content="Ikuti rekonstruksi DX-Ball dari analisis biner melalui REA ke pengujian C, original-x86 yang dipertahankan, dan pencocokan byte fungsi yang dikompilasi." />
+    <!-- prettier-ignore -->
+    <meta name="twitter:image" content="https://rea.tools/assets/social-card.png" />
+    <!-- prettier-ignore -->
+    <meta
+      name="twitter:image:alt"
+      content="REA-Cari tahu cara kerja perangkat lunak. Rekayasa balik dengan agen pengkodean Anda."
+    />
+    <!-- website:sharing:end -->
+    <!-- website:theme:start -->
+    <meta name="theme-color" content="#ffffff" />
+    <!-- Apply the saved theme before styles load, to avoid a flash on navigation. -->
+    <script src="../../../assets/theme.js"></script>
+    <!-- website:theme:end -->
+    <link rel="icon" href="../../../assets/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="../../../assets/styles.css" />
+    <script src="../../../assets/main.js" defer></script>
+  <script id="website-messages" type="application/json">{"Copied": "Disalin", "Code copied to clipboard.": "Kode disalin ke papan klip.", "Selected": "Dipilih", "Code selected. Use your keyboard to copy it.": "Kode dipilih. Gunakan keyboard Anda untuk menyalinnya.", "REA on GitHub ({count})": "REA di GitHub ({count})", "Switch to light mode": "Beralih ke mode terang", "Switch to dark mode": "Beralih ke mode gelap"}</script>
+  </head>
+  <body id="top">
+    <a class="skip-link" href="#main">Lewati ke konten</a>
+    <!-- website:header:start -->
+    <!-- prettier-ignore -->
+    <header class="site-header">
+      <div class="container header-inner">
+        <a class="brand" href="../../" aria-label="Beranda REA"
+          ><span class="brand-name">REA</span
+          ><span class="brand-caption" data-i18n-skip>Reverse Engineer Anything</span></a
+        >
+        <nav class="navigation" aria-label="Navigasi utama">
+          <a href="../../../get-started/" class="nav-start">Mulai</a>
+          <a href="../" aria-current="page">Studi kasus</a>
+          <a href="../../blog/">Blog</a>
+          <a href="../../guides/">Panduan</a>
+        </nav>
+        <div class="header-social">
+          <details class="language-picker" data-i18n-skip><summary><span aria-hidden="true">文 / A</span> <span>Bahasa Indonesia</span></summary><nav aria-label="Bahasa Indonesia"><a href="../../../showcase/dx-ball/" lang="en" dir="ltr" data-language="en">English</a><a href="../../../zh-CN/showcase/dx-ball/" lang="zh-CN" dir="ltr" data-language="zh-CN">简体中文</a><a href="../../../zh-TW/showcase/dx-ball/" lang="zh-TW" dir="ltr" data-language="zh-TW">繁體中文</a><a href="../../../ja/showcase/dx-ball/" lang="ja" dir="ltr" data-language="ja">日本語</a><a href="../../../ko/showcase/dx-ball/" lang="ko" dir="ltr" data-language="ko">한국어</a><a href="../../../tr/showcase/dx-ball/" lang="tr" dir="ltr" data-language="tr">Türkçe</a><a href="../../../ru/showcase/dx-ball/" lang="ru" dir="ltr" data-language="ru">Русский</a><a href="../../../vi/showcase/dx-ball/" lang="vi" dir="ltr" data-language="vi">Tiếng Việt</a><a href="../../../th/showcase/dx-ball/" lang="th" dir="ltr" data-language="th">ไทย</a><a href="../../../de/showcase/dx-ball/" lang="de" dir="ltr" data-language="de">Deutsch</a><a href="../../../es/showcase/dx-ball/" lang="es" dir="ltr" data-language="es">Español</a><a href="../../../fr/showcase/dx-ball/" lang="fr" dir="ltr" data-language="fr">Français</a><a href="../../../uk/showcase/dx-ball/" lang="uk" dir="ltr" data-language="uk">Українська</a><a href="../../../pl/showcase/dx-ball/" lang="pl" dir="ltr" data-language="pl">Polski</a><a href="../../../pt-BR/showcase/dx-ball/" lang="pt-BR" dir="ltr" data-language="pt-BR">Português (Brasil)</a><a href="../../../ar/showcase/dx-ball/" lang="ar" dir="rtl" data-language="ar">العربية</a><a href="../../../fa/showcase/dx-ball/" lang="fa" dir="rtl" data-language="fa">فارسی</a><a href="../../../id/showcase/dx-ball/" lang="id" dir="ltr" data-language="id" aria-current="true">Bahasa Indonesia</a><a href="../../../it/showcase/dx-ball/" lang="it" dir="ltr" data-language="it">Italiano</a><a href="../../../el/showcase/dx-ball/" lang="el" dir="ltr" data-language="el">Ελληνικά</a><a href="../../../ml/showcase/dx-ball/" lang="ml" dir="ltr" data-language="ml">മലയാളം · English</a><a href="../../../ur-Latn/showcase/dx-ball/" lang="ur-Latn" dir="ltr" data-language="ur-Latn">Roman Urdu · English</a><a href="../../../ro/showcase/dx-ball/" lang="ro" dir="ltr" data-language="ro">Română · English</a></nav></details>
+          <button class="theme-toggle" type="button" data-theme-toggle hidden>
+            <svg class="theme-moon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+              <path d="M20.9 13a9 9 0 0 1-9.9-9.9A9 9 0 1 0 20.9 13Z" />
+            </svg>
+            <svg class="theme-sun" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true" focusable="false">
+              <circle cx="12" cy="12" r="4" />
+              <path d="M12 2v2m0 16v2M2 12h2m16 0h2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42" />
+            </svg>
+          </button>
+          <a
+            class="nav-github"
+            href="https://github.com/morluto/rea"
+            aria-label="REA di GitHub"
+            title="REA di GitHub"
+          >
+            <svg
+              width="22"
+              height="22"
+              viewBox="0 0 16 16"
+              aria-hidden="true"
+              focusable="false"
+            >
+              <path
+                fill="currentColor"
+                d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82a7.65 7.65 0 0 1 2-.27c.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z"
+              />
+            </svg>
+            <span class="nav-github-count" hidden aria-hidden="true"></span>
+          </a>
+          <a
+            class="nav-discord"
+            href="https://discord.gg/GkcryMnJDM"
+            aria-label="Gabung REA di Discord"
+            title="Gabung REA di Discord"
+          >
+            <svg
+              width="22"
+              height="22"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+              focusable="false"
+            >
+              <path
+                fill="currentColor"
+                d="M20.317 4.3698a19.7913 19.7913 0 0 0-4.8851-1.5152.0741.0741 0 0 0-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 0 0-.0785-.037 19.7363 19.7363 0 0 0-4.8852 1.515.0699.0699 0 0 0-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 0 0 .0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 0 0 .0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 0 0-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 0 1-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 0 1 .0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 0 1 .0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 0 1-.0066.1276 12.2986 12.2986 0 0 1-1.873.8914.0766.0766 0 0 0-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 0 0 .0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 0 0 .0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 0 0-.0312-.0286ZM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189Zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189Z"
+              />
+            </svg>
+          </a>
+          <a
+            class="nav-x"
+            href="https://x.com/reatools"
+            aria-label="Ikuti REA di X"
+            title="Ikuti REA di X"
+          >
+            <svg
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+              focusable="false"
+            >
+              <path
+                fill="currentColor"
+                d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z"
+              />
+            </svg>
+          </a>
+        </div>
+      </div>
+    </header>
+    <!-- website:header:end -->
+    <main id="main" class="container">
+      <div class="page-heading">
+        <p class="breadcrumb">
+          <a href="../../">Rumah</a> / <a href="../">Menampilkan</a> / DX-Ball
+        </p>
+        <p class="eyebrow">Studi kasus * DX-Ball 1.07</p>
+        <h1>Membangun kembali DX-Ball <br />dari executable-nya.</h1>
+        <p class="lede">
+          Tujuannya adalah versi C yang dapat dipertahankan dari game Windows tahun 1996.  REA membantu agen memeriksa yang asli, satu fungsi pada satu waktu.
+        </p>
+        <p class="page-meta">Windows i386 * C * REA</p>
+      </div>
+      <figure class="explanatory-figure case-figure">
+        <div
+          class="figure-viewport"
+          tabindex="0"
+          role="region"
+          aria-label="DX-Ball sound-pan investigation; gulir secara horizontal pada layar yang lebih kecil"
+        >
+          <img
+            src="../../../assets/localized/id/figures/dx-ball-sound-pan-investigation.svg"
+            width="1774"
+            height="887"
+            alt="DXBALL.Fungsi EXE 0x00406400 diperiksa dengan REA . Fungsi pemanggil yang terkena batu bata memasok 20 ditambah 30 kali tile_x. Instruksi memuat x, kalikan dengan 1,5625, kurangi 500,0, terapkan pan_scale dan kembalikan bilangan bulat. C yang dipertahankan diperiksa secara independen terhadap x86 asli dalam 3.205 kasus dan oleh replay kompiler VC4. 0 yang cocok dengan 63 byte."
+            decoding="async"
+          />
+        </div>
+        <figcaption>
+          Satu fungsi, dari dapat dieksekusi hingga dicentang C. REA menyediakan instruksi, fungsi pemanggil, dan pembacaan data; proyek rekonstruksi mengimplementasikan dan menguji hasilnya. <a href="../../../assets/localized/id/figures/dx-ball-sound-pan-investigation.svg"
+            >Sosok terbuka</a
+          >
+        </figcaption>
+      </figure>
+      <div class="article-layout">
+        <nav class="contents" aria-label="Di halaman ini">
+          <p>Dalam studi kasus ini</p>
+          <ul>
+            <li><a href="#progress">Proyek ini</a></li>
+            <li><a href="#sound-pan">Panci suara</a></li>
+            <li><a href="#checking">Memeriksa hasilnya</a></li>
+            <li><a href="#continue">Lanjutkan pekerjaan</a></li>
+          </ul>
+        </nav>
+        <article class="article" aria-label="Studi kasus rekonstruksi DX-Ball">
+          <section class="article-section" id="progress">
+            <dl class="stats">
+              <div>
+                <dt>55</dt>
+                <dd>fungsi C yang dipertahankan</dd>
+              </div>
+              <div>
+                <dt>45,380</dt>
+                <dd>perbandingan dengan kode asli</dd>
+              </div>
+              <div>
+                <dt>33</dt>
+                <dd>fungsi dengan byte terkompilasi yang cocok</dd>
+              </div>
+            </dl>
+            <p class="caption">
+              Pos pemeriksaan proyek: 7 Oktober 2026. <a
+                href="https://github.com/N0zoM1z0/dx-ball/blob/a55dca27ec0a07018c1b2c95ae2be027f7d8c3c4/docs/PROGRESS.md"
+                >Buku besar kemajuan</a
+              > · <a
+                href="https://github.com/N0zoM1z0/dx-ball/blob/a55dca27ec0a07018c1b2c95ae2be027f7d8c3c4/docs/ORACLES.md"
+                >Cakupan pengujian</a
+              >
+            </p>
+            <h2>Proyek sejauh ini</h2>
+            <p>
+              Kode yang dipulihkan mencakup penanganan papan dan sumber daya, pukulan bata, animasi, partikel, dan produksi bonus. Build saat ini menyediakan utilitas inspeksi dan pustaka analisis. Pengerjaan game yang dapat dimainkan berlanjut dengan fisika bola dan dayung, penanganan power-up, dan integrasi Windows.
+            </p>
+          </section>
+
+          <section class="article-section" id="sound-pan">
+            <h2>Menemukan perhitungan posisi suara kiri/kanan</h2>
+            <p>
+              Saat sebuah batu bata dipukul, posisi horizontalnya diteruskan ke kode suara. Penyelidikan diperlukan untuk memulihkan bagaimana koordinat layar tersebut menjadi nilai panning kiri / kanan.
+            </p>
+            <div class="agent-terminal">
+              <div class="terminal-header">
+                <span class="terminal-title"
+                  ><span class="terminal-dots" aria-hidden="true"
+                    ><i></i><i></i><i></i></span
+                  >Agen pengkodean Anda</span
+                ><button
+                  class="copy-button"
+                  type="button"
+                  data-copy="dxball-prompt"
+                  aria-label="Salin contoh prompt"
+                >
+                  Salin
+                </button>
+              </div>
+              <p class="terminal-prompt">
+                <span class="prompt-symbol" aria-hidden="true">›</span
+                ><span id="dxball-prompt"
+                  >Gunakan REA untuk menemukan cara DX-Ball menghitung pemosisian suara stereo. Jelaskan perhitungannya dan tunjukkan kodenya.</span
+                ><span class="terminal-cursor" aria-hidden="true"></span>
+              </p>
+            </div>
+            <p class="caption">
+              Contoh prompt untuk agen pengkodean Anda, dengan executable lokal tersedia. Investigasi di bawah ini menunjukkan pertanyaan REA dan bukti di balik jawabannya.
+            </p>
+            <p>
+              Agen menggunakan REA untuk memeriksa fungsi, mengikuti fungsi pemanggilnya yang rusak dan membaca konstanta dari executable. Hasil tersebut memberikan masukan dan aritmatika yang diperlukan untuk menulis fungsi C di bawah ini.
+            </p>
+            <p>
+              Hasil fungsi pertama untuk <code>0x406400</code> termasuk deklarasi pseudocode <code>FUN_00406400(void)</code> dan menelepon <code>__ftol()</code>. Tampilan instruksinya menunjukkan input tumpukan dan operasi floating-point. Ketidaksesuaian itu memberi agen alasan konkret untuk terus menyelidiki.
+            </p>
+            <details class="evidence-details">
+              <summary>Tampilan dekompiler pertama</summary>
+              <div class="code-block">
+                <div class="code-header">
+                  <span>Hasil REA * kutipan pseudocode</span>
+                </div>
+                <pre><code>longlong FUN_00406400(void)
+{
+  longlong lVar1;
+
+  lVar1 = __ftol();
+  return lVar1;
+}</code></pre>
+              </div>
+              <p>
+                Outputnya menunjukkan panggilan konversi. Membaca petunjuk di bawah ini mengungkapkan masukan dan perhitungan yang memanggil panggilan itu.
+              </p>
+            </details>
+
+            <h3 class="small-heading">Tiga pertanyaan dijawab melalui REA</h3>
+            <ol class="rea-queries">
+              <li>
+                <h4>Pulihkan input yang hilang</h4>
+                <div class="rea-query-pair">
+                  <div class="code-block">
+                    <div class="code-header">
+                      <span>Agent → REA · <code>analyze_function</code></span>
+                    </div>
+                    <pre><code>{"procedure": "0x406400"}</code></pre>
+                  </div>
+                  <div class="code-block">
+                    <div class="code-header">
+                      <span>REA excerpt agen · kutipan instruksi</span>
+                    </div>
+                    <pre><code>0x406409: MOV EAX, dword ptr [EBP + 0x8]
+0x40640c: MOV dword ptr [EBP + -0xc], EAX
+0x40640f: FILD dword ptr [EBP + -0xc]</code></pre>
+                  </div>
+                </div>
+                <p>
+                  Hasil fungsi menyertakan instruksi bersama pseudocode dan fungsi pemanggil. Di sini, <code>[EBP+8]</code> memperlihatkan input integer yang hilang dari tampilan decompiler.
+                </p>
+              </li>
+              <li>
+                <h4>Ikuti fungsi pemanggil untuk memahami masukannya</h4>
+                <div class="rea-query-pair">
+                  <div class="code-block">
+                    <div class="code-header">
+                      <span>Agent → REA · <code>analyze_function</code></span>
+                    </div>
+                    <pre><code>{"procedure": "0x411f40"}</code></pre>
+                  </div>
+                  <div class="code-block">
+                    <div class="code-header">
+                      <span>REA excerpt agen · kutipan fungsi pemanggil</span>
+                    </div>
+                    <pre><code>0x411f5b: ADD EAX, 0x14
+0x411f5e: PUSH EAX
+0x411f5f: CALL 0x00406400</code></pre>
+                  </div>
+                </div>
+                <p>
+                  REA mengidentifikasi fungsi pemanggil ini pada hasil pertama. Skala instruksi sebelumnya <code>tile_x</code> sebesar 30; menambahkan 20 memberikan koordinat layar bata, <code>20 + 30 × tile_x</code>.
+                </p>
+              </li>
+              <li>
+                <h4>Baca nilai di balik alamat memori</h4>
+                <div class="rea-query-pair">
+                  <div class="code-block">
+                    <div class="code-header">
+                      <span
+                        >Agen → REA * dua <code>read_bytes</code> permintaan</span
+                      >
+                    </div>
+                    <pre><code>{"address": "0x420068", "length": 16}
+{"address": "0x4210a0", "length": 8}</code></pre>
+                  </div>
+                  <div class="code-block">
+                    <div class="code-header">
+                      <span>Hasil byte REA * diterjemahkan sebagai ganda</span>
+                    </div>
+                    <pre><code>000000000000f93f → 1.5625
+0000000000407f40 → 500.0
+000000000000f03f → 1.0</code></pre>
+                  </div>
+                </div>
+                <p>
+                  Byte yang dikembalikan menetapkan dua konstanta aritmatika dan skala pan awal. Agen sekarang memiliki nilai yang diperlukan untuk ekspresi C.
+                </p>
+              </li>
+            </ol>
+
+            <h3 class="small-heading">Dari temuan REA hingga C</h3>
+            <p>
+              Ikuti lima langkah di bawah ini. Setiap pilihan menyoroti instruksi asli dan baris C yang mereka informasikan.
+            </p>
+            <div class="step-comparison" data-step-comparison>
+              <div
+                class="step-selector"
+                role="group"
+                aria-label="Ikuti perhitungan posisi suara kiri / kanan"
+              >
+                <button
+                  type="button"
+                  data-select-step="1"
+                  aria-pressed="true"
+                  aria-controls="pan-assembly pan-source pan-step-detail"
+                >
+                  <span>01</span> Masukan
+                </button>
+                <button
+                  type="button"
+                  data-select-step="2"
+                  aria-pressed="false"
+                  aria-controls="pan-assembly pan-source pan-step-detail"
+                >
+                  <span>02</span> Lipat gandakan
+                </button>
+                <button
+                  type="button"
+                  data-select-step="3"
+                  aria-pressed="false"
+                  aria-controls="pan-assembly pan-source pan-step-detail"
+                >
+                  <span>03</span> Kurangi
+                </button>
+                <button
+                  type="button"
+                  data-select-step="4"
+                  aria-pressed="false"
+                  aria-controls="pan-assembly pan-source pan-step-detail"
+                >
+                  <span>04</span> Skala
+                </button>
+                <button
+                  type="button"
+                  data-select-step="5"
+                  aria-pressed="false"
+                  aria-controls="pan-assembly pan-source pan-step-detail"
+                >
+                  <span>05</span> Kembali
+                </button>
+              </div>
+              <div class="code-comparison">
+                <div class="code-block">
+                  <div class="code-header">
+                    <span>x86 asli · kutipan</span
+                    ><button
+                      class="copy-button"
+                      type="button"
+                      data-copy="pan-assembly"
+                      aria-label="Salin kutipan perakitan asli"
+                    >
+                      Salin
+                    </button>
+                  </div>
+                  <pre><code id="pan-assembly"><span class="code-step is-active" data-step="1">0x406409: MOV EAX, dword ptr [EBP + 0x8]
+0x40640c: MOV dword ptr [EBP + -0xc], EAX
+0x40640f: FILD dword ptr [EBP + -0xc]</span>
+<span class="code-step" data-step="2">0x406415: FMUL double ptr [0x00420068]</span>
+<span class="code-step" data-step="3">0x40641e: FSUB double ptr [0x00420070]</span>
+<span class="code-step" data-step="4">0x406427: FMUL double ptr [0x004210a0]</span>
+<span class="code-step" data-step="5">0x406430: CALL 0x0041678c
+0x40643e: RET</span></code></pre>
+                </div>
+                <div class="code-block">
+                  <div class="code-header">
+                    <span>Direkonstruksi C</span
+                    ><button
+                      class="copy-button"
+                      type="button"
+                      data-copy="pan-source"
+                      aria-label="Salin fungsi panci suara"
+                    >
+                      Salin
+                    </button>
+                  </div>
+                  <pre><code id="pan-source">DxBallInt dxball_screen_pan(<span class="is-active" data-step="1">DxBallInt x</span>)
+{
+    double pan;
+<span class="code-step is-active" data-step="1">    pan = (double)x;</span>
+<span class="code-step" data-step="2">    pan = pan * 1.5625;</span>
+<span class="code-step" data-step="3">    pan = pan - 500.0;</span>
+<span class="code-step" data-step="4">    pan = pan * dxball_pan_scale;</span>
+<span class="code-step" data-step="5">    return (DxBallInt)pan;</span>
+}</code></pre>
+                </div>
+              </div>
+              <div
+                class="step-detail"
+                id="pan-step-detail"
+                aria-live="polite"
+                aria-atomic="true"
+              >
+                <p data-step-note="1">
+                  <strong>01 * Baca inputnya.</strong> Tampilan instruksi dalam hasil fungsi REA berbunyi <code>[EBP+8]</code> dan menggunakan <code>FILD</code> untuk memuat bilangan bulat. Mengikuti fungsi pemanggilnya melalui REA menetapkan arti koordinat layar dari parameter C <code>x</code>.
+                </p>
+                <p data-step-note="2" hidden>
+                  <strong>02 * Kalikan dengan 1,5625.</strong> <code>FMUL</code> membaca dobel di <code>0x420068</code>. Byte yang dikembalikan oleh REA <code>read_bytes</code> dekode ke <code>1.5625</code>; C menggunakan konstanta yang sama.
+                </p>
+                <p data-step-note="3" hidden>
+                  <strong>03 * Kurangi 500,0.</strong> <code>FSUB</code> membaca dobel di <code>0x420070</code>.  Hasil byte REA diterjemahkan menjadi <code>500.0</code>, menggeser pusat perhitungan ke koordinat layar <code>320</code>.
+                </p>
+                <p data-step-note="4" hidden>
+                  <strong>04 * Terapkan skala yang disimpan.</strong> Yang kedua <code>FMUL</code> membaca <code>0x4210a0</code>. Global itu bernama <code>dxball_pan_scale</code> dalam sumber yang dipelihara.  Pembacaan byte kedua REA menetapkan nilai awalnya dari <code>1.0</code>.
+                </p>
+                <p data-step-note="5" hidden>
+                  <strong>05 * Mengembalikan bilangan bulat.</strong> Panggilan di <code>0x406430</code> jangkauan <code>__ftol</code>, diidentifikasi dalam hasil callee REA. C memberikan hasil ke <code>DxBallInt</code>; perbandingan original-x86 periksa nilai yang dikembalikan.
+                </p>
+              </div>
+            </div>
+            <p class="caption">
+              Kutipan perakitan memilih input, aritmatika, dan instruksi pengembalian. Daftar lengkap di bawah ini juga mencakup penyimpanan intervensi dan penyiapan serta pembersihan fungsi.
+            </p>
+            <details class="evidence-details">
+              <summary>Perakitan lengkap dan bukti pendukung</summary>
+              <div class="code-block">
+                <div class="code-header">
+                  <span>Hasil REA · 0x406400-0x40643e</span
+                  ><button
+                    class="copy-button"
+                    type="button"
+                    data-copy="pan-assembly-full"
+                    aria-label="Salin rakitan panci suara lengkap"
+                  >
+                    Salin
+                  </button>
+                </div>
+                <pre><code id="pan-assembly-full">0x406400: PUSH EBP
+0x406401: MOV EBP, ESP
+0x406403: SUB ESP, 0xc
+0x406406: PUSH EBX
+0x406407: PUSH ESI
+0x406408: PUSH EDI
+0x406409: MOV EAX, dword ptr [EBP + 0x8]
+0x40640c: MOV dword ptr [EBP + -0xc], EAX
+0x40640f: FILD dword ptr [EBP + -0xc]
+0x406412: FST double ptr [EBP + -0x8]
+0x406415: FMUL double ptr [0x00420068]
+0x40641b: FST double ptr [EBP + -0x8]
+0x40641e: FSUB double ptr [0x00420070]
+0x406424: FST double ptr [EBP + -0x8]
+0x406427: FMUL double ptr [0x004210a0]
+0x40642d: FST double ptr [EBP + -0x8]
+0x406430: CALL 0x0041678c
+0x406435: JMP 0x0040643a
+0x40643a: POP EDI
+0x40643b: POP ESI
+0x40643c: POP EBX
+0x40643d: LEAVE
+0x40643e: RET</code></pre>
+              </div>
+              <h3>Apa yang disediakan fungsi pemanggil</h3>
+              <p>
+                Fungsi pukulan bata di <code>0x411f40</code> menskalakan koordinat ubinnya sebesar 30, menambahkan 20, lalu mendorongnya sebelum panggilan:
+              </p>
+              <div class="code-block">
+                <pre><code>0x411f50: MOV EAX, dword ptr [EBP + 0x8]
+0x411f53: ADD EAX, EAX
+0x411f55: LEA EAX, [EAX + EAX*0x2]
+0x411f58: LEA EAX, [EAX + EAX*0x4]
+0x411f5b: ADD EAX, 0x14
+0x411f5e: PUSH EAX
+0x411f5f: CALL 0x00406400
+0x411f64: ADD ESP, 0x4</code></pre>
+              </div>
+              <h3>Apa yang dibaca data menetapkan</h3>
+              <div class="evidence-table-wrap">
+                <table class="evidence-table">
+                  <caption>
+                    Pembacaan byte REA, diterjemahkan sebagai ganda little-endian
+                  </caption>
+                  <thead>
+                    <tr>
+                      <th scope="col">Alamat</th>
+                      <th scope="col">Nilai</th>
+                      <th scope="col">Digunakan untuk</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td><code>0x420068</code></td>
+                      <td><code>1.5625</code></td>
+                      <td>Perkalian pertama</td>
+                    </tr>
+                    <tr>
+                      <td><code>0x420070</code></td>
+                      <td><code>500.0</code></td>
+                      <td>Pengurangan</td>
+                    </tr>
+                    <tr>
+                      <td><code>0x4210a0</code></td>
+                      <td><code>1.0</code> awalnya</td>
+                      <td>Skala panci tersimpan</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <p class="caption">
+                Direkam dengan REA 4.1.0 untuk target DX-Ball 1.07 yang disematkan hash. Catatan investigasi terkait menyimpan ID Bukti.
+              </p>
+            </details>
+            <p class="caption">
+              <a
+                href="https://github.com/N0zoM1z0/dx-ball/blob/a55dca27ec0a07018c1b2c95ae2be027f7d8c3c4/src/gameplay.c#L41"
+                >Sumber yang dipelihara</a
+              > · <a
+                href="https://github.com/N0zoM1z0/dx-ball/blob/a55dca27ec0a07018c1b2c95ae2be027f7d8c3c4/docs/GAMEPLAY_OWNER.md"
+                >Catatan investigasi dan referensi bukti</a
+              >
+            </p>
+          </section>
+
+          <section class="article-section" id="checking">
+            <h2>Memeriksa fungsi yang dipulihkan</h2>
+            <p>
+              Fungsi yang dipulihkan melewati dua pemeriksaan: nilai pengembaliannya cocok dengan aslinya, dan byte yang dikompilasi cocok dengan yang dapat dieksekusi.
+            </p>
+            <div class="verification">
+              <div>
+                <h3>3.205 kasus perilaku</h3>
+                <p>
+                  Pengujian menjalankan fungsi x86 asli dan membandingkan nilai pengembaliannya dengan C. Pengujian mencakup setiap posisi bilangan bulat dari 0 hingga 640 pada lima skala panci: 0, 0,5, 1, 20, dan -1.
+                </p>
+              </div>
+              <div>
+                <h3>63 byte yang cocok</h3>
+                <p>
+                  Fungsi C dikompilasi dengan rantai alat VC4.0 yang disematkan. Replay kompilator cocok dengan fungsi lengkap setelah menerapkan relokasi yang ditinjau dan memeriksa konstanta yang direferensikan.
+                </p>
+              </div>
+            </div>
+            <p class="small-heading">
+              Pada skala 1, perhitungan yang dipulihkan mengembalikan -500 di tepi kiri, 0 di tengah, dan 500 di tepi kanan. Bagian selanjutnya dari pekerjaan audio adalah mengintegrasikan nilai tersebut dengan backend suara game.
+            </p>
+            <p>
+              <a
+                href="https://github.com/N0zoM1z0/dx-ball/blob/a55dca27ec0a07018c1b2c95ae2be027f7d8c3c4/docs/BUILD_MATCHING.md"
+                >Baca detail pemutaran ulang kompiler</a
+              >
+            </p>
+          </section>
+
+          <section class="article-section" id="continue">
+            <h2>Lanjutkan penyelidikan</h2>
+            <p>
+              Pendekatan yang sama digunakan untuk pembaruan partikel, antrean ledakan, dan pembuatan bonus: periksa fungsi yang relevan, pulihkan status dan dependensinya, lalu bandingkan implementasinya dengan aslinya.
+            </p>
+            <p>
+              Untuk memeriksa sendiri fungsi sound-pan, ikuti petunjuk penyiapan proyek DX-Ball dan berikan target aslinya yang sesuai. Lalu lari:
+            </p>
+            <div class="code-block">
+              <div class="code-header">
+                <span>Dalam checkout DX-Ball</span
+                ><button
+                  class="copy-button"
+                  type="button"
+                  data-copy="pan-command"
+                  aria-label="Salin perintah analisis DX-Ball"
+                >
+                  Salin
+                </button>
+              </div>
+              <pre><code id="pan-command">scripts/rea function original/DXBALL.EXE 0x00406400 \
+  --snapshot .analysis/rea/dxball.snapshot.json --json</code></pre>
+            </div>
+            <ul class="reading-list">
+              <li>
+                <a href="https://github.com/N0zoM1z0/dx-ball"
+                  > Repositori DX-Ball</a
+                ><span>Sumber saat ini, kemajuan, dan pengaturan lokal.</span>
+              </li>
+              <li>
+                <a href="../../../guides/native/"> Alur kerja analisis REA</a
+                ><span
+                  >Ikuti perhitungannya, lalu gunakan pendekatan yang sama dengan biner Anda sendiri.</span
+                >
+              </li>
+              <li>
+                <a
+                  href="https://github.com/N0zoM1z0/dx-ball/blob/a55dca27ec0a07018c1b2c95ae2be027f7d8c3c4/docs/ENTITIES_OWNER.md"
+                  >Partikel dan produksi bonus</a
+                ><span
+                  >Investigasi yang lebih besar terhadap status, antrean, dan penulisan piksel.</span
+                >
+              </li>
+            </ul>
+            <div class="actions">
+              <a class="button" href="../../../get-started/"
+                >Mulailah dengan target Anda sendiri</a
+              >
+            </div>
+          </section>
+        </article>
+      </div>
+    </main>
+    <!-- website:footer:start -->
+    <!-- prettier-ignore -->
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <p>REA · Reverse Engineer Anything</p>
+        <div class="footer-links">
+          <a href="../../faq/">FAQ</a
+          ><a href="../../contributors/">Kontributor</a
+          ><a href="https://github.com/morluto/rea">Kode sumber</a
+          ><a href="https://github.com/morluto/rea/blob/main/LICENSE">Lisensi MIT</a
+          ><a href="https://discord.gg/GkcryMnJDM">Gabung komunitas</a
+          ><a href="https://x.com/reatools">Ikuti di X</a>
+        </div>
+      </div>
+    </footer>
+    <p class="sr-only" id="copy-status" role="status" aria-live="polite"></p>
+    <a class="back-to-top" href="#top" aria-label="Kembali ke atas">
+      <span aria-hidden="true">↑</span> Atas
+    </a>
+    <!-- website:footer:end -->
+  </body>
+</html>
